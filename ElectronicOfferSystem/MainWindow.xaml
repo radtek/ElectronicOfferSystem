@@ -15,9 +15,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="55" />
-            <RowDefinition Height="37*" />
-            <RowDefinition Height="363*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Top -->
         <Grid Grid.Row="0">
@@ -51,7 +50,7 @@
                     </Polygon>
                     <Ellipse Cursor="Hand"
                              HorizontalAlignment="Left"
-                             Margin="5"
+                             Margin="20 5 5 5"
                              Width="40"
                              Height="30">
                         <Ellipse.Fill>
@@ -162,84 +161,40 @@
         </Grid>
         <!-- Top End -->
 
-        <!-- ProjectList -->
+        <!-- Tab -->
         <Grid Grid.Row="1">
             <materialDesign:ColorZone Mode="PrimaryMid"
-                                      Name="ProjectList"
-                                      Height="55"
                                       MouseLeftButtonDown="NavBar_MouseLeftButtonDown"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth0">
-                <Grid>
-                    <!-- Top Right -->
-                    <Grid HorizontalAlignment="Left" Width="600">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <!-- 设置 -->
-                        <Grid Grid.Column="0">
-                            <Button Height="60"
-                                    Width="200"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                    Padding="0">
-                                设置
-                            </Button>
-                        </Grid>
-                        <!-- 楼盘表项目 -->
-                        <Grid Grid.Column="1">
-                            <Button Height="60"
-                                    Width="200"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                    Padding="0">
-                                楼盘表项目
-                            </Button>
-                        </Grid>
-                        <!-- 登记业务项目 -->
-                        <Grid Grid.Column="2">
-                            <Button Height="60"
-                                    Width="200"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                    Padding="0">
-                                登记业务项目
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      materialDesign:ShadowAssist.ShadowEdges="Bottom">
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ChangeProjectCommand}"
+                                 CommandParameter=""
+                                 Margin="4"
+                                 IsChecked="True"
+                                 Cursor="Hand"
+                                 Content="楼盘项目" />
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="登记业务项目" />
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="设置" />
+                </StackPanel>
             </materialDesign:ColorZone>
         </Grid>
-        <!-- ProjectList End -->
+        <!-- Tab End -->
 
-        <!-- Tools Bar -->
-        <Grid Grid.Row="2">
-            <materialDesign:ColorZone Mode="PrimaryLight"
-                                      Name="ToolsBar"
-                                      Height="55" 
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth3">
-
-            </materialDesign:ColorZone>
-        </Grid>
-        <!-- Tools Bar End -->
+       
 
         <!-- Main -->
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="8*" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0"
-                  Background="#FAFAFA">
-                <Frame Source="Views/ProjectList.xaml"/>
-            </Grid>
-
-            <Grid Grid.Column="1">
-                <TabControl>
-                    <TabItem Header="楼盘表项目">
-
-                    </TabItem>
-                    <TabItem Header="登记业务项目"></TabItem>
-                </TabControl>
-            </Grid>
+        <Grid Grid.Row="2">
+            <Frame Source="./Views/RealEstate/RealEstatePage.xaml"></Frame>
         </Grid>
         <!-- Main End -->
 

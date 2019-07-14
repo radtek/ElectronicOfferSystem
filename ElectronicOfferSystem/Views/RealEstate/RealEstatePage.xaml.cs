@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ElectronicOfferSystem.Views
+namespace ElectronicOfferSystem.Views.RealEstate
 {
     /// <summary>
-    /// Page1.xaml 的交互逻辑
+    /// RealEstatePage.xaml 的交互逻辑
     /// </summary>
-    public partial class Page1 : Page
+    public partial class RealEstatePage : Page
     {
-        public Page1()
+        public RealEstatePage()
         {
             InitializeComponent();
         }

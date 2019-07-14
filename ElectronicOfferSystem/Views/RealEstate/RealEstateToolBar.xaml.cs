@@ -1,5 +1,4 @@
-﻿using ElectronicOfferSystem.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ElectronicOfferSystem.Views
+namespace ElectronicOfferSystem.Views.RealEstate
 {
     /// <summary>
-    /// ProjectList.xaml 的交互逻辑
+    /// RealEstateToolBar.xaml 的交互逻辑
     /// </summary>
-    public partial class ProjectList : UserControl
+    public partial class RealEstateToolBar : UserControl
     {
-        public ProjectList()
+        public RealEstateToolBar()
         {
             InitializeComponent();
-            DataContext = new ProjectListViewModel();
-        }
-
-        private void Button_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-
         }
     }
 }
