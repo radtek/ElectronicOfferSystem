@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ElectronicOfferSystemDB.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ElectronicOfferSystemDBStoreContainer">
+    <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystemDB.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystemDB.Store.NaturalBuildingSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystemDB.Store.ProjectNaturalBuilding">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProjectSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" Nullable="false" />
+    <Property Name="DeveloperName" Type="nvarchar" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="UptateTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NaturalBuildingSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BSM" Type="nvarchar" Nullable="false" />
+    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" />
+    <Property Name="ProjectId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="ProjectNaturalBuilding">
+    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NaturalBuilding">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ElectronicOfferSystemDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ElectronicOfferSystemDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystemDB.Project" />
+          <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystemDB.NaturalBuilding" />
+          <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystemDB.ProjectNaturalBuilding">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ProjectName" Type="String" Nullable="false" />
+          <Property Name="DeveloperName" Type="String" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="UptateTime" Type="DateTime" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="false" />
+          <NavigationProperty Name="NaturalBuildings" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="Project" ToRole="NaturalBuilding" />
+        </EntityType>
+        <EntityType Name="NaturalBuilding">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="BSM" Type="String" Nullable="false" />
+          <Property Name="BDCDYH" Type="String" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="NaturalBuilding" ToRole="Project" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <Association Name="ProjectNaturalBuilding">
+          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystemDB.NaturalBuilding" Role="NaturalBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NaturalBuilding">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ElectronicOfferSystemDBStoreContainer" CdmEntityContainer="ElectronicOfferSystemDBContainer">
+    <EntitySetMapping Name="ProjectSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Project)">
+        <MappingFragment StoreEntitySet="ProjectSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="UptateTime" ColumnName="UptateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NaturalBuildingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.NaturalBuilding)">
+        <MappingFragment StoreEntitySet="NaturalBuildingSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BSM" ColumnName="BSM" />
+          <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

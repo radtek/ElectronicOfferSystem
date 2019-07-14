@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" >
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="1.75" PointY="1.875" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuilding" Width="1.5" PointX="4.25" PointY="2.625" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectNaturalBuilding" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

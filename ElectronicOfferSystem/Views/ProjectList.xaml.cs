@@ -1,5 +1,4 @@
-﻿using ElectronicOfferSystem.Dal;
-using ElectronicOfferSystem.ViewModels;
+﻿using ElectronicOfferSystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ElectronicOfferSystem
+namespace ElectronicOfferSystem.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// ProjectList.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProjectList : UserControl
     {
-        public MainWindow()
+        public ProjectList()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new ProjectListViewModel();
         }
-        private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
     }
 }
