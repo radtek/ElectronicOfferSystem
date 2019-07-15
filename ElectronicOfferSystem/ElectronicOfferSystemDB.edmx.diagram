@@ -4,10 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" >
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="1.75" PointY="1.875" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuilding" Width="1.5" PointX="4.25" PointY="2.625" />
+      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="106" >
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuilding" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="false" />
         <AssociationConnector Association="ElectronicOfferSystemDB.ProjectNaturalBuilding" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.LogicalBuilding" Width="1.5" PointX="4.875" PointY="1.125" IsExpanded="false" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectLogicalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Floor" Width="1.5" PointX="6.875" PointY="1.125" IsExpanded="false" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectFloor" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingFloor" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Obligee" Width="1.5" PointX="5.875" PointY="2.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Household" Width="1.5" PointX="2.875" PointY="2.875" IsExpanded="false" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectObligee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

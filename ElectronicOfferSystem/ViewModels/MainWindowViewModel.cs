@@ -1,16 +1,13 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ElectronicOfferSystem.ViewModels
 {
     class MainWindowViewModel : BindableBase
     {
+
         public DelegateCommand MinCommand { get; set; }
         public DelegateCommand MaxCommand { get; set; }
         public DelegateCommand CloseCommand { get; set; }
