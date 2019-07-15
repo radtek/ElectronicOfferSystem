@@ -29,10 +29,10 @@ namespace ElectronicOfferSystem.Dal
 
         public void Update(Project project)
         {
-            var id = eosDataContext.ProjectSet.Find(project.Id);
+            var id = eosDataContext.ProjectSet.Find(project.ID);
             var entry = eosDataContext.Entry(id);
             entry.CurrentValues.SetValues(project);
-            entry.Property(p => p.Id).IsModified = false;
+            entry.Property(p => p.ID).IsModified = false;
             eosDataContext.SaveChanges();
         }
     }

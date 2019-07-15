@@ -18,9 +18,13 @@ namespace ElectronicOfferSystem
         public Project()
         {
             this.NaturalBuildings = new HashSet<NaturalBuilding>();
+            this.LogicalBuildings = new HashSet<LogicalBuilding>();
+            this.Floors = new HashSet<Floor>();
+            this.Households = new HashSet<Household>();
+            this.Obligees = new HashSet<Obligee>();
         }
     
-        public System.Guid Id { get; set; }
+        public System.Guid ID { get; set; }
         public string ProjectName { get; set; }
         public string DeveloperName { get; set; }
         public int Type { get; set; }
@@ -30,5 +34,13 @@ namespace ElectronicOfferSystem
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NaturalBuilding> NaturalBuildings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Floor> Floors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Household> Households { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Obligee> Obligees { get; set; }
     }
 }

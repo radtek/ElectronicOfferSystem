@@ -14,11 +14,46 @@ namespace ElectronicOfferSystem
     
     public partial class NaturalBuilding
     {
-        public System.Guid Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NaturalBuilding()
+        {
+            this.LogicalBuildings = new HashSet<LogicalBuilding>();
+            this.Floors = new HashSet<Floor>();
+            this.Households = new HashSet<Household>();
+        }
+    
+        public System.Guid ID { get; set; }
+        public System.Guid ProjectId { get; set; }
         public string BSM { get; set; }
         public string BDCDYH { get; set; }
-        public System.Guid ProjectId { get; set; }
+        public string ZDDM { get; set; }
+        public string ZRZH { get; set; }
+        public string XMMC { get; set; }
+        public string JZWMC { get; set; }
+        public System.DateTime JGRQ { get; set; }
+        public double JZWGD { get; set; }
+        public double ZZDMJ { get; set; }
+        public double ZYDMJ { get; set; }
+        public double YCJZMJ { get; set; }
+        public double SCJZMJ { get; set; }
+        public int ZCS { get; set; }
+        public int DSCS { get; set; }
+        public int DXCS { get; set; }
+        public double DXSD { get; set; }
+        public string GHYT { get; set; }
+        public int FWJG { get; set; }
+        public int ZTS { get; set; }
+        public string JZWJBYT { get; set; }
+        public int ZT { get; set; }
+        public string BZ { get; set; }
+        public System.DateTime UpdateTime { get; set; }
     
         public virtual Project Project { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Floor> Floors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Household> Households { get; set; }
     }
 }

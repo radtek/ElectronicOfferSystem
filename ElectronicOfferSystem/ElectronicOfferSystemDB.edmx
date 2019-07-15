@@ -8,41 +8,328 @@
   <EntityContainer Name="ElectronicOfferSystemDBStoreContainer">
     <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystemDB.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystemDB.Store.NaturalBuildingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystemDB.Store.LogicalBuildingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystemDB.Store.FloorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystemDB.Store.ObligeeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystemDB.Store.HouseholdSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystemDB.Store.ProjectNaturalBuilding">
       <End Role="Project" EntitySet="ProjectSet" />
       <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
     </AssociationSet>
+    <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystemDB.Store.ProjectLogicalBuilding">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+    </AssociationSet>
+    <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystemDB.Store.NaturalBuildingLogicalBuilding">
+      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+      <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystemDB.Store.ProjectFloor">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Floor" EntitySet="FloorSet" />
+    </AssociationSet>
+    <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystemDB.Store.NaturalBuildingFloor">
+      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+      <End Role="Floor" EntitySet="FloorSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystemDB.Store.ProjectHousehold">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Household" EntitySet="HouseholdSet" />
+    </AssociationSet>
+    <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystemDB.Store.NaturalBuildingHousehold">
+      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+      <End Role="Household" EntitySet="HouseholdSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystemDB.Store.ProjectObligee">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Obligee" EntitySet="ObligeeSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ProjectSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ProjectName" Type="nvarchar" Nullable="false" />
-    <Property Name="DeveloperName" Type="nvarchar" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="DeveloperName" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="Type" Type="int" Nullable="false" />
     <Property Name="State" Type="int" Nullable="false" />
     <Property Name="UptateTime" Type="datetime" Nullable="false" />
-    <Property Name="Remark" Type="nvarchar" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="NaturalBuildingSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="BSM" Type="nvarchar" Nullable="false" />
     <Property Name="BDCDYH" Type="nvarchar" Nullable="false" />
-    <Property Name="ProjectId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ZDDM" Type="nvarchar" Nullable="false" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
+    <Property Name="XMMC" Type="nvarchar" Nullable="false" />
+    <Property Name="JZWMC" Type="nvarchar" Nullable="false" />
+    <Property Name="JGRQ" Type="datetime" Nullable="false" />
+    <Property Name="JZWGD" Type="float" Nullable="false" />
+    <Property Name="ZZDMJ" Type="float" Nullable="false" />
+    <Property Name="ZYDMJ" Type="float" Nullable="false" />
+    <Property Name="YCJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCJZMJ" Type="float" Nullable="false" />
+    <Property Name="ZCS" Type="int" Nullable="false" />
+    <Property Name="DSCS" Type="int" Nullable="false" />
+    <Property Name="DXCS" Type="int" Nullable="false" />
+    <Property Name="DXSD" Type="float" Nullable="false" />
+    <Property Name="GHYT" Type="nvarchar" Nullable="false" />
+    <Property Name="FWJG" Type="int" Nullable="false" />
+    <Property Name="ZTS" Type="int" Nullable="false" />
+    <Property Name="JZWJBYT" Type="nvarchar" Nullable="false" />
+    <Property Name="ZT" Type="int" Nullable="false" />
+    <Property Name="BZ" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogicalBuildingSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LJZH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" />
+    <Property Name="MPH" Type="nvarchar" Nullable="false" />
+    <Property Name="YCJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCDXMJ" Type="float" Nullable="false" />
+    <Property Name="YCQTMJ" Type="float" Nullable="false" />
+    <Property Name="SCJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCDXMJ" Type="float" Nullable="false" />
+    <Property Name="SCQTMJ" Type="float" Nullable="false" />
+    <Property Name="JGRQ" Type="datetime" Nullable="false" />
+    <Property Name="FWJG1" Type="nvarchar" Nullable="false" />
+    <Property Name="FWJG2" Type="nvarchar" Nullable="false" />
+    <Property Name="FWJG3" Type="nvarchar" Nullable="false" />
+    <Property Name="JZWZT" Type="nvarchar" Nullable="false" />
+    <Property Name="ZCS" Type="int" Nullable="false" />
+    <Property Name="DSCS" Type="int" Nullable="false" />
+    <Property Name="DXCS" Type="int" Nullable="false" />
+    <Property Name="BZ" Type="nvarchar" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FloorSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" />
+    <Property Name="SJC" Type="nvarchar" Nullable="false" />
+    <Property Name="MYC" Type="nvarchar" Nullable="false" />
+    <Property Name="CJZMJ" Type="float" Nullable="false" />
+    <Property Name="CTNJZMJ" Type="float" Nullable="false" />
+    <Property Name="CYTMJ" Type="float" Nullable="false" />
+    <Property Name="CGYJZMJ" Type="float" Nullable="false" />
+    <Property Name="CFTJZMJ" Type="float" Nullable="false" />
+    <Property Name="CBQMJ" Type="int" Nullable="false" />
+    <Property Name="CG" Type="float" Nullable="false" />
+    <Property Name="SPTYMJ" Type="float" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="CH86" Type="nvarchar" Nullable="false" />
+    <Property Name="CH87" Type="nvarchar" Nullable="false" />
+    <Property Name="CH88" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObligeeSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HBSM" Type="nvarchar" Nullable="false" />
+    <Property Name="QLRMC" Type="nvarchar" Nullable="false" />
+    <Property Name="BDCQZH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZJZL" Type="int" Nullable="false" />
+    <Property Name="ZJH" Type="nvarchar" Nullable="false" />
+    <Property Name="GJ" Type="int" Nullable="false" />
+    <Property Name="XB" Type="int" Nullable="false" />
+    <Property Name="QLRLX" Type="nvarchar" Nullable="false" />
+    <Property Name="DH" Type="nvarchar" Nullable="false" />
+    <Property Name="YB" Type="nvarchar" Nullable="false" />
+    <Property Name="DZ" Type="nvarchar" Nullable="false" />
+    <Property Name="QLLX" Type="int" Nullable="false" />
+    <Property Name="GYFS" Type="int" Nullable="false" />
+    <Property Name="QLMJ" Type="float" Nullable="false" />
+    <Property Name="QLBL" Type="nvarchar" Nullable="false" />
+    <Property Name="FRXM" Type="nvarchar" Nullable="false" />
+    <Property Name="FRZJLX" Type="int" Nullable="false" />
+    <Property Name="FRZJH" Type="nvarchar" Nullable="false" />
+    <Property Name="FRDH" Type="nvarchar" Nullable="false" />
+    <Property Name="DLRXM" Type="nvarchar" Nullable="false" />
+    <Property Name="DLRZJLX" Type="int" Nullable="false" />
+    <Property Name="DLRZJH" Type="nvarchar" Nullable="false" />
+    <Property Name="DLRDH" Type="nvarchar" Nullable="false" />
+    <Property Name="GZDW" Type="nvarchar" Nullable="false" />
+    <Property Name="DLJGMC" Type="nvarchar" Nullable="false" />
+    <Property Name="DZYJ" Type="nvarchar" Nullable="false" />
+    <Property Name="BZ" Type="nvarchar" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HouseholdSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HBSM" Type="nvarchar" Nullable="false" />
+    <Property Name="YXTBS" Type="nvarchar" Nullable="false" />
+    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" />
+    <Property Name="FWBM" Type="nvarchar" Nullable="false" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
+    <Property Name="LJZH" Type="nvarchar" Nullable="false" />
+    <Property Name="DYH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZCS" Type="int" Nullable="false" />
+    <Property Name="CH" Type="nvarchar" Nullable="false" />
+    <Property Name="FH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZL" Type="nvarchar" Nullable="false" />
+    <Property Name="MJDW" Type="int" Nullable="false" />
+    <Property Name="SZC" Type="nvarchar" Nullable="false" />
+    <Property Name="QSC" Type="nvarchar" Nullable="false" />
+    <Property Name="ZZC" Type="nvarchar" Nullable="false" />
+    <Property Name="HH" Type="nvarchar" Nullable="false" />
+    <Property Name="SHBW" Type="nvarchar" Nullable="false" />
+    <Property Name="HX" Type="int" Nullable="false" />
+    <Property Name="HXJG" Type="int" Nullable="false" />
+    <Property Name="GHYT" Type="nvarchar" Nullable="false" />
+    <Property Name="FWYT1" Type="int" Nullable="false" />
+    <Property Name="FWYT2" Type="int" Nullable="false" />
+    <Property Name="FWYT3" Type="int" Nullable="false" />
+    <Property Name="YCJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCTNJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCFTJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCDXBFJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCQTJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCFTXS" Type="nvarchar" Nullable="false" />
+    <Property Name="SCJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCTNJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCFTJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCDXBFJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCQTJZMJ" Type="float" Nullable="false" />
+    <Property Name="SCFTXS" Type="nvarchar" Nullable="false" />
+    <Property Name="GYTDMJ" Type="float" Nullable="false" />
+    <Property Name="FTTDMJ" Type="float" Nullable="false" />
+    <Property Name="DYTDMJ" Type="float" Nullable="false" />
+    <Property Name="FWLX" Type="int" Nullable="false" />
+    <Property Name="FWJG" Type="int" Nullable="false" />
+    <Property Name="FWXZ" Type="int" Nullable="false" />
+    <Property Name="FWCB" Type="int" Nullable="false" />
+    <Property Name="FDCJYJG" Type="float" Nullable="false" />
+    <Property Name="JGSJ" Type="datetime" Nullable="false" />
+    <Property Name="CQLY" Type="nvarchar" Nullable="false" />
+    <Property Name="QTGSD" Type="nvarchar" Nullable="false" />
+    <Property Name="QTGSN" Type="nvarchar" Nullable="false" />
+    <Property Name="QTGSX" Type="nvarchar" Nullable="false" />
+    <Property Name="QTGSB" Type="nvarchar" Nullable="false" />
+    <Property Name="TDSYQR" Type="nvarchar" Nullable="false" />
+    <Property Name="FCFHT" Type="nvarchar" Nullable="false" />
+    <Property Name="ZT" Type="int" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="ProjectNaturalBuilding">
     <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
     <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="NaturalBuilding">
         <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectLogicalBuilding">
+    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystemDB.Store.LogicalBuildingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LogicalBuilding">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingLogicalBuilding">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystemDB.Store.LogicalBuildingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LogicalBuilding">
+        <PropertyRef Name="NaturalBuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectFloor">
+    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystemDB.Store.FloorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Floor">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingFloor">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystemDB.Store.FloorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Floor">
+        <PropertyRef Name="NaturalBuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectHousehold">
+    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystemDB.Store.HouseholdSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Household">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingHousehold">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystemDB.Store.HouseholdSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Household">
+        <PropertyRef Name="NaturalBuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectObligee">
+    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Obligee" Type="ElectronicOfferSystemDB.Store.ObligeeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obligee">
+        <PropertyRef Name="ProjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1047,7 +1334,7 @@
     <EntitySetMapping Name="ProjectSet">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Project)">
         <MappingFragment StoreEntitySet="ProjectSet">
-          <ScalarProperty Name="ID" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
           <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
           <ScalarProperty Name="Type" ColumnName="Type" />
@@ -1060,10 +1347,185 @@
     <EntitySetMapping Name="NaturalBuildingSet">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.NaturalBuilding)">
         <MappingFragment StoreEntitySet="NaturalBuildingSet">
-          <ScalarProperty Name="ID" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
           <ScalarProperty Name="BSM" ColumnName="BSM" />
           <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ZDDM" ColumnName="ZDDM" />
+          <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
+          <ScalarProperty Name="XMMC" ColumnName="XMMC" />
+          <ScalarProperty Name="JZWMC" ColumnName="JZWMC" />
+          <ScalarProperty Name="JGRQ" ColumnName="JGRQ" />
+          <ScalarProperty Name="JZWGD" ColumnName="JZWGD" />
+          <ScalarProperty Name="ZZDMJ" ColumnName="ZZDMJ" />
+          <ScalarProperty Name="ZYDMJ" ColumnName="ZYDMJ" />
+          <ScalarProperty Name="YCJZMJ" ColumnName="YCJZMJ" />
+          <ScalarProperty Name="SCJZMJ" ColumnName="SCJZMJ" />
+          <ScalarProperty Name="ZCS" ColumnName="ZCS" />
+          <ScalarProperty Name="DSCS" ColumnName="DSCS" />
+          <ScalarProperty Name="DXCS" ColumnName="DXCS" />
+          <ScalarProperty Name="DXSD" ColumnName="DXSD" />
+          <ScalarProperty Name="GHYT" ColumnName="GHYT" />
+          <ScalarProperty Name="FWJG" ColumnName="FWJG" />
+          <ScalarProperty Name="ZTS" ColumnName="ZTS" />
+          <ScalarProperty Name="JZWJBYT" ColumnName="JZWJBYT" />
+          <ScalarProperty Name="ZT" ColumnName="ZT" />
+          <ScalarProperty Name="BZ" ColumnName="BZ" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogicalBuildingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.LogicalBuilding)">
+        <MappingFragment StoreEntitySet="LogicalBuildingSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
+          <ScalarProperty Name="LJZH" ColumnName="LJZH" />
+          <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
+          <ScalarProperty Name="YSDM" ColumnName="YSDM" />
+          <ScalarProperty Name="MPH" ColumnName="MPH" />
+          <ScalarProperty Name="YCJZMJ" ColumnName="YCJZMJ" />
+          <ScalarProperty Name="YCDXMJ" ColumnName="YCDXMJ" />
+          <ScalarProperty Name="YCQTMJ" ColumnName="YCQTMJ" />
+          <ScalarProperty Name="SCJZMJ" ColumnName="SCJZMJ" />
+          <ScalarProperty Name="SCDXMJ" ColumnName="SCDXMJ" />
+          <ScalarProperty Name="SCQTMJ" ColumnName="SCQTMJ" />
+          <ScalarProperty Name="JGRQ" ColumnName="JGRQ" />
+          <ScalarProperty Name="FWJG1" ColumnName="FWJG1" />
+          <ScalarProperty Name="FWJG2" ColumnName="FWJG2" />
+          <ScalarProperty Name="FWJG3" ColumnName="FWJG3" />
+          <ScalarProperty Name="JZWZT" ColumnName="JZWZT" />
+          <ScalarProperty Name="ZCS" ColumnName="ZCS" />
+          <ScalarProperty Name="DSCS" ColumnName="DSCS" />
+          <ScalarProperty Name="DXCS" ColumnName="DXCS" />
+          <ScalarProperty Name="BZ" ColumnName="BZ" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FloorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Floor)">
+        <MappingFragment StoreEntitySet="FloorSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
+          <ScalarProperty Name="CH" ColumnName="CH" />
+          <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
+          <ScalarProperty Name="YSDM" ColumnName="YSDM" />
+          <ScalarProperty Name="SJC" ColumnName="SJC" />
+          <ScalarProperty Name="MYC" ColumnName="MYC" />
+          <ScalarProperty Name="CJZMJ" ColumnName="CJZMJ" />
+          <ScalarProperty Name="CTNJZMJ" ColumnName="CTNJZMJ" />
+          <ScalarProperty Name="CYTMJ" ColumnName="CYTMJ" />
+          <ScalarProperty Name="CGYJZMJ" ColumnName="CGYJZMJ" />
+          <ScalarProperty Name="CFTJZMJ" ColumnName="CFTJZMJ" />
+          <ScalarProperty Name="CBQMJ" ColumnName="CBQMJ" />
+          <ScalarProperty Name="CG" ColumnName="CG" />
+          <ScalarProperty Name="SPTYMJ" ColumnName="SPTYMJ" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+          <ScalarProperty Name="CH86" ColumnName="CH86" />
+          <ScalarProperty Name="CH87" ColumnName="CH87" />
+          <ScalarProperty Name="CH88" ColumnName="CH88" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObligeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Obligee)">
+        <MappingFragment StoreEntitySet="ObligeeSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="HBSM" ColumnName="HBSM" />
+          <ScalarProperty Name="QLRMC" ColumnName="QLRMC" />
+          <ScalarProperty Name="BDCQZH" ColumnName="BDCQZH" />
+          <ScalarProperty Name="ZJZL" ColumnName="ZJZL" />
+          <ScalarProperty Name="ZJH" ColumnName="ZJH" />
+          <ScalarProperty Name="GJ" ColumnName="GJ" />
+          <ScalarProperty Name="XB" ColumnName="XB" />
+          <ScalarProperty Name="QLRLX" ColumnName="QLRLX" />
+          <ScalarProperty Name="DH" ColumnName="DH" />
+          <ScalarProperty Name="YB" ColumnName="YB" />
+          <ScalarProperty Name="DZ" ColumnName="DZ" />
+          <ScalarProperty Name="QLLX" ColumnName="QLLX" />
+          <ScalarProperty Name="GYFS" ColumnName="GYFS" />
+          <ScalarProperty Name="QLMJ" ColumnName="QLMJ" />
+          <ScalarProperty Name="QLBL" ColumnName="QLBL" />
+          <ScalarProperty Name="FRXM" ColumnName="FRXM" />
+          <ScalarProperty Name="FRZJLX" ColumnName="FRZJLX" />
+          <ScalarProperty Name="FRZJH" ColumnName="FRZJH" />
+          <ScalarProperty Name="FRDH" ColumnName="FRDH" />
+          <ScalarProperty Name="DLRXM" ColumnName="DLRXM" />
+          <ScalarProperty Name="DLRZJLX" ColumnName="DLRZJLX" />
+          <ScalarProperty Name="DLRZJH" ColumnName="DLRZJH" />
+          <ScalarProperty Name="DLRDH" ColumnName="DLRDH" />
+          <ScalarProperty Name="GZDW" ColumnName="GZDW" />
+          <ScalarProperty Name="DLJGMC" ColumnName="DLJGMC" />
+          <ScalarProperty Name="DZYJ" ColumnName="DZYJ" />
+          <ScalarProperty Name="BZ" ColumnName="BZ" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseholdSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Household)">
+        <MappingFragment StoreEntitySet="HouseholdSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
+          <ScalarProperty Name="HBSM" ColumnName="HBSM" />
+          <ScalarProperty Name="YXTBS" ColumnName="YXTBS" />
+          <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
+          <ScalarProperty Name="FWBM" ColumnName="FWBM" />
+          <ScalarProperty Name="YSDM" ColumnName="YSDM" />
+          <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
+          <ScalarProperty Name="LJZH" ColumnName="LJZH" />
+          <ScalarProperty Name="DYH" ColumnName="DYH" />
+          <ScalarProperty Name="ZCS" ColumnName="ZCS" />
+          <ScalarProperty Name="CH" ColumnName="CH" />
+          <ScalarProperty Name="FH" ColumnName="FH" />
+          <ScalarProperty Name="ZL" ColumnName="ZL" />
+          <ScalarProperty Name="MJDW" ColumnName="MJDW" />
+          <ScalarProperty Name="SZC" ColumnName="SZC" />
+          <ScalarProperty Name="QSC" ColumnName="QSC" />
+          <ScalarProperty Name="ZZC" ColumnName="ZZC" />
+          <ScalarProperty Name="HH" ColumnName="HH" />
+          <ScalarProperty Name="SHBW" ColumnName="SHBW" />
+          <ScalarProperty Name="HX" ColumnName="HX" />
+          <ScalarProperty Name="HXJG" ColumnName="HXJG" />
+          <ScalarProperty Name="GHYT" ColumnName="GHYT" />
+          <ScalarProperty Name="FWYT1" ColumnName="FWYT1" />
+          <ScalarProperty Name="FWYT2" ColumnName="FWYT2" />
+          <ScalarProperty Name="FWYT3" ColumnName="FWYT3" />
+          <ScalarProperty Name="YCJZMJ" ColumnName="YCJZMJ" />
+          <ScalarProperty Name="YCTNJZMJ" ColumnName="YCTNJZMJ" />
+          <ScalarProperty Name="YCFTJZMJ" ColumnName="YCFTJZMJ" />
+          <ScalarProperty Name="YCDXBFJZMJ" ColumnName="YCDXBFJZMJ" />
+          <ScalarProperty Name="YCQTJZMJ" ColumnName="YCQTJZMJ" />
+          <ScalarProperty Name="YCFTXS" ColumnName="YCFTXS" />
+          <ScalarProperty Name="SCJZMJ" ColumnName="SCJZMJ" />
+          <ScalarProperty Name="SCTNJZMJ" ColumnName="SCTNJZMJ" />
+          <ScalarProperty Name="SCFTJZMJ" ColumnName="SCFTJZMJ" />
+          <ScalarProperty Name="SCDXBFJZMJ" ColumnName="SCDXBFJZMJ" />
+          <ScalarProperty Name="SCQTJZMJ" ColumnName="SCQTJZMJ" />
+          <ScalarProperty Name="SCFTXS" ColumnName="SCFTXS" />
+          <ScalarProperty Name="GYTDMJ" ColumnName="GYTDMJ" />
+          <ScalarProperty Name="FTTDMJ" ColumnName="FTTDMJ" />
+          <ScalarProperty Name="DYTDMJ" ColumnName="DYTDMJ" />
+          <ScalarProperty Name="FWLX" ColumnName="FWLX" />
+          <ScalarProperty Name="FWJG" ColumnName="FWJG" />
+          <ScalarProperty Name="FWXZ" ColumnName="FWXZ" />
+          <ScalarProperty Name="FWCB" ColumnName="FWCB" />
+          <ScalarProperty Name="FDCJYJG" ColumnName="FDCJYJG" />
+          <ScalarProperty Name="JGSJ" ColumnName="JGSJ" />
+          <ScalarProperty Name="CQLY" ColumnName="CQLY" />
+          <ScalarProperty Name="QTGSD" ColumnName="QTGSD" />
+          <ScalarProperty Name="QTGSN" ColumnName="QTGSN" />
+          <ScalarProperty Name="QTGSX" ColumnName="QTGSX" />
+          <ScalarProperty Name="QTGSB" ColumnName="QTGSB" />
+          <ScalarProperty Name="TDSYQR" ColumnName="TDSYQR" />
+          <ScalarProperty Name="FCFHT" ColumnName="FCFHT" />
+          <ScalarProperty Name="ZT" ColumnName="ZT" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -113,12 +113,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
+    <Compile Include="Dal\Entities\Floor.cs" />
+    <Compile Include="Dal\Entities\Household.cs" />
+    <Compile Include="Dal\Entities\LogicalBuilding.cs" />
+    <Compile Include="Dal\Entities\NaturalBuilding.cs" />
+    <Compile Include="Dal\Entities\Obligee.cs" />
+    <Compile Include="Dal\Entities\Project.cs" />
     <Compile Include="ElectronicOfferSystemDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ElectronicOfferSystemDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Floor.cs">
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Household.cs">
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogicalBuilding.cs">
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="NaturalBuilding.cs">
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Obligee.cs">
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Project.cs">
@@ -150,9 +169,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
-    <Compile Include="Dal\Entities\NaturalBuilding.cs" />
-    <Compile Include="Dal\Entities\Project.cs" />
     <Compile Include="Dal\ProjectDal.cs" />
     <Compile Include="ElectronicOfferSystemDB.cs">
       <AutoGen>True</AutoGen>

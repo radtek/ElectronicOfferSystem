@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="106" >
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuilding" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="false" />
         <AssociationConnector Association="ElectronicOfferSystemDB.ProjectNaturalBuilding" />
         <EntityTypeShape EntityType="ElectronicOfferSystemDB.LogicalBuilding" Width="1.5" PointX="4.875" PointY="1.125" IsExpanded="false" />

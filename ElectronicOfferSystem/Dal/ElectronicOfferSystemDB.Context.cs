@@ -27,5 +27,9 @@ namespace ElectronicOfferSystem
     
         public virtual DbSet<Project> ProjectSet { get; set; }
         public virtual DbSet<NaturalBuilding> NaturalBuildingSet { get; set; }
+        public virtual DbSet<LogicalBuilding> LogicalBuildingSet { get; set; }
+        public virtual DbSet<Floor> FloorSet { get; set; }
+        public virtual DbSet<Obligee> ObligeeSet { get; set; }
+        public virtual DbSet<Household> HouseholdSet { get; set; }
     }
 }
