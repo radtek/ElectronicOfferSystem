@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="ElectronicOfferSystemDB.Floor" Width="1.5" PointX="6.875" PointY="1.125" IsExpanded="false" />
         <AssociationConnector Association="ElectronicOfferSystemDB.ProjectFloor" />
         <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingFloor" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Obligee" Width="1.5" PointX="5.875" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Obligee" Width="1.5" PointX="5.875" PointY="2.625" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystemDB.Household" Width="1.5" PointX="2.875" PointY="2.875" IsExpanded="false" />
         <AssociationConnector Association="ElectronicOfferSystemDB.ProjectHousehold" />
         <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingHousehold" />

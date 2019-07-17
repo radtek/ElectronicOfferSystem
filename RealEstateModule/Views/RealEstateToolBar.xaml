@@ -13,7 +13,7 @@
     <Grid>
         <ToolBarTray>
             <ToolBar
-
+    Style="{DynamicResource MaterialDesignToolBar}"
     ClipToBounds="False">
                 <Button ToolTip="Follow me on Twitter">
                     <materialDesign:PackIcon

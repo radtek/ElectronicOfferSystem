@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateModule", "RealEst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationModule", "RegistrationModule\RegistrationModule.csproj", "{0BA47A3D-DD84-4063-8315-247977F5A0F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceDic", "ResourceDic\ResourceDic.csproj", "{6B4BE1F9-8DBA-486B-AF79-4E6BBF39DA3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0BA47A3D-DD84-4063-8315-247977F5A0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BA47A3D-DD84-4063-8315-247977F5A0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BA47A3D-DD84-4063-8315-247977F5A0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B4BE1F9-8DBA-486B-AF79-4E6BBF39DA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4BE1F9-8DBA-486B-AF79-4E6BBF39DA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4BE1F9-8DBA-486B-AF79-4E6BBF39DA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4BE1F9-8DBA-486B-AF79-4E6BBF39DA3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,6 +25,7 @@ namespace ProjectModule.Views
         public ProjectList(IRegionManager regionManager)
         {
             InitializeComponent();
+           
             // view discovery
             regionManager.RegisterViewWithRegion("AddOrEditProjectDialogRegion", typeof(AddOrEditProjectDialog));
             DataContext = new ProjectListViewModel();

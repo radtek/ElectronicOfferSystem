@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusinessData
+namespace ElectronicOfferSystem
 {
     using System;
     using System.Collections.Generic;

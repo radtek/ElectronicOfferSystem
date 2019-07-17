@@ -29,12 +29,12 @@
             </Grid.RowDefinitions>
             <!-- ToolBar -->
             <Grid Grid.Row="0">
-                <ContentControl prism:RegionManager.RegionName="RealEstateToolBarRegion"/>
+                <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="RealEstateToolBarRegion"/>
             </Grid>
             <!-- ToolBar End -->
 
             <Grid Grid.Row="1">
-                <DataGrid  Margin="0 0 0 0"
+                <DataGrid  Margin="5 0 0 0"
                            ItemsSource="{Binding Items3}"
                            CanUserSortColumns="True"
                            CanUserAddRows="False" />

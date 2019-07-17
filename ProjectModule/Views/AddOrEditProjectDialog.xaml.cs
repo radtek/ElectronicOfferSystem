@@ -1,4 +1,6 @@
-﻿using ProjectModule.ViewModels;
+﻿using Prism.Events;
+using Prism.Interactivity.InteractionRequest;
+using ProjectModule.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +28,6 @@ namespace ProjectModule.Views
             InitializeComponent();
             DataContext = new AddOrEditProjectDialogViewModel();
         }
+       
     }
 }

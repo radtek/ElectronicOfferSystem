@@ -1,4 +1,6 @@
 ﻿using ElectronicOfferSystem.ViewModels;
+using Prism.Regions;
+using RealEstateModule.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,12 @@ namespace ElectronicOfferSystem.Views
     /// </summary>
     public partial class ProjectTab : UserControl
     {
-        public ProjectTab()
+        public ProjectTab(IRegionManager regionManager)
         {
             InitializeComponent();
             //DataContext = new ProjectTabViewModel();
+            // view discovery
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(RealEstatePage));
         }
 
     }
