@@ -136,9 +136,6 @@
     <Property Name="CG" Type="float" Nullable="false" />
     <Property Name="SPTYMJ" Type="float" Nullable="false" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
-    <Property Name="CH86" Type="nvarchar" Nullable="false" />
-    <Property Name="CH87" Type="nvarchar" Nullable="false" />
-    <Property Name="CH88" Type="nvarchar" Nullable="false" />
   </EntityType>
   <EntityType Name="ObligeeSet">
     <Key>
@@ -421,11 +418,31 @@
               <Summary>备注</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="NaturalBuildings" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="Project" ToRole="NaturalBuilding" />
-          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="Project" ToRole="LogicalBuilding" />
-          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Project" ToRole="Floor" />
-          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Project" ToRole="Household" />
-          <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Project" ToRole="Obligee" />
+          <NavigationProperty Name="NaturalBuildings" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="Project" ToRole="NaturalBuilding" >
+            <Documentation>
+              <Summary>自然幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="Project" ToRole="LogicalBuilding" >
+            <Documentation>
+              <Summary>逻辑幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Project" ToRole="Floor" >
+            <Documentation>
+              <Summary>层集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Project" ToRole="Household" >
+            <Documentation>
+              <Summary>户集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Project" ToRole="Obligee" >
+            <Documentation>
+              <Summary>权利人集合</Summary>
+            </Documentation>
+          </NavigationProperty>
         </EntityType>
         <EntityType Name="NaturalBuilding">
           <Documentation>
@@ -454,7 +471,11 @@
               <Summary>不动产单元号</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="NaturalBuilding" ToRole="Project" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="NaturalBuilding" ToRole="Project" >
+            <Documentation>
+              <Summary>项目</Summary>
+            </Documentation>
+          </NavigationProperty>
           <Property Name="ZDDM" Type="String" Nullable="false" >
             <Documentation>
               <Summary>宗地代码</Summary>
@@ -560,9 +581,21 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="NaturalBuilding" ToRole="LogicalBuilding" />
-          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="NaturalBuilding" ToRole="Floor" />
-          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="NaturalBuilding" ToRole="Household" />
+          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="NaturalBuilding" ToRole="LogicalBuilding" >
+            <Documentation>
+              <Summary>逻辑幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="NaturalBuilding" ToRole="Floor" >
+            <Documentation>
+              <Summary>层集合</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="NaturalBuilding" ToRole="Household" >
+            <Documentation>
+              <Summary>户集合</Summary>
+            </Documentation>
+          </NavigationProperty>
         </EntityType>
         <Association Name="ProjectNaturalBuilding">
           <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
@@ -698,8 +731,16 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="LogicalBuilding" ToRole="Project" />
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="LogicalBuilding" ToRole="NaturalBuilding" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="LogicalBuilding" ToRole="Project" >
+            <Documentation>
+              <Summary>项目</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="LogicalBuilding" ToRole="NaturalBuilding" >
+            <Documentation>
+              <Summary>自然幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
           </EntityType>
         <Association Name="ProjectLogicalBuilding">
           <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
@@ -732,7 +773,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>ID</Summary>
+            </Documentation>
+          </Property>
           <Property Name="ProjectID" Type="Guid" Nullable="false" >
             <Documentation>
               <Summary>项目ID</Summary>
@@ -813,11 +858,16 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <Property Name="CH86" Type="String" Nullable="false" />
-          <Property Name="CH87" Type="String" Nullable="false" />
-          <Property Name="CH88" Type="String" Nullable="false" />
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Floor" ToRole="Project" />
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="Floor" ToRole="NaturalBuilding" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Floor" ToRole="Project" >
+            <Documentation>
+              <Summary>项目</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="Floor" ToRole="NaturalBuilding" >
+            <Documentation>
+              <Summary>自然幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
         </EntityType>
         <Association Name="ProjectFloor">
           <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
@@ -850,7 +900,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>ID</Summary>
+            </Documentation>
+          </Property>
           <Property Name="ProjectID" Type="Guid" Nullable="false">
             <Documentation>
               <Summary>项目ID</Summary>
@@ -891,7 +945,11 @@
               <Summary>性别</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLRLX" Type="String" Nullable="false" />
+          <Property Name="QLRLX" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>权利人类型</Summary>
+            </Documentation>
+          </Property>
           <Property Name="DH" Type="String" Nullable="false" >
             <Documentation>
               <Summary>电话</Summary>
@@ -992,7 +1050,11 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Obligee" ToRole="Project" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Obligee" ToRole="Project" >
+            <Documentation>
+              <Summary>项目</Summary>
+            </Documentation>
+          </NavigationProperty>
         </EntityType>
         <EntityType Name="Household">
           <Documentation>
@@ -1286,8 +1348,16 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Household" ToRole="Project" />
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="Household" ToRole="NaturalBuilding" />
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Household" ToRole="Project" >
+            <Documentation>
+              <Summary>项目</Summary>
+            </Documentation>
+          </NavigationProperty>
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="Household" ToRole="NaturalBuilding" >
+            <Documentation>
+              <Summary>自然幢集合</Summary>
+            </Documentation>
+          </NavigationProperty>
           </EntityType>
         <Association Name="ProjectHousehold">
           <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
@@ -1424,9 +1494,6 @@
           <ScalarProperty Name="CG" ColumnName="CG" />
           <ScalarProperty Name="SPTYMJ" ColumnName="SPTYMJ" />
           <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-          <ScalarProperty Name="CH86" ColumnName="CH86" />
-          <ScalarProperty Name="CH87" ColumnName="CH87" />
-          <ScalarProperty Name="CH88" ColumnName="CH88" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

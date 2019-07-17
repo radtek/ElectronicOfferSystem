@@ -1,9 +1,18 @@
-﻿using ElectronicOfferSystem.Dal;
-using ElectronicOfferSystem.ViewModels;
+﻿using ElectronicOfferSystem.ViewModels;
 using Prism.Regions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace ElectronicOfferSystem.Views
 {
@@ -15,8 +24,9 @@ namespace ElectronicOfferSystem.Views
         public MainWindow(IRegionManager regionManager)
         {
             InitializeComponent();
-            // view discovery
+            // View Discovery
             regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
+            regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
 
             DataContext = new MainWindowViewModel();
         }
@@ -24,6 +34,5 @@ namespace ElectronicOfferSystem.Views
         {
             DragMove();
         }
-
     }
 }

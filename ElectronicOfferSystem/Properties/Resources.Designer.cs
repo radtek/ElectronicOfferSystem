@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ElectronicOfferSystem.Properties
+namespace BusinessData.Properties
 {
 
 

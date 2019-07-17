@@ -17,13 +17,20 @@ if (!typeMapper.VerifyCaseInsensitiveTypeUniqueness(typeMapper.GetAllGlobalItems
 }
 
 WriteHeader(codeStringGenerator, fileManager);
-
+string summary = string.Empty;
 foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection))
 {
     fileManager.StartNewFile(entity.Name + ".cs");
     BeginNamespace(code);
+	if(entity.Documentation != null && entity.Documentation.Summary != null)
+	    summary = entity.Documentation.Summary;
+	else
+	    summary = entity.Name;
 #>
 <#=codeStringGenerator.UsingDirectives(inHeader: false)#>
+/// <summary>
+/// <#=summary#>
+/// </summary>
 <#=codeStringGenerator.EntityClassOpening(entity)#>
 {
 <#
@@ -69,7 +76,18 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     {
         foreach (var edmProperty in simpleProperties)
         {
+		    if (edmProperty.Documentation != null && edmProperty.Documentation.Summary != null)
+            {
+                summary=edmProperty.Documentation.Summary;
+            }
+            else
+            {
+                summary="";
+            }
 #>
+    /// <summary>
+    /// <#=summary#>
+    /// </summary>
     <#=codeStringGenerator.Property(edmProperty)#>
 <#
         }
@@ -94,11 +112,22 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
 #>
 
 <#
-        foreach (var navigationProperty in navigationProperties)
+    foreach (var navigationProperty in navigationProperties)
+    {
+	 if(navigationProperty.Documentation != null &&navigationProperty.Documentation.Summary != null)
+        {
+            summary=navigationProperty.Documentation.Summary;
+        }
+        else
+        {
+            summary="";
+        }
+        if (navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
         {
-            if (navigationProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
-            {
 #>
+    /// <summary>
+    /// <#=summary#>
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 <#
             }

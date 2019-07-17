@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/15/2019 22:22:16
+-- Date Created: 07/15/2019 23:21:45
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -14,6 +14,20 @@
 
     ALTER TABLE [NaturalBuildingSet] DROP CONSTRAINT [FK_ProjectNaturalBuilding];
 GO
+    ALTER TABLE [LogicalBuildingSet] DROP CONSTRAINT [FK_ProjectLogicalBuilding];
+GO
+    ALTER TABLE [LogicalBuildingSet] DROP CONSTRAINT [FK_NaturalBuildingLogicalBuilding];
+GO
+    ALTER TABLE [FloorSet] DROP CONSTRAINT [FK_ProjectFloor];
+GO
+    ALTER TABLE [FloorSet] DROP CONSTRAINT [FK_NaturalBuildingFloor];
+GO
+    ALTER TABLE [HouseholdSet] DROP CONSTRAINT [FK_ProjectHousehold];
+GO
+    ALTER TABLE [HouseholdSet] DROP CONSTRAINT [FK_NaturalBuildingHousehold];
+GO
+    ALTER TABLE [ObligeeSet] DROP CONSTRAINT [FK_ProjectObligee];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -23,6 +37,14 @@ GO
     DROP TABLE [ProjectSet];
 GO
     DROP TABLE [NaturalBuildingSet];
+GO
+    DROP TABLE [LogicalBuildingSet];
+GO
+    DROP TABLE [FloorSet];
+GO
+    DROP TABLE [ObligeeSet];
+GO
+    DROP TABLE [HouseholdSet];
 GO
 
 -- --------------------------------------------------
@@ -117,10 +139,7 @@ CREATE TABLE [FloorSet] (
     [CBQMJ] int  NOT NULL,
     [CG] float  NOT NULL,
     [SPTYMJ] float  NOT NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [CH86] nvarchar(4000)  NOT NULL,
-    [CH87] nvarchar(4000)  NOT NULL,
-    [CH88] nvarchar(4000)  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 

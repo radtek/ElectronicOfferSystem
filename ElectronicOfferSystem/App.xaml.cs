@@ -1,7 +1,8 @@
 ﻿using Prism.Ioc;
 using Prism.Unity;
-using ElectronicOfferSystem.Views;
 using System.Windows;
+using Prism.Modularity;
+using ElectronicOfferSystem.Views;
 
 namespace ElectronicOfferSystem
 {
@@ -20,5 +21,10 @@ namespace ElectronicOfferSystem
 
         }
 
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<RealEstateModule.RealEstateModule>();
+            moduleCatalog.AddModule<RegistrationModule.RegistrationModule>();
+        }
     }
 }

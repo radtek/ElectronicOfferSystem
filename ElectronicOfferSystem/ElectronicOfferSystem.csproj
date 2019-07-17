@@ -113,13 +113,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
-    <Compile Include="Dal\Entities\Floor.cs" />
-    <Compile Include="Dal\Entities\Household.cs" />
-    <Compile Include="Dal\Entities\LogicalBuilding.cs" />
-    <Compile Include="Dal\Entities\NaturalBuilding.cs" />
-    <Compile Include="Dal\Entities\Obligee.cs" />
-    <Compile Include="Dal\Entities\Project.cs" />
     <Compile Include="ElectronicOfferSystemDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,33 +136,10 @@
     <Compile Include="Project.cs">
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AddOrEditProjectDialogViewModel.cs" />
-    <Compile Include="Views\AddOrEditProjectDialog.xaml.cs">
-      <DependentUpon>AddOrEditProjectDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\ProjectListViewModel.cs" />
-    <Compile Include="Views\ProjectList.xaml.cs">
-      <DependentUpon>ProjectList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RealEstate\RealEstatePage.xaml.cs">
-      <DependentUpon>RealEstatePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RealEstate\RealEstateToolBar.xaml.cs">
-      <DependentUpon>RealEstateToolBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WindowTop.xaml.cs">
-      <DependentUpon>WindowTop.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dal\ProjectDal.cs" />
     <Compile Include="ElectronicOfferSystemDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,30 +150,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProjectTabViewModel.cs" />
+    <Compile Include="ViewModels\WindowTopViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AddOrEditProjectDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProjectList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RealEstate\RealEstatePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RealEstate\RealEstateToolBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WindowTop.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Views\ProjectTab.xaml.cs">
+      <DependentUpon>ProjectTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowTop.xaml.cs">
+      <DependentUpon>WindowTop.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -230,7 +188,6 @@
     <None Include="ElectronicOfferSystemDB.edmx.diagram">
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -240,9 +197,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataBase\ElectronicOfferSystem.sdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="ElectronicOfferSystemDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ElectronicOfferSystemDB.Context.cs</LastGenOutput>
@@ -260,8 +214,28 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dal\Entities\Mappings\" />
-    <Folder Include="Views\Registration\" />
+    <ProjectReference Include="..\RealEstateModule\RealEstateModule.csproj">
+      <Project>{c638612b-28b2-4801-9958-c186d053701d}</Project>
+      <Name>RealEstateModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RegistrationModule\RegistrationModule.csproj">
+      <Project>{0ba47a3d-dd84-4063-8315-247977f5a0f9}</Project>
+      <Name>RegistrationModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowTop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

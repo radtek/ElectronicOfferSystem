@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:local="clr-namespace:ElectronicOfferSystem"
+        xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -15,7 +15,6 @@
         ResizeMode="NoResize"
         Height="800" Width="1100">
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="50" />
@@ -25,48 +24,20 @@
         <Grid Grid.Row="0">
             <ContentControl prism:RegionManager.RegionName="WindowTopRegion"
                             MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>
-            
         </Grid>
         <!-- Top End -->
 
         <!-- Tab -->
         <Grid Grid.Row="1">
-            <materialDesign:ColorZone Mode="PrimaryMid"
-                                      MouseLeftButtonDown="NavBar_MouseLeftButtonDown"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                      materialDesign:ShadowAssist.ShadowEdges="Bottom">
-                <StackPanel Orientation="Horizontal" Margin="2">
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ChangeProjectCommand}"
-                                 CommandParameter=""
-                                 Margin="4"
-                                 IsChecked="True"
-                                 Cursor="Hand"
-                                 Content="楼盘项目" />
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Margin="4"
-                                 IsChecked="False"
-                                 Cursor="Hand"
-                                 Content="登记业务项目" />
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Margin="4"
-                                 IsChecked="False"
-                                 Cursor="Hand"
-                                 Content="设置" />
-                </StackPanel>
-            </materialDesign:ColorZone>
+            <ContentControl prism:RegionManager.RegionName="ProjectTabRegion"
+                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>
         </Grid>
         <!-- Tab End -->
 
-       
-
         <!-- Main -->
         <Grid Grid.Row="2">
-            <Frame Source="RealEstate/RealEstatePage.xaml"></Frame>
+            <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
         </Grid>
         <!-- Main End -->
-
     </Grid>
-
-
 </Window>
