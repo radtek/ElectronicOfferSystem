@@ -10,10 +10,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ProjectModule.ViewModels
 {
-    class ProjectListViewModel : BindableBase
+    class ProjectPageViewModel : BindableBase
     {
         private Project project;
         public Project Project
@@ -46,21 +47,45 @@ namespace ProjectModule.ViewModels
         public DelegateCommand<string> OpenAddOrEditProjectDialogCommand { get; private set; }
         public DelegateCommand AcceptCommand { get; set; }
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
+        public DelegateCommand<object> SelectProjectCommand { get; set; }
 
-
-        public ProjectListViewModel()
+        public ProjectPageViewModel()
         {
-            
+            // 选中ListView中的一项
+            SelectProjectCommand = new DelegateCommand<object>((obj) => {
+                ListView listView = obj as ListView;
+                Project = listView.SelectedItem as Project;
 
+            });
+
+            // 关闭模态框
             CancelAddOrEditProjectDialogCommand = new DelegateCommand(() => {
                 IsAddOrEditProjectDialogOpen = false;
                 Project = null;
             });
-            AcceptCommand = new DelegateCommand(AddProject);
 
+            // 模态框的确认按钮
+            AcceptCommand = new DelegateCommand(()=> {
+                switch (DialogTitle)
+                {
+                    case "新增项目":
+                        AddProject();
+                        break;
+                    case "编辑项目":
+                        UpdProject();
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            // 打开模态框
             OpenAddOrEditProjectDialogCommand = new DelegateCommand<string>((string dialogTitle) => {
                 DialogTitle = dialogTitle;
-                Project = new Project();
+                if ("新增项目".Equals(DialogTitle))
+                {
+                    Project = new Project();
+                }
                 IsAddOrEditProjectDialogOpen = true;
             });
 
@@ -68,16 +93,31 @@ namespace ProjectModule.ViewModels
             Projects = new ObservableCollection<Project>(projectDal.GetAllProject());
         }
 
+        ProjectDal projectDal = new ProjectDal();
+
         private void AddProject()
         {
-            ProjectDal projectDal = new ProjectDal();
-            
+            // 新增项目的初始化
             Project.ID = Guid.NewGuid();
             Project.UptateTime = DateTime.Now;
             Project.Type = 1;
             Project.State = 0;
 
             projectDal.Insert(Project);
+            CloseDialogAndRefreshProjectList();
+        }
+
+        private void UpdProject()
+        {  
+            if (Project != null)
+            {    
+                projectDal.Update(Project);
+                CloseDialogAndRefreshProjectList();
+            }
+        }
+
+        private void CloseDialogAndRefreshProjectList()
+        {
             IsAddOrEditProjectDialogOpen = false;
             Project = null;
             Projects = new ObservableCollection<Project>(projectDal.GetAllProject());

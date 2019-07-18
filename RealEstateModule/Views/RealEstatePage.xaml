@@ -10,21 +10,26 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <!-- ProjectList -->
-        <Grid Grid.Column="0" Background="#FAFAFA">
-            <ContentControl prism:RegionManager.RegionName="ProjectListRegion"/>
-        </Grid>
-        <!-- ProjectList End -->
-
         <!-- Main -->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- ToolBar -->
@@ -33,11 +38,98 @@
             </Grid>
             <!-- ToolBar End -->
 
+            <!-- Tab -->
             <Grid Grid.Row="1">
-                <DataGrid  Margin="5 0 0 0"
-                           ItemsSource="{Binding Items3}"
-                           CanUserSortColumns="True"
-                           CanUserAddRows="False" />
+                <materialDesign:ColorZone Mode="PrimaryMid"
+                                          Margin="5 0 0 0"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      materialDesign:ShadowAssist.ShadowEdges="Bottom">
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ProjectNavCommand}"
+                                 CommandParameter="RealEstatePage"
+                                 Margin="4"
+                                 IsChecked="True"
+                                 Cursor="Hand"
+                                 Content="自然幢" />
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ProjectNavCommand}"
+                                 CommandParameter="RegistrationPage"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="逻辑幢" />
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ProjectNavCommand}"
+                                 CommandParameter="Setting"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="层信息" />
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ProjectNavCommand}"
+                                 CommandParameter="Setting"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="户信息" />
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding ProjectNavCommand}"
+                                 CommandParameter="Setting"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="权利人" />
+                    </StackPanel>
+                </materialDesign:ColorZone>
+            </Grid>
+            <!-- Tab End -->
+
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- List -->
+                <Grid Grid.Column="0">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                        <StackPanel  Margin="8 0 2 0">
+                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              Cursor="Hand"
+                              Name="BusinessList"
+                              ItemsSource="{Binding Businesses}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectBusinessCommand}"
+                                                       CommandParameter="{Binding ElementName=BusinessList}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                                                                       CommandParameter="编辑项目"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Height="50" >
+                                            <TextBlock Text="{Binding ProjectName}" FontSize="15" />
+                                            <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+
+                <Grid Grid.Column="1">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="NaturalBuildingPageRegion"/>
+                    </ScrollViewer>
+                </Grid>
             </Grid>
         </Grid>
         <!-- Main Ends -->

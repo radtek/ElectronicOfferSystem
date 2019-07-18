@@ -25,6 +25,8 @@ namespace ElectronicOfferSystem
         {
             moduleCatalog.AddModule<RealEstateModule.RealEstateModule>();
             moduleCatalog.AddModule<RegistrationModule.RegistrationModule>();
+            moduleCatalog.AddModule<Common.CommonModule>();
+            moduleCatalog.AddModule<ProjectModule.ProjectModule>();
         }
     }
 }

@@ -214,6 +214,14 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{b7ed7a54-e280-4dd3-b4a7-008fafb4e7f2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectModule\ProjectModule.csproj">
+      <Project>{51850fe3-0e04-4447-a7b6-9974258f0d6a}</Project>
+      <Name>ProjectModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RealEstateModule\RealEstateModule.csproj">
       <Project>{c638612b-28b2-4801-9958-c186d053701d}</Project>
       <Name>RealEstateModule</Name>

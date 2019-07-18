@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:ResourceDic">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary>
+        <ResourceDictionary x:Uid="theme1">
             <ResourceDictionary.MergedDictionaries>
 
                 <!--  Material Design  -->

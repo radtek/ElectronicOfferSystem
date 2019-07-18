@@ -5,7 +5,7 @@ using Prism.Regions;
 
 namespace ProjectModule
 {
-    public class ProjectModuleModule : IModule
+    public class ProjectModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
@@ -14,7 +14,7 @@ namespace ProjectModule
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<AddOrEditProjectDialog>();
-            containerRegistry.RegisterForNavigation<ProjectList>();
+            containerRegistry.RegisterForNavigation<ProjectPage>();
         }
     }
 }

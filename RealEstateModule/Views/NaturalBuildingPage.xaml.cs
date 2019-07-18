@@ -1,6 +1,4 @@
-﻿using Prism.Regions;
-using ProjectModule.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectModule.Views
+namespace RealEstateModule.Views
 {
     /// <summary>
-    /// ProjectList.xaml 的交互逻辑
+    /// NaturalBuildingPage.xaml 的交互逻辑
     /// </summary>
-    public partial class ProjectList : UserControl
+    public partial class NaturalBuildingPage : UserControl
     {
-        public ProjectList(IRegionManager regionManager)
+        public NaturalBuildingPage()
         {
             InitializeComponent();
-           
-            // view discovery
-            regionManager.RegisterViewWithRegion("AddOrEditProjectDialogRegion", typeof(AddOrEditProjectDialog));
-            DataContext = new ProjectListViewModel();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ElectronicOfferSystem.ViewModels;
 using Prism.Regions;
+using ProjectModule.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace ElectronicOfferSystem.Views
             // View Discovery
             regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
             regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
+            regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
 
             DataContext = new MainWindowViewModel();
         }

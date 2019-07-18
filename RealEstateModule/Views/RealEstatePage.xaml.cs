@@ -1,5 +1,4 @@
 ﻿using Prism.Regions;
-using ProjectModule.Views;
 using RealEstateModule.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,8 +26,8 @@ namespace RealEstateModule.Views
         {
             InitializeComponent();
             // view discovery
-            regionManager.RegisterViewWithRegion("ProjectListRegion", typeof(ProjectList));
             regionManager.RegisterViewWithRegion("RealEstateToolBarRegion", typeof(RealEstateToolBar));
+            regionManager.RegisterViewWithRegion("NaturalBuildingPageRegion", typeof(NaturalBuildingPage));
 
             DataContext = new RealEstatePageViewModel();
         }

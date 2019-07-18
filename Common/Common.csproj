@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51850FE3-0E04-4447-A7B6-9974258F0D6A}</ProjectGuid>
+    <ProjectGuid>{B7ED7A54-E280-4DD3-B4A7-008FAFB4E7F2}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectModule</RootNamespace>
-    <AssemblyName>ProjectModule</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectModule.cs" />
+    <Compile Include="CommonModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -63,14 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\AddOrEditProjectDialogViewModel.cs" />
-    <Compile Include="ViewModels\ProjectPageViewModel.cs" />
-    <Compile Include="Views\AddOrEditProjectDialog.xaml.cs">
-      <DependentUpon>AddOrEditProjectDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProjectPage.xaml.cs">
-      <DependentUpon>ProjectPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,15 +76,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors">
-      <Version>1.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="MaterialDesignThemes">
-      <Version>2.6.0</Version>
-    </PackageReference>
-    <PackageReference Include="MaterialDesignXaml.DialogsHelper">
-      <Version>1.0.2</Version>
-    </PackageReference>
     <PackageReference Include="Prism.Core">
       <Version>7.1.0.431</Version>
     </PackageReference>
@@ -99,30 +83,6 @@
       <Version>7.1.0.431</Version>
     </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\AddOrEditProjectDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProjectPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessData\BusinessData.csproj">
-      <Project>{6b55a929-d17e-41fc-8f08-ba64f43e23e3}</Project>
-      <Name>BusinessData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{b7ed7a54-e280-4dd3-b4a7-008fafb4e7f2}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ResourceDic\ResourceDic.csproj">
-      <Project>{6b4be1f9-8dba-486b-af79-4e6bbf39da3a}</Project>
-      <Name>ResourceDic</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

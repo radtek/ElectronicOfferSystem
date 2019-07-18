@@ -12,12 +12,12 @@
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Height="800" Width="1100">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Top -->
@@ -26,17 +26,132 @@
                             MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>
         </Grid>
         <!-- Top End -->
-
-        <!-- Tab -->
+        
+        <!-- Menu -->
         <Grid Grid.Row="1">
-            <ContentControl prism:RegionManager.RegionName="ProjectTabRegion"
-                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>
+            <Menu IsMainMenu="True" Margin="0 -10 0 0" Height="40" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+                <MenuItem Header="楼盘表项目">
+                    <MenuItem Header="新建">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="AddCircle" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="打开">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="FolderOpen" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="另存为">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSave" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="关闭">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CloseBox" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="登记业务项目">
+                    <MenuItem Header="新建">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="AddCircle" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="另存为">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSave" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="关闭">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CloseBox" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="检查">
+                    <MenuItem Header="楼盘表质检">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="ShieldCheck" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="设置">
+                    <MenuItem Header="项目路径">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="FolderMove" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="服务器IP设置">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="ServerNetwork" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="用户管理">
+                    <MenuItem Header="添加用户">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="UserCircle" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="管理用户">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="UserSettings" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="帮助">
+                    <MenuItem Header="查看帮助">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="Help" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="检查更新">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="Update" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="关于">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon  Kind="AlertBox" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
         </Grid>
-        <!-- Tab End -->
+        <!-- Menu End -->
 
         <!-- Main -->
         <Grid Grid.Row="2">
-            <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!-- ProjectPage -->
+            <Grid Grid.Column="0">
+                <ContentControl prism:RegionManager.RegionName="ProjectPageRegion"/>
+            </Grid>
+            <!-- ProjectPage End -->
+            
+            <!-- MainPage -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- Tab -->
+                <Grid Grid.Row="0">
+                    <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="ProjectTabRegion"/>
+                </Grid>
+                <!-- Tab End -->
+                
+                <Grid Grid.Row="1">
+                    <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="ContentRegion"/>
+                </Grid>
+            </Grid>
+            <!-- MainPage End -->
         </Grid>
         <!-- Main End -->
     </Grid>
