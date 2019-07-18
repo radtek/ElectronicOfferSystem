@@ -29,7 +29,7 @@ namespace RealEstateModule.Views
             regionManager.RegisterViewWithRegion("RealEstateToolBarRegion", typeof(RealEstateToolBar));
             regionManager.RegisterViewWithRegion("NaturalBuildingPageRegion", typeof(NaturalBuildingPage));
 
-            DataContext = new RealEstatePageViewModel();
+            //DataContext = new RealEstatePageViewModel();
         }
     }
 }

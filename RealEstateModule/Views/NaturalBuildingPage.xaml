@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:RealEstateModule.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,8 +19,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                <Setter Property="Margin" Value="5" />
-                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="1"/>
+                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
@@ -26,16 +29,16 @@
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
                 <Setter Property="Margin" Value="0 8 0 8" />
             </Style>
-
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="100" />
-            <ColumnDefinition Width="*" MinWidth="100" />
-            <ColumnDefinition Width="*" MinWidth="100" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -56,41 +59,44 @@
                  materialDesign:HintAssist.Hint="宗地代码" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NaturalBuilding.ZRZH}"
                  materialDesign:HintAssist.Hint="自然幢号" />
-        <TextBox Grid.Row="1" Grid.Column="2" 
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding NaturalBuilding.JZWMC}"
                  materialDesign:HintAssist.Hint="建筑物名称"/>
-        <TextBox Grid.Row="2" Grid.Column="0" 
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding NaturalBuilding.XMMC}"
                  materialDesign:HintAssist.Hint="项目名称"/>
-        <TextBox Grid.Row="2" Grid.Column="1" 
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NaturalBuilding.JZWGD}"
                  materialDesign:HintAssist.Hint="建筑物高度"/>
-        <TextBox Grid.Row="2" Grid.Column="2" 
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NaturalBuilding.JGRQ}"
                  materialDesign:HintAssist.Hint="竣工日期"/>
-        <TextBox Grid.Row="3" Grid.Column="0" 
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding NaturalBuilding.ZYDMJ}"
                  materialDesign:HintAssist.Hint="幢用地面积"/>
-        <TextBox Grid.Row="3" Grid.Column="1" 
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NaturalBuilding.ZZDMJ}"
                  materialDesign:HintAssist.Hint="幢占地面积"/>
-        <TextBox Grid.Row="3" Grid.Column="2" 
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding NaturalBuilding.SCJZMJ}"
                  materialDesign:HintAssist.Hint="实测建筑面积"/>
-        <TextBox Grid.Row="4" Grid.Column="0" 
+        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding NaturalBuilding.YCJZMJ}"
                  materialDesign:HintAssist.Hint="预测建筑面积"/>
-        <TextBox Grid.Row="4" Grid.Column="1" 
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding NaturalBuilding.DSCS}"
                  materialDesign:HintAssist.Hint="地上层数"/>
-        <TextBox Grid.Row="4" Grid.Column="2" 
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding NaturalBuilding.ZCS}"
                  materialDesign:HintAssist.Hint="总层数"/>
-        <TextBox Grid.Row="5" Grid.Column="0" 
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding NaturalBuilding.DXCS}"
                  materialDesign:HintAssist.Hint="地下层数"/>
-        <TextBox Grid.Row="5" Grid.Column="1" 
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding NaturalBuilding.DXSD}"
                  materialDesign:HintAssist.Hint="地下深度"/>
-        <TextBox Grid.Row="5" Grid.Column="2" 
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding NaturalBuilding.FWJG}"
                  materialDesign:HintAssist.Hint="房屋结构"/>
-        <TextBox Grid.Row="6" Grid.Column="0" 
+        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding NaturalBuilding.GHYT}"
                  materialDesign:HintAssist.Hint="规划用途"/>
-        <TextBox Grid.Row="6" Grid.Column="1" 
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding NaturalBuilding.JZWJBYT}"
                  materialDesign:HintAssist.Hint="建筑物基本用途"/>
-        <TextBox Grid.Row="6" Grid.Column="2" 
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding NaturalBuilding.ZTS}"
                  materialDesign:HintAssist.Hint="总套数"/>
-        <TextBox Grid.Row="7" Grid.Column="0" 
+        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding NaturalBuilding.ZT}"
                  materialDesign:HintAssist.Hint="状态"/>
-        <TextBox Grid.Row="7" Grid.Column="1" 
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NaturalBuilding.BZ}"
                  materialDesign:HintAssist.Hint="备注"/>
+        <Button Grid.Row="8" Grid.Column="1" 
+                Command="{Binding AddOrEditNaturalBuildingCommand}" 
+                Content="保存" />
     </Grid>
 </UserControl>

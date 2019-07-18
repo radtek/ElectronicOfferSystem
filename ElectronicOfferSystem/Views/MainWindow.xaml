@@ -12,7 +12,7 @@
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         Height="800" Width="1100">
     <Grid>
         <Grid.RowDefinitions>

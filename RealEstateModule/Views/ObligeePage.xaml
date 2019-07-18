@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="RealEstateModule.Views.ObligeePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RealEstateModule.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="5" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Obligee.ID}"
+                 materialDesign:HintAssist.Hint="户唯一码" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Obligee.QLRMC}"
+                 materialDesign:HintAssist.Hint="权利人名称" />
+        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Obligee.BDCQZH}"
+                 materialDesign:HintAssist.Hint="不动产权证号" />
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Obligee.ZJZL}"
+                 materialDesign:HintAssist.Hint="证件种类" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Obligee.ZJH}"
+                 materialDesign:HintAssist.Hint="证件号" />
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Obligee.GJ}"
+                 materialDesign:HintAssist.Hint="国家/地区" />
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Obligee.XB}"
+                 materialDesign:HintAssist.Hint="性别" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Obligee.QLRLX}"
+                 materialDesign:HintAssist.Hint="权利人类型" />
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Obligee.DH}"
+                 materialDesign:HintAssist.Hint="电话" />
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Obligee.YB}"
+                 materialDesign:HintAssist.Hint="邮编" />
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Obligee.DZ}"
+                 materialDesign:HintAssist.Hint="地址" />
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Obligee.QLLX}"
+                 materialDesign:HintAssist.Hint="权利类型" />
+        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Obligee.GYFS}"
+                 materialDesign:HintAssist.Hint="共有方式" />
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Obligee.QLMJ}"
+                 materialDesign:HintAssist.Hint="权利面积" />
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Obligee.QLBL}"
+                 materialDesign:HintAssist.Hint="权利比例" />
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Obligee.FRXM}"
+                 materialDesign:HintAssist.Hint="法人姓名" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Obligee.FRZJLX}"
+                 materialDesign:HintAssist.Hint="法人证件类型" />
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Obligee.FRZJH}"
+                 materialDesign:HintAssist.Hint="法人证件号" />
+        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Obligee.FRDH}"
+                 materialDesign:HintAssist.Hint="法人电话" />
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Obligee.DLRXM}"
+                 materialDesign:HintAssist.Hint="代理人姓名" />
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Obligee.DLRZJLX}"
+                 materialDesign:HintAssist.Hint="代理人证件类型" />
+        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Obligee.DLRZJH}"
+                 materialDesign:HintAssist.Hint="代理人证件号" />
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Obligee.DLRDH}"
+                 materialDesign:HintAssist.Hint="代理人电话" />
+        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Obligee.GZDW}"
+                 materialDesign:HintAssist.Hint="工作单位" />
+        <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Obligee.DLJGMC}"
+                 materialDesign:HintAssist.Hint="代理机构名称" />
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Obligee.DZYJ}"
+                 materialDesign:HintAssist.Hint="电子邮件" />
+        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Obligee.BZ}"
+                 materialDesign:HintAssist.Hint="备注" />
+       
+
+    </Grid>
+</UserControl>

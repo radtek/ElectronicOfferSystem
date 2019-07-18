@@ -14,8 +14,13 @@ namespace RealEstateModule
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<RealEstatePage>();
             containerRegistry.RegisterForNavigation<RealEstateToolBar>();
+            containerRegistry.RegisterForNavigation<RealEstatePage>();
+            containerRegistry.RegisterForNavigation<NaturalBuildingPage>();
+            containerRegistry.RegisterForNavigation<LogicalBuildingPage>();
+            containerRegistry.RegisterForNavigation<FloorPage>();
+            containerRegistry.RegisterForNavigation<HouseholdPage>();
+            containerRegistry.RegisterForNavigation<ObligeePage>();
         }
     }
 }

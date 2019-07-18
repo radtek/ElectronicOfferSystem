@@ -46,36 +46,36 @@
                                       materialDesign:ShadowAssist.ShadowEdges="Bottom">
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ProjectNavCommand}"
-                                 CommandParameter="RealEstatePage"
+                                 Command="{Binding BusinessNavCommand}"
+                                 CommandParameter="NaturalBuildingPage"
                                  Margin="4"
                                  IsChecked="True"
                                  Cursor="Hand"
                                  Content="自然幢" />
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ProjectNavCommand}"
-                                 CommandParameter="RegistrationPage"
+                                 Command="{Binding BusinessNavCommand}"
+                                 CommandParameter="LogicalBuildingPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="逻辑幢" />
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ProjectNavCommand}"
-                                 CommandParameter="Setting"
+                                 Command="{Binding BusinessNavCommand}"
+                                 CommandParameter="FloorPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="层信息" />
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ProjectNavCommand}"
-                                 CommandParameter="Setting"
+                                 Command="{Binding BusinessNavCommand}"
+                                 CommandParameter="HouseholdPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="户信息" />
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                                 Command="{Binding ProjectNavCommand}"
-                                 CommandParameter="Setting"
+                                 Command="{Binding BusinessNavCommand}"
+                                 CommandParameter="ObligeePage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
@@ -127,7 +127,7 @@
 
                 <Grid Grid.Column="1">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="NaturalBuildingPageRegion"/>
+                        <ContentControl Margin="5 0" prism:RegionManager.RegionName="BusinessContentRegion"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>

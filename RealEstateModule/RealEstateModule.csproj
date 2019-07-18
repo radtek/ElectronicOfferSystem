@@ -63,10 +63,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\NaturalBuildingPageViewModel.cs" />
     <Compile Include="ViewModels\RealEstatePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
+    <Compile Include="Views\FloorPage.xaml.cs">
+      <DependentUpon>FloorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HouseholdPage.xaml.cs">
+      <DependentUpon>HouseholdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogicalBuildingPage.xaml.cs">
+      <DependentUpon>LogicalBuildingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NaturalBuildingPage.xaml.cs">
       <DependentUpon>NaturalBuildingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObligeePage.xaml.cs">
+      <DependentUpon>ObligeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RealEstatePage.xaml.cs">
       <DependentUpon>RealEstatePage.xaml</DependentUpon>
@@ -100,7 +113,23 @@
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\FloorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HouseholdPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogicalBuildingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NaturalBuildingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ObligeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +142,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessData\BusinessData.csproj">
+      <Project>{6b55a929-d17e-41fc-8f08-ba64f43e23e3}</Project>
+      <Name>BusinessData</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -90,7 +90,7 @@ namespace ProjectModule.ViewModels
             });
 
             ProjectDal projectDal = new ProjectDal();
-            Projects = new ObservableCollection<Project>(projectDal.GetAllProject());
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
         }
 
         ProjectDal projectDal = new ProjectDal();
@@ -103,15 +103,15 @@ namespace ProjectModule.ViewModels
             Project.Type = 1;
             Project.State = 0;
 
-            projectDal.Insert(Project);
+            projectDal.Add(Project);
             CloseDialogAndRefreshProjectList();
         }
 
         private void UpdProject()
         {  
             if (Project != null)
-            {    
-                projectDal.Update(Project);
+            {
+                projectDal.Modify(Project);
                 CloseDialogAndRefreshProjectList();
             }
         }
@@ -120,7 +120,7 @@ namespace ProjectModule.ViewModels
         {
             IsAddOrEditProjectDialogOpen = false;
             Project = null;
-            Projects = new ObservableCollection<Project>(projectDal.GetAllProject());
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p)=>p.Type == 1));
         }
     }
 }

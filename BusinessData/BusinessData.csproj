@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessData.cs" />
+    <Compile Include="Dal\BaseDal.cs" />
     <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
     <Compile Include="Dal\Entities\Floor.cs" />
     <Compile Include="Dal\Entities\Household.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Dal\Entities\NaturalBuilding.cs" />
     <Compile Include="Dal\Entities\Obligee.cs" />
     <Compile Include="Dal\Entities\Project.cs" />
+    <Compile Include="Dal\NaturalBuildingDal.cs" />
     <Compile Include="Dal\ProjectDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
