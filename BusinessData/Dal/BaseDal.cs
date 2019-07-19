@@ -8,9 +8,13 @@ using System.Reflection;
 
 namespace BusinessData.Dal
 {
+    /// <summary>
+    /// 基础数据访问层
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseDal<T> where T : class, new()
     {
-        DbContext db = new ElectronicOfferSystemDBContainer();
+        protected DbContext db = new ElectronicOfferSystemDBContainer();
 
         #region 1.0 新增实体，返回受影响的行数 +  int Add(T model)  
         /// <summary>  

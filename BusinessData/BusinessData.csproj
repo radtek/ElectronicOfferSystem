@@ -63,7 +63,11 @@
     <Compile Include="Dal\Entities\NaturalBuilding.cs" />
     <Compile Include="Dal\Entities\Obligee.cs" />
     <Compile Include="Dal\Entities\Project.cs" />
+    <Compile Include="Dal\FloorDal.cs" />
+    <Compile Include="Dal\HouseholdDal.cs" />
+    <Compile Include="Dal\LogicalBuildingDal.cs" />
     <Compile Include="Dal\NaturalBuildingDal.cs" />
+    <Compile Include="Dal\ObligeeDal.cs" />
     <Compile Include="Dal\ProjectDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

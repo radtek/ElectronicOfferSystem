@@ -147,6 +147,10 @@
       <Project>{6b55a929-d17e-41fc-8f08-ba64f43e23e3}</Project>
       <Name>BusinessData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{b7ed7a54-e280-4dd3-b4a7-008fafb4e7f2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

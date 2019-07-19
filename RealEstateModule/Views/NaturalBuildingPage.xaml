@@ -49,7 +49,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding NaturalBuilding.ID}"
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding NaturalBuilding.BSM}"
                  materialDesign:HintAssist.Hint="自然幢唯一码" />
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NaturalBuilding.YSDM}"
                  materialDesign:HintAssist.Hint="要素代码" />

@@ -64,7 +64,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Obligee.ID}"
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Obligee.HBSM}"
                  materialDesign:HintAssist.Hint="户唯一码" />
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Obligee.QLRMC}"
                  materialDesign:HintAssist.Hint="权利人名称" />

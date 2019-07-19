@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 namespace BusinessData.Dal
 {
     /// <summary>
-    /// 自然幢数据访问层
+    /// 户信息数据访问层
     /// </summary>
-    public class NaturalBuildingDal : BaseDal<NaturalBuilding>
+    class HouseholdDal : BaseDal<Household>
     {
-        
-
     }
 }

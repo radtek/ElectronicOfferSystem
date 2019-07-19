@@ -8,6 +8,7 @@
              xmlns:prism="http://prismlibrary.com/"  
              xmlns:local="clr-namespace:ProjectModule.Views"
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
+             xmlns:common="clr-namespace:Common;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -125,7 +126,7 @@
                               ItemsSource="{Binding Projects}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding SelectProjectCommand}"
+                                                <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectProjectCommand}"
                                                        CommandParameter="{Binding ElementName=ProjectList}" />
                                         </i:EventTrigger>
                                             <i:EventTrigger EventName="MouseDoubleClick">

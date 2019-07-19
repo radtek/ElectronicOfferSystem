@@ -1,67 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace BusinessData.Dal
 {
+    /// <summary>
+    /// 项目信息数据访问层
+    /// </summary>
     public class ProjectDal : BaseDal<Project>
     {
-        //ElectronicOfferSystemDBContainer ctx = new ElectronicOfferSystemDBContainer();
+        /// <summary>
+        /// 初始化楼盘表项目
+        /// </summary>
+        /// <param name="whereLambda"></param>
+        /// <returns></returns>
+        public Project InitialRealEstateProject(Project project)
+        {
+            if (project == null)
+                return null;
+            if (project.Type != 1)
+                return project;
+            NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
+            LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
+            FloorDal floorDal = new FloorDal();
+            HouseholdDal householdDal = new HouseholdDal();
+            ObligeeDal obligeeDal = new ObligeeDal();
+            project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectId == project.ID);
+            project.LogicalBuildings = logicalBuildingDal.GetListBy((l) => l.ProjectID == project.ID);
+            project.Floors = floorDal.GetListBy((f) => f.ProjectID == project.ID);
+            project.Households = householdDal.GetListBy((h) => h.ProjectID == project.ID);
+            project.Obligees = obligeeDal.GetListBy((o) => o.ProjectID == project.ID);
 
-        //public List<Project> GetAllProject()
-        //{
-        //    List<Project> list = new List<Project>();
-        //    try
-        //    {
-        //        list = ctx.ProjectSet.ToList();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    return list;
-        //}
-
-        //public void Insert(Project project)
-        //{
-        //    ctx.ProjectSet.Add(project);
-        //    try
-        //    {
-        //        ctx.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //public void Delete(Project project)
-        //{
-        //    ctx.ProjectSet.Remove(project);
-        //    try
-        //    {
-        //        ctx.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //public void Update(Project project)
-        //{
-        //    var id = ctx.ProjectSet.Find(project.ID);
-        //    var entry = ctx.Entry(id);
-        //    entry.CurrentValues.SetValues(project);
-        //    entry.Property(p => p.ID).IsModified = false;
-        //    try
-        //    {
-        //        ctx.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+            return project;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ProjectModule.ViewModels
 {
@@ -48,15 +50,20 @@ namespace ProjectModule.ViewModels
         public DelegateCommand AcceptCommand { get; set; }
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
+        ProjectDal projectDal = new ProjectDal();
 
         public ProjectPageViewModel()
         {
-            // 选中ListView中的一项
-            SelectProjectCommand = new DelegateCommand<object>((obj) => {
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
+            // 加载项目列表
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
 
-            });
+            // 选中ListView中的一项
+            //SelectProjectCommand = new DelegateCommand<object>((obj) => {
+            //    ListView listView = obj as ListView;
+            //    Project = listView.SelectedItem as Project;
+            //    Project = projectDal.InitialRealEstateProject(Project); // 加载该项目的数据
+            //});
+            //GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             // 关闭模态框
             CancelAddOrEditProjectDialogCommand = new DelegateCommand(() => {
@@ -89,11 +96,10 @@ namespace ProjectModule.ViewModels
                 IsAddOrEditProjectDialogOpen = true;
             });
 
-            ProjectDal projectDal = new ProjectDal();
-            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
+            
+            
         }
 
-        ProjectDal projectDal = new ProjectDal();
 
         private void AddProject()
         {
@@ -111,6 +117,7 @@ namespace ProjectModule.ViewModels
         {  
             if (Project != null)
             {
+                Project.UptateTime = DateTime.Now;
                 projectDal.Modify(Project);
                 CloseDialogAndRefreshProjectList();
             }

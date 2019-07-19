@@ -59,7 +59,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Household.ID}"
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Household.HBSM}"
                  materialDesign:HintAssist.Hint="户唯一码" />
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Household.YXTBS}"
                  materialDesign:HintAssist.Hint="原系统标识" />
