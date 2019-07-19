@@ -4,21 +4,56 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="106" >
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Project" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuilding" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="false" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectNaturalBuilding" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.LogicalBuilding" Width="1.5" PointX="4.875" PointY="1.125" IsExpanded="false" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectLogicalBuilding" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Floor" Width="1.5" PointX="7.25" PointY="1.125" IsExpanded="false" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectFloor" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingFloor" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Obligee" Width="1.5" PointX="5.875" PointY="2.625" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystemDB.Household" Width="1.5" PointX="3" PointY="3.5" IsExpanded="false" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectHousehold" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.NaturalBuildingHousehold" />
-        <AssociationConnector Association="ElectronicOfferSystemDB.ProjectObligee" />
+      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="72" >
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Project" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.NaturalBuilding" Width="1.5" PointX="3.375" PointY="0.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.LogicalBuilding" Width="1.5" PointX="3.25" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Floor" Width="1.5" PointX="3.25" PointY="2.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Obligee" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Household" Width="1.5" PointX="7.25" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONST" Width="1.5" PointX="1.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="3.625" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="ElectronicOfferSystem.ProjectNaturalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystem.ProjectLogicalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystem.ProjectFloor" />
+        <AssociationConnector Association="ElectronicOfferSystem.ProjectHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystem.ProjectObligee" />
+        <AssociationConnector Association="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystem.NaturalBuildingFloor" />
+        <AssociationConnector Association="ElectronicOfferSystem.NaturalBuildingHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystem.HouseholdObligee" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.BDCS_CONST" Width="1.5" PointX="6.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.BDCS_CONSTCLS" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.FloorSet" Width="1.5" PointX="28.875" PointY="23.375" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.FloorSet1" Width="1.5" PointX="13.875" PointY="31.625" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.HouseholdSet" Width="1.5" PointX="25.875" PointY="25.5" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.HouseholdSet1" Width="1.5" PointX="16.875" PointY="27.875" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.LogicalBuildingSet" Width="1.5" PointX="28.875" PointY="28.75" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.LogicalBuildingSet1" Width="1.5" PointX="10.875" PointY="31.125" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuildingSet" Width="1.5" PointX="23.625" PointY="39.875" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.NaturalBuildingSet1" Width="1.5" PointX="8.625" PointY="42" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.ObligeeSet" Width="1.5" PointX="31.125" PointY="21.625" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.ObligeeSet1" Width="1.5" PointX="19.125" PointY="26.125" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.ProjectSet" Width="1.5" PointX="21.375" PointY="16.625" />
+        <EntityTypeShape EntityType="ElectronicOfferSystemDB.ProjectSet1" Width="1.5" PointX="6.375" PointY="19.25" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingFloor" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectFloor" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingFloor1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectFloor1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_HouseholdObligee" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectHousehold" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_HouseholdObligee1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingHousehold1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectHousehold1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingLogicalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectLogicalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_NaturalBuildingLogicalBuilding1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectLogicalBuilding1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectNaturalBuilding" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectNaturalBuilding1" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectObligee" />
+        <AssociationConnector Association="ElectronicOfferSystemDB.FK_ProjectObligee1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

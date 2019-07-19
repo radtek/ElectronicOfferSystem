@@ -4,44 +4,50 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ElectronicOfferSystemDB.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="ElectronicOfferSystemDBStoreContainer">
-    <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystemDB.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystemDB.Store.NaturalBuildingSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystemDB.Store.LogicalBuildingSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystemDB.Store.FloorSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystemDB.Store.ObligeeSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystemDB.Store.HouseholdSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystemDB.Store.ProjectNaturalBuilding">
+    <Schema Namespace="ElectronicOfferSystem.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ElectronicOfferSystemStoreContainer">
+    <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystem.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystem.Store.NaturalBuildingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystem.Store.LogicalBuildingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystem.Store.FloorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystem.Store.ObligeeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystem.Store.HouseholdSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.Store.BDCS_CONST" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.Store.BDCS_CONSTCLS" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystem.Store.ProjectNaturalBuilding">
       <End Role="Project" EntitySet="ProjectSet" />
       <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
     </AssociationSet>
-    <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystemDB.Store.ProjectLogicalBuilding">
+    <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystem.Store.ProjectLogicalBuilding">
       <End Role="Project" EntitySet="ProjectSet" />
       <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
     </AssociationSet>
-    <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystemDB.Store.NaturalBuildingLogicalBuilding">
+    <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystem.Store.ProjectFloor">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Floor" EntitySet="FloorSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystem.Store.ProjectHousehold">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Household" EntitySet="HouseholdSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystem.Store.ProjectObligee">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Obligee" EntitySet="ObligeeSet" />
+    </AssociationSet>
+    <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystem.Store.NaturalBuildingLogicalBuilding">
       <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
       <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
     </AssociationSet>
-    <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystemDB.Store.ProjectFloor">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="Floor" EntitySet="FloorSet" />
-    </AssociationSet>
-    <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystemDB.Store.NaturalBuildingFloor">
+    <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystem.Store.NaturalBuildingFloor">
       <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
       <End Role="Floor" EntitySet="FloorSet" />
     </AssociationSet>
-    <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystemDB.Store.ProjectHousehold">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="Household" EntitySet="HouseholdSet" />
-    </AssociationSet>
-    <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystemDB.Store.NaturalBuildingHousehold">
+    <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystem.Store.NaturalBuildingHousehold">
       <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
       <End Role="Household" EntitySet="HouseholdSet" />
     </AssociationSet>
-    <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystemDB.Store.ProjectObligee">
-      <End Role="Project" EntitySet="ProjectSet" />
+    <AssociationSet Name="HouseholdObligee" Association="ElectronicOfferSystem.Store.HouseholdObligee">
+      <End Role="Household" EntitySet="HouseholdSet" />
       <End Role="Obligee" EntitySet="ObligeeSet" />
     </AssociationSet>
   </EntityContainer>
@@ -55,37 +61,39 @@
     <Property Name="Type" Type="int" Nullable="false" />
     <Property Name="State" Type="int" Nullable="false" />
     <Property Name="UptateTime" Type="datetime" Nullable="false" />
-    <Property Name="Remark" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="400" />
   </EntityType>
   <EntityType Name="NaturalBuildingSet">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ProjectId" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="BSM" Type="nvarchar" Nullable="false" />
-    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" />
-    <Property Name="ZDDM" Type="nvarchar" Nullable="false" />
-    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
-    <Property Name="XMMC" Type="nvarchar" Nullable="false" />
-    <Property Name="JZWMC" Type="nvarchar" Nullable="false" />
-    <Property Name="JGRQ" Type="datetime" Nullable="false" />
-    <Property Name="JZWGD" Type="float" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BSM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ZDDM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="XMMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="JZWMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="JGRQ" Type="datetime" Nullable="true" />
+    <Property Name="JZWGD" Type="float" Nullable="true" />
     <Property Name="ZZDMJ" Type="float" Nullable="false" />
     <Property Name="ZYDMJ" Type="float" Nullable="false" />
-    <Property Name="YCJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCJZMJ" Type="float" Nullable="false" />
+    <Property Name="YCJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCJZMJ" Type="float" Nullable="true" />
     <Property Name="ZCS" Type="int" Nullable="false" />
     <Property Name="DSCS" Type="int" Nullable="false" />
     <Property Name="DXCS" Type="int" Nullable="false" />
-    <Property Name="DXSD" Type="float" Nullable="false" />
-    <Property Name="GHYT" Type="nvarchar" Nullable="false" />
+    <Property Name="DXSD" Type="float" Nullable="true" />
+    <Property Name="GHYT" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWJG" Type="int" Nullable="false" />
     <Property Name="ZTS" Type="int" Nullable="false" />
-    <Property Name="JZWJBYT" Type="nvarchar" Nullable="false" />
+    <Property Name="JZWJBYT" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="ZT" Type="int" Nullable="false" />
-    <Property Name="BZ" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="BZ" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="LogicalBuildingSet">
     <Key>
@@ -93,27 +101,28 @@
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="LJZH" Type="nvarchar" Nullable="false" />
     <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
-    <Property Name="YSDM" Type="nvarchar" Nullable="false" />
-    <Property Name="MPH" Type="nvarchar" Nullable="false" />
-    <Property Name="YCJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCDXMJ" Type="float" Nullable="false" />
-    <Property Name="YCQTMJ" Type="float" Nullable="false" />
-    <Property Name="SCJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCDXMJ" Type="float" Nullable="false" />
-    <Property Name="SCQTMJ" Type="float" Nullable="false" />
-    <Property Name="JGRQ" Type="datetime" Nullable="false" />
-    <Property Name="FWJG1" Type="nvarchar" Nullable="false" />
-    <Property Name="FWJG2" Type="nvarchar" Nullable="false" />
-    <Property Name="FWJG3" Type="nvarchar" Nullable="false" />
-    <Property Name="JZWZT" Type="nvarchar" Nullable="false" />
-    <Property Name="ZCS" Type="int" Nullable="false" />
-    <Property Name="DSCS" Type="int" Nullable="false" />
-    <Property Name="DXCS" Type="int" Nullable="false" />
-    <Property Name="BZ" Type="nvarchar" Nullable="false" />
+    <Property Name="LJZH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="MPH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCDXMJ" Type="float" Nullable="true" />
+    <Property Name="YCQTMJ" Type="float" Nullable="true" />
+    <Property Name="SCJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCDXMJ" Type="float" Nullable="true" />
+    <Property Name="SCQTMJ" Type="float" Nullable="true" />
+    <Property Name="JGRQ" Type="datetime" Nullable="true" />
+    <Property Name="FWJG1" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWJG2" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWJG3" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="JZWZT" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZCS" Type="int" Nullable="true" />
+    <Property Name="DSCS" Type="int" Nullable="true" />
+    <Property Name="DXCS" Type="int" Nullable="true" />
+    <Property Name="BZ" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="FloorSet">
     <Key>
@@ -121,21 +130,22 @@
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CH" Type="nvarchar" Nullable="false" />
-    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
-    <Property Name="YSDM" Type="nvarchar" Nullable="false" />
-    <Property Name="SJC" Type="nvarchar" Nullable="false" />
-    <Property Name="MYC" Type="nvarchar" Nullable="false" />
-    <Property Name="CJZMJ" Type="float" Nullable="false" />
-    <Property Name="CTNJZMJ" Type="float" Nullable="false" />
-    <Property Name="CYTMJ" Type="float" Nullable="false" />
-    <Property Name="CGYJZMJ" Type="float" Nullable="false" />
-    <Property Name="CFTJZMJ" Type="float" Nullable="false" />
-    <Property Name="CBQMJ" Type="int" Nullable="false" />
-    <Property Name="CG" Type="float" Nullable="false" />
-    <Property Name="SPTYMJ" Type="float" Nullable="false" />
+    <Property Name="CH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="YSDM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="SJC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="MYC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CJZMJ" Type="float" Nullable="true" />
+    <Property Name="CTNJZMJ" Type="float" Nullable="true" />
+    <Property Name="CYTMJ" Type="float" Nullable="true" />
+    <Property Name="CGYJZMJ" Type="float" Nullable="true" />
+    <Property Name="CFTJZMJ" Type="float" Nullable="true" />
+    <Property Name="CBQMJ" Type="int" Nullable="true" />
+    <Property Name="CG" Type="float" Nullable="true" />
+    <Property Name="SPTYMJ" Type="float" Nullable="true" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="ObligeeSet">
     <Key>
@@ -143,34 +153,36 @@
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="HBSM" Type="nvarchar" Nullable="false" />
-    <Property Name="QLRMC" Type="nvarchar" Nullable="false" />
-    <Property Name="BDCQZH" Type="nvarchar" Nullable="false" />
+    <Property Name="HBSM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="QLRMC" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="BDCQZH" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="ZJZL" Type="int" Nullable="false" />
-    <Property Name="ZJH" Type="nvarchar" Nullable="false" />
+    <Property Name="ZJH" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="GJ" Type="int" Nullable="false" />
-    <Property Name="XB" Type="int" Nullable="false" />
-    <Property Name="QLRLX" Type="nvarchar" Nullable="false" />
-    <Property Name="DH" Type="nvarchar" Nullable="false" />
-    <Property Name="YB" Type="nvarchar" Nullable="false" />
-    <Property Name="DZ" Type="nvarchar" Nullable="false" />
+    <Property Name="XB" Type="int" Nullable="true" />
+    <Property Name="QLRLX" Type="int" Nullable="false" />
+    <Property Name="DH" Type="nvarchar" Nullable="true" />
+    <Property Name="YB" Type="nvarchar" Nullable="true" />
+    <Property Name="DZ" Type="nvarchar" Nullable="true" />
     <Property Name="QLLX" Type="int" Nullable="false" />
     <Property Name="GYFS" Type="int" Nullable="false" />
-    <Property Name="QLMJ" Type="float" Nullable="false" />
-    <Property Name="QLBL" Type="nvarchar" Nullable="false" />
-    <Property Name="FRXM" Type="nvarchar" Nullable="false" />
-    <Property Name="FRZJLX" Type="int" Nullable="false" />
-    <Property Name="FRZJH" Type="nvarchar" Nullable="false" />
-    <Property Name="FRDH" Type="nvarchar" Nullable="false" />
-    <Property Name="DLRXM" Type="nvarchar" Nullable="false" />
-    <Property Name="DLRZJLX" Type="int" Nullable="false" />
-    <Property Name="DLRZJH" Type="nvarchar" Nullable="false" />
-    <Property Name="DLRDH" Type="nvarchar" Nullable="false" />
-    <Property Name="GZDW" Type="nvarchar" Nullable="false" />
-    <Property Name="DLJGMC" Type="nvarchar" Nullable="false" />
-    <Property Name="DZYJ" Type="nvarchar" Nullable="false" />
-    <Property Name="BZ" Type="nvarchar" Nullable="false" />
+    <Property Name="QLMJ" Type="float" Nullable="true" />
+    <Property Name="QLBL" Type="nvarchar" Nullable="true" />
+    <Property Name="FRXM" Type="nvarchar" Nullable="true" />
+    <Property Name="FRZJLX" Type="int" Nullable="true" />
+    <Property Name="FRZJH" Type="nvarchar" Nullable="true" />
+    <Property Name="FRDH" Type="nvarchar" Nullable="true" />
+    <Property Name="DLRXM" Type="nvarchar" Nullable="true" />
+    <Property Name="DLRZJLX" Type="int" Nullable="true" />
+    <Property Name="DLRZJH" Type="nvarchar" Nullable="true" />
+    <Property Name="DLRDH" Type="nvarchar" Nullable="true" />
+    <Property Name="GZDW" Type="nvarchar" Nullable="true" />
+    <Property Name="DLJGMC" Type="nvarchar" Nullable="true" />
+    <Property Name="DZYJ" Type="nvarchar" Nullable="true" />
+    <Property Name="BZ" Type="nvarchar" Nullable="true" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Household_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="HouseholdSet">
     <Key>
@@ -178,199 +190,248 @@
     </Key>
     <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="NaturalBuildingID" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="HBSM" Type="nvarchar" Nullable="false" />
-    <Property Name="YXTBS" Type="nvarchar" Nullable="false" />
-    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" />
-    <Property Name="FWBM" Type="nvarchar" Nullable="false" />
+    <Property Name="HBSM" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="YXTBS" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="FWBM" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="YSDM" Type="nvarchar" Nullable="false" />
-    <Property Name="ZRZH" Type="nvarchar" Nullable="false" />
-    <Property Name="LJZH" Type="nvarchar" Nullable="false" />
-    <Property Name="DYH" Type="nvarchar" Nullable="false" />
-    <Property Name="ZCS" Type="int" Nullable="false" />
-    <Property Name="CH" Type="nvarchar" Nullable="false" />
-    <Property Name="FH" Type="nvarchar" Nullable="false" />
-    <Property Name="ZL" Type="nvarchar" Nullable="false" />
+    <Property Name="ZRZH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="LJZH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DYH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZCS" Type="int" Nullable="true" />
+    <Property Name="CH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZL" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="MJDW" Type="int" Nullable="false" />
-    <Property Name="SZC" Type="nvarchar" Nullable="false" />
-    <Property Name="QSC" Type="nvarchar" Nullable="false" />
-    <Property Name="ZZC" Type="nvarchar" Nullable="false" />
-    <Property Name="HH" Type="nvarchar" Nullable="false" />
-    <Property Name="SHBW" Type="nvarchar" Nullable="false" />
-    <Property Name="HX" Type="int" Nullable="false" />
-    <Property Name="HXJG" Type="int" Nullable="false" />
-    <Property Name="GHYT" Type="nvarchar" Nullable="false" />
-    <Property Name="FWYT1" Type="int" Nullable="false" />
-    <Property Name="FWYT2" Type="int" Nullable="false" />
-    <Property Name="FWYT3" Type="int" Nullable="false" />
-    <Property Name="YCJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCTNJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCFTJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCDXBFJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCQTJZMJ" Type="float" Nullable="false" />
-    <Property Name="YCFTXS" Type="nvarchar" Nullable="false" />
-    <Property Name="SCJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCTNJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCFTJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCDXBFJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCQTJZMJ" Type="float" Nullable="false" />
-    <Property Name="SCFTXS" Type="nvarchar" Nullable="false" />
-    <Property Name="GYTDMJ" Type="float" Nullable="false" />
-    <Property Name="FTTDMJ" Type="float" Nullable="false" />
-    <Property Name="DYTDMJ" Type="float" Nullable="false" />
-    <Property Name="FWLX" Type="int" Nullable="false" />
-    <Property Name="FWJG" Type="int" Nullable="false" />
-    <Property Name="FWXZ" Type="int" Nullable="false" />
-    <Property Name="FWCB" Type="int" Nullable="false" />
-    <Property Name="FDCJYJG" Type="float" Nullable="false" />
-    <Property Name="JGSJ" Type="datetime" Nullable="false" />
-    <Property Name="CQLY" Type="nvarchar" Nullable="false" />
-    <Property Name="QTGSD" Type="nvarchar" Nullable="false" />
-    <Property Name="QTGSN" Type="nvarchar" Nullable="false" />
-    <Property Name="QTGSX" Type="nvarchar" Nullable="false" />
-    <Property Name="QTGSB" Type="nvarchar" Nullable="false" />
-    <Property Name="TDSYQR" Type="nvarchar" Nullable="false" />
-    <Property Name="FCFHT" Type="nvarchar" Nullable="false" />
-    <Property Name="ZT" Type="int" Nullable="false" />
+    <Property Name="SZC" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="QSC" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ZZC" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="HH" Type="nvarchar" Nullable="true" />
+    <Property Name="SHBW" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="HX" Type="int" Nullable="true" />
+    <Property Name="HXJG" Type="int" Nullable="true" />
+    <Property Name="GHYT" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT1" Type="int" Nullable="true" />
+    <Property Name="FWYT2" Type="int" Nullable="true" />
+    <Property Name="FWYT3" Type="int" Nullable="true" />
+    <Property Name="YCJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCTNJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCFTJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCDXBFJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCQTJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCFTXS" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCTNJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCFTJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCDXBFJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCQTJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCFTXS" Type="nvarchar" Nullable="true" />
+    <Property Name="GYTDMJ" Type="float" Nullable="true" />
+    <Property Name="FTTDMJ" Type="float" Nullable="true" />
+    <Property Name="DYTDMJ" Type="float" Nullable="true" />
+    <Property Name="FWLX" Type="int" Nullable="true" />
+    <Property Name="FWJG" Type="int" Nullable="true" />
+    <Property Name="FWXZ" Type="int" Nullable="true" />
+    <Property Name="FWCB" Type="int" Nullable="true" />
+    <Property Name="FDCJYJG" Type="float" Nullable="true" />
+    <Property Name="JGSJ" Type="datetime" Nullable="true" />
+    <Property Name="CQLY" Type="nvarchar" Nullable="true" />
+    <Property Name="QTGSD" Type="nvarchar" Nullable="true" />
+    <Property Name="QTGSN" Type="nvarchar" Nullable="true" />
+    <Property Name="QTGSX" Type="nvarchar" Nullable="true" />
+    <Property Name="QTGSB" Type="nvarchar" Nullable="true" />
+    <Property Name="TDSYQR" Type="nvarchar" Nullable="true" />
+    <Property Name="FCFHT" Type="nvarchar" Nullable="true" />
+    <Property Name="ZT" Type="int" Nullable="true" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+    <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BDCS_CONST">
+    <Key>
+      <PropertyRef Name="MBBSM" />
+    </Key>
+    <Property Name="MBBSM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONSTSLSID" Type="int" Nullable="true" />
+    <Property Name="CONSTVALUE" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="CONSTTRANS" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="PARENTNODE" Type="int" Nullable="true" />
+    <Property Name="CONSTORDER" Type="int" Nullable="true" />
+    <Property Name="BZ" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="CREATETIME" Type="datetime" Nullable="true" />
+    <Property Name="MODIFYTIME" Type="datetime" Nullable="true" />
+    <Property Name="REPORTVALUE" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="GJCONSTTRANS" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="SFSY" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="GJVALUE" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BDCS_CONSTCLS">
+    <Key>
+      <PropertyRef Name="MBBSM" />
+    </Key>
+    <Property Name="MBBSM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONSTSLSID" Type="int" Nullable="true" />
+    <Property Name="CONSTCLSNAME" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="CONSTCLSTYPE" Type="nvarchar" Nullable="true" MaxLength="100" />
+    <Property Name="BZ" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="CREATETIME" Type="datetime" Nullable="true" />
+    <Property Name="MODIFYTIME" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="ProjectNaturalBuilding">
-    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="NaturalBuilding">
-        <PropertyRef Name="ProjectId" />
+        <PropertyRef Name="Project_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectLogicalBuilding">
-    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
-    <End Role="LogicalBuilding" Type="ElectronicOfferSystemDB.Store.LogicalBuildingSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuildingSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="LogicalBuilding">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="NaturalBuildingLogicalBuilding">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="LogicalBuilding" Type="ElectronicOfferSystemDB.Store.LogicalBuildingSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NaturalBuilding">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="LogicalBuilding">
-        <PropertyRef Name="NaturalBuildingID" />
+        <PropertyRef Name="Project_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectFloor">
-    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Floor" Type="ElectronicOfferSystemDB.Store.FloorSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystem.Store.FloorSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Floor">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="NaturalBuildingFloor">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="Floor" Type="ElectronicOfferSystemDB.Store.FloorSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NaturalBuilding">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Floor">
-        <PropertyRef Name="NaturalBuildingID" />
+        <PropertyRef Name="Project_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectHousehold">
-    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Household" Type="ElectronicOfferSystemDB.Store.HouseholdSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Household">
-        <PropertyRef Name="ProjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="NaturalBuildingHousehold">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystemDB.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="Household" Type="ElectronicOfferSystemDB.Store.HouseholdSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NaturalBuilding">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Household">
-        <PropertyRef Name="NaturalBuildingID" />
+        <PropertyRef Name="Project_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectObligee">
-    <End Role="Project" Type="ElectronicOfferSystemDB.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Obligee" Type="ElectronicOfferSystemDB.Store.ObligeeSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Obligee" Type="ElectronicOfferSystem.Store.ObligeeSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Obligee">
-        <PropertyRef Name="ProjectID" />
+        <PropertyRef Name="Project_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingLogicalBuilding">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuildingSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LogicalBuilding">
+        <PropertyRef Name="NaturalBuilding_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingFloor">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystem.Store.FloorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Floor">
+        <PropertyRef Name="NaturalBuilding_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NaturalBuildingHousehold">
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaturalBuilding">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Household">
+        <PropertyRef Name="NaturalBuilding_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HouseholdObligee">
+    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="1" />
+    <End Role="Obligee" Type="ElectronicOfferSystem.Store.ObligeeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Household">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Obligee">
+        <PropertyRef Name="Household_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ElectronicOfferSystemDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="ElectronicOfferSystemDBContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystemDB.Project" />
-          <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystemDB.NaturalBuilding" />
-          <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystemDB.ProjectNaturalBuilding">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ElectronicOfferSystem" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ElectronicOfferSystemDBContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Public">
+          <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystem.Project" />
+          <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystem.NaturalBuilding" />
+          <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystem.LogicalBuilding" />
+          <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystem.Floor" />
+          <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystem.Obligee" />
+          <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystem.Household" />
+          <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.CONST" />
+          <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.CONSTCLS" />
+          <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystem.ProjectNaturalBuilding">
             <End Role="Project" EntitySet="ProjectSet" />
             <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
           </AssociationSet>
-          <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystemDB.LogicalBuilding" />
-          <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystemDB.ProjectLogicalBuilding">
+          <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystem.ProjectLogicalBuilding">
             <End Role="Project" EntitySet="ProjectSet" />
             <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
           </AssociationSet>
-          <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding">
+          <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystem.ProjectFloor">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Floor" EntitySet="FloorSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystem.ProjectHousehold">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Household" EntitySet="HouseholdSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystem.ProjectObligee">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Obligee" EntitySet="ObligeeSet" />
+          </AssociationSet>
+          <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystem.NaturalBuildingLogicalBuilding">
             <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
             <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
           </AssociationSet>
-          <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystemDB.Floor" />
-          <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystemDB.ProjectFloor">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="Floor" EntitySet="FloorSet" />
-          </AssociationSet>
-          <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystemDB.NaturalBuildingFloor">
+          <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystem.NaturalBuildingFloor">
             <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
             <End Role="Floor" EntitySet="FloorSet" />
           </AssociationSet>
-          <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystemDB.Obligee" />
-          <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystemDB.Household" />
-          <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystemDB.ProjectHousehold">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="Household" EntitySet="HouseholdSet" />
-          </AssociationSet>
-          <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystemDB.NaturalBuildingHousehold">
+          <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystem.NaturalBuildingHousehold">
             <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
             <End Role="Household" EntitySet="HouseholdSet" />
           </AssociationSet>
-          <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystemDB.ProjectObligee">
-            <End Role="Project" EntitySet="ProjectSet" />
+          <AssociationSet Name="HouseholdObligee" Association="ElectronicOfferSystem.HouseholdObligee">
+            <End Role="Household" EntitySet="HouseholdSet" />
             <End Role="Obligee" EntitySet="ObligeeSet" />
           </AssociationSet>
         </EntityContainer>
@@ -413,36 +474,16 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <Property Name="Remark" Type="String" Nullable="false" MaxLength="100" >
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="400" >
             <Documentation>
               <Summary>备注</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="NaturalBuildings" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="Project" ToRole="NaturalBuilding" >
-            <Documentation>
-              <Summary>自然幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="Project" ToRole="LogicalBuilding" >
-            <Documentation>
-              <Summary>逻辑幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Project" ToRole="Floor" >
-            <Documentation>
-              <Summary>层集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Project" ToRole="Household" >
-            <Documentation>
-              <Summary>户集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Project" ToRole="Obligee" >
-            <Documentation>
-              <Summary>权利人集合</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="NaturalBuildings" Relationship="ElectronicOfferSystem.ProjectNaturalBuilding" FromRole="Project" ToRole="NaturalBuilding" />
+          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystem.ProjectLogicalBuilding" FromRole="Project" ToRole="LogicalBuilding" />
+          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystem.ProjectFloor" FromRole="Project" ToRole="Floor" />
+          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystem.ProjectHousehold" FromRole="Project" ToRole="Household" />
+          <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystem.ProjectObligee" FromRole="Project" ToRole="Obligee" />
         </EntityType>
         <EntityType Name="NaturalBuilding">
           <Documentation>
@@ -456,52 +497,52 @@
               <Summary>ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="ProjectId" Type="Guid" Nullable="false">
+          <Property Name="ProjectID" Type="Guid" Nullable="false">
             <Documentation>
               <Summary>项目ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="BSM" Type="String" Nullable="false" >
+          <Property Name="BSM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>标识码</Summary>
             </Documentation>
           </Property>
-          <Property Name="BDCDYH" Type="String" Nullable="false" >
+          <Property Name="YSDM" Type="String" Nullable="false" MaxLength="60" >
+            <Documentation>
+              <Summary>要素代码</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BDCDYH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>不动产单元号</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectNaturalBuilding" FromRole="NaturalBuilding" ToRole="Project" >
-            <Documentation>
-              <Summary>项目</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <Property Name="ZDDM" Type="String" Nullable="false" >
+          <Property Name="ZDDM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>宗地代码</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZRZH" Type="String" Nullable="false" >
+          <Property Name="ZRZH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>自然幢号</Summary>
             </Documentation>
           </Property>
-          <Property Name="XMMC" Type="String" Nullable="false" >
+          <Property Name="XMMC" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>项目名称</Summary>
             </Documentation>
           </Property>
-          <Property Name="JZWMC" Type="String" Nullable="false" >
+          <Property Name="JZWMC" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>建筑物名称</Summary>
             </Documentation>
           </Property>
-          <Property Name="JGRQ" Type="DateTime" Nullable="false" >
+          <Property Name="JGRQ" Type="DateTime" Nullable="true" >
             <Documentation>
               <Summary>竣工日期</Summary>
             </Documentation>
           </Property>
-          <Property Name="JZWGD" Type="Double" Nullable="false" >
+          <Property Name="JZWGD" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>建筑物高度</Summary>
             </Documentation>
@@ -516,12 +557,12 @@
               <Summary>幢用地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
@@ -541,12 +582,12 @@
               <Summary>地下层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="DXSD" Type="Double" Nullable="false" >
+          <Property Name="DXSD" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>地下深度</Summary>
             </Documentation>
           </Property>
-          <Property Name="GHYT" Type="String" Nullable="false" >
+          <Property Name="GHYT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>规划用途</Summary>
             </Documentation>
@@ -561,7 +602,7 @@
               <Summary>总套数</Summary>
             </Documentation>
           </Property>
-          <Property Name="JZWJBYT" Type="String" Nullable="false" >
+          <Property Name="JZWJBYT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>建筑物基本用途</Summary>
             </Documentation>
@@ -571,7 +612,7 @@
               <Summary>状态</Summary>
             </Documentation>
           </Property>
-          <Property Name="BZ" Type="String" Nullable="false" MaxLength="100">
+          <Property Name="BZ" Type="String" Nullable="true" MaxLength="200">
             <Documentation>
               <Summary>备注</Summary>
             </Documentation>
@@ -581,34 +622,11 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="NaturalBuilding" ToRole="LogicalBuilding" >
-            <Documentation>
-              <Summary>逻辑幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="NaturalBuilding" ToRole="Floor" >
-            <Documentation>
-              <Summary>层集合</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="NaturalBuilding" ToRole="Household" >
-            <Documentation>
-              <Summary>户集合</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystem.ProjectNaturalBuilding" FromRole="NaturalBuilding" ToRole="Project" />
+          <NavigationProperty Name="LogicalBuildings" Relationship="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" FromRole="NaturalBuilding" ToRole="LogicalBuilding" />
+          <NavigationProperty Name="Floors" Relationship="ElectronicOfferSystem.NaturalBuildingFloor" FromRole="NaturalBuilding" ToRole="Floor" />
+          <NavigationProperty Name="Households" Relationship="ElectronicOfferSystem.NaturalBuildingHousehold" FromRole="NaturalBuilding" ToRole="Household" />
         </EntityType>
-        <Association Name="ProjectNaturalBuilding">
-          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.NaturalBuilding" Role="NaturalBuilding" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="NaturalBuilding">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="LogicalBuilding">
           <Documentation>
             <Summary>逻辑幢</Summary>
@@ -626,102 +644,93 @@
               <Summary>项目ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="NaturalBuildingID" Type="Guid" Nullable="false" >
-            <Documentation>
-              <Summary>自然幢ID</Summary>
-            </Documentation>
-          </Property>
-          <Property Name="LJZH" Type="String" Nullable="false" >
+          <Property Name="ZRZH" Type="String" Nullable="false" />
+          <Property Name="LJZH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>逻辑幢号</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZRZH" Type="String" Nullable="false" >
-            <Documentation>
-              <Summary>自然幢号</Summary>
-            </Documentation>
-          </Property>
-          <Property Name="YSDM" Type="String" Nullable="false" >
+          <Property Name="YSDM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>要素代码</Summary>
             </Documentation>
           </Property>
-          <Property Name="MPH" Type="String" Nullable="false" >
+          <Property Name="MPH" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>门牌号</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCDXMJ" Type="Double" Nullable="false" >
+          <Property Name="YCDXMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测地下面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCQTMJ" Type="Double" Nullable="false" >
+          <Property Name="YCQTMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测其他面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCDXMJ" Type="Double" Nullable="false" >
+          <Property Name="SCDXMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测地下面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCQTMJ" Type="Double" Nullable="false" >
+          <Property Name="SCQTMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测其他面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="JGRQ" Type="DateTime" Nullable="false" >
+          <Property Name="JGRQ" Type="DateTime" Nullable="true" >
             <Documentation>
               <Summary>竣工日期</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG1" Type="String" Nullable="false" >
+          <Property Name="FWJG1" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋结构1</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG2" Type="String" Nullable="false" >
+          <Property Name="FWJG2" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋结构2</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG3" Type="String" Nullable="false" >
+          <Property Name="FWJG3" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋结构3</Summary>
             </Documentation>
           </Property>
-          <Property Name="JZWZT" Type="String" Nullable="false" >
+          <Property Name="JZWZT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>建筑物状态</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZCS" Type="Int32" Nullable="false" >
+          <Property Name="ZCS" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>总层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="DSCS" Type="Int32" Nullable="false" >
+          <Property Name="DSCS" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>地上层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="DXCS" Type="Int32" Nullable="false" >
+          <Property Name="DXCS" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>地下层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="BZ" Type="String" Nullable="false" >
+          <Property Name="BZ" Type="String" Nullable="true" MaxLength="200" >
             <Documentation>
               <Summary>备注</Summary>
             </Documentation>
@@ -731,41 +740,9 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectLogicalBuilding" FromRole="LogicalBuilding" ToRole="Project" >
-            <Documentation>
-              <Summary>项目</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingLogicalBuilding" FromRole="LogicalBuilding" ToRole="NaturalBuilding" >
-            <Documentation>
-              <Summary>自然幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystem.ProjectLogicalBuilding" FromRole="LogicalBuilding" ToRole="Project" />
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" FromRole="LogicalBuilding" ToRole="NaturalBuilding" />
           </EntityType>
-        <Association Name="ProjectLogicalBuilding">
-          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.LogicalBuilding" Role="LogicalBuilding" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LogicalBuilding">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="NaturalBuildingLogicalBuilding">
-          <End Type="ElectronicOfferSystemDB.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.LogicalBuilding" Role="LogicalBuilding" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NaturalBuilding">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LogicalBuilding">
-              <PropertyRef Name="NaturalBuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Floor">
           <Documentation>
             <Summary>层</Summary>
@@ -783,72 +760,67 @@
               <Summary>项目ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="NaturalBuildingID" Type="Guid" Nullable="false" >
-            <Documentation>
-              <Summary>自然幢ID</Summary>
-            </Documentation>
-          </Property>
-          <Property Name="CH" Type="String" Nullable="false" >
+          <Property Name="CH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>层号</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZRZH" Type="String" Nullable="false" >
+          <Property Name="ZRZH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>自然幢号</Summary>
             </Documentation>
           </Property>
-          <Property Name="YSDM" Type="String" Nullable="false" >
+          <Property Name="YSDM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>要素代码</Summary>
             </Documentation>
           </Property>
-          <Property Name="SJC" Type="String" Nullable="false" >
+          <Property Name="SJC" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实际层</Summary>
             </Documentation>
           </Property>
-          <Property Name="MYC" Type="String" Nullable="false" >
+          <Property Name="MYC" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>名义层</Summary>
             </Documentation>
           </Property>
-          <Property Name="CJZMJ" Type="Double" Nullable="false" >
+          <Property Name="CJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CTNJZMJ" Type="Double" Nullable="false" >
+          <Property Name="CTNJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CYTMJ" Type="Double" Nullable="false" >
+          <Property Name="CYTMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层阳台面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CGYJZMJ" Type="Double" Nullable="false" >
+          <Property Name="CGYJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层共有建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CFTJZMJ" Type="Double" Nullable="false" >
+          <Property Name="CFTJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CBQMJ" Type="Int32" Nullable="false" >
+          <Property Name="CBQMJ" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>层半墙面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CG" Type="Double" Nullable="false" >
+          <Property Name="CG" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>层高</Summary>
             </Documentation>
           </Property>
-          <Property Name="SPTYMJ" Type="Double" Nullable="false" >
+          <Property Name="SPTYMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>水平投影面积</Summary>
             </Documentation>
@@ -858,41 +830,9 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectFloor" FromRole="Floor" ToRole="Project" >
-            <Documentation>
-              <Summary>项目</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingFloor" FromRole="Floor" ToRole="NaturalBuilding" >
-            <Documentation>
-              <Summary>自然幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystem.ProjectFloor" FromRole="Floor" ToRole="Project" />
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystem.NaturalBuildingFloor" FromRole="Floor" ToRole="NaturalBuilding" />
         </EntityType>
-        <Association Name="ProjectFloor">
-          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.Floor" Role="Floor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Floor">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="NaturalBuildingFloor">
-          <End Type="ElectronicOfferSystemDB.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.Floor" Role="Floor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NaturalBuilding">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Floor">
-              <PropertyRef Name="NaturalBuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Obligee">
           <Documentation>
             <Summary>权利人</Summary>
@@ -905,22 +845,18 @@
               <Summary>ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="ProjectID" Type="Guid" Nullable="false">
-            <Documentation>
-              <Summary>项目ID</Summary>
-            </Documentation>
-          </Property>
-          <Property Name="HBSM" Type="String" Nullable="false" >
+          <Property Name="ProjectID" Type="Guid" Nullable="false" />
+          <Property Name="HBSM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>户标识码</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLRMC" Type="String" Nullable="false" >
+          <Property Name="QLRMC" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>权利人名称</Summary>
             </Documentation>
           </Property>
-          <Property Name="BDCQZH" Type="String" Nullable="false" >
+          <Property Name="BDCQZH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>不动产权证号</Summary>
             </Documentation>
@@ -930,7 +866,7 @@
               <Summary>证件种类</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZJH" Type="String" Nullable="false" >
+          <Property Name="ZJH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>证件号</Summary>
             </Documentation>
@@ -940,27 +876,27 @@
               <Summary>国家/地区</Summary>
             </Documentation>
           </Property>
-          <Property Name="XB" Type="Int32" Nullable="false" >
+          <Property Name="XB" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>性别</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLRLX" Type="String" Nullable="false" >
+          <Property Name="QLRLX" Type="Int32" Nullable="false" >
             <Documentation>
               <Summary>权利人类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="DH" Type="String" Nullable="false" >
+          <Property Name="DH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>电话</Summary>
             </Documentation>
           </Property>
-          <Property Name="YB" Type="String" Nullable="false" >
+          <Property Name="YB" Type="String" Nullable="true" >
             <Documentation>
               <Summary>邮编</Summary>
             </Documentation>
           </Property>
-          <Property Name="DZ" Type="String" Nullable="false" >
+          <Property Name="DZ" Type="String" Nullable="true" >
             <Documentation>
               <Summary>地址</Summary>
             </Documentation>
@@ -975,72 +911,72 @@
               <Summary>共有方式</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLMJ" Type="Double" Nullable="false" >
+          <Property Name="QLMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>权利面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLBL" Type="String" Nullable="false" >
+          <Property Name="QLBL" Type="String" Nullable="true" >
             <Documentation>
               <Summary>权利比例</Summary>
             </Documentation>
           </Property>
-          <Property Name="FRXM" Type="String" Nullable="false" >
+          <Property Name="FRXM" Type="String" Nullable="true" >
             <Documentation>
               <Summary>法人姓名</Summary>
             </Documentation>
           </Property>
-          <Property Name="FRZJLX" Type="Int32" Nullable="false" >
+          <Property Name="FRZJLX" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>法人证件类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="FRZJH" Type="String" Nullable="false" >
+          <Property Name="FRZJH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>法人证件号</Summary>
             </Documentation>
           </Property>
-          <Property Name="FRDH" Type="String" Nullable="false" >
+          <Property Name="FRDH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>法人电话</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLRXM" Type="String" Nullable="false" >
+          <Property Name="DLRXM" Type="String" Nullable="true" >
             <Documentation>
               <Summary>代理人姓名</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLRZJLX" Type="Int32" Nullable="false" >
+          <Property Name="DLRZJLX" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>代理人证件类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLRZJH" Type="String" Nullable="false" >
+          <Property Name="DLRZJH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>代理人证件号</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLRDH" Type="String" Nullable="false" >
+          <Property Name="DLRDH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>代理人电话</Summary>
             </Documentation>
           </Property>
-          <Property Name="GZDW" Type="String" Nullable="false" >
+          <Property Name="GZDW" Type="String" Nullable="true" >
             <Documentation>
               <Summary>工作单位</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLJGMC" Type="String" Nullable="false" >
+          <Property Name="DLJGMC" Type="String" Nullable="true" >
             <Documentation>
               <Summary>代理机构名称</Summary>
             </Documentation>
           </Property>
-          <Property Name="DZYJ" Type="String" Nullable="false" >
+          <Property Name="DZYJ" Type="String" Nullable="true" >
             <Documentation>
               <Summary>电子邮件</Summary>
             </Documentation>
           </Property>
-          <Property Name="BZ" Type="String" Nullable="false" >
+          <Property Name="BZ" Type="String" Nullable="true" >
             <Documentation>
               <Summary>备注</Summary>
             </Documentation>
@@ -1050,11 +986,8 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectObligee" FromRole="Obligee" ToRole="Project" >
-            <Documentation>
-              <Summary>项目</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystem.ProjectObligee" FromRole="Obligee" ToRole="Project" />
+          <NavigationProperty Name="Household" Relationship="ElectronicOfferSystem.HouseholdObligee" FromRole="Obligee" ToRole="Household" />
         </EntityType>
         <EntityType Name="Household">
           <Documentation>
@@ -1073,27 +1006,22 @@
               <Summary>项目ID</Summary>
             </Documentation>
           </Property>
-          <Property Name="NaturalBuildingID" Type="Guid" Nullable="false" >
-            <Documentation>
-              <Summary>自然幢ID</Summary>
-            </Documentation>
-          </Property>
-          <Property Name="HBSM" Type="String" Nullable="false" >
+          <Property Name="HBSM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>户标识码</Summary>
             </Documentation>
           </Property>
-          <Property Name="YXTBS" Type="String" Nullable="false" >
+          <Property Name="YXTBS" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>原系统标识</Summary>
             </Documentation>
           </Property>
-          <Property Name="BDCDYH" Type="String" Nullable="false" >
+          <Property Name="BDCDYH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>不动产单元号</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWBM" Type="String" Nullable="false" >
+          <Property Name="FWBM" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>房屋编码</Summary>
             </Documentation>
@@ -1103,37 +1031,37 @@
               <Summary>要素代码</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZRZH" Type="String" Nullable="false" >
+          <Property Name="ZRZH" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>自然幢号</Summary>
             </Documentation>
           </Property>
-          <Property Name="LJZH" Type="String" Nullable="false" >
+          <Property Name="LJZH" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>逻辑幢号</Summary>
             </Documentation>
           </Property>
-          <Property Name="DYH" Type="String" Nullable="false" >
+          <Property Name="DYH" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>单元号</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZCS" Type="Int32" Nullable="false" >
+          <Property Name="ZCS" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>总层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="CH" Type="String" Nullable="false" >
+          <Property Name="CH" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层号</Summary>
             </Documentation>
           </Property>
-          <Property Name="FH" Type="String" Nullable="false" >
+          <Property Name="FH" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房号</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZL" Type="String" Nullable="false" >
+          <Property Name="ZL" Type="String" Nullable="false" MaxLength="100" >
             <Documentation>
               <Summary>坐落</Summary>
             </Documentation>
@@ -1143,202 +1071,202 @@
               <Summary>面积单位</Summary>
             </Documentation>
           </Property>
-          <Property Name="SZC" Type="String" Nullable="false" >
+          <Property Name="SZC" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>所在层</Summary>
             </Documentation>
           </Property>
-          <Property Name="QSC" Type="String" Nullable="false" >
+          <Property Name="QSC" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>起始层</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZZC" Type="String" Nullable="false" >
+          <Property Name="ZZC" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>终止层</Summary>
             </Documentation>
           </Property>
-          <Property Name="HH" Type="String" Nullable="false" >
+          <Property Name="HH" Type="String" Nullable="true" >
             <Documentation>
               <Summary>户号</Summary>
             </Documentation>
           </Property>
-          <Property Name="SHBW" Type="String" Nullable="false" >
+          <Property Name="SHBW" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>室号部位</Summary>
             </Documentation>
           </Property>
-          <Property Name="HX" Type="Int32" Nullable="false" >
+          <Property Name="HX" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>户型</Summary>
             </Documentation>
           </Property>
-          <Property Name="HXJG" Type="Int32" Nullable="false" >
+          <Property Name="HXJG" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>户型结构</Summary>
             </Documentation>
           </Property>
-          <Property Name="GHYT" Type="String" Nullable="false" >
+          <Property Name="GHYT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>规划用途</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT1" Type="Int32" Nullable="false" >
+          <Property Name="FWYT1" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋用途1</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT2" Type="Int32" Nullable="false" >
+          <Property Name="FWYT2" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋用途2</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT3" Type="Int32" Nullable="false" >
+          <Property Name="FWYT3" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋用途3</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCTNJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCTNJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCFTJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCFTJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCDXBFJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCDXBFJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测地下部分建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCQTJZMJ" Type="Double" Nullable="false" >
+          <Property Name="YCQTJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>预测其它建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCFTXS" Type="String" Nullable="false" >
+          <Property Name="YCFTXS" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测分摊系数</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCTNJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCTNJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCFTJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCFTJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCDXBFJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCDXBFJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测地下部分建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCQTJZMJ" Type="Double" Nullable="false" >
+          <Property Name="SCQTJZMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>实测其它建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCFTXS" Type="String" Nullable="false" >
+          <Property Name="SCFTXS" Type="String" Nullable="true" >
             <Documentation>
               <Summary>实测分摊系数</Summary>
             </Documentation>
           </Property>
-          <Property Name="GYTDMJ" Type="Double" Nullable="false" >
+          <Property Name="GYTDMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>共有土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="FTTDMJ" Type="Double" Nullable="false" >
+          <Property Name="FTTDMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>分摊土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="DYTDMJ" Type="Double" Nullable="false" >
+          <Property Name="DYTDMJ" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>独用土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWLX" Type="Int32" Nullable="false" >
+          <Property Name="FWLX" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG" Type="Int32" Nullable="false" >
+          <Property Name="FWJG" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋结构</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWXZ" Type="Int32" Nullable="false" >
+          <Property Name="FWXZ" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋性质</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWCB" Type="Int32" Nullable="false" >
+          <Property Name="FWCB" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>房屋产别</Summary>
             </Documentation>
           </Property>
-          <Property Name="FDCJYJG" Type="Double" Nullable="false" >
+          <Property Name="FDCJYJG" Type="Double" Nullable="true" >
             <Documentation>
               <Summary>房地产交易价格</Summary>
             </Documentation>
           </Property>
-          <Property Name="JGSJ" Type="DateTime" Nullable="false" >
+          <Property Name="JGSJ" Type="DateTime" Nullable="true" >
             <Documentation>
               <Summary>竣工时间</Summary>
             </Documentation>
           </Property>
-          <Property Name="CQLY" Type="String" Nullable="false" >
+          <Property Name="CQLY" Type="String" Nullable="true" >
             <Documentation>
               <Summary>产权来源</Summary>
             </Documentation>
           </Property>
-          <Property Name="QTGSD" Type="String" Nullable="false" >
+          <Property Name="QTGSD" Type="String" Nullable="true" >
             <Documentation>
               <Summary>墙体归属东</Summary>
             </Documentation>
           </Property>
-          <Property Name="QTGSN" Type="String" Nullable="false" >
+          <Property Name="QTGSN" Type="String" Nullable="true" >
             <Documentation>
               <Summary>墙体归属南</Summary>
             </Documentation>
           </Property>
-          <Property Name="QTGSX" Type="String" Nullable="false" >
+          <Property Name="QTGSX" Type="String" Nullable="true" >
             <Documentation>
               <Summary>墙体归属西</Summary>
             </Documentation>
           </Property>
-          <Property Name="QTGSB" Type="String" Nullable="false" >
+          <Property Name="QTGSB" Type="String" Nullable="true" >
             <Documentation>
               <Summary>墙体归属北</Summary>
             </Documentation>
           </Property>
-          <Property Name="TDSYQR" Type="String" Nullable="false" >
+          <Property Name="TDSYQR" Type="String" Nullable="true" >
             <Documentation>
               <Summary>土地使用权人</Summary>
             </Documentation>
           </Property>
-          <Property Name="FCFHT" Type="String" Nullable="false" >
+          <Property Name="FCFHT" Type="String" Nullable="true" >
             <Documentation>
               <Summary>房产分户图</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZT" Type="Int32" Nullable="false" >
+          <Property Name="ZT" Type="Int32" Nullable="true" >
             <Documentation>
               <Summary>状态</Summary>
             </Documentation>
@@ -1348,61 +1276,84 @@
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystemDB.ProjectHousehold" FromRole="Household" ToRole="Project" >
-            <Documentation>
-              <Summary>项目</Summary>
-            </Documentation>
-          </NavigationProperty>
-          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystemDB.NaturalBuildingHousehold" FromRole="Household" ToRole="NaturalBuilding" >
-            <Documentation>
-              <Summary>自然幢集合</Summary>
-            </Documentation>
-          </NavigationProperty>
+          <NavigationProperty Name="Project" Relationship="ElectronicOfferSystem.ProjectHousehold" FromRole="Household" ToRole="Project" />
+          <NavigationProperty Name="NaturalBuilding" Relationship="ElectronicOfferSystem.NaturalBuildingHousehold" FromRole="Household" ToRole="NaturalBuilding" />
+          <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystem.HouseholdObligee" FromRole="Household" ToRole="Obligee" />
           </EntityType>
-        <Association Name="ProjectHousehold">
-          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.Household" Role="Household" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Household">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <EntityType Name="CONST">
+          <Key>
+            <PropertyRef Name="MBBSM" />
+          </Key>
+          <Property Name="MBBSM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONSTSLSID" Type="Int32" />
+          <Property Name="CONSTVALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CONSTTRANS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PARENTNODE" Type="Int32" />
+          <Property Name="CONSTORDER" Type="Int32" Nullable="true" />
+          <Property Name="BZ" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATETIME" Type="DateTime" Precision="3" />
+          <Property Name="MODIFYTIME" Type="DateTime" Precision="3" />
+          <Property Name="REPORTVALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GJCONSTTRANS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SFSY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GJVALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CONSTCLS">
+          <Key>
+            <PropertyRef Name="MBBSM" />
+          </Key>
+          <Property Name="MBBSM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONSTSLSID" Type="Int32" />
+          <Property Name="CONSTCLSNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CONSTCLSTYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BZ" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CREATETIME" Type="DateTime" Precision="3" />
+          <Property Name="MODIFYTIME" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="ProjectNaturalBuilding">
+          <End Type="ElectronicOfferSystem.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.NaturalBuilding" Role="NaturalBuilding" Multiplicity="*" />
         </Association>
-        <Association Name="NaturalBuildingHousehold">
-          <End Type="ElectronicOfferSystemDB.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.Household" Role="Household" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NaturalBuilding">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Household">
-              <PropertyRef Name="NaturalBuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ProjectLogicalBuilding">
+          <End Type="ElectronicOfferSystem.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.LogicalBuilding" Role="LogicalBuilding" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectFloor">
+          <End Type="ElectronicOfferSystem.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Floor" Role="Floor" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectHousehold">
+          <End Type="ElectronicOfferSystem.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Household" Role="Household" Multiplicity="*" />
         </Association>
         <Association Name="ProjectObligee">
-          <End Type="ElectronicOfferSystemDB.Project" Role="Project" Multiplicity="1" />
-          <End Type="ElectronicOfferSystemDB.Obligee" Role="Obligee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Obligee">
-              <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Type="ElectronicOfferSystem.Project" Role="Project" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Obligee" Role="Obligee" Multiplicity="*" />
+        </Association>
+        <Association Name="NaturalBuildingLogicalBuilding">
+          <End Type="ElectronicOfferSystem.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.LogicalBuilding" Role="LogicalBuilding" Multiplicity="*" />
+        </Association>
+        <Association Name="NaturalBuildingFloor">
+          <End Type="ElectronicOfferSystem.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Floor" Role="Floor" Multiplicity="*" />
+        </Association>
+        <Association Name="NaturalBuildingHousehold">
+          <End Type="ElectronicOfferSystem.NaturalBuilding" Role="NaturalBuilding" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Household" Role="Household" Multiplicity="*" />
+        </Association>
+        <Association Name="HouseholdObligee">
+          <End Type="ElectronicOfferSystem.Household" Role="Household" Multiplicity="1" />
+          <End Type="ElectronicOfferSystem.Obligee" Role="Obligee" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ElectronicOfferSystemDBStoreContainer" CdmEntityContainer="ElectronicOfferSystemDBContainer">
+  <EntityContainerMapping StorageEntityContainer="ElectronicOfferSystemStoreContainer" CdmEntityContainer="ElectronicOfferSystemDBContainer">
     <EntitySetMapping Name="ProjectSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Project)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Project)">
         <MappingFragment StoreEntitySet="ProjectSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
@@ -1415,11 +1366,12 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NaturalBuildingSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.NaturalBuilding)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.NaturalBuilding)">
         <MappingFragment StoreEntitySet="NaturalBuildingSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="BSM" ColumnName="BSM" />
+          <ScalarProperty Name="YSDM" ColumnName="YSDM" />
           <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
           <ScalarProperty Name="ZDDM" ColumnName="ZDDM" />
           <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
@@ -1446,13 +1398,12 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="LogicalBuildingSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.LogicalBuilding)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.LogicalBuilding)">
         <MappingFragment StoreEntitySet="LogicalBuildingSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
-          <ScalarProperty Name="LJZH" ColumnName="LJZH" />
           <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
+          <ScalarProperty Name="LJZH" ColumnName="LJZH" />
           <ScalarProperty Name="YSDM" ColumnName="YSDM" />
           <ScalarProperty Name="MPH" ColumnName="MPH" />
           <ScalarProperty Name="YCJZMJ" ColumnName="YCJZMJ" />
@@ -1475,11 +1426,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FloorSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Floor)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Floor)">
         <MappingFragment StoreEntitySet="FloorSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
           <ScalarProperty Name="CH" ColumnName="CH" />
           <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
           <ScalarProperty Name="YSDM" ColumnName="YSDM" />
@@ -1498,7 +1448,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ObligeeSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Obligee)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Obligee)">
         <MappingFragment StoreEntitySet="ObligeeSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -1534,11 +1484,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HouseholdSet">
-      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystemDB.Household)">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Household)">
         <MappingFragment StoreEntitySet="HouseholdSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-          <ScalarProperty Name="NaturalBuildingID" ColumnName="NaturalBuildingID" />
           <ScalarProperty Name="HBSM" ColumnName="HBSM" />
           <ScalarProperty Name="YXTBS" ColumnName="YXTBS" />
           <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
@@ -1596,6 +1545,110 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BDCS_CONST">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.CONST)">
+        <MappingFragment StoreEntitySet="BDCS_CONST">
+          <ScalarProperty Name="MBBSM" ColumnName="MBBSM" />
+          <ScalarProperty Name="CONSTSLSID" ColumnName="CONSTSLSID" />
+          <ScalarProperty Name="CONSTVALUE" ColumnName="CONSTVALUE" />
+          <ScalarProperty Name="CONSTTRANS" ColumnName="CONSTTRANS" />
+          <ScalarProperty Name="PARENTNODE" ColumnName="PARENTNODE" />
+          <ScalarProperty Name="CONSTORDER" ColumnName="CONSTORDER" />
+          <ScalarProperty Name="BZ" ColumnName="BZ" />
+          <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+          <ScalarProperty Name="MODIFYTIME" ColumnName="MODIFYTIME" />
+          <ScalarProperty Name="REPORTVALUE" ColumnName="REPORTVALUE" />
+          <ScalarProperty Name="GJCONSTTRANS" ColumnName="GJCONSTTRANS" />
+          <ScalarProperty Name="SFSY" ColumnName="SFSY" />
+          <ScalarProperty Name="GJVALUE" ColumnName="GJVALUE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BDCS_CONSTCLS">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.CONSTCLS)">
+        <MappingFragment StoreEntitySet="BDCS_CONSTCLS">
+          <ScalarProperty Name="MBBSM" ColumnName="MBBSM" />
+          <ScalarProperty Name="CONSTSLSID" ColumnName="CONSTSLSID" />
+          <ScalarProperty Name="CONSTCLSNAME" ColumnName="CONSTCLSNAME" />
+          <ScalarProperty Name="CONSTCLSTYPE" ColumnName="CONSTCLSTYPE" />
+          <ScalarProperty Name="BZ" ColumnName="BZ" />
+          <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
+          <ScalarProperty Name="MODIFYTIME" ColumnName="MODIFYTIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectNaturalBuilding" TypeName="ElectronicOfferSystem.ProjectNaturalBuilding" StoreEntitySet="NaturalBuildingSet">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="Project_ID" />
+      </EndProperty>
+      <EndProperty Name="NaturalBuilding">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectLogicalBuilding" TypeName="ElectronicOfferSystem.ProjectLogicalBuilding" StoreEntitySet="LogicalBuildingSet">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="Project_ID" />
+      </EndProperty>
+      <EndProperty Name="LogicalBuilding">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectFloor" TypeName="ElectronicOfferSystem.ProjectFloor" StoreEntitySet="FloorSet">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="Project_ID" />
+      </EndProperty>
+      <EndProperty Name="Floor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectHousehold" TypeName="ElectronicOfferSystem.ProjectHousehold" StoreEntitySet="HouseholdSet">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="Project_ID" />
+      </EndProperty>
+      <EndProperty Name="Household">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectObligee" TypeName="ElectronicOfferSystem.ProjectObligee" StoreEntitySet="ObligeeSet">
+      <EndProperty Name="Project">
+        <ScalarProperty Name="ID" ColumnName="Project_ID" />
+      </EndProperty>
+      <EndProperty Name="Obligee">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NaturalBuildingLogicalBuilding" TypeName="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" StoreEntitySet="LogicalBuildingSet">
+      <EndProperty Name="NaturalBuilding">
+        <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
+      </EndProperty>
+      <EndProperty Name="LogicalBuilding">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NaturalBuildingFloor" TypeName="ElectronicOfferSystem.NaturalBuildingFloor" StoreEntitySet="FloorSet">
+      <EndProperty Name="NaturalBuilding">
+        <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
+      </EndProperty>
+      <EndProperty Name="Floor">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="NaturalBuildingHousehold" TypeName="ElectronicOfferSystem.NaturalBuildingHousehold" StoreEntitySet="HouseholdSet">
+      <EndProperty Name="NaturalBuilding">
+        <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
+      </EndProperty>
+      <EndProperty Name="Household">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HouseholdObligee" TypeName="ElectronicOfferSystem.HouseholdObligee" StoreEntitySet="ObligeeSet">
+      <EndProperty Name="Household">
+        <ScalarProperty Name="ID" ColumnName="Household_ID" />
+      </EndProperty>
+      <EndProperty Name="Obligee">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -1612,6 +1665,7 @@
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -23,8 +24,8 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref project, value); }
         }
 
-        private ObservableCollection<Business> businesses;
-        public ObservableCollection<Business> Businesses
+        private ObservableCollection<Business<object>> businesses;
+        public ObservableCollection<Business<object>> Businesses
         {
             get { return businesses; }
             set { SetProperty(ref businesses, value); }
@@ -33,6 +34,8 @@ namespace RealEstateModule.ViewModels
         private readonly IRegionManager RegionManager;
         public DelegateCommand<string> BusinessNavCommand { get; private set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
+        public DelegateCommand<object> SelectBusinessCommand { get; set; }
+
         ProjectDal projectDal = new ProjectDal();
 
         public RealEstatePageViewModel(IRegionManager regionManager)
@@ -49,40 +52,48 @@ namespace RealEstateModule.ViewModels
             SelectProjectCommand = new DelegateCommand<object>((obj) => {
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
-                Project = projectDal.InitialRealEstateProject(Project); // 加载该项目的数据
+                // 加载该项目的数据
+                Project = projectDal.InitialRealEstateProject(Project); 
+                // 初始进入自然幢页面
+                BusinessNavCommand.Execute("NaturalBuildingPage");
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
-
-            // 加载数据
-            if (Project != null)
-            {
-                foreach (NaturalBuilding n in Project.NaturalBuildings)
-                {
-                    Business business = new Business();
-                    business.Name = n.ZRZH;
-                    business.BusinessObject = n;
-                    Businesses.Add(business);
-                }
-            }
+            
         }
 
         private void Navigate(string navigatePath)
         {
-            var parameters = new NavigationParameters();
-            parameters.Add("ProjectID", Project.ID);
+            if (navigatePath == null) return;
 
-            if (navigatePath != null)
-                RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
+            Businesses = new ObservableCollection<Business<object>>();
+            switch (navigatePath)
+            {
+                case "NaturalBuildingPage":
+                    // 加载数据列表
+                    if (Project != null)
+                    {
+                        foreach (NaturalBuilding naturalBuilding in Project.NaturalBuildings)
+                        {
+                            Business<object> business = new Business<object>();
+                            business.Name = naturalBuilding.ZRZH;
+                            business.BusinessObject = naturalBuilding;
+                            Businesses.Add(business);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            // 页面跳转
+            var parameters = new NavigationParameters();
+            parameters.Add("ProjectID", Project?.ID);
+            RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
         }
         private void NavigationComplete(NavigationResult result)
         {
             //System.Windows.MessageBox.Show(String.Format("Navigation to {0} complete. ", result.Context.Uri));
         }
 
-        public class Business
-        {
-            public string Name { get; set; }
-            public object BusinessObject { get; set; }
-        }
     }
 }

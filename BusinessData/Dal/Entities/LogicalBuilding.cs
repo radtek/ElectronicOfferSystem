@@ -26,17 +26,13 @@ namespace BusinessData
         /// </summary>
         public System.Guid ProjectID { get; set; }
         /// <summary>
-        /// 自然幢ID
+        /// 
         /// </summary>
-        public System.Guid NaturalBuildingID { get; set; }
+        public string ZRZH { get; set; }
         /// <summary>
         /// 逻辑幢号
         /// </summary>
         public string LJZH { get; set; }
-        /// <summary>
-        /// 自然幢号
-        /// </summary>
-        public string ZRZH { get; set; }
         /// <summary>
         /// 要素代码
         /// </summary>
@@ -48,31 +44,31 @@ namespace BusinessData
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public double YCJZMJ { get; set; }
+        public Nullable<double> YCJZMJ { get; set; }
         /// <summary>
         /// 预测地下面积
         /// </summary>
-        public double YCDXMJ { get; set; }
+        public Nullable<double> YCDXMJ { get; set; }
         /// <summary>
         /// 预测其他面积
         /// </summary>
-        public double YCQTMJ { get; set; }
+        public Nullable<double> YCQTMJ { get; set; }
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public double SCJZMJ { get; set; }
+        public Nullable<double> SCJZMJ { get; set; }
         /// <summary>
         /// 实测地下面积
         /// </summary>
-        public double SCDXMJ { get; set; }
+        public Nullable<double> SCDXMJ { get; set; }
         /// <summary>
         /// 实测其他面积
         /// </summary>
-        public double SCQTMJ { get; set; }
+        public Nullable<double> SCQTMJ { get; set; }
         /// <summary>
         /// 竣工日期
         /// </summary>
-        public System.DateTime JGRQ { get; set; }
+        public Nullable<System.DateTime> JGRQ { get; set; }
         /// <summary>
         /// 房屋结构1
         /// </summary>
@@ -92,15 +88,15 @@ namespace BusinessData
         /// <summary>
         /// 总层数
         /// </summary>
-        public int ZCS { get; set; }
+        public Nullable<int> ZCS { get; set; }
         /// <summary>
         /// 地上层数
         /// </summary>
-        public int DSCS { get; set; }
+        public Nullable<int> DSCS { get; set; }
         /// <summary>
         /// 地下层数
         /// </summary>
-        public int DXCS { get; set; }
+        public Nullable<int> DXCS { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

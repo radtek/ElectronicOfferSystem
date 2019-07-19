@@ -27,7 +27,7 @@ namespace BusinessData.Dal
             FloorDal floorDal = new FloorDal();
             HouseholdDal householdDal = new HouseholdDal();
             ObligeeDal obligeeDal = new ObligeeDal();
-            project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectId == project.ID);
+            project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectID == project.ID);
             project.LogicalBuildings = logicalBuildingDal.GetListBy((l) => l.ProjectID == project.ID);
             project.Floors = floorDal.GetListBy((f) => f.ProjectID == project.ID);
             project.Households = householdDal.GetListBy((h) => h.ProjectID == project.ID);

@@ -32,11 +32,15 @@ namespace BusinessData
         /// <summary>
         /// 项目ID
         /// </summary>
-        public System.Guid ProjectId { get; set; }
+        public System.Guid ProjectID { get; set; }
         /// <summary>
         /// 标识码
         /// </summary>
         public string BSM { get; set; }
+        /// <summary>
+        /// 要素代码
+        /// </summary>
+        public string YSDM { get; set; }
         /// <summary>
         /// 不动产单元号
         /// </summary>
@@ -60,11 +64,11 @@ namespace BusinessData
         /// <summary>
         /// 竣工日期
         /// </summary>
-        public System.DateTime JGRQ { get; set; }
+        public Nullable<System.DateTime> JGRQ { get; set; }
         /// <summary>
         /// 建筑物高度
         /// </summary>
-        public double JZWGD { get; set; }
+        public Nullable<double> JZWGD { get; set; }
         /// <summary>
         /// 幢占地面积
         /// </summary>
@@ -76,11 +80,11 @@ namespace BusinessData
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public double YCJZMJ { get; set; }
+        public Nullable<double> YCJZMJ { get; set; }
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public double SCJZMJ { get; set; }
+        public Nullable<double> SCJZMJ { get; set; }
         /// <summary>
         /// 总层数
         /// </summary>
@@ -96,7 +100,7 @@ namespace BusinessData
         /// <summary>
         /// 地下深度
         /// </summary>
-        public double DXSD { get; set; }
+        public Nullable<double> DXSD { get; set; }
         /// <summary>
         /// 规划用途
         /// </summary>
@@ -128,17 +132,17 @@ namespace BusinessData
     
         public virtual Project Project { get; set; }
         /// <summary>
-        /// 逻辑幢集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
         /// <summary>
-        /// 层集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Floor> Floors { get; set; }
         /// <summary>
-        /// 户集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Household> Households { get; set; }

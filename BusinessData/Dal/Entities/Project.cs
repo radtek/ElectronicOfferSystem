@@ -57,27 +57,27 @@ namespace BusinessData
         public string Remark { get; set; }
     
         /// <summary>
-        /// 自然幢集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NaturalBuilding> NaturalBuildings { get; set; }
         /// <summary>
-        /// 逻辑幢集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
         /// <summary>
-        /// 层集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Floor> Floors { get; set; }
         /// <summary>
-        /// 户集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Household> Households { get; set; }
         /// <summary>
-        /// 权利人集合
+        /// 
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Obligee> Obligees { get; set; }

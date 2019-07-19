@@ -26,10 +26,6 @@ namespace BusinessData
         /// </summary>
         public System.Guid ProjectID { get; set; }
         /// <summary>
-        /// 自然幢ID
-        /// </summary>
-        public System.Guid NaturalBuildingID { get; set; }
-        /// <summary>
         /// 层号
         /// </summary>
         public string CH { get; set; }
@@ -52,35 +48,35 @@ namespace BusinessData
         /// <summary>
         /// 层建筑面积
         /// </summary>
-        public double CJZMJ { get; set; }
+        public Nullable<double> CJZMJ { get; set; }
         /// <summary>
         /// 层套内建筑面积
         /// </summary>
-        public double CTNJZMJ { get; set; }
+        public Nullable<double> CTNJZMJ { get; set; }
         /// <summary>
         /// 层阳台面积
         /// </summary>
-        public double CYTMJ { get; set; }
+        public Nullable<double> CYTMJ { get; set; }
         /// <summary>
         /// 层共有建筑面积
         /// </summary>
-        public double CGYJZMJ { get; set; }
+        public Nullable<double> CGYJZMJ { get; set; }
         /// <summary>
         /// 层分摊建筑面积
         /// </summary>
-        public double CFTJZMJ { get; set; }
+        public Nullable<double> CFTJZMJ { get; set; }
         /// <summary>
         /// 层半墙面积
         /// </summary>
-        public int CBQMJ { get; set; }
+        public Nullable<int> CBQMJ { get; set; }
         /// <summary>
         /// 层高
         /// </summary>
-        public double CG { get; set; }
+        public Nullable<double> CG { get; set; }
         /// <summary>
         /// 水平投影面积
         /// </summary>
-        public double SPTYMJ { get; set; }
+        public Nullable<double> SPTYMJ { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

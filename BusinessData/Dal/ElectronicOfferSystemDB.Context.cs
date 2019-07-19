@@ -31,5 +31,7 @@ namespace BusinessData
         public virtual DbSet<Floor> FloorSet { get; set; }
         public virtual DbSet<Obligee> ObligeeSet { get; set; }
         public virtual DbSet<Household> HouseholdSet { get; set; }
+        public virtual DbSet<CONST> BDCS_CONST { get; set; }
+        public virtual DbSet<CONSTCLS> BDCS_CONSTCLS { get; set; }
     }
 }

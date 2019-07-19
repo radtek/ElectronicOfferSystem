@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CommonModule.cs" />
     <Compile Include="GlobalCommands.cs" />
+    <Compile Include="Models\Business.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +65,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Utils\DictionaryUtil.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

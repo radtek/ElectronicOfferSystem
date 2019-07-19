@@ -17,6 +17,12 @@ namespace BusinessData
     /// </summary>
     public partial class Household
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Household()
+        {
+            this.Obligees = new HashSet<Obligee>();
+        }
+    
         /// <summary>
         /// ID
         /// </summary>
@@ -25,10 +31,6 @@ namespace BusinessData
         /// 项目ID
         /// </summary>
         public System.Guid ProjectID { get; set; }
-        /// <summary>
-        /// 自然幢ID
-        /// </summary>
-        public System.Guid NaturalBuildingID { get; set; }
         /// <summary>
         /// 户标识码
         /// </summary>
@@ -64,7 +66,7 @@ namespace BusinessData
         /// <summary>
         /// 总层数
         /// </summary>
-        public int ZCS { get; set; }
+        public Nullable<int> ZCS { get; set; }
         /// <summary>
         /// 层号
         /// </summary>
@@ -104,11 +106,11 @@ namespace BusinessData
         /// <summary>
         /// 户型
         /// </summary>
-        public int HX { get; set; }
+        public Nullable<int> HX { get; set; }
         /// <summary>
         /// 户型结构
         /// </summary>
-        public int HXJG { get; set; }
+        public Nullable<int> HXJG { get; set; }
         /// <summary>
         /// 规划用途
         /// </summary>
@@ -116,35 +118,35 @@ namespace BusinessData
         /// <summary>
         /// 房屋用途1
         /// </summary>
-        public int FWYT1 { get; set; }
+        public Nullable<int> FWYT1 { get; set; }
         /// <summary>
         /// 房屋用途2
         /// </summary>
-        public int FWYT2 { get; set; }
+        public Nullable<int> FWYT2 { get; set; }
         /// <summary>
         /// 房屋用途3
         /// </summary>
-        public int FWYT3 { get; set; }
+        public Nullable<int> FWYT3 { get; set; }
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public double YCJZMJ { get; set; }
+        public Nullable<double> YCJZMJ { get; set; }
         /// <summary>
         /// 预测套内建筑面积
         /// </summary>
-        public double YCTNJZMJ { get; set; }
+        public Nullable<double> YCTNJZMJ { get; set; }
         /// <summary>
         /// 预测分摊建筑面积
         /// </summary>
-        public double YCFTJZMJ { get; set; }
+        public Nullable<double> YCFTJZMJ { get; set; }
         /// <summary>
         /// 预测地下部分建筑面积
         /// </summary>
-        public double YCDXBFJZMJ { get; set; }
+        public Nullable<double> YCDXBFJZMJ { get; set; }
         /// <summary>
         /// 预测其它建筑面积
         /// </summary>
-        public double YCQTJZMJ { get; set; }
+        public Nullable<double> YCQTJZMJ { get; set; }
         /// <summary>
         /// 预测分摊系数
         /// </summary>
@@ -152,23 +154,23 @@ namespace BusinessData
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public double SCJZMJ { get; set; }
+        public Nullable<double> SCJZMJ { get; set; }
         /// <summary>
         /// 实测套内建筑面积
         /// </summary>
-        public double SCTNJZMJ { get; set; }
+        public Nullable<double> SCTNJZMJ { get; set; }
         /// <summary>
         /// 实测分摊建筑面积
         /// </summary>
-        public double SCFTJZMJ { get; set; }
+        public Nullable<double> SCFTJZMJ { get; set; }
         /// <summary>
         /// 实测地下部分建筑面积
         /// </summary>
-        public double SCDXBFJZMJ { get; set; }
+        public Nullable<double> SCDXBFJZMJ { get; set; }
         /// <summary>
         /// 实测其它建筑面积
         /// </summary>
-        public double SCQTJZMJ { get; set; }
+        public Nullable<double> SCQTJZMJ { get; set; }
         /// <summary>
         /// 实测分摊系数
         /// </summary>
@@ -176,39 +178,39 @@ namespace BusinessData
         /// <summary>
         /// 共有土地面积
         /// </summary>
-        public double GYTDMJ { get; set; }
+        public Nullable<double> GYTDMJ { get; set; }
         /// <summary>
         /// 分摊土地面积
         /// </summary>
-        public double FTTDMJ { get; set; }
+        public Nullable<double> FTTDMJ { get; set; }
         /// <summary>
         /// 独用土地面积
         /// </summary>
-        public double DYTDMJ { get; set; }
+        public Nullable<double> DYTDMJ { get; set; }
         /// <summary>
         /// 房屋类型
         /// </summary>
-        public int FWLX { get; set; }
+        public Nullable<int> FWLX { get; set; }
         /// <summary>
         /// 房屋结构
         /// </summary>
-        public int FWJG { get; set; }
+        public Nullable<int> FWJG { get; set; }
         /// <summary>
         /// 房屋性质
         /// </summary>
-        public int FWXZ { get; set; }
+        public Nullable<int> FWXZ { get; set; }
         /// <summary>
         /// 房屋产别
         /// </summary>
-        public int FWCB { get; set; }
+        public Nullable<int> FWCB { get; set; }
         /// <summary>
         /// 房地产交易价格
         /// </summary>
-        public double FDCJYJG { get; set; }
+        public Nullable<double> FDCJYJG { get; set; }
         /// <summary>
         /// 竣工时间
         /// </summary>
-        public System.DateTime JGSJ { get; set; }
+        public Nullable<System.DateTime> JGSJ { get; set; }
         /// <summary>
         /// 产权来源
         /// </summary>
@@ -240,7 +242,7 @@ namespace BusinessData
         /// <summary>
         /// 状态
         /// </summary>
-        public int ZT { get; set; }
+        public Nullable<int> ZT { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
@@ -248,5 +250,10 @@ namespace BusinessData
     
         public virtual Project Project { get; set; }
         public virtual NaturalBuilding NaturalBuilding { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Obligee> Obligees { get; set; }
     }
 }

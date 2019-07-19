@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:common="clr-namespace:Common;assembly=Common"
              xmlns:local="clr-namespace:RealEstateModule.Views"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -103,20 +104,20 @@
                               ItemsSource="{Binding Businesses}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding SelectBusinessCommand}"
+                                        <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectBusinessCommand}"
                                                        CommandParameter="{Binding ElementName=BusinessList}" />
                                     </i:EventTrigger>
-                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                    <!--<i:EventTrigger EventName="MouseDoubleClick">
                                         <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
                                                                        CommandParameter="编辑项目"/>
-                                    </i:EventTrigger>
+                                    </i:EventTrigger>-->
                                 </i:Interaction.Triggers>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" Height="50" >
-                                            <TextBlock Text="{Binding ProjectName}" FontSize="15" />
-                                            <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />
-                                        </StackPanel>
+                                        <!--<StackPanel Orientation="Horizontal" Height="50" >
+                                            <TextBlock Text="{Binding Name}" FontSize="15" />
+                                        </StackPanel>-->
+                                        <TextBlock Text="{Binding Name}" FontSize="15" />
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

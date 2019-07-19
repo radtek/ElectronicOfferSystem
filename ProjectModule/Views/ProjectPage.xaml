@@ -136,7 +136,7 @@
                                     </i:Interaction.Triggers>
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Height="50" >
+                                            <StackPanel Orientation="Horizontal" >
                                                 <!--<TextBlock Text="{Binding ID}" Visibility="Collapsed" />-->
                                                 <TextBlock Text="{Binding ProjectName}" FontSize="15" />
                                                 <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />

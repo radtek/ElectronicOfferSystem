@@ -58,12 +58,12 @@ namespace ProjectModule.ViewModels
             Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
 
             // 选中ListView中的一项
-            //SelectProjectCommand = new DelegateCommand<object>((obj) => {
-            //    ListView listView = obj as ListView;
-            //    Project = listView.SelectedItem as Project;
-            //    Project = projectDal.InitialRealEstateProject(Project); // 加载该项目的数据
-            //});
-            //GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
+            SelectProjectCommand = new DelegateCommand<object>((obj) =>
+            {
+                ListView listView = obj as ListView;
+                Project = listView.SelectedItem as Project;
+            });
+            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             // 关闭模态框
             CancelAddOrEditProjectDialogCommand = new DelegateCommand(() => {

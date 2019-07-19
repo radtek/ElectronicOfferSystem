@@ -22,7 +22,7 @@ namespace BusinessData
         /// </summary>
         public System.Guid ID { get; set; }
         /// <summary>
-        /// 项目ID
+        /// 
         /// </summary>
         public System.Guid ProjectID { get; set; }
         /// <summary>
@@ -52,11 +52,11 @@ namespace BusinessData
         /// <summary>
         /// 性别
         /// </summary>
-        public int XB { get; set; }
+        public Nullable<int> XB { get; set; }
         /// <summary>
         /// 权利人类型
         /// </summary>
-        public string QLRLX { get; set; }
+        public int QLRLX { get; set; }
         /// <summary>
         /// 电话
         /// </summary>
@@ -80,7 +80,7 @@ namespace BusinessData
         /// <summary>
         /// 权利面积
         /// </summary>
-        public double QLMJ { get; set; }
+        public Nullable<double> QLMJ { get; set; }
         /// <summary>
         /// 权利比例
         /// </summary>
@@ -92,7 +92,7 @@ namespace BusinessData
         /// <summary>
         /// 法人证件类型
         /// </summary>
-        public int FRZJLX { get; set; }
+        public Nullable<int> FRZJLX { get; set; }
         /// <summary>
         /// 法人证件号
         /// </summary>
@@ -108,7 +108,7 @@ namespace BusinessData
         /// <summary>
         /// 代理人证件类型
         /// </summary>
-        public int DLRZJLX { get; set; }
+        public Nullable<int> DLRZJLX { get; set; }
         /// <summary>
         /// 代理人证件号
         /// </summary>
@@ -139,5 +139,6 @@ namespace BusinessData
         public System.DateTime UpdateTime { get; set; }
     
         public virtual Project Project { get; set; }
+        public virtual Household Household { get; set; }
     }
 }

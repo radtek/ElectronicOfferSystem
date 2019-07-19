@@ -1,7 +1,10 @@
-﻿using Prism.Commands;
+﻿using BusinessData;
+using BusinessData.Dal;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +25,52 @@ namespace ElectronicOfferSystem.ViewModels
             });
             MinCommand = new DelegateCommand(() => {
                 Application.Current.MainWindow.WindowState = WindowState.Minimized;
+
+                // 导入BDCS_CONSTCLS
+                //BaseDal<CONSTCLS> baseDal = new BaseDal<CONSTCLS>();
+                //StreamReader sr = new StreamReader(@"C:\Users\Administrator\Desktop\BDCS_CONSTCLS 1.txt", Encoding.Default);
+                //String line;
+                //while ((line = sr.ReadLine()) != null)
+                //{
+                //    string[] s = line.Split(',');
+                //    CONSTCLS c = new CONSTCLS();
+                //    c.MBBSM = int.Parse(s[0].Trim());
+                //    c.CONSTSLSID = int.Parse(s[1].Trim());
+                //    c.CONSTCLSNAME = s[2].Trim();
+                //    c.CONSTCLSTYPE = s[3].Trim();
+                //    c.BZ = s[4].Trim();
+                //    baseDal.Add(c);
+                //}
+
+                //BaseDal<CONST> baseDal2 = new BaseDal<CONST>();
+                //StreamReader sr2 = new StreamReader(@"C:\Users\Administrator\Desktop\BDCS_CONST 1.txt", Encoding.Default);
+                //String line2;
+                //while ((line2 = sr2.ReadLine()) != null)
+                //{
+                //    string[] s = line2.Split(',');
+                //    CONST c = new CONST();
+                //    c.MBBSM = int.Parse(s[0].Trim());
+                //    c.CONSTSLSID = int.Parse(s[1].Trim());
+                //    c.CONSTVALUE = s[2].Trim();
+                //    c.CONSTTRANS = s[3].Trim();
+                //    if (s[4].Trim() != "")
+                //        c.PARENTNODE = int.Parse(s[4].Trim());
+                //    else
+                //        c.PARENTNODE = null;
+                //    if (s[5].Trim() != "")
+                //        c.CONSTORDER = int.Parse(s[5].Trim());
+                //    else
+                //        c.CONSTORDER = null;
+                //    c.BZ = s[6].Trim();
+                //    c.CREATETIME = null;
+                //    c.MODIFYTIME = null;
+                //    c.REPORTVALUE = s[9].Trim();
+                //    c.GJCONSTTRANS = s[10].Trim();
+                //    c.SFSY = s[11].Trim();
+                //    c.GJVALUE = s[12].Trim();
+
+                //    baseDal2.Add(c);
+                //}
             });
             MaxCommand = new DelegateCommand(() => {
                 if (Application.Current.MainWindow.WindowState == WindowState.Normal)
