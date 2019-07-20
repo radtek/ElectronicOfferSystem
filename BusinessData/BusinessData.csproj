@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="BusinessData.cs" />
     <Compile Include="Dal\BaseDal.cs" />
+    <Compile Include="Dal\CONSTCLSDal.cs" />
+    <Compile Include="Dal\CONSTDal.cs" />
     <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
     <Compile Include="Dal\Entities\CONST.cs" />
     <Compile Include="Dal\Entities\CONSTCLS.cs" />

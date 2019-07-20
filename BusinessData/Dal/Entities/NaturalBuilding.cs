@@ -108,7 +108,7 @@ namespace BusinessData
         /// <summary>
         /// 房屋结构
         /// </summary>
-        public int FWJG { get; set; }
+        public string FWJG { get; set; }
         /// <summary>
         /// 总套数
         /// </summary>
@@ -120,7 +120,7 @@ namespace BusinessData
         /// <summary>
         /// 状态
         /// </summary>
-        public int ZT { get; set; }
+        public string ZT { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using Common;
 using Common.Models;
+using Common.Utils;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -20,6 +21,9 @@ namespace RealEstateModule.ViewModels
     {
         public Guid ProjectID { get; set; }
 
+        /// <summary>
+        /// 新增/修改按钮内容
+        /// </summary>
         private string buttonContent = "确认新增";
         public string ButtonContent
         {
@@ -27,7 +31,9 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref buttonContent, value); }
         }
 
-
+        /// <summary>
+        /// 自然幢信息
+        /// </summary>
         private NaturalBuilding naturalBuilding;
         public NaturalBuilding NaturalBuilding
         {
@@ -35,16 +41,53 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref naturalBuilding, value); }
         }
 
+        #region 字典
+        /// <summary>
+        /// 房屋结构
+        /// </summary>
+        private Dictionary<string, string> fwjglList;
+        public Dictionary<string, string> FWJGList
+        {
+            get { return fwjglList; }
+            set { SetProperty(ref fwjglList, value); }
+        }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        private Dictionary<string, string> ztList;
+        public Dictionary<string, string> ZTList
+        {
+            get { return ztList; }
+            set { SetProperty(ref ztList, value); }
+        }
+        #endregion
+
+        #region 命令
+        /// <summary>
+        /// 新增或修改自然幢
+        /// </summary>
         public DelegateCommand AddOrEditNaturalBuildingCommand { get; set; }
+        /// <summary>
+        /// 在项目列表选择一个项目
+        /// </summary>
         public DelegateCommand<object> SelectProjectCommand { get; set; }
+        /// <summary>
+        /// 在自然幢列表选择一个自然幢
+        /// </summary>
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
+        #endregion 
 
         NaturalBuildingDal NaturalBuildingDal = new NaturalBuildingDal();
+
 
         public NaturalBuildingPageViewModel()
         {
             //NaturalBuilding = new NaturalBuilding();
 
+            // 初始化下拉框
+            InitialComboBoxList();
+
+            // 新增或修改自然幢信息
             AddOrEditNaturalBuildingCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
                 {
@@ -64,8 +107,13 @@ namespace RealEstateModule.ViewModels
             GlobalCommands.SelectBusinessCommand.RegisterCommand(SelectBusinessCommand);
         }
 
+        /// <summary>
+        /// 页面加载
+        /// </summary>
+        /// <param name="navigationContext"></param>
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            // 获取项目ID
             Guid? projectID = navigationContext.Parameters["ProjectID"] as Guid?;
             if (projectID != null)
             {
@@ -73,10 +121,13 @@ namespace RealEstateModule.ViewModels
             }
 
             // 初始自然幢数据
-            NaturalBuilding = new NaturalBuilding();
+            InitialNaturalBuilding();
+            
             // 按钮为新增状态
             ButtonContent = "确认新增";
         }
+
+
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
@@ -146,6 +197,31 @@ namespace RealEstateModule.ViewModels
             if (NaturalBuilding == null) return;
             NaturalBuilding.UpdateTime = DateTime.Now;
             NaturalBuildingDal.Modify(NaturalBuilding);
+        }
+
+        /// <summary>
+        /// 初始化自然幢
+        /// </summary>
+        private void InitialNaturalBuilding()
+        {
+            NaturalBuilding = new NaturalBuilding();
+            // 默认房屋结构为"钢结构"
+            //NaturalBuilding.FWJG = "1";
+            // 默认状态为"有效"
+            //NaturalBuilding.ZT = "1";
+        }
+
+        /// <summary>
+        /// 初始化下拉框
+        /// </summary>
+        private void InitialComboBoxList()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic = DictionaryUtil.GetDictionaryByName("房屋结构");
+            FWJGList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("不动产单元状态");
+            ZTList = dic;
         }
     }
 }

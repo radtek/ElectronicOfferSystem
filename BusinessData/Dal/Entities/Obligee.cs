@@ -40,7 +40,7 @@ namespace BusinessData
         /// <summary>
         /// 证件种类
         /// </summary>
-        public int ZJZL { get; set; }
+        public string ZJZL { get; set; }
         /// <summary>
         /// 证件号
         /// </summary>
@@ -48,15 +48,15 @@ namespace BusinessData
         /// <summary>
         /// 国家/地区
         /// </summary>
-        public int GJ { get; set; }
+        public string GJ { get; set; }
         /// <summary>
         /// 性别
         /// </summary>
-        public Nullable<int> XB { get; set; }
+        public string XB { get; set; }
         /// <summary>
         /// 权利人类型
         /// </summary>
-        public int QLRLX { get; set; }
+        public string QLRLX { get; set; }
         /// <summary>
         /// 电话
         /// </summary>
@@ -72,11 +72,11 @@ namespace BusinessData
         /// <summary>
         /// 权利类型
         /// </summary>
-        public int QLLX { get; set; }
+        public string QLLX { get; set; }
         /// <summary>
         /// 共有方式
         /// </summary>
-        public int GYFS { get; set; }
+        public string GYFS { get; set; }
         /// <summary>
         /// 权利面积
         /// </summary>
@@ -92,7 +92,7 @@ namespace BusinessData
         /// <summary>
         /// 法人证件类型
         /// </summary>
-        public Nullable<int> FRZJLX { get; set; }
+        public string FRZJLX { get; set; }
         /// <summary>
         /// 法人证件号
         /// </summary>
@@ -108,7 +108,7 @@ namespace BusinessData
         /// <summary>
         /// 代理人证件类型
         /// </summary>
-        public Nullable<int> DLRZJLX { get; set; }
+        public string DLRZJLX { get; set; }
         /// <summary>
         /// 代理人证件号
         /// </summary>

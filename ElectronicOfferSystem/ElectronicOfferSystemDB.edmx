@@ -87,10 +87,10 @@
     <Property Name="DXCS" Type="int" Nullable="false" />
     <Property Name="DXSD" Type="float" Nullable="true" />
     <Property Name="GHYT" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="FWJG" Type="int" Nullable="false" />
+    <Property Name="FWJG" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="ZTS" Type="int" Nullable="false" />
     <Property Name="JZWJBYT" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="ZT" Type="int" Nullable="false" />
+    <Property Name="ZT" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="BZ" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
@@ -156,24 +156,24 @@
     <Property Name="HBSM" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="QLRMC" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="BDCQZH" Type="nvarchar" Nullable="false" MaxLength="60" />
-    <Property Name="ZJZL" Type="int" Nullable="false" />
+    <Property Name="ZJZL" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="ZJH" Type="nvarchar" Nullable="false" MaxLength="60" />
-    <Property Name="GJ" Type="int" Nullable="false" />
-    <Property Name="XB" Type="int" Nullable="true" />
-    <Property Name="QLRLX" Type="int" Nullable="false" />
+    <Property Name="GJ" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="XB" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="QLRLX" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="DH" Type="nvarchar" Nullable="true" />
     <Property Name="YB" Type="nvarchar" Nullable="true" />
     <Property Name="DZ" Type="nvarchar" Nullable="true" />
-    <Property Name="QLLX" Type="int" Nullable="false" />
-    <Property Name="GYFS" Type="int" Nullable="false" />
+    <Property Name="QLLX" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="GYFS" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="QLMJ" Type="float" Nullable="true" />
     <Property Name="QLBL" Type="nvarchar" Nullable="true" />
     <Property Name="FRXM" Type="nvarchar" Nullable="true" />
-    <Property Name="FRZJLX" Type="int" Nullable="true" />
+    <Property Name="FRZJLX" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FRZJH" Type="nvarchar" Nullable="true" />
     <Property Name="FRDH" Type="nvarchar" Nullable="true" />
     <Property Name="DLRXM" Type="nvarchar" Nullable="true" />
-    <Property Name="DLRZJLX" Type="int" Nullable="true" />
+    <Property Name="DLRZJLX" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="DLRZJH" Type="nvarchar" Nullable="true" />
     <Property Name="DLRDH" Type="nvarchar" Nullable="true" />
     <Property Name="GZDW" Type="nvarchar" Nullable="true" />
@@ -202,18 +202,18 @@
     <Property Name="CH" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FH" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="ZL" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="MJDW" Type="int" Nullable="false" />
+    <Property Name="MJDW" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="SZC" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="QSC" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="ZZC" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="HH" Type="nvarchar" Nullable="true" />
     <Property Name="SHBW" Type="nvarchar" Nullable="false" MaxLength="60" />
-    <Property Name="HX" Type="int" Nullable="true" />
-    <Property Name="HXJG" Type="int" Nullable="true" />
+    <Property Name="HX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="HXJG" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="GHYT" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="FWYT1" Type="int" Nullable="true" />
-    <Property Name="FWYT2" Type="int" Nullable="true" />
-    <Property Name="FWYT3" Type="int" Nullable="true" />
+    <Property Name="FWYT1" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT2" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT3" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="YCJZMJ" Type="float" Nullable="true" />
     <Property Name="YCTNJZMJ" Type="float" Nullable="true" />
     <Property Name="YCFTJZMJ" Type="float" Nullable="true" />
@@ -229,10 +229,10 @@
     <Property Name="GYTDMJ" Type="float" Nullable="true" />
     <Property Name="FTTDMJ" Type="float" Nullable="true" />
     <Property Name="DYTDMJ" Type="float" Nullable="true" />
-    <Property Name="FWLX" Type="int" Nullable="true" />
-    <Property Name="FWJG" Type="int" Nullable="true" />
-    <Property Name="FWXZ" Type="int" Nullable="true" />
-    <Property Name="FWCB" Type="int" Nullable="true" />
+    <Property Name="FWLX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWJG" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWXZ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWCB" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FDCJYJG" Type="float" Nullable="true" />
     <Property Name="JGSJ" Type="datetime" Nullable="true" />
     <Property Name="CQLY" Type="nvarchar" Nullable="true" />
@@ -242,7 +242,7 @@
     <Property Name="QTGSB" Type="nvarchar" Nullable="true" />
     <Property Name="TDSYQR" Type="nvarchar" Nullable="true" />
     <Property Name="FCFHT" Type="nvarchar" Nullable="true" />
-    <Property Name="ZT" Type="int" Nullable="true" />
+    <Property Name="ZT" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
@@ -592,7 +592,7 @@
               <Summary>规划用途</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG" Type="Int32" Nullable="false" >
+          <Property Name="FWJG" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>房屋结构</Summary>
             </Documentation>
@@ -607,7 +607,7 @@
               <Summary>建筑物基本用途</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZT" Type="Int32" Nullable="false" >
+          <Property Name="ZT" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>状态</Summary>
             </Documentation>
@@ -861,7 +861,7 @@
               <Summary>不动产权证号</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZJZL" Type="Int32" Nullable="false" >
+          <Property Name="ZJZL" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>证件种类</Summary>
             </Documentation>
@@ -871,17 +871,17 @@
               <Summary>证件号</Summary>
             </Documentation>
           </Property>
-          <Property Name="GJ" Type="Int32" Nullable="false" >
+          <Property Name="GJ" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>国家/地区</Summary>
             </Documentation>
           </Property>
-          <Property Name="XB" Type="Int32" Nullable="true" >
+          <Property Name="XB" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>性别</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLRLX" Type="Int32" Nullable="false" >
+          <Property Name="QLRLX" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>权利人类型</Summary>
             </Documentation>
@@ -901,12 +901,12 @@
               <Summary>地址</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLLX" Type="Int32" Nullable="false" >
+          <Property Name="QLLX" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>权利类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="GYFS" Type="Int32" Nullable="false" >
+          <Property Name="GYFS" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>共有方式</Summary>
             </Documentation>
@@ -926,7 +926,7 @@
               <Summary>法人姓名</Summary>
             </Documentation>
           </Property>
-          <Property Name="FRZJLX" Type="Int32" Nullable="true" >
+          <Property Name="FRZJLX" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>法人证件类型</Summary>
             </Documentation>
@@ -946,7 +946,7 @@
               <Summary>代理人姓名</Summary>
             </Documentation>
           </Property>
-          <Property Name="DLRZJLX" Type="Int32" Nullable="true" >
+          <Property Name="DLRZJLX" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>代理人证件类型</Summary>
             </Documentation>
@@ -1066,7 +1066,7 @@
               <Summary>坐落</Summary>
             </Documentation>
           </Property>
-          <Property Name="MJDW" Type="Int32" Nullable="false" >
+          <Property Name="MJDW" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>面积单位</Summary>
             </Documentation>
@@ -1096,12 +1096,12 @@
               <Summary>室号部位</Summary>
             </Documentation>
           </Property>
-          <Property Name="HX" Type="Int32" Nullable="true" >
+          <Property Name="HX" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>户型</Summary>
             </Documentation>
           </Property>
-          <Property Name="HXJG" Type="Int32" Nullable="true" >
+          <Property Name="HXJG" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>户型结构</Summary>
             </Documentation>
@@ -1111,17 +1111,17 @@
               <Summary>规划用途</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT1" Type="Int32" Nullable="true" >
+          <Property Name="FWYT1" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋用途1</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT2" Type="Int32" Nullable="true" >
+          <Property Name="FWYT2" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋用途2</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWYT3" Type="Int32" Nullable="true" >
+          <Property Name="FWYT3" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋用途3</Summary>
             </Documentation>
@@ -1201,22 +1201,22 @@
               <Summary>独用土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWLX" Type="Int32" Nullable="true" >
+          <Property Name="FWLX" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋类型</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWJG" Type="Int32" Nullable="true" >
+          <Property Name="FWJG" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋结构</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWXZ" Type="Int32" Nullable="true" >
+          <Property Name="FWXZ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋性质</Summary>
             </Documentation>
           </Property>
-          <Property Name="FWCB" Type="Int32" Nullable="true" >
+          <Property Name="FWCB" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>房屋产别</Summary>
             </Documentation>
@@ -1266,7 +1266,7 @@
               <Summary>房产分户图</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZT" Type="Int32" Nullable="true" >
+          <Property Name="ZT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>状态</Summary>
             </Documentation>
@@ -1281,6 +1281,9 @@
           <NavigationProperty Name="Obligees" Relationship="ElectronicOfferSystem.HouseholdObligee" FromRole="Household" ToRole="Obligee" />
           </EntityType>
         <EntityType Name="CONST">
+          <Documentation>
+            <Summary>字典</Summary>
+          </Documentation>
           <Key>
             <PropertyRef Name="MBBSM" />
           </Key>
@@ -1299,6 +1302,9 @@
           <Property Name="GJVALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CONSTCLS">
+          <Documentation>
+            <Summary>字典目录</Summary>
+          </Documentation>
           <Key>
             <PropertyRef Name="MBBSM" />
           </Key>

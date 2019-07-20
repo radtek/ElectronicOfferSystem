@@ -80,7 +80,7 @@
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Padding="0"
-                                    Command="{Binding AddCommand}">
+                                    Command="{Binding ImportCommand}">
                             <Viewbox Width="25"
                                          Height="25">
                                 <Canvas Width="24"

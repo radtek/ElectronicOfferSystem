@@ -82,7 +82,7 @@ namespace BusinessData
         /// <summary>
         /// 面积单位
         /// </summary>
-        public int MJDW { get; set; }
+        public string MJDW { get; set; }
         /// <summary>
         /// 所在层
         /// </summary>
@@ -106,11 +106,11 @@ namespace BusinessData
         /// <summary>
         /// 户型
         /// </summary>
-        public Nullable<int> HX { get; set; }
+        public string HX { get; set; }
         /// <summary>
         /// 户型结构
         /// </summary>
-        public Nullable<int> HXJG { get; set; }
+        public string HXJG { get; set; }
         /// <summary>
         /// 规划用途
         /// </summary>
@@ -118,15 +118,15 @@ namespace BusinessData
         /// <summary>
         /// 房屋用途1
         /// </summary>
-        public Nullable<int> FWYT1 { get; set; }
+        public string FWYT1 { get; set; }
         /// <summary>
         /// 房屋用途2
         /// </summary>
-        public Nullable<int> FWYT2 { get; set; }
+        public string FWYT2 { get; set; }
         /// <summary>
         /// 房屋用途3
         /// </summary>
-        public Nullable<int> FWYT3 { get; set; }
+        public string FWYT3 { get; set; }
         /// <summary>
         /// 预测建筑面积
         /// </summary>
@@ -190,19 +190,19 @@ namespace BusinessData
         /// <summary>
         /// 房屋类型
         /// </summary>
-        public Nullable<int> FWLX { get; set; }
+        public string FWLX { get; set; }
         /// <summary>
         /// 房屋结构
         /// </summary>
-        public Nullable<int> FWJG { get; set; }
+        public string FWJG { get; set; }
         /// <summary>
         /// 房屋性质
         /// </summary>
-        public Nullable<int> FWXZ { get; set; }
+        public string FWXZ { get; set; }
         /// <summary>
         /// 房屋产别
         /// </summary>
-        public Nullable<int> FWCB { get; set; }
+        public string FWCB { get; set; }
         /// <summary>
         /// 房地产交易价格
         /// </summary>
@@ -242,7 +242,7 @@ namespace BusinessData
         /// <summary>
         /// 状态
         /// </summary>
-        public Nullable<int> ZT { get; set; }
+        public string ZT { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

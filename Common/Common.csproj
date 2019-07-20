@@ -77,7 +77,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessData\BusinessData.csproj">
+      <Project>{6b55a929-d17e-41fc-8f08-ba64f43e23e3}</Project>
+      <Name>BusinessData</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Core">
       <Version>7.1.0.431</Version>
