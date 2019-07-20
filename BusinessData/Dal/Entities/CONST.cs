@@ -13,7 +13,7 @@ namespace BusinessData
     using System.Collections.Generic;
     
     /// <summary>
-    /// CONST
+    /// 字典
     /// </summary>
     public partial class CONST
     {

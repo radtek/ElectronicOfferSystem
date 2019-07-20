@@ -21,7 +21,7 @@ namespace ElectronicOfferSystem.ViewModels
 
         public WindowTopViewModel()
         {
-            //ImportCommand = new DelegateCommand(ImportData);
+            ImportCommand = new DelegateCommand(ImportData);
             CloseCommand = new DelegateCommand(() => {
                 Application.Current.Shutdown();
             });

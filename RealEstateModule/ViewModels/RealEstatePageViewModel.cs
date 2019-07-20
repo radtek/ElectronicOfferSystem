@@ -50,6 +50,7 @@ namespace RealEstateModule.ViewModels
 
             // 在项目列表选择一个项目之后执行
             SelectProjectCommand = new DelegateCommand<object>((obj) => {
+
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
                 // 加载该项目的数据
@@ -87,7 +88,7 @@ namespace RealEstateModule.ViewModels
 
             // 页面跳转
             var parameters = new NavigationParameters();
-            parameters.Add("ProjectID", Project?.ID);
+            parameters.Add("Project", Project);
             RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
         }
         private void NavigationComplete(NavigationResult result)

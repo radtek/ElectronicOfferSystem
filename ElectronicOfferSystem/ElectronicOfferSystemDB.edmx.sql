@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/20/2019 12:14:08
+-- Date Created: 07/20/2019 20:07:51
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -57,8 +57,8 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'ProjectSet'
-CREATE TABLE [ProjectSet] (
+-- Creating table 'Project'
+CREATE TABLE [Project] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectName] nvarchar(60)  NOT NULL,
     [DeveloperName] nvarchar(60)  NOT NULL,
@@ -69,8 +69,8 @@ CREATE TABLE [ProjectSet] (
 );
 GO
 
--- Creating table 'NaturalBuildingSet'
-CREATE TABLE [NaturalBuildingSet] (
+-- Creating table 'NaturalBuilding'
+CREATE TABLE [NaturalBuilding] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectID] uniqueidentifier  NOT NULL,
     [BSM] nvarchar(60)  NOT NULL,
@@ -101,8 +101,8 @@ CREATE TABLE [NaturalBuildingSet] (
 );
 GO
 
--- Creating table 'LogicalBuildingSet'
-CREATE TABLE [LogicalBuildingSet] (
+-- Creating table 'LogicalBuilding'
+CREATE TABLE [LogicalBuilding] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectID] uniqueidentifier  NOT NULL,
     [ZRZH] nvarchar(4000)  NOT NULL,
@@ -130,8 +130,8 @@ CREATE TABLE [LogicalBuildingSet] (
 );
 GO
 
--- Creating table 'FloorSet'
-CREATE TABLE [FloorSet] (
+-- Creating table 'Floor'
+CREATE TABLE [Floor] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectID] uniqueidentifier  NOT NULL,
     [CH] nvarchar(60)  NOT NULL,
@@ -153,8 +153,8 @@ CREATE TABLE [FloorSet] (
 );
 GO
 
--- Creating table 'ObligeeSet'
-CREATE TABLE [ObligeeSet] (
+-- Creating table 'Obligee'
+CREATE TABLE [Obligee] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectID] uniqueidentifier  NOT NULL,
     [HBSM] nvarchar(60)  NOT NULL,
@@ -190,8 +190,8 @@ CREATE TABLE [ObligeeSet] (
 );
 GO
 
--- Creating table 'HouseholdSet'
-CREATE TABLE [HouseholdSet] (
+-- Creating table 'Household'
+CREATE TABLE [Household] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectID] uniqueidentifier  NOT NULL,
     [HBSM] nvarchar(60)  NOT NULL,
@@ -287,39 +287,39 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [ID] in table 'ProjectSet'
-ALTER TABLE [ProjectSet]
-ADD CONSTRAINT [PK_ProjectSet]
+-- Creating primary key on [ID] in table 'Project'
+ALTER TABLE [Project]
+ADD CONSTRAINT [PK_Project]
     PRIMARY KEY ([ID] );
 GO
 
--- Creating primary key on [ID] in table 'NaturalBuildingSet'
-ALTER TABLE [NaturalBuildingSet]
-ADD CONSTRAINT [PK_NaturalBuildingSet]
+-- Creating primary key on [ID] in table 'NaturalBuilding'
+ALTER TABLE [NaturalBuilding]
+ADD CONSTRAINT [PK_NaturalBuilding]
     PRIMARY KEY ([ID] );
 GO
 
--- Creating primary key on [ID] in table 'LogicalBuildingSet'
-ALTER TABLE [LogicalBuildingSet]
-ADD CONSTRAINT [PK_LogicalBuildingSet]
+-- Creating primary key on [ID] in table 'LogicalBuilding'
+ALTER TABLE [LogicalBuilding]
+ADD CONSTRAINT [PK_LogicalBuilding]
     PRIMARY KEY ([ID] );
 GO
 
--- Creating primary key on [ID] in table 'FloorSet'
-ALTER TABLE [FloorSet]
-ADD CONSTRAINT [PK_FloorSet]
+-- Creating primary key on [ID] in table 'Floor'
+ALTER TABLE [Floor]
+ADD CONSTRAINT [PK_Floor]
     PRIMARY KEY ([ID] );
 GO
 
--- Creating primary key on [ID] in table 'ObligeeSet'
-ALTER TABLE [ObligeeSet]
-ADD CONSTRAINT [PK_ObligeeSet]
+-- Creating primary key on [ID] in table 'Obligee'
+ALTER TABLE [Obligee]
+ADD CONSTRAINT [PK_Obligee]
     PRIMARY KEY ([ID] );
 GO
 
--- Creating primary key on [ID] in table 'HouseholdSet'
-ALTER TABLE [HouseholdSet]
-ADD CONSTRAINT [PK_HouseholdSet]
+-- Creating primary key on [ID] in table 'Household'
+ALTER TABLE [Household]
+ADD CONSTRAINT [PK_Household]
     PRIMARY KEY ([ID] );
 GO
 
@@ -339,138 +339,138 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Project_ID] in table 'NaturalBuildingSet'
-ALTER TABLE [NaturalBuildingSet]
+-- Creating foreign key on [Project_ID] in table 'NaturalBuilding'
+ALTER TABLE [NaturalBuilding]
 ADD CONSTRAINT [FK_ProjectNaturalBuilding]
     FOREIGN KEY ([Project_ID])
-    REFERENCES [ProjectSet]
+    REFERENCES [Project]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectNaturalBuilding'
 CREATE INDEX [IX_FK_ProjectNaturalBuilding]
-ON [NaturalBuildingSet]
+ON [NaturalBuilding]
     ([Project_ID]);
 GO
 
--- Creating foreign key on [Project_ID] in table 'LogicalBuildingSet'
-ALTER TABLE [LogicalBuildingSet]
+-- Creating foreign key on [Project_ID] in table 'LogicalBuilding'
+ALTER TABLE [LogicalBuilding]
 ADD CONSTRAINT [FK_ProjectLogicalBuilding]
     FOREIGN KEY ([Project_ID])
-    REFERENCES [ProjectSet]
+    REFERENCES [Project]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectLogicalBuilding'
 CREATE INDEX [IX_FK_ProjectLogicalBuilding]
-ON [LogicalBuildingSet]
+ON [LogicalBuilding]
     ([Project_ID]);
 GO
 
--- Creating foreign key on [Project_ID] in table 'FloorSet'
-ALTER TABLE [FloorSet]
+-- Creating foreign key on [Project_ID] in table 'Floor'
+ALTER TABLE [Floor]
 ADD CONSTRAINT [FK_ProjectFloor]
     FOREIGN KEY ([Project_ID])
-    REFERENCES [ProjectSet]
+    REFERENCES [Project]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectFloor'
 CREATE INDEX [IX_FK_ProjectFloor]
-ON [FloorSet]
+ON [Floor]
     ([Project_ID]);
 GO
 
--- Creating foreign key on [Project_ID] in table 'HouseholdSet'
-ALTER TABLE [HouseholdSet]
+-- Creating foreign key on [Project_ID] in table 'Household'
+ALTER TABLE [Household]
 ADD CONSTRAINT [FK_ProjectHousehold]
     FOREIGN KEY ([Project_ID])
-    REFERENCES [ProjectSet]
+    REFERENCES [Project]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectHousehold'
 CREATE INDEX [IX_FK_ProjectHousehold]
-ON [HouseholdSet]
+ON [Household]
     ([Project_ID]);
 GO
 
--- Creating foreign key on [Project_ID] in table 'ObligeeSet'
-ALTER TABLE [ObligeeSet]
+-- Creating foreign key on [Project_ID] in table 'Obligee'
+ALTER TABLE [Obligee]
 ADD CONSTRAINT [FK_ProjectObligee]
     FOREIGN KEY ([Project_ID])
-    REFERENCES [ProjectSet]
+    REFERENCES [Project]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectObligee'
 CREATE INDEX [IX_FK_ProjectObligee]
-ON [ObligeeSet]
+ON [Obligee]
     ([Project_ID]);
 GO
 
--- Creating foreign key on [NaturalBuilding_ID] in table 'LogicalBuildingSet'
-ALTER TABLE [LogicalBuildingSet]
+-- Creating foreign key on [NaturalBuilding_ID] in table 'LogicalBuilding'
+ALTER TABLE [LogicalBuilding]
 ADD CONSTRAINT [FK_NaturalBuildingLogicalBuilding]
     FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuildingSet]
+    REFERENCES [NaturalBuilding]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingLogicalBuilding'
 CREATE INDEX [IX_FK_NaturalBuildingLogicalBuilding]
-ON [LogicalBuildingSet]
+ON [LogicalBuilding]
     ([NaturalBuilding_ID]);
 GO
 
--- Creating foreign key on [NaturalBuilding_ID] in table 'FloorSet'
-ALTER TABLE [FloorSet]
+-- Creating foreign key on [NaturalBuilding_ID] in table 'Floor'
+ALTER TABLE [Floor]
 ADD CONSTRAINT [FK_NaturalBuildingFloor]
     FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuildingSet]
+    REFERENCES [NaturalBuilding]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingFloor'
 CREATE INDEX [IX_FK_NaturalBuildingFloor]
-ON [FloorSet]
+ON [Floor]
     ([NaturalBuilding_ID]);
 GO
 
--- Creating foreign key on [NaturalBuilding_ID] in table 'HouseholdSet'
-ALTER TABLE [HouseholdSet]
+-- Creating foreign key on [NaturalBuilding_ID] in table 'Household'
+ALTER TABLE [Household]
 ADD CONSTRAINT [FK_NaturalBuildingHousehold]
     FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuildingSet]
+    REFERENCES [NaturalBuilding]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingHousehold'
 CREATE INDEX [IX_FK_NaturalBuildingHousehold]
-ON [HouseholdSet]
+ON [Household]
     ([NaturalBuilding_ID]);
 GO
 
--- Creating foreign key on [Household_ID] in table 'ObligeeSet'
-ALTER TABLE [ObligeeSet]
+-- Creating foreign key on [Household_ID] in table 'Obligee'
+ALTER TABLE [Obligee]
 ADD CONSTRAINT [FK_HouseholdObligee]
     FOREIGN KEY ([Household_ID])
-    REFERENCES [HouseholdSet]
+    REFERENCES [Household]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_HouseholdObligee'
 CREATE INDEX [IX_FK_HouseholdObligee]
-ON [ObligeeSet]
+ON [Obligee]
     ([Household_ID]);
 GO
 

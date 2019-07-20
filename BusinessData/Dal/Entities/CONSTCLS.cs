@@ -13,7 +13,7 @@ namespace BusinessData
     using System.Collections.Generic;
     
     /// <summary>
-    /// CONSTCLS
+    /// 字典目录
     /// </summary>
     public partial class CONSTCLS
     {

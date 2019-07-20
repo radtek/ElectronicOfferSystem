@@ -10,6 +10,11 @@ namespace Common
     public class GlobalCommands
     {
         /// <summary>
+        /// 页面导航
+        /// </summary>
+        public static CompositeCommand NavigateCommand = new CompositeCommand();
+
+        /// <summary>
         /// 在项目列表中选择一个项目
         /// </summary>
         public static CompositeCommand SelectProjectCommand = new CompositeCommand();

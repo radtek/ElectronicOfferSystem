@@ -6,52 +6,52 @@
     <edmx:StorageModels>
     <Schema Namespace="ElectronicOfferSystem.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ElectronicOfferSystemStoreContainer">
-    <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystem.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystem.Store.NaturalBuildingSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystem.Store.LogicalBuildingSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystem.Store.FloorSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystem.Store.ObligeeSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystem.Store.HouseholdSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Project" EntityType="ElectronicOfferSystem.Store.Project" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NaturalBuilding" EntityType="ElectronicOfferSystem.Store.NaturalBuilding" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogicalBuilding" EntityType="ElectronicOfferSystem.Store.LogicalBuilding" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Floor" EntityType="ElectronicOfferSystem.Store.Floor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Obligee" EntityType="ElectronicOfferSystem.Store.Obligee" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Household" EntityType="ElectronicOfferSystem.Store.Household" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.Store.BDCS_CONST" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.Store.BDCS_CONSTCLS" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystem.Store.ProjectNaturalBuilding">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+      <End Role="Project" EntitySet="Project" />
+      <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
     </AssociationSet>
     <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystem.Store.ProjectLogicalBuilding">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+      <End Role="Project" EntitySet="Project" />
+      <End Role="LogicalBuilding" EntitySet="LogicalBuilding" />
     </AssociationSet>
     <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystem.Store.ProjectFloor">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="Floor" EntitySet="FloorSet" />
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Floor" EntitySet="Floor" />
     </AssociationSet>
     <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystem.Store.ProjectHousehold">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="Household" EntitySet="HouseholdSet" />
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Household" EntitySet="Household" />
     </AssociationSet>
     <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystem.Store.ProjectObligee">
-      <End Role="Project" EntitySet="ProjectSet" />
-      <End Role="Obligee" EntitySet="ObligeeSet" />
+      <End Role="Project" EntitySet="Project" />
+      <End Role="Obligee" EntitySet="Obligee" />
     </AssociationSet>
     <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystem.Store.NaturalBuildingLogicalBuilding">
-      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-      <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+      <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+      <End Role="LogicalBuilding" EntitySet="LogicalBuilding" />
     </AssociationSet>
     <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystem.Store.NaturalBuildingFloor">
-      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-      <End Role="Floor" EntitySet="FloorSet" />
+      <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+      <End Role="Floor" EntitySet="Floor" />
     </AssociationSet>
     <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystem.Store.NaturalBuildingHousehold">
-      <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-      <End Role="Household" EntitySet="HouseholdSet" />
+      <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+      <End Role="Household" EntitySet="Household" />
     </AssociationSet>
     <AssociationSet Name="HouseholdObligee" Association="ElectronicOfferSystem.Store.HouseholdObligee">
-      <End Role="Household" EntitySet="HouseholdSet" />
-      <End Role="Obligee" EntitySet="ObligeeSet" />
+      <End Role="Household" EntitySet="Household" />
+      <End Role="Obligee" EntitySet="Obligee" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ProjectSet">
+  <EntityType Name="Project">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -63,7 +63,7 @@
     <Property Name="UptateTime" Type="datetime" Nullable="false" />
     <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="400" />
   </EntityType>
-  <EntityType Name="NaturalBuildingSet">
+  <EntityType Name="NaturalBuilding">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -95,7 +95,7 @@
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="LogicalBuildingSet">
+  <EntityType Name="LogicalBuilding">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -124,7 +124,7 @@
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="FloorSet">
+  <EntityType Name="Floor">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -147,7 +147,7 @@
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="NaturalBuilding_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="ObligeeSet">
+  <EntityType Name="Obligee">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -184,7 +184,7 @@
     <Property Name="Project_ID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Household_ID" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
-  <EntityType Name="HouseholdSet">
+  <EntityType Name="Household">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -278,8 +278,8 @@
     <Property Name="MODIFYTIME" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="ProjectNaturalBuilding">
-    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.Project" Multiplicity="1" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuilding" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
@@ -290,8 +290,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectLogicalBuilding">
-    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
-    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuildingSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.Project" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuilding" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
@@ -302,8 +302,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectFloor">
-    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Floor" Type="ElectronicOfferSystem.Store.FloorSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.Project" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystem.Store.Floor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
@@ -314,8 +314,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectHousehold">
-    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.Project" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystem.Store.Household" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
@@ -326,8 +326,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ProjectObligee">
-    <End Role="Project" Type="ElectronicOfferSystem.Store.ProjectSet" Multiplicity="1" />
-    <End Role="Obligee" Type="ElectronicOfferSystem.Store.ObligeeSet" Multiplicity="*" />
+    <End Role="Project" Type="ElectronicOfferSystem.Store.Project" Multiplicity="1" />
+    <End Role="Obligee" Type="ElectronicOfferSystem.Store.Obligee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project">
         <PropertyRef Name="ID" />
@@ -338,8 +338,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="NaturalBuildingLogicalBuilding">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuildingSet" Multiplicity="*" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuilding" Multiplicity="1" />
+    <End Role="LogicalBuilding" Type="ElectronicOfferSystem.Store.LogicalBuilding" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NaturalBuilding">
         <PropertyRef Name="ID" />
@@ -350,8 +350,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="NaturalBuildingFloor">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="Floor" Type="ElectronicOfferSystem.Store.FloorSet" Multiplicity="*" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuilding" Multiplicity="1" />
+    <End Role="Floor" Type="ElectronicOfferSystem.Store.Floor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NaturalBuilding">
         <PropertyRef Name="ID" />
@@ -362,8 +362,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="NaturalBuildingHousehold">
-    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuildingSet" Multiplicity="1" />
-    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="*" />
+    <End Role="NaturalBuilding" Type="ElectronicOfferSystem.Store.NaturalBuilding" Multiplicity="1" />
+    <End Role="Household" Type="ElectronicOfferSystem.Store.Household" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NaturalBuilding">
         <PropertyRef Name="ID" />
@@ -374,8 +374,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="HouseholdObligee">
-    <End Role="Household" Type="ElectronicOfferSystem.Store.HouseholdSet" Multiplicity="1" />
-    <End Role="Obligee" Type="ElectronicOfferSystem.Store.ObligeeSet" Multiplicity="*" />
+    <End Role="Household" Type="ElectronicOfferSystem.Store.Household" Multiplicity="1" />
+    <End Role="Obligee" Type="ElectronicOfferSystem.Store.Obligee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Household">
         <PropertyRef Name="ID" />
@@ -390,49 +390,49 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ElectronicOfferSystem" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ElectronicOfferSystemDBContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Public">
-          <EntitySet Name="ProjectSet" EntityType="ElectronicOfferSystem.Project" />
-          <EntitySet Name="NaturalBuildingSet" EntityType="ElectronicOfferSystem.NaturalBuilding" />
-          <EntitySet Name="LogicalBuildingSet" EntityType="ElectronicOfferSystem.LogicalBuilding" />
-          <EntitySet Name="FloorSet" EntityType="ElectronicOfferSystem.Floor" />
-          <EntitySet Name="ObligeeSet" EntityType="ElectronicOfferSystem.Obligee" />
-          <EntitySet Name="HouseholdSet" EntityType="ElectronicOfferSystem.Household" />
+          <EntitySet Name="Project" EntityType="ElectronicOfferSystem.Project" />
+          <EntitySet Name="NaturalBuilding" EntityType="ElectronicOfferSystem.NaturalBuilding" />
+          <EntitySet Name="LogicalBuilding" EntityType="ElectronicOfferSystem.LogicalBuilding" />
+          <EntitySet Name="Floor" EntityType="ElectronicOfferSystem.Floor" />
+          <EntitySet Name="Obligee" EntityType="ElectronicOfferSystem.Obligee" />
+          <EntitySet Name="Household" EntityType="ElectronicOfferSystem.Household" />
           <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.CONST" />
           <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.CONSTCLS" />
           <AssociationSet Name="ProjectNaturalBuilding" Association="ElectronicOfferSystem.ProjectNaturalBuilding">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
+            <End Role="Project" EntitySet="Project" />
+            <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
           </AssociationSet>
           <AssociationSet Name="ProjectLogicalBuilding" Association="ElectronicOfferSystem.ProjectLogicalBuilding">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+            <End Role="Project" EntitySet="Project" />
+            <End Role="LogicalBuilding" EntitySet="LogicalBuilding" />
           </AssociationSet>
           <AssociationSet Name="ProjectFloor" Association="ElectronicOfferSystem.ProjectFloor">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="Floor" EntitySet="FloorSet" />
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Floor" EntitySet="Floor" />
           </AssociationSet>
           <AssociationSet Name="ProjectHousehold" Association="ElectronicOfferSystem.ProjectHousehold">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="Household" EntitySet="HouseholdSet" />
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Household" EntitySet="Household" />
           </AssociationSet>
           <AssociationSet Name="ProjectObligee" Association="ElectronicOfferSystem.ProjectObligee">
-            <End Role="Project" EntitySet="ProjectSet" />
-            <End Role="Obligee" EntitySet="ObligeeSet" />
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Obligee" EntitySet="Obligee" />
           </AssociationSet>
           <AssociationSet Name="NaturalBuildingLogicalBuilding" Association="ElectronicOfferSystem.NaturalBuildingLogicalBuilding">
-            <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-            <End Role="LogicalBuilding" EntitySet="LogicalBuildingSet" />
+            <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+            <End Role="LogicalBuilding" EntitySet="LogicalBuilding" />
           </AssociationSet>
           <AssociationSet Name="NaturalBuildingFloor" Association="ElectronicOfferSystem.NaturalBuildingFloor">
-            <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-            <End Role="Floor" EntitySet="FloorSet" />
+            <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+            <End Role="Floor" EntitySet="Floor" />
           </AssociationSet>
           <AssociationSet Name="NaturalBuildingHousehold" Association="ElectronicOfferSystem.NaturalBuildingHousehold">
-            <End Role="NaturalBuilding" EntitySet="NaturalBuildingSet" />
-            <End Role="Household" EntitySet="HouseholdSet" />
+            <End Role="NaturalBuilding" EntitySet="NaturalBuilding" />
+            <End Role="Household" EntitySet="Household" />
           </AssociationSet>
           <AssociationSet Name="HouseholdObligee" Association="ElectronicOfferSystem.HouseholdObligee">
-            <End Role="Household" EntitySet="HouseholdSet" />
-            <End Role="Obligee" EntitySet="ObligeeSet" />
+            <End Role="Household" EntitySet="Household" />
+            <End Role="Obligee" EntitySet="Obligee" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Project">
@@ -1358,9 +1358,9 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ElectronicOfferSystemStoreContainer" CdmEntityContainer="ElectronicOfferSystemDBContainer">
-    <EntitySetMapping Name="ProjectSet">
+    <EntitySetMapping Name="Project">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Project)">
-        <MappingFragment StoreEntitySet="ProjectSet">
+        <MappingFragment StoreEntitySet="Project">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
           <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
@@ -1371,9 +1371,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NaturalBuildingSet">
+    <EntitySetMapping Name="NaturalBuilding">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.NaturalBuilding)">
-        <MappingFragment StoreEntitySet="NaturalBuildingSet">
+        <MappingFragment StoreEntitySet="NaturalBuilding">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="BSM" ColumnName="BSM" />
@@ -1403,9 +1403,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LogicalBuildingSet">
+    <EntitySetMapping Name="LogicalBuilding">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.LogicalBuilding)">
-        <MappingFragment StoreEntitySet="LogicalBuildingSet">
+        <MappingFragment StoreEntitySet="LogicalBuilding">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="ZRZH" ColumnName="ZRZH" />
@@ -1431,9 +1431,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FloorSet">
+    <EntitySetMapping Name="Floor">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Floor)">
-        <MappingFragment StoreEntitySet="FloorSet">
+        <MappingFragment StoreEntitySet="Floor">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="CH" ColumnName="CH" />
@@ -1453,9 +1453,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ObligeeSet">
+    <EntitySetMapping Name="Obligee">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Obligee)">
-        <MappingFragment StoreEntitySet="ObligeeSet">
+        <MappingFragment StoreEntitySet="Obligee">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="HBSM" ColumnName="HBSM" />
@@ -1489,9 +1489,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="HouseholdSet">
+    <EntitySetMapping Name="Household">
       <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Household)">
-        <MappingFragment StoreEntitySet="HouseholdSet">
+        <MappingFragment StoreEntitySet="Household">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
           <ScalarProperty Name="HBSM" ColumnName="HBSM" />
@@ -1583,7 +1583,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ProjectNaturalBuilding" TypeName="ElectronicOfferSystem.ProjectNaturalBuilding" StoreEntitySet="NaturalBuildingSet">
+    <AssociationSetMapping Name="ProjectNaturalBuilding" TypeName="ElectronicOfferSystem.ProjectNaturalBuilding" StoreEntitySet="NaturalBuilding">
       <EndProperty Name="Project">
         <ScalarProperty Name="ID" ColumnName="Project_ID" />
       </EndProperty>
@@ -1591,7 +1591,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectLogicalBuilding" TypeName="ElectronicOfferSystem.ProjectLogicalBuilding" StoreEntitySet="LogicalBuildingSet">
+    <AssociationSetMapping Name="ProjectLogicalBuilding" TypeName="ElectronicOfferSystem.ProjectLogicalBuilding" StoreEntitySet="LogicalBuilding">
       <EndProperty Name="Project">
         <ScalarProperty Name="ID" ColumnName="Project_ID" />
       </EndProperty>
@@ -1599,7 +1599,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectFloor" TypeName="ElectronicOfferSystem.ProjectFloor" StoreEntitySet="FloorSet">
+    <AssociationSetMapping Name="ProjectFloor" TypeName="ElectronicOfferSystem.ProjectFloor" StoreEntitySet="Floor">
       <EndProperty Name="Project">
         <ScalarProperty Name="ID" ColumnName="Project_ID" />
       </EndProperty>
@@ -1607,7 +1607,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectHousehold" TypeName="ElectronicOfferSystem.ProjectHousehold" StoreEntitySet="HouseholdSet">
+    <AssociationSetMapping Name="ProjectHousehold" TypeName="ElectronicOfferSystem.ProjectHousehold" StoreEntitySet="Household">
       <EndProperty Name="Project">
         <ScalarProperty Name="ID" ColumnName="Project_ID" />
       </EndProperty>
@@ -1615,7 +1615,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProjectObligee" TypeName="ElectronicOfferSystem.ProjectObligee" StoreEntitySet="ObligeeSet">
+    <AssociationSetMapping Name="ProjectObligee" TypeName="ElectronicOfferSystem.ProjectObligee" StoreEntitySet="Obligee">
       <EndProperty Name="Project">
         <ScalarProperty Name="ID" ColumnName="Project_ID" />
       </EndProperty>
@@ -1623,7 +1623,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NaturalBuildingLogicalBuilding" TypeName="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" StoreEntitySet="LogicalBuildingSet">
+    <AssociationSetMapping Name="NaturalBuildingLogicalBuilding" TypeName="ElectronicOfferSystem.NaturalBuildingLogicalBuilding" StoreEntitySet="LogicalBuilding">
       <EndProperty Name="NaturalBuilding">
         <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
       </EndProperty>
@@ -1631,7 +1631,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NaturalBuildingFloor" TypeName="ElectronicOfferSystem.NaturalBuildingFloor" StoreEntitySet="FloorSet">
+    <AssociationSetMapping Name="NaturalBuildingFloor" TypeName="ElectronicOfferSystem.NaturalBuildingFloor" StoreEntitySet="Floor">
       <EndProperty Name="NaturalBuilding">
         <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
       </EndProperty>
@@ -1639,7 +1639,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="NaturalBuildingHousehold" TypeName="ElectronicOfferSystem.NaturalBuildingHousehold" StoreEntitySet="HouseholdSet">
+    <AssociationSetMapping Name="NaturalBuildingHousehold" TypeName="ElectronicOfferSystem.NaturalBuildingHousehold" StoreEntitySet="Household">
       <EndProperty Name="NaturalBuilding">
         <ScalarProperty Name="ID" ColumnName="NaturalBuilding_ID" />
       </EndProperty>
@@ -1647,7 +1647,7 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="HouseholdObligee" TypeName="ElectronicOfferSystem.HouseholdObligee" StoreEntitySet="ObligeeSet">
+    <AssociationSetMapping Name="HouseholdObligee" TypeName="ElectronicOfferSystem.HouseholdObligee" StoreEntitySet="Obligee">
       <EndProperty Name="Household">
         <ScalarProperty Name="ID" ColumnName="Household_ID" />
       </EndProperty>

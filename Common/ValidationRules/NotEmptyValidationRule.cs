@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows.Controls;
 
 namespace Common.ValidationRules
 {
+    /// <summary>
+    /// 非空验证
+    /// </summary>
     public class NotEmptyValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return string.IsNullOrWhiteSpace((value ?? "").ToString())
-               ? new ValidationResult(false, "Field is required.")
+               ? new ValidationResult(false, "字段不能为空")
                : ValidationResult.ValidResult;
         }
     }

@@ -1,7 +1,4 @@
-﻿using ElectronicOfferSystem.ViewModels;
-using Prism.Regions;
-using RealEstateModule.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,17 +16,13 @@ using System.Windows.Shapes;
 namespace ElectronicOfferSystem.Views
 {
     /// <summary>
-    /// ProjectTab.xaml 的交互逻辑
+    /// IndexPage.xaml 的交互逻辑
     /// </summary>
-    public partial class ProjectTab : UserControl
+    public partial class IndexPage : UserControl
     {
-        public ProjectTab(IRegionManager regionManager)
+        public IndexPage()
         {
             InitializeComponent();
-            //DataContext = new ProjectTabViewModel();
-            // view discovery
-            regionManager.RegisterViewWithRegion("ContentRegion", typeof(IndexPage));
         }
-
     }
 }

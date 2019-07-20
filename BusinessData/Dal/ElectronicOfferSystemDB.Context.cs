@@ -25,12 +25,12 @@ namespace BusinessData
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Project> ProjectSet { get; set; }
-        public virtual DbSet<NaturalBuilding> NaturalBuildingSet { get; set; }
-        public virtual DbSet<LogicalBuilding> LogicalBuildingSet { get; set; }
-        public virtual DbSet<Floor> FloorSet { get; set; }
-        public virtual DbSet<Obligee> ObligeeSet { get; set; }
-        public virtual DbSet<Household> HouseholdSet { get; set; }
+        public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<NaturalBuilding> NaturalBuilding { get; set; }
+        public virtual DbSet<LogicalBuilding> LogicalBuilding { get; set; }
+        public virtual DbSet<Floor> Floor { get; set; }
+        public virtual DbSet<Obligee> Obligee { get; set; }
+        public virtual DbSet<Household> Household { get; set; }
         public virtual DbSet<CONST> BDCS_CONST { get; set; }
         public virtual DbSet<CONSTCLS> BDCS_CONSTCLS { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Common;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -12,13 +13,16 @@ namespace ElectronicOfferSystem.ViewModels
     class ProjectTabViewModel : BindableBase
     {
         private readonly IRegionManager RegionManager;
-        public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand<string> NavigateCommand { get; set; }
 
 
         public ProjectTabViewModel(IRegionManager regionManager)
         {
             RegionManager = regionManager;
+
+            // 页面导航
             NavigateCommand = new DelegateCommand<string>(Navigate);
+            GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
         }
 
         private void Navigate(string navigatePath)

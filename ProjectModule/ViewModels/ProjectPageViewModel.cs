@@ -46,6 +46,10 @@ namespace ProjectModule.ViewModels
             set { SetProperty(ref projects, value); }
         }
 
+        /// <summary>
+        /// 页面导航
+        /// </summary>
+        public DelegateCommand<string> NavigateCommand { get; set; }
         public DelegateCommand<string> OpenAddOrEditProjectDialogCommand { get; private set; }
         public DelegateCommand AcceptCommand { get; set; }
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
@@ -54,8 +58,13 @@ namespace ProjectModule.ViewModels
 
         public ProjectPageViewModel()
         {
+            // 页面导航
+            NavigateCommand = new DelegateCommand<string>(Navigate);
+            GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
+
             // 加载项目列表
-            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
+            //Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
+            projects = new ObservableCollection<Project>();
 
             // 选中ListView中的一项
             SelectProjectCommand = new DelegateCommand<object>((obj) =>
@@ -100,6 +109,27 @@ namespace ProjectModule.ViewModels
             
         }
 
+        private void Navigate(string navigatePath)
+        {
+            switch (navigatePath)
+            {
+                case "IndexPage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>p.Type!=-1));
+                    break;
+                case "RealEstatePage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
+                    break;
+                case "RegistrationPage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 2));
+                    break;
+                case "SettingPage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => p.Type != -1));
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
         private void AddProject()
         {
