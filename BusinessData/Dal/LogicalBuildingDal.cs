@@ -9,7 +9,7 @@ namespace BusinessData.Dal
     /// <summary>
     /// 逻辑幢数据访问层
     /// </summary>
-    class LogicalBuildingDal : BaseDal<LogicalBuilding>
+    public class LogicalBuildingDal : BaseDal<LogicalBuilding>
     {
     }
 }

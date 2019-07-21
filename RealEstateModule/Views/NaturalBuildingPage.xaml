@@ -53,7 +53,7 @@
         <TextBox Grid.Row="0" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="自然幢唯一码*" >
             <TextBox.Text>
-                <Binding Path="BSM" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.BSM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -64,7 +64,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" 
                  materialDesign:HintAssist.Hint="要素代码*">
             <TextBox.Text>
-                <Binding Path="YSDM" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.YSDM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -75,7 +75,7 @@
         <TextBox Grid.Row="0" Grid.Column="2" 
                  materialDesign:HintAssist.Hint="不动产单元号*" >
             <TextBox.Text>
-                <Binding Path="BDCDYH" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -86,7 +86,7 @@
         <TextBox Grid.Row="1" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="宗地代码*">
             <TextBox.Text>
-                <Binding Path="ZDDM" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZDDM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -97,7 +97,7 @@
         <TextBox Grid.Row="1" Grid.Column="1" 
                  materialDesign:HintAssist.Hint="自然幢号*">
             <TextBox.Text>
-                <Binding Path="ZRZH" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZRZH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -112,7 +112,7 @@
         <TextBox Grid.Row="2" Grid.Column="1" 
                  materialDesign:HintAssist.Hint="建筑物高度">
             <TextBox.Text>
-                <Binding Path="JZWGD" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.JZWGD" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
@@ -120,13 +120,13 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker Grid.Row="2" Grid.Column="2" Text="{Binding NaturalBuilding.JGRQ}"
+        <DatePicker Grid.Row="2" Grid.Column="2" SelectedDate="{Binding NaturalBuilding.JGRQ}"
                     materialDesign:HintAssist.Hint="竣工日期"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
         <TextBox Grid.Row="3" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="幢用地面积*">
             <TextBox.Text>
-                <Binding Path="ZYDMJ" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZYDMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -137,7 +137,7 @@
         <TextBox Grid.Row="3" Grid.Column="1"
                  materialDesign:HintAssist.Hint="幢占地面积*">
             <TextBox.Text>
-                <Binding Path="ZZDMJ" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZZDMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -148,7 +148,7 @@
         <TextBox Grid.Row="3" Grid.Column="2"
                  materialDesign:HintAssist.Hint="实测建筑面积">
             <TextBox.Text>
-                <Binding Path="SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
@@ -159,7 +159,7 @@
         <TextBox Grid.Row="4" Grid.Column="0"
                  materialDesign:HintAssist.Hint="预测建筑面积">
             <TextBox.Text>
-                <Binding Path="YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
@@ -170,7 +170,7 @@
         <TextBox Grid.Row="4" Grid.Column="1"
                  materialDesign:HintAssist.Hint="地上层数*">
             <TextBox.Text>
-                <Binding Path="DSCS" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.DSCS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -181,7 +181,7 @@
         <TextBox Grid.Row="4" Grid.Column="2"
                  materialDesign:HintAssist.Hint="总层数*">
             <TextBox.Text>
-                <Binding Path="ZCS" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZCS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -192,7 +192,7 @@
         <TextBox Grid.Row="5" Grid.Column="0"
                  materialDesign:HintAssist.Hint="地下层数*">
             <TextBox.Text>
-                <Binding Path="DXCS" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.DXCS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
@@ -213,7 +213,7 @@
         <TextBox Grid.Row="6" Grid.Column="2"
                  materialDesign:HintAssist.Hint="总套数*">
             <TextBox.Text>
-                <Binding Path="ZTS" UpdateSourceTrigger="PropertyChanged" 
+                <Binding Path="NaturalBuilding.ZTS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />

@@ -63,7 +63,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\FloorPageViewModel.cs" />
+    <Compile Include="ViewModels\HouseholdPageViewModel.cs" />
+    <Compile Include="ViewModels\LogicalBuildingPageViewModel.cs" />
     <Compile Include="ViewModels\NaturalBuildingPageViewModel.cs" />
+    <Compile Include="ViewModels\ObligeePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstatePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
     <Compile Include="Views\FloorPage.xaml.cs">

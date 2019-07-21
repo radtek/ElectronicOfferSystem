@@ -17,16 +17,6 @@ namespace BusinessData
     /// </summary>
     public partial class Project
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
-        {
-            this.NaturalBuildings = new HashSet<NaturalBuilding>();
-            this.LogicalBuildings = new HashSet<LogicalBuilding>();
-            this.Floors = new HashSet<Floor>();
-            this.Households = new HashSet<Household>();
-            this.Obligees = new HashSet<Obligee>();
-        }
-    
         /// <summary>
         /// ID
         /// </summary>
@@ -42,11 +32,11 @@ namespace BusinessData
         /// <summary>
         /// 项目类型
         /// </summary>
-        public int Type { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// 项目状态
         /// </summary>
-        public int State { get; set; }
+        public string State { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
@@ -55,31 +45,5 @@ namespace BusinessData
         /// 备注
         /// </summary>
         public string Remark { get; set; }
-    
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NaturalBuilding> NaturalBuildings { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Floor> Floors { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Household> Households { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Obligee> Obligees { get; set; }
     }
 }

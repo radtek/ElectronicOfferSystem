@@ -18,6 +18,7 @@ namespace BusinessData
         public ElectronicOfferSystemDBContainer()
             : base("name=ElectronicOfferSystemDBContainer")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

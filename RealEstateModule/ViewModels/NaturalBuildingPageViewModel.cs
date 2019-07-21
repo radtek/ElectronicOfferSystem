@@ -1,7 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using BusinessData.Models;
 using Common;
-using Common.Models;
 using Common.Utils;
 using Common.ValidationRules;
 using Prism.Commands;
@@ -10,18 +10,16 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace RealEstateModule.ViewModels
 {
     class NaturalBuildingPageViewModel : BindableBase, INavigationAware
     {
+        #region Properties
+        /// <summary>
+        /// 项目
+        /// </summary>
         public Project Project { get; set; }
 
         /// <summary>
@@ -44,197 +42,23 @@ namespace RealEstateModule.ViewModels
             set
             {
                 SetProperty(ref naturalBuilding, value);
+                RaisePropertyChanged(NaturalBuilding?.BSM);
+                RaisePropertyChanged(NaturalBuilding?.YSDM);
+                RaisePropertyChanged(NaturalBuilding?.BDCDYH);
+                RaisePropertyChanged(NaturalBuilding?.ZDDM);
+                RaisePropertyChanged(NaturalBuilding?.ZRZH);
+                RaisePropertyChanged(NaturalBuilding?.ZYDMJ.ToString());
+                RaisePropertyChanged(NaturalBuilding?.ZZDMJ.ToString());
+                RaisePropertyChanged(NaturalBuilding?.DSCS);
+                RaisePropertyChanged(NaturalBuilding?.ZCS);
+                RaisePropertyChanged(NaturalBuilding?.DXCS);
+                RaisePropertyChanged(NaturalBuilding?.ZTS);
+                RaisePropertyChanged(NaturalBuilding?.JZWGD.ToString());
+                RaisePropertyChanged(NaturalBuilding?.SCJZMJ.ToString());
+                RaisePropertyChanged(NaturalBuilding?.YCJZMJ.ToString());
+                //RaiseCanExecuteChanged();
             }
         }
-
-        #region 需要验证的字段
-        /// <summary>
-        /// 标识码/唯一码
-        /// </summary>
-        public string BSM
-        {
-            get { return NaturalBuilding.BSM; }
-            set
-            {
-                NaturalBuilding.BSM = value;
-                RaisePropertyChanged("BSM");
-                RaiseCanExecuteChanged();
-            }
-
-        }
-        /// <summary>
-        /// 要素代码
-        /// </summary>
-        public string YSDM
-        {
-            get { return NaturalBuilding.YSDM; }
-            set
-            {
-                NaturalBuilding.YSDM = value;
-                RaisePropertyChanged("YSDM");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 不动产单元号
-        /// </summary>
-        public string BDCDYH
-        {
-            get { return NaturalBuilding.BDCDYH; }
-            set
-            {
-                NaturalBuilding.BDCDYH = value;
-                RaisePropertyChanged("BDCDYH");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 宗地代码
-        /// </summary>
-        public string ZDDM
-        {
-            get { return NaturalBuilding.ZDDM; }
-            set
-            {
-                NaturalBuilding.ZDDM = value;
-                RaisePropertyChanged("ZDDM");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 自然幢号
-        /// </summary>
-        public string ZRZH
-        {
-            get { return NaturalBuilding.ZRZH; }
-            set
-            {
-                NaturalBuilding.ZRZH = value;
-                RaisePropertyChanged("ZRZH");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 幢用地面积
-        /// </summary>
-        public double ZYDMJ
-        {
-            get { return NaturalBuilding.ZYDMJ; }
-            set
-            {
-                NaturalBuilding.ZYDMJ = value;
-                RaisePropertyChanged("ZYDMJ");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 幢占地面积
-        /// </summary>
-        public double ZZDMJ
-        {
-            get { return NaturalBuilding.ZZDMJ; }
-            set
-            {
-                NaturalBuilding.ZZDMJ = value;
-                RaisePropertyChanged("ZZDMJ");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 地上层数
-        /// </summary>
-        public int DSCS
-        {
-            get { return NaturalBuilding.DSCS; }
-            set
-            {
-                NaturalBuilding.DSCS = value;
-                RaisePropertyChanged("DSCS");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 总层数
-        /// </summary>
-        public int ZCS
-        {
-            get { return NaturalBuilding.ZCS; }
-            set
-            {
-                NaturalBuilding.ZCS = value;
-                RaisePropertyChanged("ZCS");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 地下层数
-        /// </summary>
-        public int DXCS
-        {
-            get { return NaturalBuilding.DXCS; }
-            set
-            {
-                NaturalBuilding.DXCS = value;
-                RaisePropertyChanged("DXCS");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 总套数
-        /// </summary>
-        public int ZTS
-        {
-            get { return NaturalBuilding.ZTS; }
-            set
-            {
-                NaturalBuilding.ZTS = value;
-                RaisePropertyChanged("ZTS");
-                RaiseCanExecuteChanged();
-            }
-        }
-
-        /// <summary>
-        /// 建筑物高度
-        /// </summary>
-        public double? JZWGD
-        {
-            get { return NaturalBuilding.JZWGD; }
-            set
-            {
-                NaturalBuilding.JZWGD = value;
-                RaisePropertyChanged("JZWGD");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 实测建筑面积
-        /// </summary>
-        public double? SCJZMJ
-        {
-            get { return NaturalBuilding.SCJZMJ; }
-            set
-            {
-                NaturalBuilding.SCJZMJ = value;
-                RaisePropertyChanged("SCJZMJ");
-                RaiseCanExecuteChanged();
-            }
-        }
-        /// <summary>
-        /// 预测建筑面积
-        /// </summary>
-        public double? YCJZMJ
-        {
-            get { return NaturalBuilding.YCJZMJ; }
-            set
-            {
-                NaturalBuilding.YCJZMJ = value;
-                RaisePropertyChanged("YCJZMJ");
-                RaiseCanExecuteChanged();
-            }
-        }
-
-        #endregion
-
 
         #region 字典
         /// <summary>
@@ -273,15 +97,13 @@ namespace RealEstateModule.ViewModels
         #endregion 
 
         NaturalBuildingDal NaturalBuildingDal = new NaturalBuildingDal();
+        #endregion
 
-
+        #region ctor
         public NaturalBuildingPageViewModel()
-        {
-            
-
+        {         
             // 初始化下拉框
             InitialComboBoxList();
-
             // 新增或修改自然幢信息
             AddOrEditNaturalBuildingCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
@@ -295,16 +117,13 @@ namespace RealEstateModule.ViewModels
                     default:
                         break;
                 }
-            },canExecute);
-
-            // 初始化自然幢（必须放在新增命令之下）
-            NaturalBuilding = new NaturalBuilding();
+            });
 
             // 选中自然幢列表中的一项
             SelectBusinessCommand = new DelegateCommand<object>(SelectBusiness);
             GlobalCommands.SelectBusinessCommand.RegisterCommand(SelectBusinessCommand);
         }
-
+        #endregion
 
 
         /// <summary>
@@ -321,10 +140,9 @@ namespace RealEstateModule.ViewModels
             }
 
             // 初始自然幢数据
-            //InitialNaturalBuilding();
-            
+            InitialNaturalBuilding();          
             // 按钮为新增状态
-            ButtonContent = "确认新增";
+            ButtonContent = "确认新增";   
         }
 
 
@@ -355,21 +173,9 @@ namespace RealEstateModule.ViewModels
         {
             // 加载自然幢数据
             ListView listView = obj as ListView;
-            Business<NaturalBuilding> business = new Business<NaturalBuilding>();
-            business = listView.SelectedItem as Business<NaturalBuilding>;
-            var item = listView.SelectedItem;
-            if (item == null) return;
-            Type type = item.GetType();
-            foreach (PropertyInfo pi in type.GetProperties())
-            {
-                var name = pi.Name;
-                var value = pi.GetValue(item, null);
-                var t = value?.GetType() ?? typeof(object);
-                if (value.GetType() == typeof(NaturalBuilding))
-                {
-                    NaturalBuilding = value as NaturalBuilding;
-                }
-            }
+            Business business = new Business();
+            business = listView.SelectedItem as Business;
+            NaturalBuilding = business?.NaturalBuilding;
 
             // 按钮为修改状态
             ButtonContent = "确认修改";
@@ -406,10 +212,7 @@ namespace RealEstateModule.ViewModels
         private void InitialNaturalBuilding()
         {
             NaturalBuilding = new NaturalBuilding();
-            // 默认房屋结构为"钢结构"
-            //NaturalBuilding.FWJG = "1";
-            // 默认状态为"有效"
-            //NaturalBuilding.ZT = "1";
+            
         }
 
         /// <summary>
@@ -423,6 +226,7 @@ namespace RealEstateModule.ViewModels
 
             dic = DictionaryUtil.GetDictionaryByName("不动产单元状态");
             ZTList = dic;
+            
         }
 
         /// <summary>
@@ -436,34 +240,33 @@ namespace RealEstateModule.ViewModels
             bool isValid = true;
             // 非空验证
             NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
-            isValid &= notEmptyValidationRule.Validate(BSM, new CultureInfo("")).IsValid;
-            isValid &= notEmptyValidationRule.Validate(YSDM, new CultureInfo("")).IsValid;
-            isValid &= notEmptyValidationRule.Validate(BDCDYH, new CultureInfo("")).IsValid;
-            isValid &= notEmptyValidationRule.Validate(ZDDM, new CultureInfo("")).IsValid;
-            isValid &= notEmptyValidationRule.Validate(ZRZH, new CultureInfo("")).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.BSM, new CultureInfo("")).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.YSDM, new CultureInfo("")).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.BDCDYH, new CultureInfo("")).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.ZDDM, new CultureInfo("")).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.ZRZH, new CultureInfo("")).IsValid;
             // 数字和非空验证
             NumbericAndNotEmptyValidationRule numbericAndNotEmptyValidationRule = new NumbericAndNotEmptyValidationRule();
-            isValid &= numbericAndNotEmptyValidationRule.Validate(ZYDMJ, new CultureInfo("")).IsValid;
-            isValid &= numbericAndNotEmptyValidationRule.Validate(ZZDMJ, new CultureInfo("")).IsValid;
+            isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.ZYDMJ, new CultureInfo("")).IsValid;
+            isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.ZZDMJ, new CultureInfo("")).IsValid;
             // 整数和非空验证
             IntegerAndNotEmptyValidationRule integerAndNotEmptyValidationRule = new IntegerAndNotEmptyValidationRule();
-            isValid &= integerAndNotEmptyValidationRule.Validate(DSCS, new CultureInfo("")).IsValid;
-            isValid &= integerAndNotEmptyValidationRule.Validate(DXCS, new CultureInfo("")).IsValid;
-            isValid &= integerAndNotEmptyValidationRule.Validate(ZCS, new CultureInfo("")).IsValid;
-            isValid &= integerAndNotEmptyValidationRule.Validate(ZTS, new CultureInfo("")).IsValid;
+            isValid &= integerAndNotEmptyValidationRule.Validate(NaturalBuilding.DSCS, new CultureInfo("")).IsValid;
+            isValid &= integerAndNotEmptyValidationRule.Validate(NaturalBuilding.DXCS, new CultureInfo("")).IsValid;
+            isValid &= integerAndNotEmptyValidationRule.Validate(NaturalBuilding.ZCS, new CultureInfo("")).IsValid;
+            isValid &= integerAndNotEmptyValidationRule.Validate(NaturalBuilding.ZTS, new CultureInfo("")).IsValid;
             // 数字验证
             NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
-            isValid &= numbericValidationRule.Validate(JZWGD, new CultureInfo("")).IsValid;
-            isValid &= numbericValidationRule.Validate(SCJZMJ, new CultureInfo("")).IsValid;
-            isValid &= numbericValidationRule.Validate(YCJZMJ, new CultureInfo("")).IsValid;
+            isValid &= numbericValidationRule.Validate(NaturalBuilding.JZWGD, new CultureInfo("")).IsValid;
+            isValid &= numbericValidationRule.Validate(NaturalBuilding.SCJZMJ, new CultureInfo("")).IsValid;
+            isValid &= numbericValidationRule.Validate(NaturalBuilding.YCJZMJ, new CultureInfo("")).IsValid;
 
             return isValid;
         }
 
         private void RaiseCanExecuteChanged()
         {
-            this.AddOrEditNaturalBuildingCommand.RaiseCanExecuteChanged();
-           
+            this.AddOrEditNaturalBuildingCommand.RaiseCanExecuteChanged();           
         }
 
     }

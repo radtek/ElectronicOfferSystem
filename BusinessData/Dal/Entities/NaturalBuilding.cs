@@ -17,14 +17,6 @@ namespace BusinessData
     /// </summary>
     public partial class NaturalBuilding
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NaturalBuilding()
-        {
-            this.LogicalBuildings = new HashSet<LogicalBuilding>();
-            this.Floors = new HashSet<Floor>();
-            this.Households = new HashSet<Household>();
-        }
-    
         /// <summary>
         /// ID
         /// </summary>
@@ -88,15 +80,15 @@ namespace BusinessData
         /// <summary>
         /// 总层数
         /// </summary>
-        public int ZCS { get; set; }
+        public string ZCS { get; set; }
         /// <summary>
         /// 地上层数
         /// </summary>
-        public int DSCS { get; set; }
+        public string DSCS { get; set; }
         /// <summary>
         /// 地下层数
         /// </summary>
-        public int DXCS { get; set; }
+        public string DXCS { get; set; }
         /// <summary>
         /// 地下深度
         /// </summary>
@@ -112,7 +104,7 @@ namespace BusinessData
         /// <summary>
         /// 总套数
         /// </summary>
-        public int ZTS { get; set; }
+        public string ZTS { get; set; }
         /// <summary>
         /// 建筑物基本用途
         /// </summary>
@@ -129,22 +121,5 @@ namespace BusinessData
         /// 更新时间
         /// </summary>
         public System.DateTime UpdateTime { get; set; }
-    
-        public virtual Project Project { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LogicalBuilding> LogicalBuildings { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Floor> Floors { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Household> Households { get; set; }
     }
 }

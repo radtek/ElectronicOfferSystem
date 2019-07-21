@@ -88,15 +88,15 @@ namespace BusinessData
         /// <summary>
         /// 总层数
         /// </summary>
-        public Nullable<int> ZCS { get; set; }
+        public string ZCS { get; set; }
         /// <summary>
         /// 地上层数
         /// </summary>
-        public Nullable<int> DSCS { get; set; }
+        public string DSCS { get; set; }
         /// <summary>
         /// 地下层数
         /// </summary>
-        public Nullable<int> DXCS { get; set; }
+        public string DXCS { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
@@ -105,8 +105,5 @@ namespace BusinessData
         /// 更新时间
         /// </summary>
         public System.DateTime UpdateTime { get; set; }
-    
-        public virtual Project Project { get; set; }
-        public virtual NaturalBuilding NaturalBuilding { get; set; }
     }
 }

@@ -20,19 +20,19 @@ namespace BusinessData.Dal
         {
             if (project == null)
                 return null;
-            if (project.Type != 1)
-                return project;
-            NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
-            LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
-            FloorDal floorDal = new FloorDal();
-            HouseholdDal householdDal = new HouseholdDal();
-            ObligeeDal obligeeDal = new ObligeeDal();
-            project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectID == project.ID);
-            project.LogicalBuildings = logicalBuildingDal.GetListBy((l) => l.ProjectID == project.ID);
-            project.Floors = floorDal.GetListBy((f) => f.ProjectID == project.ID);
-            project.Households = householdDal.GetListBy((h) => h.ProjectID == project.ID);
-            project.Obligees = obligeeDal.GetListBy((o) => o.ProjectID == project.ID);
-
+            if ("1".Equals(project.Type))
+            {
+                NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
+                LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
+                FloorDal floorDal = new FloorDal();
+                HouseholdDal householdDal = new HouseholdDal();
+                ObligeeDal obligeeDal = new ObligeeDal();
+                project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectID == project.ID);
+                project.LogicalBuildings = logicalBuildingDal.GetListBy((l) => l.ProjectID == project.ID);
+                project.Floors = floorDal.GetListBy((f) => f.ProjectID == project.ID);
+                project.Households = householdDal.GetListBy((h) => h.ProjectID == project.ID);
+                project.Obligees = obligeeDal.GetListBy((o) => o.ProjectID == project.ID);
+            }
             return project;
         }
     }

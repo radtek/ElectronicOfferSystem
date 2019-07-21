@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:RealEstateModule.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -22,12 +23,6 @@
                 <Setter Property="Margin" Value="5 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
-            </Style>
-            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
-                <Setter Property="Margin" Value="0 8 0 8" />
-            </Style>
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
-                <Setter Property="Margin" Value="0 8 0 8" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -49,33 +44,134 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Floor.CH}"
-                 materialDesign:HintAssist.Hint="层号" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Floor.ZRZH}"
-                 materialDesign:HintAssist.Hint="自然幢号" />
-        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Floor.YSDM}"
-                 materialDesign:HintAssist.Hint="要素代码" />
+        <TextBox Grid.Row="0" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="层号*">
+            <TextBox.Text>
+                <Binding Path="Floor.CH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="自然幢号*">
+            <TextBox.Text>
+                <Binding Path="Floor.ZRZH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="要素代码*" >
+            <TextBox.Text>
+                <Binding Path="Floor.YSDM" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Floor.SJC}"
                  materialDesign:HintAssist.Hint="实际层" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Floor.MYC}"
                  materialDesign:HintAssist.Hint="名义层" />
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Floor.CJZMJ}"
-                 materialDesign:HintAssist.Hint="层建筑面积" />
-        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Floor.CTNJZMJ}"
-                 materialDesign:HintAssist.Hint="层套内建筑面积" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Floor.CYTMJ}"
-                 materialDesign:HintAssist.Hint="层阳台面积" />
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Floor.CGYJZMJ}"
-                 materialDesign:HintAssist.Hint="层共有建筑面积" />
-        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Floor.CFTJZMJ}"
-                 materialDesign:HintAssist.Hint="层分摊建筑面积" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Floor.CBQMJ}"
-                 materialDesign:HintAssist.Hint="层半墙面积" />
-        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Floor.CG}"
-                 materialDesign:HintAssist.Hint="层高" />
-        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Floor.SPTYMJ}"
-                 materialDesign:HintAssist.Hint="水平投影面积" />
-        
+        <TextBox Grid.Row="1" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="层建筑面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="层套内建筑面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="层阳台面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CYTMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="2" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="层共有建筑面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CGYJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="3" Grid.Column="0" 
+                 materialDesign:HintAssist.Hint="层分摊建筑面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="层半墙面积">
+            <TextBox.Text>
+                <Binding Path="Floor.CBQMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="层高">
+            <TextBox.Text>
+                <Binding Path="Floor.CG" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="4" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="水平投影面积">
+            <TextBox.Text>
+                <Binding Path="Floor.SPTYMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Button Grid.Row="5" Grid.Column="1" 
+                Command="{Binding AddOrEditFloorCommand}" 
+                Content="{Binding ButtonContent}" />
 
     </Grid>
 </UserControl>

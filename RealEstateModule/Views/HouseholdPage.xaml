@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:RealEstateModule.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -23,11 +24,11 @@
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
-            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
-                <Setter Property="Margin" Value="0 8 0 8" />
-            </Style>
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
-                <Setter Property="Margin" Value="0 8 0 8" />
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="IsEditable" Value="False"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -58,19 +59,65 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Household.HBSM}"
-                 materialDesign:HintAssist.Hint="户唯一码" />
+        <TextBox Grid.Row="0" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="户唯一码*">
+            <TextBox.Text>
+                <Binding Path="Household.HBSM" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Household.YXTBS}"
                  materialDesign:HintAssist.Hint="原系统标识" />
-        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Household.BDCDYH}"
-                 materialDesign:HintAssist.Hint="不动产单元号" />
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Household.FWBM}"
-                 materialDesign:HintAssist.Hint="房屋编码" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Household.YSDM}"
-                 materialDesign:HintAssist.Hint="要素代码" />
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Household.ZRZH}"
-                 materialDesign:HintAssist.Hint="自然幢号" />
+        <TextBox Grid.Row="0" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="不动产单元号*">
+            <TextBox.Text>
+                <Binding Path="Household.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="房屋编码*">
+            <TextBox.Text>
+                <Binding Path="Household.FWBM" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="要素代码*">
+            <TextBox.Text>
+                <Binding Path="Household.YSDM" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="自然幢号*">
+            <TextBox.Text>
+                <Binding Path="Household.ZRZH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Household.LJZH}"
                  materialDesign:HintAssist.Hint="逻辑幢号" />
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Household.DYH}"
@@ -79,74 +126,257 @@
                  materialDesign:HintAssist.Hint="总层数" />
         <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Household.FH}"
                  materialDesign:HintAssist.Hint="房号" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Household.ZL}"
-                 materialDesign:HintAssist.Hint="坐落" />
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="坐落*">
+            <TextBox.Text>
+                <Binding Path="Household.ZL" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Household.CH}"
                  materialDesign:HintAssist.Hint="层号" />
-        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Household.SZC}"
-                 materialDesign:HintAssist.Hint="所在层" />
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Household.QSC}"
-                 materialDesign:HintAssist.Hint="起始层" />
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Household.MJDW}"
-                 materialDesign:HintAssist.Hint="面积单位" />
+        <TextBox Grid.Row="4" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="所在层*">
+            <TextBox.Text>
+                <Binding Path="Household.SZC" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="起始层*">
+            <TextBox.Text>
+                <Binding Path="Household.QSC" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding MJDWList}" 
+                  materialDesign:HintAssist.Hint="面积单位*"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Household.MJDW,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Household.HH}"
                  materialDesign:HintAssist.Hint="户号" />
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Household.SHBW}"
-                 materialDesign:HintAssist.Hint="室号部位" />
-        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Household.ZZC}"
-                 materialDesign:HintAssist.Hint="终止层" />
-        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Household.HXJG}"
-                 materialDesign:HintAssist.Hint="户型结构" />
+        <TextBox Grid.Row="5" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="室号部位*">
+            <TextBox.Text>
+                <Binding Path="Household.SHBW" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="5" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="终止层*">
+            <TextBox.Text>
+                <Binding Path="Household.ZZC" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox Grid.Row="6" Grid.Column="0" ItemsSource="{Binding HXJGList}" 
+                  materialDesign:HintAssist.Hint="户型结构"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.HXJG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Household.GHYT}"
                  materialDesign:HintAssist.Hint="规划用途" />
-        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Household.HX}"
-                 materialDesign:HintAssist.Hint="户型" />
-        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Household.FWYT1}"
-                 materialDesign:HintAssist.Hint="房屋用途1" />
-        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Household.FWYT2}"
-                 materialDesign:HintAssist.Hint="房屋用途2" />
-        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Household.FWYT3}"
-                 materialDesign:HintAssist.Hint="房屋用途3" />
-        <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Household.YCTNJZMJ}"
-                 materialDesign:HintAssist.Hint="预测套内建筑面积" />
-        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Household.YCFTJZMJ}"
-                 materialDesign:HintAssist.Hint="预测分摊建筑面积" />
-        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Household.YCJZMJ}"
-                 materialDesign:HintAssist.Hint="预测建筑面积" />
-        <TextBox Grid.Row="9" Grid.Column="0" Text="{Binding Household.YCQTJZMJ}"
-                 materialDesign:HintAssist.Hint="预测其他建筑面积" />
+        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding HXList}" 
+                  materialDesign:HintAssist.Hint="户型"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.HX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding FWYT1List}" 
+                  materialDesign:HintAssist.Hint="房屋用途1"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.FWYT1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding FWYT2List}" 
+                  materialDesign:HintAssist.Hint="房屋用途2"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.FWYT2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Row="7" Grid.Column="2" ItemsSource="{Binding FWYT3List}" 
+                  materialDesign:HintAssist.Hint="房屋用途3"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Household.FWYT3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="8" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="预测套内建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.YCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="预测分摊建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.YCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="8" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="预测建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="9" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="预测其他建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.YCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Household.YCFTXS}"
                  materialDesign:HintAssist.Hint="预测分摊系数" />
-        <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding Household.YCDXBFJZMJ}"
-                 materialDesign:HintAssist.Hint="预测地下部分建筑面积" />
-        <TextBox Grid.Row="10" Grid.Column="0" Text="{Binding Household.SCTNJZMJ}"
-                 materialDesign:HintAssist.Hint="实测套内建筑面积" />
-        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Household.SCFTJZMJ}"
-                 materialDesign:HintAssist.Hint="实测分摊建筑面积" />
-        <TextBox Grid.Row="10" Grid.Column="2" Text="{Binding Household.SCJZMJ}"
-                 materialDesign:HintAssist.Hint="实测建筑面积" />
-        <TextBox Grid.Row="11" Grid.Column="0" Text="{Binding Household.SCQTJZMJ}"
-                 materialDesign:HintAssist.Hint="实测其他建筑面积" />
+        <TextBox Grid.Row="9" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="预测地下部分建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.YCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="10" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="实测套内建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.SCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="10" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="实测分摊建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.SCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="10" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="实测建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="11" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="实测其他建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.SCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Household.SCFTXS}"
                  materialDesign:HintAssist.Hint="实测分摊系数" />
-        <TextBox Grid.Row="11" Grid.Column="2" Text="{Binding Household.SCDXBFJZMJ}"
-                 materialDesign:HintAssist.Hint="实测地下部分建筑面积" />
-        <TextBox Grid.Row="12" Grid.Column="0" Text="{Binding Household.FTTDMJ}"
-                 materialDesign:HintAssist.Hint="分摊土地面积" />
-        <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Household.DYTDMJ}"
-                 materialDesign:HintAssist.Hint="独用土地面积" />
-        <TextBox Grid.Row="12" Grid.Column="2" Text="{Binding Household.GYTDMJ}"
-                 materialDesign:HintAssist.Hint="共有土地面积" />
-        <TextBox Grid.Row="13" Grid.Column="0" Text="{Binding Household.FWJG}"
-                 materialDesign:HintAssist.Hint="房屋结构" />
-        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding Household.FWXZ}"
-                 materialDesign:HintAssist.Hint="房屋性质" />
-        <TextBox Grid.Row="13" Grid.Column="2" Text="{Binding Household.FWLX}"
-                 materialDesign:HintAssist.Hint="房屋类型" />
-        <TextBox Grid.Row="14" Grid.Column="0" Text="{Binding Household.JGSJ}"
-                 materialDesign:HintAssist.Hint="竣工时间" />
-        <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Household.FWCB}"
-                 materialDesign:HintAssist.Hint="房屋产别" />
+        <TextBox Grid.Row="11" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="实测地下部分建筑面积">
+            <TextBox.Text>
+                <Binding Path="Household.SCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="12" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="分摊土地面积">
+            <TextBox.Text>
+                <Binding Path="Household.FTTDMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="12" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="独用土地面积">
+            <TextBox.Text>
+                <Binding Path="Household.DYTDMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="12" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="共有土地面积">
+            <TextBox.Text>
+                <Binding Path="Household.GYTDMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <ComboBox Grid.Row="13" Grid.Column="0" ItemsSource="{Binding FWJGList}" 
+                  materialDesign:HintAssist.Hint="房屋结构"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.FWJG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Row="13" Grid.Column="1" ItemsSource="{Binding FWXZList}" 
+                  materialDesign:HintAssist.Hint="房屋性质"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.FWXZ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox Grid.Row="13" Grid.Column="2" ItemsSource="{Binding FWLXList}" 
+                  materialDesign:HintAssist.Hint="房屋类型"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Household.FWLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <DatePicker Grid.Row="14" Grid.Column="0" SelectedDate="{Binding Household.JGSJ}"
+                    materialDesign:HintAssist.Hint="竣工时间"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+        <ComboBox Grid.Row="14" Grid.Column="1" ItemsSource="{Binding FWCBList}" 
+                  materialDesign:HintAssist.Hint="房屋产别"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Household.FWCB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="14" Grid.Column="2" Text="{Binding Household.FDCJYJG}"
                  materialDesign:HintAssist.Hint="房地产交易价格" />
         <TextBox Grid.Row="15" Grid.Column="0" Text="{Binding Household.QTGSD}"
@@ -163,9 +393,12 @@
                  materialDesign:HintAssist.Hint="土地使用人" />
         <TextBox Grid.Row="17" Grid.Column="0" Text="{Binding Household.FCFHT}"
                  materialDesign:HintAssist.Hint="房产分户图" />
-        <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding Household.ZT}"
-                 materialDesign:HintAssist.Hint="状态" />
-
-
+        <ComboBox Grid.Row="17" Grid.Column="1" ItemsSource="{Binding ZTList}" 
+                  materialDesign:HintAssist.Hint="状态"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.ZT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="18" Grid.Column="1" 
+                Command="{Binding AddOrEditHouseholdCommand}" 
+                Content="{Binding ButtonContent}" />
     </Grid>
 </UserControl>

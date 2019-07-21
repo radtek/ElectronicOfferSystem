@@ -137,8 +137,5 @@ namespace BusinessData
         /// 更新时间
         /// </summary>
         public System.DateTime UpdateTime { get; set; }
-    
-        public virtual Project Project { get; set; }
-        public virtual Household Household { get; set; }
     }
 }

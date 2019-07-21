@@ -17,12 +17,6 @@ namespace BusinessData
     /// </summary>
     public partial class Household
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Household()
-        {
-            this.Obligees = new HashSet<Obligee>();
-        }
-    
         /// <summary>
         /// ID
         /// </summary>
@@ -66,7 +60,7 @@ namespace BusinessData
         /// <summary>
         /// 总层数
         /// </summary>
-        public Nullable<int> ZCS { get; set; }
+        public string ZCS { get; set; }
         /// <summary>
         /// 层号
         /// </summary>
@@ -206,7 +200,7 @@ namespace BusinessData
         /// <summary>
         /// 房地产交易价格
         /// </summary>
-        public Nullable<double> FDCJYJG { get; set; }
+        public string FDCJYJG { get; set; }
         /// <summary>
         /// 竣工时间
         /// </summary>
@@ -247,13 +241,5 @@ namespace BusinessData
         /// 更新时间
         /// </summary>
         public System.DateTime UpdateTime { get; set; }
-    
-        public virtual Project Project { get; set; }
-        public virtual NaturalBuilding NaturalBuilding { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Obligee> Obligees { get; set; }
     }
 }

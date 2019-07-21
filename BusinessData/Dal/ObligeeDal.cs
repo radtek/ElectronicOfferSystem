@@ -9,7 +9,7 @@ namespace BusinessData.Dal
     /// <summary>
     /// 权利人信息数据访问层
     /// </summary>
-    class ObligeeDal : BaseDal<Obligee>
+    public class ObligeeDal : BaseDal<Obligee>
     {
     }
 }

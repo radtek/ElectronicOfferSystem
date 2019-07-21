@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/20/2019 20:07:51
+-- Date Created: 07/21/2019 16:13:59
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -12,41 +12,23 @@
 -- NOTE: if the constraint does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
-    ALTER TABLE [NaturalBuildingSet] DROP CONSTRAINT [FK_ProjectNaturalBuilding];
-GO
-    ALTER TABLE [LogicalBuildingSet] DROP CONSTRAINT [FK_ProjectLogicalBuilding];
-GO
-    ALTER TABLE [FloorSet] DROP CONSTRAINT [FK_ProjectFloor];
-GO
-    ALTER TABLE [HouseholdSet] DROP CONSTRAINT [FK_ProjectHousehold];
-GO
-    ALTER TABLE [ObligeeSet] DROP CONSTRAINT [FK_ProjectObligee];
-GO
-    ALTER TABLE [LogicalBuildingSet] DROP CONSTRAINT [FK_NaturalBuildingLogicalBuilding];
-GO
-    ALTER TABLE [FloorSet] DROP CONSTRAINT [FK_NaturalBuildingFloor];
-GO
-    ALTER TABLE [HouseholdSet] DROP CONSTRAINT [FK_NaturalBuildingHousehold];
-GO
-    ALTER TABLE [ObligeeSet] DROP CONSTRAINT [FK_HouseholdObligee];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- NOTE: if the table does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
-    DROP TABLE [ProjectSet];
+    DROP TABLE [Project];
 GO
-    DROP TABLE [NaturalBuildingSet];
+    DROP TABLE [NaturalBuilding];
 GO
-    DROP TABLE [LogicalBuildingSet];
+    DROP TABLE [LogicalBuilding];
 GO
-    DROP TABLE [FloorSet];
+    DROP TABLE [Floor];
 GO
-    DROP TABLE [ObligeeSet];
+    DROP TABLE [Obligee];
 GO
-    DROP TABLE [HouseholdSet];
+    DROP TABLE [Household];
 GO
     DROP TABLE [BDCS_CONST];
 GO
@@ -61,9 +43,9 @@ GO
 CREATE TABLE [Project] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectName] nvarchar(60)  NOT NULL,
-    [DeveloperName] nvarchar(60)  NOT NULL,
-    [Type] int  NOT NULL,
-    [State] int  NOT NULL,
+    [DeveloperName] nvarchar(60)  NULL,
+    [Type] nvarchar(60)  NOT NULL,
+    [State] nvarchar(4000)  NULL,
     [UptateTime] datetime  NOT NULL,
     [Remark] nvarchar(400)  NULL
 );
@@ -86,18 +68,17 @@ CREATE TABLE [NaturalBuilding] (
     [ZYDMJ] float  NOT NULL,
     [YCJZMJ] float  NULL,
     [SCJZMJ] float  NULL,
-    [ZCS] int  NOT NULL,
-    [DSCS] int  NOT NULL,
-    [DXCS] int  NOT NULL,
+    [ZCS] nvarchar(60)  NOT NULL,
+    [DSCS] nvarchar(60)  NOT NULL,
+    [DXCS] nvarchar(60)  NOT NULL,
     [DXSD] float  NULL,
     [GHYT] nvarchar(60)  NULL,
     [FWJG] nvarchar(60)  NOT NULL,
-    [ZTS] int  NOT NULL,
+    [ZTS] nvarchar(4000)  NOT NULL,
     [JZWJBYT] nvarchar(60)  NULL,
     [ZT] nvarchar(60)  NOT NULL,
     [BZ] nvarchar(200)  NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [Project_ID] uniqueidentifier  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 
@@ -120,13 +101,11 @@ CREATE TABLE [LogicalBuilding] (
     [FWJG2] nvarchar(60)  NULL,
     [FWJG3] nvarchar(60)  NULL,
     [JZWZT] nvarchar(60)  NULL,
-    [ZCS] int  NULL,
-    [DSCS] int  NULL,
-    [DXCS] int  NULL,
+    [ZCS] nvarchar(60)  NULL,
+    [DSCS] nvarchar(60)  NULL,
+    [DXCS] nvarchar(60)  NULL,
     [BZ] nvarchar(200)  NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [Project_ID] uniqueidentifier  NOT NULL,
-    [NaturalBuilding_ID] uniqueidentifier  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 
@@ -144,12 +123,10 @@ CREATE TABLE [Floor] (
     [CYTMJ] float  NULL,
     [CGYJZMJ] float  NULL,
     [CFTJZMJ] float  NULL,
-    [CBQMJ] int  NULL,
+    [CBQMJ] float  NULL,
     [CG] float  NULL,
     [SPTYMJ] float  NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [Project_ID] uniqueidentifier  NOT NULL,
-    [NaturalBuilding_ID] uniqueidentifier  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 
@@ -184,9 +161,7 @@ CREATE TABLE [Obligee] (
     [DLJGMC] nvarchar(4000)  NULL,
     [DZYJ] nvarchar(4000)  NULL,
     [BZ] nvarchar(4000)  NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [Project_ID] uniqueidentifier  NOT NULL,
-    [Household_ID] uniqueidentifier  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 
@@ -202,7 +177,7 @@ CREATE TABLE [Household] (
     [ZRZH] nvarchar(60)  NOT NULL,
     [LJZH] nvarchar(60)  NULL,
     [DYH] nvarchar(60)  NULL,
-    [ZCS] int  NULL,
+    [ZCS] nvarchar(60)  NULL,
     [CH] nvarchar(60)  NULL,
     [FH] nvarchar(60)  NULL,
     [ZL] nvarchar(100)  NOT NULL,
@@ -237,7 +212,7 @@ CREATE TABLE [Household] (
     [FWJG] nvarchar(60)  NULL,
     [FWXZ] nvarchar(60)  NULL,
     [FWCB] nvarchar(60)  NULL,
-    [FDCJYJG] float  NULL,
+    [FDCJYJG] nvarchar(60)  NULL,
     [JGSJ] datetime  NULL,
     [CQLY] nvarchar(4000)  NULL,
     [QTGSD] nvarchar(4000)  NULL,
@@ -247,9 +222,7 @@ CREATE TABLE [Household] (
     [TDSYQR] nvarchar(4000)  NULL,
     [FCFHT] nvarchar(4000)  NULL,
     [ZT] nvarchar(60)  NULL,
-    [UpdateTime] datetime  NOT NULL,
-    [Project_ID] uniqueidentifier  NOT NULL,
-    [NaturalBuilding_ID] uniqueidentifier  NOT NULL
+    [UpdateTime] datetime  NOT NULL
 );
 GO
 
@@ -338,141 +311,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [Project_ID] in table 'NaturalBuilding'
-ALTER TABLE [NaturalBuilding]
-ADD CONSTRAINT [FK_ProjectNaturalBuilding]
-    FOREIGN KEY ([Project_ID])
-    REFERENCES [Project]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProjectNaturalBuilding'
-CREATE INDEX [IX_FK_ProjectNaturalBuilding]
-ON [NaturalBuilding]
-    ([Project_ID]);
-GO
-
--- Creating foreign key on [Project_ID] in table 'LogicalBuilding'
-ALTER TABLE [LogicalBuilding]
-ADD CONSTRAINT [FK_ProjectLogicalBuilding]
-    FOREIGN KEY ([Project_ID])
-    REFERENCES [Project]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProjectLogicalBuilding'
-CREATE INDEX [IX_FK_ProjectLogicalBuilding]
-ON [LogicalBuilding]
-    ([Project_ID]);
-GO
-
--- Creating foreign key on [Project_ID] in table 'Floor'
-ALTER TABLE [Floor]
-ADD CONSTRAINT [FK_ProjectFloor]
-    FOREIGN KEY ([Project_ID])
-    REFERENCES [Project]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProjectFloor'
-CREATE INDEX [IX_FK_ProjectFloor]
-ON [Floor]
-    ([Project_ID]);
-GO
-
--- Creating foreign key on [Project_ID] in table 'Household'
-ALTER TABLE [Household]
-ADD CONSTRAINT [FK_ProjectHousehold]
-    FOREIGN KEY ([Project_ID])
-    REFERENCES [Project]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProjectHousehold'
-CREATE INDEX [IX_FK_ProjectHousehold]
-ON [Household]
-    ([Project_ID]);
-GO
-
--- Creating foreign key on [Project_ID] in table 'Obligee'
-ALTER TABLE [Obligee]
-ADD CONSTRAINT [FK_ProjectObligee]
-    FOREIGN KEY ([Project_ID])
-    REFERENCES [Project]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ProjectObligee'
-CREATE INDEX [IX_FK_ProjectObligee]
-ON [Obligee]
-    ([Project_ID]);
-GO
-
--- Creating foreign key on [NaturalBuilding_ID] in table 'LogicalBuilding'
-ALTER TABLE [LogicalBuilding]
-ADD CONSTRAINT [FK_NaturalBuildingLogicalBuilding]
-    FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuilding]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingLogicalBuilding'
-CREATE INDEX [IX_FK_NaturalBuildingLogicalBuilding]
-ON [LogicalBuilding]
-    ([NaturalBuilding_ID]);
-GO
-
--- Creating foreign key on [NaturalBuilding_ID] in table 'Floor'
-ALTER TABLE [Floor]
-ADD CONSTRAINT [FK_NaturalBuildingFloor]
-    FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuilding]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingFloor'
-CREATE INDEX [IX_FK_NaturalBuildingFloor]
-ON [Floor]
-    ([NaturalBuilding_ID]);
-GO
-
--- Creating foreign key on [NaturalBuilding_ID] in table 'Household'
-ALTER TABLE [Household]
-ADD CONSTRAINT [FK_NaturalBuildingHousehold]
-    FOREIGN KEY ([NaturalBuilding_ID])
-    REFERENCES [NaturalBuilding]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_NaturalBuildingHousehold'
-CREATE INDEX [IX_FK_NaturalBuildingHousehold]
-ON [Household]
-    ([NaturalBuilding_ID]);
-GO
-
--- Creating foreign key on [Household_ID] in table 'Obligee'
-ALTER TABLE [Obligee]
-ADD CONSTRAINT [FK_HouseholdObligee]
-    FOREIGN KEY ([Household_ID])
-    REFERENCES [Household]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HouseholdObligee'
-CREATE INDEX [IX_FK_HouseholdObligee]
-ON [Obligee]
-    ([Household_ID]);
-GO
 
 -- --------------------------------------------------
 -- Script has ended

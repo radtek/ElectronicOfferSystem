@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="CommonModule.cs" />
     <Compile Include="GlobalCommands.cs" />
-    <Compile Include="Models\Business.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

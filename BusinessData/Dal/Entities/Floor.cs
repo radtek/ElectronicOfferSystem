@@ -68,7 +68,7 @@ namespace BusinessData
         /// <summary>
         /// 层半墙面积
         /// </summary>
-        public Nullable<int> CBQMJ { get; set; }
+        public Nullable<double> CBQMJ { get; set; }
         /// <summary>
         /// 层高
         /// </summary>
@@ -81,8 +81,5 @@ namespace BusinessData
         /// 更新时间
         /// </summary>
         public System.DateTime UpdateTime { get; set; }
-    
-        public virtual Project Project { get; set; }
-        public virtual NaturalBuilding NaturalBuilding { get; set; }
     }
 }

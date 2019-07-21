@@ -9,7 +9,7 @@ namespace BusinessData.Dal
     /// <summary>
     /// 层信息数据访问层
     /// </summary>
-    class FloorDal : BaseDal<Floor>
+    public class FloorDal : BaseDal<Floor>
     {
     }
 }

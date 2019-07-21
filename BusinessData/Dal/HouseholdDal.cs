@@ -9,7 +9,7 @@ namespace BusinessData.Dal
     /// <summary>
     /// 户信息数据访问层
     /// </summary>
-    class HouseholdDal : BaseDal<Household>
+    public class HouseholdDal : BaseDal<Household>
     {
     }
 }

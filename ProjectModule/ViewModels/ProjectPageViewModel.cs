@@ -114,16 +114,16 @@ namespace ProjectModule.ViewModels
             switch (navigatePath)
             {
                 case "IndexPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>p.Type!=-1));
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>!"-1".Equals(p.Type)));
                     break;
                 case "RealEstatePage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 1));
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
                     break;
                 case "RegistrationPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => p.Type == 2));
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
                     break;
                 case "SettingPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => p.Type != -1));
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type) ));
                     break;
                 default:
                     break;
@@ -136,8 +136,8 @@ namespace ProjectModule.ViewModels
             // 新增项目的初始化
             Project.ID = Guid.NewGuid();
             Project.UptateTime = DateTime.Now;
-            Project.Type = 1;
-            Project.State = 0;
+            Project.Type = "1";
+            Project.State = "0";
 
             projectDal.Add(Project);
             CloseDialogAndRefreshProjectList();
@@ -157,7 +157,7 @@ namespace ProjectModule.ViewModels
         {
             IsAddOrEditProjectDialogOpen = false;
             Project = null;
-            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p)=>p.Type == 1));
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p)=> "1".Equals(p.Type) ));
         }
     }
 }

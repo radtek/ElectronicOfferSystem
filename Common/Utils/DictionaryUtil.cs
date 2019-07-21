@@ -17,9 +17,38 @@ namespace Common.Utils
         /// <returns></returns>
         public static Dictionary<string, string> GetDictionaryByName(string name)
         {
+            if (name == null) return null;
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            // 处理特例
+            if ("房屋用途".Equals(name))
+            {
+                dic.Add("10", "住宅");
+                dic.Add("11", "成套住宅");
+                dic.Add("111", "别墅");
+                dic.Add("112", "高档公寓");
+                return dic;
+            }
+            if ("国家和地区".Equals(name))
+            {
+                dic.Add("142", "中华人民共和国");
+                dic.Add("1421", "香港特别行政区");
+                return dic;
+            }
+            if ("权利类型".Equals(name))
+            {
+                dic.Add("1", "集体土地所有权");
+                dic.Add("2", "国家土地所有权");
+                dic.Add("3", "国有建设用地使用权");
+                dic.Add("4", "国有建设用地使用权 / 房屋（构筑物）所有权");
+                dic.Add("5", "宅基地使用权");
+                dic.Add("6", "宅基地使用权 / 房屋（构筑物）所有权");
+                dic.Add("7", "集体建设用地使用权");
+                dic.Add("8", "集体建设用地使用权 / 房屋（构筑物）所有权");
+                return dic;
+            }
+
             CONSTCLSDal constclsDal = new CONSTCLSDal();
             CONSTDal constDal = new CONSTDal();
-            if (name == null) return null;
             CONSTCLS catalog = new CONSTCLS();
             // 获取目录
             catalog = constclsDal.GetModel(c => c.CONSTCLSNAME == name);
@@ -28,24 +57,16 @@ namespace Common.Utils
             // 获取字典List
             constList = constDal.GetListBy(c => c.CONSTSLSID == catalog.CONSTSLSID);
             if (constList == null) return null;
-            Dictionary<string, string> dic = new Dictionary<string, string>();
             foreach (var item in constList)
             {
                 // 去掉重复键值
                 if (dic.ContainsKey(item.CONSTVALUE)) continue;
                 dic.Add(item.CONSTVALUE, item.CONSTTRANS);
             }
-
+            // 字典排序
+            dic = dic.OrderBy(p => p.Key).ToDictionary(p => p.Key, o => o.Value);
             return dic;
         }
-
-        /// 房屋结构
-        ///"1"="钢结构"
-        ///"2"="钢和钢筋混凝土结构"
-        ///"3"="钢筋混凝土结构"
-        ///"4"="混合结构"
-        ///"5"="砖木结构"
-        ///"6"="其它结构"
 
     }
 }
