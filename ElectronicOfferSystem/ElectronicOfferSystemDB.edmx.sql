@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/21/2019 21:55:41
+-- Date Created: 07/22/2019 17:44:10
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -101,6 +101,9 @@ CREATE TABLE [LogicalBuilding] (
     [FWJG2] nvarchar(60)  NULL,
     [FWJG3] nvarchar(60)  NULL,
     [JZWZT] nvarchar(60)  NULL,
+    [FWYT1] nvarchar(60)  NULL,
+    [FWYT2] nvarchar(60)  NULL,
+    [FWYT3] nvarchar(60)  NULL,
     [ZCS] nvarchar(60)  NULL,
     [DSCS] nvarchar(60)  NULL,
     [DXCS] nvarchar(60)  NULL,

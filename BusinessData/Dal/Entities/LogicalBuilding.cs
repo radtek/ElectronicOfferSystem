@@ -86,6 +86,18 @@ namespace BusinessData
         /// </summary>
         public string JZWZT { get; set; }
         /// <summary>
+        /// 房屋用途1
+        /// </summary>
+        public string FWYT1 { get; set; }
+        /// <summary>
+        /// 房屋用途2
+        /// </summary>
+        public string FWYT2 { get; set; }
+        /// <summary>
+        /// 房屋用途3
+        /// </summary>
+        public string FWYT3 { get; set; }
+        /// <summary>
         /// 总层数
         /// </summary>
         public string ZCS { get; set; }

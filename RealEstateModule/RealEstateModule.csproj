@@ -63,6 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\Dialogs\ImportRealEstateDialogViewModel.cs" />
     <Compile Include="ViewModels\FloorPageViewModel.cs" />
     <Compile Include="ViewModels\HouseholdPageViewModel.cs" />
     <Compile Include="ViewModels\LogicalBuildingPageViewModel.cs" />
@@ -70,6 +71,12 @@
     <Compile Include="ViewModels\ObligeePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstatePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
+    <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
+      <DependentUpon>CustomDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ImportRealEstateDialog.xaml.cs">
+      <DependentUpon>ImportRealEstateDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FloorPage.xaml.cs">
       <DependentUpon>FloorPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +124,14 @@
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Dialogs\CustomDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\ImportRealEstateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FloorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

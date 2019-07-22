@@ -6,163 +6,102 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:views="clr-namespace:RealEstateModule.Views.Dialogs"
              xmlns:local="clr-namespace:RealEstateModule.Views"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ImportRealEstateDialogRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
+                    <views:ImportRealEstateDialog />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <ToolBarTray>
-            <ToolBar
-    Style="{DynamicResource MaterialDesignToolBar}"
-    ClipToBounds="False">
-                <Button ToolTip="Follow me on Twitter">
-                    <materialDesign:PackIcon
-        Kind="TwitterBox" />
+            <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                <Button ToolTip="新增">
+                    <materialDesign:PackIcon Kind="AddBox" />
                 </Button>
-                <Button
-      ToolTip="Save">
-                    <materialDesign:PackIcon
-        Kind="ContentSave" />
+                <Button ToolTip="编辑">
+                    <materialDesign:PackIcon Kind="SquareEditOutline" />
+                </Button>
+                <Button ToolTip="删除">
+                    <materialDesign:PackIcon Kind="DeleteForever" />
                 </Button>
                 <Separator />
-                <Button
-      Command="Cut"
-      ToolTip="Cut"
-      ToolBar.OverflowMode="AsNeeded">
-                    <materialDesign:PackIcon
-        Kind="ContentCut" />
+                <Button ToolTip="导入楼盘表" Command="{Binding OpenImportRealEstateDialogCommand}">
+                    <materialDesign:PackIcon Kind="Import" />
                 </Button>
-                <Button
-      Command="Copy"
-      ToolTip="Copy that stuff"
-      ToolBar.OverflowMode="AsNeeded">
-                    <materialDesign:PackIcon
-        Kind="ContentCopy" />
+                <Button ToolTip="导出楼盘表" Command="{Binding ExportRealEstateCommand}">
+                    <materialDesign:PackIcon Kind="Export" />
                 </Button>
                 <Separator />
-                <Button
-      Command="Paste"
-      ToolTip="Paste some stuff"
-      ToolBar.OverflowMode="AsNeeded">
-                    <materialDesign:PackIcon
-        Kind="ContentPaste" />
+                <Button ToolTip="楼盘表质检">
+                    <materialDesign:PackIcon Kind="ShieldCheck" />
                 </Button>
-                <!-- when badging in a toolbar, make sure the parent ToolBar.ClipToBounds="False", and
-                   manually apply the button style -->
-                <materialDesign:Badged
-      ToolBar.OverflowMode="AsNeeded"
-      Badge="{materialDesign:PackIcon Alert}">
-                    <Button
-        ToolTip="Badge it up!"
-        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-                        <materialDesign:PackIcon
-          Kind="AirplaneTakeoff" />
-                    </Button>
-                </materialDesign:Badged>
                 <Separator />
-                <ListBox>
-                    <ListBoxItem
-        ToolTip="This is a lonley toggle with TextBlock instead of icon">
-                        <TextBlock>
-        W
-                        </TextBlock>
-                    </ListBoxItem>
-                </ListBox>
+                <Button Command="Cut" ToolTip="剪切" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon Kind="ContentCut" />
+                </Button>
+                <Button Command="Copy" ToolTip="复制" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon Kind="ContentCopy" />
+                </Button>
                 <Separator />
-                <ListBox
-      SelectedIndex="0">
+                <Button Command="Paste" ToolTip="粘贴" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon  Kind="ContentPaste" />
+                </Button>
+                <Separator />
+                <ListBox SelectedIndex="0">
                     <ListBox.ToolTip>
                         <StackPanel>
-                            <TextBlock
-            Text="MaterialDesignToolToggleFlatListBox" />
-                            <TextBlock
-            Text="Exclusive selection" />
-                            <TextBlock
-            Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
+                            <TextBlock Text="文本位置" />
                         </StackPanel>
                     </ListBox.ToolTip>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatAlignLeft" />
+                        <materialDesign:PackIcon Kind="FormatAlignLeft" />
                     </ListBoxItem>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatAlignCenter" />
+                        <materialDesign:PackIcon  Kind="FormatAlignCenter" />
                     </ListBoxItem>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatAlignRight" />
+                        <materialDesign:PackIcon Kind="FormatAlignRight" />
                     </ListBoxItem>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatAlignJustify" />
+                        <materialDesign:PackIcon   Kind="FormatAlignJustify" />
                     </ListBoxItem>
                 </ListBox>
                 <Separator />
-                <ListBox
-      SelectionMode="Extended">
+                <ListBox SelectionMode="Extended">
                     <ListBox.ToolTip>
                         <StackPanel>
-                            <TextBlock
-            Text="MaterialDesignToolToggleListBox" />
-                            <TextBlock
-            Text="Multiple selection" />
-                            <TextBlock
-            Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
+                            <TextBlock Text="Multiple selection" />
                         </StackPanel>
                     </ListBox.ToolTip>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatBold" />
+                        <materialDesign:PackIcon Kind="FormatBold" />
                     </ListBoxItem>
                     <ListBoxItem>
-                        <materialDesign:PackIcon
-          Kind="FormatItalic" />
+                        <materialDesign:PackIcon  Kind="FormatItalic" />
                     </ListBoxItem>
-                    <ListBoxItem
-        x:Name="UnderlineCheckbox">
-                        <materialDesign:PackIcon
-          Kind="FormatUnderline" />
+                    <ListBoxItem x:Name="UnderlineCheckbox">
+                        <materialDesign:PackIcon Kind="FormatUnderline" />
                     </ListBoxItem>
                 </ListBox>
                 <Separator />
-                <Label
-      Content="Font size:"
-      VerticalAlignment="Center" />
+                <Label Content="字体大小:" VerticalAlignment="Center" />
                 <ComboBox>
-                    <ComboBoxItem
-        Content="10" />
-                    <ComboBoxItem
-        IsSelected="True"
-        Content="12" />
-                    <ComboBoxItem
-        Content="14" />
-                    <ComboBoxItem
-        Content="16" />
+                    <ComboBoxItem  Content="10" />
+                    <ComboBoxItem IsSelected="True" Content="12" />
+                    <ComboBoxItem  Content="14" />
+                    <ComboBoxItem Content="16" />
                 </ComboBox>
-                <CheckBox>
-                    Check
-                </CheckBox>
-                <Button
-      ToolTip="Take a nap"
-      ToolBar.OverflowMode="Always">
-                    <materialDesign:PackIcon
-        Kind="Hotel" />
-                </Button>
-                <RadioButton
-      GroupName="XXX"
-      Content="Radio" />
-                <RadioButton
-      GroupName="XXX"
-      Content="Ga Ga" />
-                <Separator />
+               
 
-                <RadioButton
-      GroupName="YYY">
-                    <materialDesign:PackIcon
-        Kind="EmoticonPoop" />
-                </RadioButton>
-                <Separator />
+  
                 <ToggleButton />
             </ToolBar>
         </ToolBarTray>

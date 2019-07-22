@@ -79,6 +79,9 @@
     <Property Name="FWJG2" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWJG3" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="JZWZT" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT1" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT2" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FWYT3" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="ZCS" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="DSCS" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="DXCS" Type="nvarchar" Nullable="true" MaxLength="60" />
@@ -515,6 +518,21 @@
           <Property Name="JZWZT" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>建筑物状态</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FWYT1" Type="String" Nullable="true" MaxLength="60">
+            <Documentation>
+              <Summary>房屋用途1</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FWYT2" Type="String" Nullable="true" MaxLength="60">
+            <Documentation>
+              <Summary>房屋用途2</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FWYT3" Type="String" Nullable="true" MaxLength="60">
+            <Documentation>
+              <Summary>房屋用途3</Summary>
             </Documentation>
           </Property>
           <Property Name="ZCS" Type="String" Nullable="true" MaxLength="60" >
@@ -1180,6 +1198,9 @@
           <ScalarProperty Name="FWJG2" ColumnName="FWJG2" />
           <ScalarProperty Name="FWJG3" ColumnName="FWJG3" />
           <ScalarProperty Name="JZWZT" ColumnName="JZWZT" />
+          <ScalarProperty Name="FWYT1" ColumnName="FWYT1" />
+          <ScalarProperty Name="FWYT2" ColumnName="FWYT2" />
+          <ScalarProperty Name="FWYT3" ColumnName="FWYT3" />
           <ScalarProperty Name="ZCS" ColumnName="ZCS" />
           <ScalarProperty Name="DSCS" ColumnName="DSCS" />
           <ScalarProperty Name="DXCS" ColumnName="DXCS" />

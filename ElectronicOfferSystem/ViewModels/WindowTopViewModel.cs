@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace ElectronicOfferSystem.ViewModels
         public DelegateCommand MaxCommand { get; set; }
         public DelegateCommand CloseCommand { get; set; }
         public DelegateCommand ImportCommand { get; set; }
+        public InteractionRequest<IConfirmation> ConfirmCloseRequest { get; set; }
+        public DelegateCommand ConfirmCloseCommand { get; set; }
 
         public WindowTopViewModel()
         {
@@ -37,6 +40,17 @@ namespace ElectronicOfferSystem.ViewModels
                 {
                     Application.Current.MainWindow.WindowState = WindowState.Normal;
                 }
+            });
+            ConfirmCloseRequest = new InteractionRequest<IConfirmation>();
+            ConfirmCloseCommand = new DelegateCommand(RaiseConfirmClose);
+        }
+
+        private void RaiseConfirmClose()
+        {
+            ConfirmCloseRequest.Raise(new Confirmation { Title = "确认消息", Content = "请确认退出系统？" }, r => {
+                if (r.Confirmed) CloseCommand.Execute();
+                else return;
+
             });
         }
 
