@@ -3,6 +3,7 @@ using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -13,6 +14,7 @@ namespace RealEstateModule.ViewModels
     class LogicalBuildingPageViewModel : BindableBase, INavigationAware
     {
         #region Properties
+        IEventAggregator EA;
         /// <summary>
         /// 项目
         /// </summary>
@@ -61,8 +63,9 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public LogicalBuildingPageViewModel()
+        public LogicalBuildingPageViewModel(IEventAggregator ea)
         {
+            EA = ea;
             // 新增或修改逻辑幢信息
             AddOrEditLogicalBuildingCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
@@ -150,6 +153,8 @@ namespace RealEstateModule.ViewModels
             LogicalBuildingDal.Add(LogicalBuilding);
 
             LogicalBuilding = null;
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("LogicalBuildingPage");
         }
         /// <summary>
         /// 修改逻辑幢
@@ -159,6 +164,8 @@ namespace RealEstateModule.ViewModels
             if (LogicalBuilding == null) return;
             LogicalBuilding.UpdateTime = DateTime.Now;
             LogicalBuildingDal.Modify(LogicalBuilding);
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("LogicalBuildingPage");
         }
 
 

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/21/2019 16:13:59
+-- Date Created: 07/21/2019 21:55:41
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -136,7 +136,7 @@ CREATE TABLE [Obligee] (
     [ProjectID] uniqueidentifier  NOT NULL,
     [HBSM] nvarchar(60)  NOT NULL,
     [QLRMC] nvarchar(60)  NOT NULL,
-    [BDCQZH] nvarchar(60)  NOT NULL,
+    [BDCQZH] nvarchar(60)  NULL,
     [ZJZL] nvarchar(60)  NOT NULL,
     [ZJH] nvarchar(60)  NOT NULL,
     [GJ] nvarchar(60)  NOT NULL,

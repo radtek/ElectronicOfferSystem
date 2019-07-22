@@ -5,6 +5,7 @@ using Common;
 using Common.Utils;
 using Common.ValidationRules;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -17,6 +18,7 @@ namespace RealEstateModule.ViewModels
     class HouseholdPageViewModel : BindableBase, INavigationAware
     {
         #region Properties
+        IEventAggregator EA;
         /// <summary>
         /// 项目
         /// </summary>
@@ -160,8 +162,9 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public HouseholdPageViewModel()
+        public HouseholdPageViewModel(IEventAggregator ea)
         {
+            EA = ea;
             // 初始化下拉框
             InitialComboBoxList();
             // 新增或修改户信息
@@ -244,6 +247,9 @@ namespace RealEstateModule.ViewModels
             if (Household == null) return;
             Household.UpdateTime = DateTime.Now;
             HouseholdDal.Modify(Household);
+
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("HouseholdPage");
         }
 
         private void AddHousehold()
@@ -256,6 +262,8 @@ namespace RealEstateModule.ViewModels
             HouseholdDal.Add(Household);
 
             Household = null;
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("HouseholdPage");
         }
 
         /// <summary>

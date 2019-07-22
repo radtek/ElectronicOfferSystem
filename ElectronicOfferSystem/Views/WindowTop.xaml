@@ -19,26 +19,26 @@
 
             <Grid>
                 <!--第三个多边形-->
-                <Polygon Points="780,0 1100,0 1100,40 723,40 "
+                <!--<Polygon Points="780,0 1100,0 1100,40 723,40 "
                              StrokeThickness="1">
                     <Polygon.Fill>
                         <SolidColorBrush Color="#3448A1" />
                     </Polygon.Fill>
                 </Polygon>
-                <!--第二个多边形-->
+                --><!--第二个多边形--><!--
                 <Polygon Points="700,0 780,0 740,40 "
                              StrokeThickness="1">
                     <Polygon.Fill>
                         <SolidColorBrush Color="#3E58C9" />
                     </Polygon.Fill>
                 </Polygon>
-                <!--第一个多边形-->
+                --><!--第一个多边形--><!--
                 <Polygon Points="0,0 700,0 756,40 0,40"
                              StrokeThickness="1">
                     <Polygon.Fill>
                         <SolidColorBrush Color="#1C93EC" />
                     </Polygon.Fill>
-                </Polygon>
+                </Polygon>-->
                 <Ellipse Cursor="Hand"
                              HorizontalAlignment="Left"
                              Margin="20 5 5 5"

@@ -3,6 +3,7 @@ using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -18,6 +19,7 @@ namespace RealEstateModule.ViewModels
     {
 
         #region Properties
+        IEventAggregator EA;
         /// <summary>
         /// 项目
         /// </summary>
@@ -60,8 +62,9 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public FloorPageViewModel()
+        public FloorPageViewModel(IEventAggregator ea)
         {
+            EA = ea;
             // 新增或修改层信息
             AddOrEditFloorCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
@@ -144,6 +147,9 @@ namespace RealEstateModule.ViewModels
             if (Floor == null) return;
             Floor.UpdateTime = DateTime.Now;
             FloorDal.Modify(Floor);
+
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("FloorPage");
         }
 
         private void AddFloor()
@@ -156,6 +162,8 @@ namespace RealEstateModule.ViewModels
             FloorDal.Add(Floor);
 
             Floor = null;
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("FloorPage");
         }
     }
 }

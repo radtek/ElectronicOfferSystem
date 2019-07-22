@@ -20,12 +20,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
@@ -372,6 +372,7 @@
                   SelectedValue="{Binding Household.FWLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker Grid.Row="14" Grid.Column="0" SelectedDate="{Binding Household.JGSJ}"
                     materialDesign:HintAssist.Hint="竣工时间"
+                    Margin="20 10"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
         <ComboBox Grid.Row="14" Grid.Column="1" ItemsSource="{Binding FWCBList}" 
                   materialDesign:HintAssist.Hint="房屋产别"

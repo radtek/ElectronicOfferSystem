@@ -5,6 +5,7 @@ using Common;
 using Common.Utils;
 using Common.ValidationRules;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -18,6 +19,7 @@ namespace RealEstateModule.ViewModels
     {
 
         #region Properties
+        IEventAggregator EA;
         /// <summary>
         /// 项目
         /// </summary>
@@ -136,8 +138,9 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public ObligeePageViewModel()
+        public ObligeePageViewModel(IEventAggregator ea)
         {
+            EA = ea;
             // 初始化下拉框
             InitialComboBoxList();
             // 新增或修改自然幢信息
@@ -216,6 +219,8 @@ namespace RealEstateModule.ViewModels
             if (Obligee == null) return;
             Obligee.UpdateTime = DateTime.Now;
             ObligeeDal.Modify(Obligee);
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("ObligeePage");
         }
 
         private void AddObligee()
@@ -228,6 +233,8 @@ namespace RealEstateModule.ViewModels
             ObligeeDal.Add(Obligee);
 
             Obligee = null;
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("ObligeePage");
         }
 
         private void InitialComboBoxList()

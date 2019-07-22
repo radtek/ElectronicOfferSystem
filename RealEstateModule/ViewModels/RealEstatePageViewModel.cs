@@ -3,6 +3,7 @@ using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -36,23 +37,26 @@ namespace RealEstateModule.ViewModels
         public Business Business { get; set; }
 
         private readonly IRegionManager RegionManager;
+        IEventAggregator EA;
         public DelegateCommand<string> BusinessNavCommand { get; private set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
         public DelegateCommand AddBusinessCommand { get; set; }
         public DelegateCommand DelBusinessCommand { get; set; }
 
-        ProjectDal projectDal = new ProjectDal();
+        ProjectDal ProjectDal = new ProjectDal();
 
-        public RealEstatePageViewModel(IRegionManager regionManager)
+        public RealEstatePageViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
-            // 显示业务数据列表
-            //NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
-            //Businesses = new ObservableCollection<object>(naturalBuildingDal.GetListBy((n) => n.ID != null));
+            EA = ea;
+            RegionManager = regionManager;
 
             // 导航到不同的业务数据页面
-            RegionManager = regionManager;
             BusinessNavCommand = new DelegateCommand<string>(Navigate);
+            // 在业务表执行增删改之后
+            EA.GetEvent<PubSubEvent<string>>().Subscribe((navPage)=> {
+                BusinessNavCommand.Execute(navPage);
+            });
 
             // 在项目列表选择一个项目之后执行
             SelectProjectCommand = new DelegateCommand<object>((obj) => {
@@ -60,7 +64,7 @@ namespace RealEstateModule.ViewModels
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
                 // 加载该项目的数据
-                Project = projectDal.InitialRealEstateProject(Project); 
+                //Project = ProjectDal.InitialRealEstateProject(Project); 
                 // 初始进入自然幢页面
                 BusinessNavCommand.Execute("NaturalBuildingPage");
             });
@@ -110,12 +114,15 @@ namespace RealEstateModule.ViewModels
                     default:
                         break;
                 }
-
+                BusinessNavCommand.Execute(NavigatePath);
             });
         }
 
         private void Navigate(string navigatePath)
         {
+            // 加载该项目的数据
+            Project = ProjectDal.InitialRealEstateProject(Project);
+
             if (navigatePath == null) return;
             if (Project == null) return;
             NavigatePath = navigatePath;
@@ -129,7 +136,7 @@ namespace RealEstateModule.ViewModels
                         Business business = new Business();
                         business.Name = naturalBuilding.ZRZH;
                         business.NaturalBuilding = naturalBuilding;
-                        Businesses.Add(business);
+                        Businesses.Add(business);                      
                     }
                     break;
                 case "LogicalBuildingPage":
@@ -170,7 +177,10 @@ namespace RealEstateModule.ViewModels
                     break;
                 default:
                     break;
+
             }
+
+           
 
             // 页面跳转
             var parameters = new NavigationParameters();

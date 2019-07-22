@@ -20,12 +20,13 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
+                
             </Style>
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <Setter Property="Margin" Value="5 10" />
+                <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
@@ -122,6 +123,7 @@
         </TextBox>
         <DatePicker Grid.Row="2" Grid.Column="2" SelectedDate="{Binding NaturalBuilding.JGRQ}"
                     materialDesign:HintAssist.Hint="竣工日期"
+                    Margin="20 10"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
         <TextBox Grid.Row="3" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="幢用地面积*">

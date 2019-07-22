@@ -5,6 +5,7 @@ using Common;
 using Common.Utils;
 using Common.ValidationRules;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -17,6 +18,8 @@ namespace RealEstateModule.ViewModels
     class NaturalBuildingPageViewModel : BindableBase, INavigationAware
     {
         #region Properties
+        IEventAggregator EA;
+
         /// <summary>
         /// 项目
         /// </summary>
@@ -100,8 +103,9 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public NaturalBuildingPageViewModel()
-        {         
+        public NaturalBuildingPageViewModel(IEventAggregator ea)
+        {
+            EA = ea;
             // 初始化下拉框
             InitialComboBoxList();
             // 新增或修改自然幢信息
@@ -194,6 +198,8 @@ namespace RealEstateModule.ViewModels
             NaturalBuildingDal.Add(NaturalBuilding);
 
             NaturalBuilding = null;
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("NaturalBuildingPage");
         }
 
         /// <summary>
@@ -204,6 +210,9 @@ namespace RealEstateModule.ViewModels
             if (NaturalBuilding == null) return;
             NaturalBuilding.UpdateTime = DateTime.Now;
             NaturalBuildingDal.Modify(NaturalBuilding);
+
+            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+            EA.GetEvent<PubSubEvent<string>>().Publish("NaturalBuildingPage");
         }
 
         /// <summary>
