@@ -124,23 +124,23 @@ namespace BusinessData
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public Nullable<double> YCJZMJ { get; set; }
+        public string YCJZMJ { get; set; }
         /// <summary>
         /// 预测套内建筑面积
         /// </summary>
-        public Nullable<double> YCTNJZMJ { get; set; }
+        public string YCTNJZMJ { get; set; }
         /// <summary>
         /// 预测分摊建筑面积
         /// </summary>
-        public Nullable<double> YCFTJZMJ { get; set; }
+        public string YCFTJZMJ { get; set; }
         /// <summary>
         /// 预测地下部分建筑面积
         /// </summary>
-        public Nullable<double> YCDXBFJZMJ { get; set; }
+        public string YCDXBFJZMJ { get; set; }
         /// <summary>
         /// 预测其它建筑面积
         /// </summary>
-        public Nullable<double> YCQTJZMJ { get; set; }
+        public string YCQTJZMJ { get; set; }
         /// <summary>
         /// 预测分摊系数
         /// </summary>
@@ -148,23 +148,23 @@ namespace BusinessData
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public Nullable<double> SCJZMJ { get; set; }
+        public string SCJZMJ { get; set; }
         /// <summary>
         /// 实测套内建筑面积
         /// </summary>
-        public Nullable<double> SCTNJZMJ { get; set; }
+        public string SCTNJZMJ { get; set; }
         /// <summary>
         /// 实测分摊建筑面积
         /// </summary>
-        public Nullable<double> SCFTJZMJ { get; set; }
+        public string SCFTJZMJ { get; set; }
         /// <summary>
         /// 实测地下部分建筑面积
         /// </summary>
-        public Nullable<double> SCDXBFJZMJ { get; set; }
+        public string SCDXBFJZMJ { get; set; }
         /// <summary>
         /// 实测其它建筑面积
         /// </summary>
-        public Nullable<double> SCQTJZMJ { get; set; }
+        public string SCQTJZMJ { get; set; }
         /// <summary>
         /// 实测分摊系数
         /// </summary>
@@ -172,15 +172,15 @@ namespace BusinessData
         /// <summary>
         /// 共有土地面积
         /// </summary>
-        public Nullable<double> GYTDMJ { get; set; }
+        public string GYTDMJ { get; set; }
         /// <summary>
         /// 分摊土地面积
         /// </summary>
-        public Nullable<double> FTTDMJ { get; set; }
+        public string FTTDMJ { get; set; }
         /// <summary>
         /// 独用土地面积
         /// </summary>
-        public Nullable<double> DYTDMJ { get; set; }
+        public string DYTDMJ { get; set; }
         /// <summary>
         /// 房屋类型
         /// </summary>

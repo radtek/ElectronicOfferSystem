@@ -67,6 +67,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Rules\RuleHelper.cs" />
     <Compile Include="Utils\DictionaryUtil.cs" />
     <Compile Include="Utils\Office\ExcelBase.cs" />
     <Compile Include="Utils\Office\ExcelHelper.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Utils\Office\RealEstateExcelBook.cs" />
     <Compile Include="Utils\Office\WordBase.cs" />
     <Compile Include="Utils\Office\WordOperator.cs" />
+    <Compile Include="Utils\ZipHelper.cs" />
     <Compile Include="ValidationRules\IntegerAndNotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerValidationRule.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
@@ -124,10 +126,11 @@
       <Version>7.1.0.431</Version>
     </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+    <PackageReference Include="SharpZipLib">
+      <Version>1.1.0</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\SampleDialog.xaml">
       <SubType>Designer</SubType>

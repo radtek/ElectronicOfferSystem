@@ -37,9 +37,6 @@
                     Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
                     CommandParameter="{Binding ElementName=FileTextBox}"
                     Style="{DynamicResource MaterialDesignFlatButton}">
-                <!--<Button.CommandParameter>
-                    <Binding ElementName="file"></Binding>
-                </Button.CommandParameter>-->
                 确认
             </Button>
 

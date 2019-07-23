@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using Common.Rules;
 
 namespace Common.ValidationRules
 {
@@ -10,12 +11,9 @@ namespace Common.ValidationRules
     public class IntegerValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
+        {  
             if (value == null) return ValidationResult.ValidResult;
-            string text = value.ToString();
-            // 匹配整数
-            string pattern = @"^\d+$";
-            return Regex.IsMatch(text, pattern)
+            return RuleHelper.IsInteger(value)
                 ? ValidationResult.ValidResult
                 : new ValidationResult(false, "请输入整数");
         }

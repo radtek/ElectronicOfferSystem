@@ -63,8 +63,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\Export\ExportRealEstateBook.cs" />
     <Compile Include="Services\Import\ImportRealEstateBook.cs" />
+    <Compile Include="Services\QualityControl.cs" />
+    <Compile Include="Tasks\ExportRealEstateTask.cs" />
     <Compile Include="Tasks\ImportRealEstateTask.cs" />
+    <Compile Include="Tasks\QualityControlTask.cs" />
+    <Compile Include="ViewModels\Dialogs\ExportRealEstateDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\ImportRealEstateDialogViewModel.cs" />
     <Compile Include="ViewModels\FloorPageViewModel.cs" />
     <Compile Include="ViewModels\HouseholdPageViewModel.cs" />
@@ -75,6 +80,9 @@
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
     <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ExportRealEstateDialog.xaml.cs">
+      <DependentUpon>ExportRealEstateDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\ImportRealEstateDialog.xaml.cs">
       <DependentUpon>ImportRealEstateDialog.xaml</DependentUpon>
@@ -109,6 +117,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Templates\补录-批量导入户数据模板.xlt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors">
@@ -127,6 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Dialogs\CustomDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\ExportRealEstateDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,8 +188,6 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Export\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

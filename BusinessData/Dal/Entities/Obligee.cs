@@ -80,7 +80,7 @@ namespace BusinessData
         /// <summary>
         /// 权利面积
         /// </summary>
-        public Nullable<double> QLMJ { get; set; }
+        public string QLMJ { get; set; }
         /// <summary>
         /// 权利比例
         /// </summary>

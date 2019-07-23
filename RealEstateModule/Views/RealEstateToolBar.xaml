@@ -24,15 +24,15 @@
                     <materialDesign:PackIcon Kind="DeleteForever" />
                 </Button>
                 <Separator />
+                <Button ToolTip="楼盘表质检" Command="{Binding QualityControlCommand}">
+                    <materialDesign:PackIcon Kind="ShieldCheck" />
+                </Button>
+                <Separator />
                 <Button ToolTip="导入楼盘表" Command="{Binding OpenImportRealEstateDialogCommand}">
                     <materialDesign:PackIcon Kind="Import" />
                 </Button>
                 <Button ToolTip="导出楼盘表" Command="{Binding OpenExportRealEstateDialogCommand}">
                     <materialDesign:PackIcon Kind="Export" />
-                </Button>
-                <Separator />
-                <Button ToolTip="楼盘表质检">
-                    <materialDesign:PackIcon Kind="ShieldCheck" />
                 </Button>
                 <Separator />
                 <Button Command="Cut" ToolTip="剪切" ToolBar.OverflowMode="AsNeeded">

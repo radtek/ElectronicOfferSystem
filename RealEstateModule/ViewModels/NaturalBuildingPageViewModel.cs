@@ -45,20 +45,20 @@ namespace RealEstateModule.ViewModels
             set
             {
                 SetProperty(ref naturalBuilding, value);
-                RaisePropertyChanged(NaturalBuilding?.BSM);
-                RaisePropertyChanged(NaturalBuilding?.YSDM);
-                RaisePropertyChanged(NaturalBuilding?.BDCDYH);
-                RaisePropertyChanged(NaturalBuilding?.ZDDM);
-                RaisePropertyChanged(NaturalBuilding?.ZRZH);
-                RaisePropertyChanged(NaturalBuilding?.ZYDMJ.ToString());
-                RaisePropertyChanged(NaturalBuilding?.ZZDMJ.ToString());
-                RaisePropertyChanged(NaturalBuilding?.DSCS);
-                RaisePropertyChanged(NaturalBuilding?.ZCS);
-                RaisePropertyChanged(NaturalBuilding?.DXCS);
-                RaisePropertyChanged(NaturalBuilding?.ZTS);
-                RaisePropertyChanged(NaturalBuilding?.JZWGD.ToString());
-                RaisePropertyChanged(NaturalBuilding?.SCJZMJ.ToString());
-                RaisePropertyChanged(NaturalBuilding?.YCJZMJ.ToString());
+                //RaisePropertyChanged(NaturalBuilding?.BSM);
+                //RaisePropertyChanged(NaturalBuilding?.YSDM);
+                //RaisePropertyChanged(NaturalBuilding?.BDCDYH);
+                //RaisePropertyChanged(NaturalBuilding?.ZDDM);
+                //RaisePropertyChanged(NaturalBuilding?.ZRZH);
+                //RaisePropertyChanged(NaturalBuilding?.ZYDMJ.ToString());
+                //RaisePropertyChanged(NaturalBuilding?.ZZDMJ.ToString());
+                //RaisePropertyChanged(NaturalBuilding?.DSCS);
+                //RaisePropertyChanged(NaturalBuilding?.ZCS);
+                //RaisePropertyChanged(NaturalBuilding?.DXCS);
+                //RaisePropertyChanged(NaturalBuilding?.ZTS);
+                //RaisePropertyChanged(NaturalBuilding?.JZWGD.ToString());
+                //RaisePropertyChanged(NaturalBuilding?.SCJZMJ.ToString());
+                //RaisePropertyChanged(NaturalBuilding?.YCJZMJ.ToString());
                 //RaiseCanExecuteChanged();
             }
         }

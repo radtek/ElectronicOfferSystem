@@ -48,35 +48,35 @@ namespace BusinessData
         /// <summary>
         /// 层建筑面积
         /// </summary>
-        public Nullable<double> CJZMJ { get; set; }
+        public string CJZMJ { get; set; }
         /// <summary>
         /// 层套内建筑面积
         /// </summary>
-        public Nullable<double> CTNJZMJ { get; set; }
+        public string CTNJZMJ { get; set; }
         /// <summary>
         /// 层阳台面积
         /// </summary>
-        public Nullable<double> CYTMJ { get; set; }
+        public string CYTMJ { get; set; }
         /// <summary>
         /// 层共有建筑面积
         /// </summary>
-        public Nullable<double> CGYJZMJ { get; set; }
+        public string CGYJZMJ { get; set; }
         /// <summary>
         /// 层分摊建筑面积
         /// </summary>
-        public Nullable<double> CFTJZMJ { get; set; }
+        public string CFTJZMJ { get; set; }
         /// <summary>
         /// 层半墙面积
         /// </summary>
-        public Nullable<double> CBQMJ { get; set; }
+        public string CBQMJ { get; set; }
         /// <summary>
         /// 层高
         /// </summary>
-        public Nullable<double> CG { get; set; }
+        public string CG { get; set; }
         /// <summary>
         /// 水平投影面积
         /// </summary>
-        public Nullable<double> SPTYMJ { get; set; }
+        public string SPTYMJ { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

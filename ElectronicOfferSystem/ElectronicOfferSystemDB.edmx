@@ -41,15 +41,15 @@
     <Property Name="XMMC" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="JZWMC" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="JGRQ" Type="datetime" Nullable="true" />
-    <Property Name="JZWGD" Type="float" Nullable="true" />
-    <Property Name="ZZDMJ" Type="float" Nullable="false" />
-    <Property Name="ZYDMJ" Type="float" Nullable="false" />
-    <Property Name="YCJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCJZMJ" Type="float" Nullable="true" />
+    <Property Name="JZWGD" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZZDMJ" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="ZYDMJ" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="YCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="ZCS" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="DSCS" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="DXCS" Type="nvarchar" Nullable="false" MaxLength="60" />
-    <Property Name="DXSD" Type="float" Nullable="true" />
+    <Property Name="DXSD" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="GHYT" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWJG" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="ZTS" Type="nvarchar" Nullable="false" />
@@ -68,12 +68,12 @@
     <Property Name="LJZH" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="YSDM" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="MPH" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="YCJZMJ" Type="float" Nullable="true" />
-    <Property Name="YCDXMJ" Type="float" Nullable="true" />
-    <Property Name="YCQTMJ" Type="float" Nullable="true" />
-    <Property Name="SCJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCDXMJ" Type="float" Nullable="true" />
-    <Property Name="SCQTMJ" Type="float" Nullable="true" />
+    <Property Name="YCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCDXMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCQTMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCDXMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCQTMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="JGRQ" Type="datetime" Nullable="true" />
     <Property Name="FWJG1" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWJG2" Type="nvarchar" Nullable="true" MaxLength="60" />
@@ -99,14 +99,14 @@
     <Property Name="YSDM" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="SJC" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="MYC" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="CJZMJ" Type="float" Nullable="true" />
-    <Property Name="CTNJZMJ" Type="float" Nullable="true" />
-    <Property Name="CYTMJ" Type="float" Nullable="true" />
-    <Property Name="CGYJZMJ" Type="float" Nullable="true" />
-    <Property Name="CFTJZMJ" Type="float" Nullable="true" />
-    <Property Name="CBQMJ" Type="float" Nullable="true" />
-    <Property Name="CG" Type="float" Nullable="true" />
-    <Property Name="SPTYMJ" Type="float" Nullable="true" />
+    <Property Name="CJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CTNJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CYTMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CGYJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CFTJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CBQMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="CG" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SPTYMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Obligee">
@@ -128,7 +128,7 @@
     <Property Name="DZ" Type="nvarchar" Nullable="true" />
     <Property Name="QLLX" Type="nvarchar" Nullable="false" MaxLength="60" />
     <Property Name="GYFS" Type="nvarchar" Nullable="false" MaxLength="60" />
-    <Property Name="QLMJ" Type="float" Nullable="true" />
+    <Property Name="QLMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="QLBL" Type="nvarchar" Nullable="true" />
     <Property Name="FRXM" Type="nvarchar" Nullable="true" />
     <Property Name="FRZJLX" Type="nvarchar" Nullable="true" MaxLength="60" />
@@ -174,21 +174,21 @@
     <Property Name="FWYT1" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWYT2" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWYT3" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="YCJZMJ" Type="float" Nullable="true" />
-    <Property Name="YCTNJZMJ" Type="float" Nullable="true" />
-    <Property Name="YCFTJZMJ" Type="float" Nullable="true" />
-    <Property Name="YCDXBFJZMJ" Type="float" Nullable="true" />
-    <Property Name="YCQTJZMJ" Type="float" Nullable="true" />
+    <Property Name="YCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCTNJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCFTJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCDXBFJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YCQTJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="YCFTXS" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="SCJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCTNJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCFTJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCDXBFJZMJ" Type="float" Nullable="true" />
-    <Property Name="SCQTJZMJ" Type="float" Nullable="true" />
+    <Property Name="SCJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCTNJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCFTJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCDXBFJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SCQTJZMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="SCFTXS" Type="nvarchar" Nullable="true" />
-    <Property Name="GYTDMJ" Type="float" Nullable="true" />
-    <Property Name="FTTDMJ" Type="float" Nullable="true" />
-    <Property Name="DYTDMJ" Type="float" Nullable="true" />
+    <Property Name="GYTDMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FTTDMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DYTDMJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWLX" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWJG" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="FWXZ" Type="nvarchar" Nullable="true" MaxLength="60" />
@@ -351,27 +351,27 @@
               <Summary>竣工日期</Summary>
             </Documentation>
           </Property>
-          <Property Name="JZWGD" Type="Double" Nullable="true" >
+          <Property Name="JZWGD" Type="String" Nullable="true" FixedLength="false" MaxLength="60" >
             <Documentation>
               <Summary>建筑物高度</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZZDMJ" Type="Double" Nullable="false" >
+          <Property Name="ZZDMJ" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>幢占地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="ZYDMJ" Type="Double" Nullable="false" >
+          <Property Name="ZYDMJ" Type="String" Nullable="false" MaxLength="60" >
             <Documentation>
               <Summary>幢用地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
@@ -391,7 +391,7 @@
               <Summary>地下层数</Summary>
             </Documentation>
           </Property>
-          <Property Name="DXSD" Type="Double" Nullable="true" >
+          <Property Name="DXSD" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>地下深度</Summary>
             </Documentation>
@@ -465,32 +465,32 @@
               <Summary>门牌号</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCDXMJ" Type="Double" Nullable="true" >
+          <Property Name="YCDXMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测地下面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCQTMJ" Type="Double" Nullable="true" >
+          <Property Name="YCQTMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测其他面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCDXMJ" Type="Double" Nullable="true" >
+          <Property Name="SCDXMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测地下面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCQTMJ" Type="Double" Nullable="true" >
+          <Property Name="SCQTMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测其他面积</Summary>
             </Documentation>
@@ -603,42 +603,42 @@
               <Summary>名义层</Summary>
             </Documentation>
           </Property>
-          <Property Name="CJZMJ" Type="Double" Nullable="true" >
+          <Property Name="CJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CTNJZMJ" Type="Double" Nullable="true" >
+          <Property Name="CTNJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CYTMJ" Type="Double" Nullable="true" >
+          <Property Name="CYTMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层阳台面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CGYJZMJ" Type="Double" Nullable="true" >
+          <Property Name="CGYJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层共有建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CFTJZMJ" Type="Double" Nullable="true" >
+          <Property Name="CFTJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CBQMJ" Type="Double" Nullable="true" >
+          <Property Name="CBQMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层半墙面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="CG" Type="Double" Nullable="true" >
+          <Property Name="CG" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>层高</Summary>
             </Documentation>
           </Property>
-          <Property Name="SPTYMJ" Type="Double" Nullable="true" >
+          <Property Name="SPTYMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>水平投影面积</Summary>
             </Documentation>
@@ -727,7 +727,7 @@
               <Summary>共有方式</Summary>
             </Documentation>
           </Property>
-          <Property Name="QLMJ" Type="Double" Nullable="true" >
+          <Property Name="QLMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>权利面积</Summary>
             </Documentation>
@@ -940,27 +940,27 @@
               <Summary>房屋用途3</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCTNJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCTNJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCFTJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCFTJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCDXBFJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCDXBFJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测地下部分建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="YCQTJZMJ" Type="Double" Nullable="true" >
+          <Property Name="YCQTJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>预测其它建筑面积</Summary>
             </Documentation>
@@ -970,27 +970,27 @@
               <Summary>预测分摊系数</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCTNJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCTNJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测套内建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCFTJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCFTJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测分摊建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCDXBFJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCDXBFJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测地下部分建筑面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="SCQTJZMJ" Type="Double" Nullable="true" >
+          <Property Name="SCQTJZMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>实测其它建筑面积</Summary>
             </Documentation>
@@ -1000,17 +1000,17 @@
               <Summary>实测分摊系数</Summary>
             </Documentation>
           </Property>
-          <Property Name="GYTDMJ" Type="Double" Nullable="true" >
+          <Property Name="GYTDMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>共有土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="FTTDMJ" Type="Double" Nullable="true" >
+          <Property Name="FTTDMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>分摊土地面积</Summary>
             </Documentation>
           </Property>
-          <Property Name="DYTDMJ" Type="Double" Nullable="true" >
+          <Property Name="DYTDMJ" Type="String" Nullable="true" MaxLength="60" >
             <Documentation>
               <Summary>独用土地面积</Summary>
             </Documentation>

@@ -60,23 +60,23 @@ namespace BusinessData
         /// <summary>
         /// 建筑物高度
         /// </summary>
-        public Nullable<double> JZWGD { get; set; }
+        public string JZWGD { get; set; }
         /// <summary>
         /// 幢占地面积
         /// </summary>
-        public double ZZDMJ { get; set; }
+        public string ZZDMJ { get; set; }
         /// <summary>
         /// 幢用地面积
         /// </summary>
-        public double ZYDMJ { get; set; }
+        public string ZYDMJ { get; set; }
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public Nullable<double> YCJZMJ { get; set; }
+        public string YCJZMJ { get; set; }
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public Nullable<double> SCJZMJ { get; set; }
+        public string SCJZMJ { get; set; }
         /// <summary>
         /// 总层数
         /// </summary>
@@ -92,7 +92,7 @@ namespace BusinessData
         /// <summary>
         /// 地下深度
         /// </summary>
-        public Nullable<double> DXSD { get; set; }
+        public string DXSD { get; set; }
         /// <summary>
         /// 规划用途
         /// </summary>

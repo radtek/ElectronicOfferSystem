@@ -44,27 +44,27 @@ namespace BusinessData
         /// <summary>
         /// 预测建筑面积
         /// </summary>
-        public Nullable<double> YCJZMJ { get; set; }
+        public string YCJZMJ { get; set; }
         /// <summary>
         /// 预测地下面积
         /// </summary>
-        public Nullable<double> YCDXMJ { get; set; }
+        public string YCDXMJ { get; set; }
         /// <summary>
         /// 预测其他面积
         /// </summary>
-        public Nullable<double> YCQTMJ { get; set; }
+        public string YCQTMJ { get; set; }
         /// <summary>
         /// 实测建筑面积
         /// </summary>
-        public Nullable<double> SCJZMJ { get; set; }
+        public string SCJZMJ { get; set; }
         /// <summary>
         /// 实测地下面积
         /// </summary>
-        public Nullable<double> SCDXMJ { get; set; }
+        public string SCDXMJ { get; set; }
         /// <summary>
         /// 实测其他面积
         /// </summary>
-        public Nullable<double> SCQTMJ { get; set; }
+        public string SCQTMJ { get; set; }
         /// <summary>
         /// 竣工日期
         /// </summary>

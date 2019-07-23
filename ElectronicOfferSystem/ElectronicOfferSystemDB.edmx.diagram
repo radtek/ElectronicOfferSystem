@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="82" DisplayType="true" >
+      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="66" DisplayType="true" >
         <EntityTypeShape EntityType="ElectronicOfferSystem.Project" Width="1.375" PointX="0.625" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.NaturalBuilding" Width="1.5" PointX="2.375" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.NaturalBuilding" Width="1.5" PointX="2.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.LogicalBuilding" Width="1.5" PointX="4.5" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Floor" Width="1.5" PointX="6.625" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Obligee" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Household" Width="1.5" PointX="8.75" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.CONST" Width="1.5" PointX="0.5" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="0.5" PointY="2.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONST" Width="1.5" PointX="0.625" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="0.625" PointY="1.875" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

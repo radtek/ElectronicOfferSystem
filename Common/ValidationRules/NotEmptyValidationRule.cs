@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Common.Rules;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace Common.ValidationRules
@@ -10,9 +11,9 @@ namespace Common.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            return string.IsNullOrWhiteSpace((value ?? "").ToString())
-               ? new ValidationResult(false, "字段不能为空")
-               : ValidationResult.ValidResult;
+            return RuleHelper.IsNotEmpty(value)
+               ? ValidationResult.ValidResult
+               : new ValidationResult(false, "字段不能为空");
         }
     }
 }

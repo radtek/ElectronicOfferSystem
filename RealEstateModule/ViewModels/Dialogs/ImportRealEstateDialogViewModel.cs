@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateModule.ViewModels.Dialogs
 {
-    class ImportRealEstateDialogViewModel : BindableBase
+    public class ImportRealEstateDialogViewModel : BindableBase
     {
         private string filePath;
         public string FilePath
