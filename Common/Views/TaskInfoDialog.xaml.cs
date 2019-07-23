@@ -1,4 +1,4 @@
-﻿using RealEstateModule.ViewModels;
+﻿using Common.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RealEstateModule.Views
+namespace Common.Views
 {
     /// <summary>
-    /// RealEstateToolBar.xaml 的交互逻辑
+    /// TaskInfoDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class RealEstateToolBar : UserControl
+    public partial class TaskInfoDialog : UserControl
     {
-        public RealEstateToolBar()
+        public TaskInfoDialog()
         {
             InitializeComponent();
-            //DataContext = new RealEstateToolBarViewModel();
+            DataContext = TaskInfoDialogViewModel.getInstance();
         }
     }
 }

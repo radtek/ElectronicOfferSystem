@@ -1,4 +1,6 @@
 ﻿using Common;
+using Common.Views;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -14,7 +16,7 @@ namespace ElectronicOfferSystem.ViewModels
     {
         private readonly IRegionManager RegionManager;
         public DelegateCommand<string> NavigateCommand { get; set; }
-
+        public DelegateCommand OpenTaskInfoDialogCommand { get; set; }
 
         public ProjectTabViewModel(IRegionManager regionManager)
         {
@@ -23,6 +25,13 @@ namespace ElectronicOfferSystem.ViewModels
             // 页面导航
             NavigateCommand = new DelegateCommand<string>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
+
+            OpenTaskInfoDialogCommand = new DelegateCommand(() =>{
+                var view = new TaskInfoDialog();
+                //ImportRealEstateViewModel = new TaskInfoDialogViewModel();
+                //show the dialog
+                var result = DialogHost.Show(view, "RootDialog");
+            });
         }
 
         private void Navigate(string navigatePath)

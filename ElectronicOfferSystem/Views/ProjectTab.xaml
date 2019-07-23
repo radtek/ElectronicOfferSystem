@@ -15,7 +15,13 @@
         <materialDesign:ColorZone Mode="PrimaryMid"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                       materialDesign:ShadowAssist.ShadowEdges="Bottom">
-            <StackPanel Orientation="Horizontal" Margin="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Margin="2" Grid.Column="0" >
                 <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
                                  CommandParameter="IndexPage"
@@ -36,14 +42,22 @@
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="登记业务项目" />
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
                                  CommandParameter="SettingPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="设置" />
-            </StackPanel>
+                </StackPanel>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                        Content="任务" Grid.Column="1" Width="100" HorizontalAlignment="Right"
+                        ToolTip="任务信息" Margin="10 0"
+                        Command="{Binding OpenTaskInfoDialogCommand}"/>
+            </Grid>
         </materialDesign:ColorZone>
     </Grid>
 </UserControl>

@@ -11,15 +11,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <i:Interaction.Triggers>
-        <prism:InteractionRequestTrigger SourceObject="{Binding ImportRealEstateDialogRequest}">
-            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
-                <prism:PopupWindowAction.WindowContent>
-                    <views:ImportRealEstateDialog />
-                </prism:PopupWindowAction.WindowContent>
-            </prism:PopupWindowAction>
-        </prism:InteractionRequestTrigger>
-    </i:Interaction.Triggers>
     <Grid>
         <ToolBarTray>
             <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
@@ -36,7 +27,7 @@
                 <Button ToolTip="导入楼盘表" Command="{Binding OpenImportRealEstateDialogCommand}">
                     <materialDesign:PackIcon Kind="Import" />
                 </Button>
-                <Button ToolTip="导出楼盘表" Command="{Binding ExportRealEstateCommand}">
+                <Button ToolTip="导出楼盘表" Command="{Binding OpenExportRealEstateDialogCommand}">
                     <materialDesign:PackIcon Kind="Export" />
                 </Button>
                 <Separator />

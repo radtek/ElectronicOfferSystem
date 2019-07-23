@@ -63,6 +63,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Services\Import\ImportRealEstateBook.cs" />
+    <Compile Include="Tasks\ImportRealEstateTask.cs" />
     <Compile Include="ViewModels\Dialogs\ImportRealEstateDialogViewModel.cs" />
     <Compile Include="ViewModels\FloorPageViewModel.cs" />
     <Compile Include="ViewModels\HouseholdPageViewModel.cs" />
@@ -170,6 +172,9 @@
       <Project>{b7ed7a54-e280-4dd3-b4a7-008fafb4e7f2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Export\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

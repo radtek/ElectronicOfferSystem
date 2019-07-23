@@ -1,11 +1,13 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
-using Common.Tasks;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
+using RealEstateModule.Tasks;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,29 +42,11 @@ namespace RealEstateModule.ViewModels.Dialogs
 
             ImportRealEstateCommand = new DelegateCommand(()=> {
                 //FinishInteraction?.Invoke();
-                if (string.IsNullOrEmpty(FilePath))
-                {
-                    //DevComponents.DotNetBar.MessageBoxEx.Show(this, "请选择文件", "提示");
-                    return;
-                }
-
-                // 判断项目名称是否已经存在
-                int start = FilePath.LastIndexOf("\\");
-                int end = FilePath.LastIndexOf(".");
-                String projectName = FilePath.Substring(start + 1, end - start);
-
-                ProjectDal projectDal = new ProjectDal();
-                var projectList = projectDal.GetListBy(p => p.ProjectName == projectName && p.Type == "1");
-
-                if (projectList.Count > 0)
-                {
-                    //DevComponents.DotNetBar.MessageBoxEx.Show("项目名称已存在，请更改excel名称");
-                    return;
-                }
+                
                 ImportRealEstateTask task = new ImportRealEstateTask();
                 task.FullPath = FilePath;
                 task.Ongo();
-                //this.Close();
+
             });
         }
 

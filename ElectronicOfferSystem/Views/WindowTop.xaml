@@ -20,7 +20,6 @@
         <materialDesign:ColorZone Mode="PrimaryMid"
                                       Name="NavBar"
                                       Height="40" 
-                                      
                                       materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
             <Grid>
@@ -139,7 +138,7 @@
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                    Command="{Binding ConfirmCloseCommand}"
+                                    Command="{Binding CloseCommand}"
                                     Padding="0">
                             <Viewbox Width="25"
                                          Height="25">

@@ -54,6 +54,7 @@ namespace ProjectModule.ViewModels
         public DelegateCommand AcceptCommand { get; set; }
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
+        public DelegateCommand DelProjectCommand { get; set; }
         ProjectDal projectDal = new ProjectDal();
 
         public ProjectPageViewModel()
@@ -104,9 +105,14 @@ namespace ProjectModule.ViewModels
                 }
                 IsAddOrEditProjectDialogOpen = true;
             });
+            // 删除项目
+            DelProjectCommand = new DelegateCommand(()=> {
+                if (Project == null) return;
+                projectDal.Del(Project);
+                RefreshProjectList();
+            });
 
-            
-            
+
         }
 
         private void Navigate(string navigatePath)
@@ -156,8 +162,13 @@ namespace ProjectModule.ViewModels
         private void CloseDialogAndRefreshProjectList()
         {
             IsAddOrEditProjectDialogOpen = false;
+            RefreshProjectList();
+        }
+
+        private void RefreshProjectList()
+        {
             Project = null;
-            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p)=> "1".Equals(p.Type) ));
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type)));
         }
     }
 }

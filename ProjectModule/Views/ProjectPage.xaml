@@ -24,8 +24,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <materialDesign:DialogHost Identifier="RootDialog"
-                                   IsOpen="{Binding IsAddOrEditProjectDialogOpen}">
+        <materialDesign:DialogHost IsOpen="{Binding IsAddOrEditProjectDialogOpen}">
             <materialDesign:DialogHost.DialogContent>
                 <!--Dialog Content-->
                 <!--<ContentControl prism:RegionManager.RegionName="AddOrEditProjectDialogRegion"/>-->
@@ -134,25 +133,37 @@
                                                                        CommandParameter="编辑项目"/>
                                             </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" >
-                                                <!--<TextBlock Text="{Binding ID}" Visibility="Collapsed" />-->
-                                                <TextBlock Text="{Binding ProjectName}" FontSize="15" />
-                                                <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <!--<ListView.ItemContainerStyle>
-                                        <Style TargetType="{x:Type ListViewItem}">
-                                            <Style.Setters>
-                                                <Setter Property="Background" Value="#FFFFFF" />
-                                                <Setter Property="Selector.Background" Value="Gray" />
-                                                <EventSetter Event="MouseDoubleClick" Handler="OnListViewItemDoubleClick" />
-                                            </Style.Setters>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>-->
-                                </ListView>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <!--<TextBlock Text="{Binding ID}" Visibility="Collapsed" />-->
+                                                    <TextBlock Text="{Binding ProjectName}" FontSize="15" />
+                                                    <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <ListView.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="新增" Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                                                          CommandParameter="新增项目" >
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="编辑选中项" Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                                                          CommandParameter="编辑项目" >
+                                                <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="SquareEditOutline" />
+                                                </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="删除选中项" Command="{Binding DelProjectCommand}" >
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </ListView.ContextMenu>
+                                    </ListView>
                             
                         </StackPanel>
                         </ScrollViewer>

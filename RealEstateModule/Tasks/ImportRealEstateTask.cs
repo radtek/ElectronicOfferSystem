@@ -1,15 +1,24 @@
-﻿using System;
+﻿using BusinessData;
+using BusinessData.Dal;
+using Common.ViewModels;
+using Common.Views;
+using MaterialDesignThemes.Wpf;
+using RealEstateModule.Services.Import;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RealEstateModule.Tasks
 {
-    class ImportRealEstateTask
+    public class ImportRealEstateTask
     {
         public string FullPath { get; set; }
         public List<string> ErrorMsg { get; set; }
+        public TaskInfoDialogViewModel TaskInfoDialog { get; set; }
 
         public ImportRealEstateTask()
         {
@@ -20,68 +29,218 @@ namespace RealEstateModule.Tasks
         {
             try
             {
-                //ErrorInfomationDialog errordoalog = new ErrorInfomationDialog();
-                //errordoalog.Show();
-                //errordoalog.SetRrrorText("开始导入\n");
+                TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
+                String FileName = Path.GetFileName(FullPath);
+                TaskInfoDialog.Messages.Add("开始导入：" + FileName);
+
                 Task task = new Task(() =>
                 {
-                    ImportHosueTable import = new ImportHosueTable();
-                    import.FileName = FileName;
+                    ImportRealEstateBook import = new ImportRealEstateBook();
+                    import.FileName = FullPath;
                     import.Read();
                     var canContinue = import.ReadInformation();
                     if (canContinue)
                     {
                         //var naturalEffective = NaturalEffective(import.ZRZList);
-                        var naturalNumberBool = NaturalNumberBool(import.ZRZList);
-                        var houseLogoBool = HouseLogoBool(import.HList);
-                        if (naturalNumberBool && houseLogoBool)
+                        var isNaturalBuildingUnique = IsNaturalBuildingUnique(import.NaturalBuildings);
+                        var isHouseholdUnique = IsHouseholdUnique(import.Households);
+                        if (isNaturalBuildingUnique && isHouseholdUnique)
                         {
-                            Xmxx xmxx = CreatXmxx(import.ZRZList);
-                            CService.AddRangC(import.CList, xmxx.Xmbh);
-                            HService.AddRangH(import.HList, xmxx.Xmbh);
-                            ZrzService.AddRangZRZ(import.ZRZList, xmxx.Xmbh);
-                            LjzService.AddRangLjz(import.LJZList, xmxx.Xmbh);
-                            QlrService.AddRangQLR(import.QLRList, xmxx.Xmbh);
-                            XmxxService.InsertXmxx(xmxx);
+
+                            Project project = InitialProject();
+                            ProjectDal projectDal = new ProjectDal();
+                            NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
+                            LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
+                            FloorDal floorDal = new FloorDal();
+                            HouseholdDal householdDal = new HouseholdDal();
+                            ObligeeDal obligeeDal = new ObligeeDal();
+                            try
+                            {
+                                foreach (var naturalBuilding in import.NaturalBuildings)
+                                {
+                                    naturalBuilding.ID = Guid.NewGuid();
+                                    naturalBuilding.ProjectID = project.ID;
+                                    naturalBuilding.UpdateTime = DateTime.Now;
+                                    naturalBuildingDal.Add(naturalBuilding);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("自然幢数据异常：" + ex.Message);
+                            }
+                            try
+                            { 
+                                foreach (var logicalBuilding in import.LogicalBuildings)
+                                {
+                                    logicalBuilding.ID = Guid.NewGuid();
+                                    logicalBuilding.ProjectID = project.ID;
+                                    logicalBuilding.UpdateTime = DateTime.Now;
+                                    logicalBuildingDal.Add(logicalBuilding);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("逻辑幢数据异常：" + ex.Message);
+                            }
+                            try
+                            { 
+                                foreach (var floor in import.Floors)
+                                {
+                                    floor.ID = Guid.NewGuid();
+                                    floor.ProjectID = project.ID;
+                                    floor.UpdateTime = DateTime.Now;
+                                    floorDal.Add(floor);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("层数据异常：" + ex.Message);
+                            }
+                            try
+                            {
+                                foreach (var household in import.Households)
+                                {
+                                    household.ID = Guid.NewGuid();
+                                    household.ProjectID = project.ID;
+                                    household.UpdateTime = DateTime.Now;
+                                    householdDal.Add(household);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("户数据异常：" + ex.Message);
+                            }
+                            try
+                            { 
+                                foreach (var obligee in import.Obligees)
+                                {
+                                    obligee.ID = Guid.NewGuid();
+                                    obligee.ProjectID = project.ID;
+                                    obligee.UpdateTime = DateTime.Now;
+                                    obligeeDal.Add(obligee);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("权利人数据异常：" + ex.Message);
+                            }
+                            try
+                            { 
+                                projectDal.Add(project);
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorMsg.Add("项目数据异常：" + ex.Message);
+                            }
+
                         }
                     }
                     //ErrorList = import.ErrorList;
-                    ErrorList.AddRange(import.ErrorList);
+                    ErrorMsg.AddRange(import.ErrorMsg);
 
                 });
                 task.Start();
                 task.ContinueWith(t =>
                 {
-                    foreach (var error in ErrorList)
-                    {
-                        errordoalog.SetRrrorText(error + "\n");
-                    }
-                    if (ErrorList != null && ErrorList.Count > 0)
-                        errordoalog.SetRrrorText("导入失败");
-                    else
-                    {
-                        errordoalog.SetRrrorText("导入成功");
-                        // 刷新项目列表
-                        Node node = MainForm.mainForm.node1;
-                        Xmxx xmxx1 = new Xmxx
-                        {
-                            Xmzl = "1"
-                        };
-                        List<Xmxx> xmxxList = XmxxService.SelectXmxx(xmxx1);
-                        node.Nodes.Clear();
-                        foreach (Xmxx xm in xmxxList)
-                        {
-                            node.Nodes.Add(new Node(xm.Xmmc));
-                        }
+                    ThreadPool.QueueUserWorkItem(delegate
+                     {
+                         SynchronizationContext.SetSynchronizationContext(new
+                     System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Application.Current.Dispatcher));
+                         SynchronizationContext.Current.Post(pl =>
+                     {
 
-                    }
+                         foreach (var error in ErrorMsg)
+                         {
+                             TaskInfoDialog.Messages.Add(error);
+                         }
+                         if (ErrorMsg != null && ErrorMsg.Count > 0)
+                         {
+                             TaskInfoDialog.Messages.Add("导入失败");
+                         }
+                         else
+                         {
+                             TaskInfoDialog.Messages.Add("导入成功");
+                             // 刷新项目列表
+
+                         }
+
+
+                     }, null);
+                     });
+
                 });
 
             }
             catch (Exception ex)
             {
-                DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
+                //DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// 判断自然幢号是否唯一
+        /// </summary>
+        /// <param name="naturalBuildings"></param>
+        /// <returns></returns>
+        private bool IsNaturalBuildingUnique(List<NaturalBuilding> naturalBuildings)
+        {
+            bool isUnique = true;
+            if (naturalBuildings == null || naturalBuildings.Count == 0)
+            {
+                //ErrorList.Add("自然幢为空");
+                return true;
+            }
+            var zrzh = naturalBuildings.GroupBy(x => x.ZRZH).Where(x => x.Count() > 1).ToList();
+            if (zrzh != null && zrzh.Count > 0)
+            {
+                foreach (var item in zrzh)
+                {
+                    ErrorMsg.Add(string.Format("自然幢号为：{0}的数据重复", item));
+                }
+                isUnique = false;
+            }
+            return isUnique;
+        }
+
+        /// <summary>
+        /// 判断户标识嘛是否唯一
+        /// </summary>
+        /// <param name="households"></param>
+        /// <returns></returns>
+        private bool IsHouseholdUnique(List<Household> households)
+        {
+            bool isUnique = true;
+            if (households == null || households.Count == 0)
+            {
+                //ErrorList.Add("户数据为空");
+                return true;
+            }
+            var hbsmList = households.GroupBy(x => x.HBSM).Where(x => x.Count() > 1).ToList();
+            if (hbsmList != null && hbsmList.Count > 0)
+            {
+                foreach (var hbsm in hbsmList)
+                {
+                    ErrorMsg.Add(string.Format("户标识码为：{0}的数据重复", hbsm));
+                }
+                isUnique = false;
+            }
+            return isUnique;
+        }
+
+        private Project InitialProject()
+        {
+            //int start = FullPath.LastIndexOf("\\");
+            //int end = FullPath.LastIndexOf(".");
+            //String projectName = FullPath.Substring(start + 1, end - start - 1);
+            String projectName = Path.GetFileNameWithoutExtension(FullPath);
+            Project project = new Project();
+            project.ID = Guid.NewGuid();
+            project.ProjectName = projectName;
+            project.UptateTime = DateTime.Now;
+            project.Type = "1";
+            project.State = "0";
+
+            return project;
         }
     }
 }
