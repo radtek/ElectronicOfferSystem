@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="RegistrationModule.Views.RegistrationToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RegistrationModule.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ToolBarTray>
+            <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
+                <Button ToolTip="新增">
+                    <materialDesign:PackIcon Kind="AddBox" />
+                </Button>
+                <Button ToolTip="编辑">
+                    <materialDesign:PackIcon Kind="SquareEditOutline" />
+                </Button>
+                <Button ToolTip="删除">
+                    <materialDesign:PackIcon Kind="DeleteForever" />
+                </Button>
+                <Separator />
+                <Button ToolTip="导出登记项目" Command="{Binding OpenExportRegistrationDialogCommand}">
+                    <materialDesign:PackIcon Kind="Export" />
+                </Button>
+                <Separator />
+                <Button Command="Cut" ToolTip="剪切" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon Kind="ContentCut" />
+                </Button>
+                <Button Command="Copy" ToolTip="复制" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon Kind="ContentCopy" />
+                </Button>
+                <Separator />
+                <Button Command="Paste" ToolTip="粘贴" ToolBar.OverflowMode="AsNeeded">
+                    <materialDesign:PackIcon  Kind="ContentPaste" />
+                </Button>
+                <Separator />
+                <ListBox SelectedIndex="0">
+                    <ListBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="文本位置" />
+                        </StackPanel>
+                    </ListBox.ToolTip>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon Kind="FormatAlignLeft" />
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon  Kind="FormatAlignCenter" />
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon Kind="FormatAlignRight" />
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon   Kind="FormatAlignJustify" />
+                    </ListBoxItem>
+                </ListBox>
+                <Separator />
+                <ListBox SelectionMode="Extended">
+                    <ListBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Multiple selection" />
+                        </StackPanel>
+                    </ListBox.ToolTip>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon Kind="FormatBold" />
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <materialDesign:PackIcon  Kind="FormatItalic" />
+                    </ListBoxItem>
+                    <ListBoxItem x:Name="UnderlineCheckbox">
+                        <materialDesign:PackIcon Kind="FormatUnderline" />
+                    </ListBoxItem>
+                </ListBox>
+                <Separator />
+                <Label Content="字体大小:" VerticalAlignment="Center" />
+                <ComboBox>
+                    <ComboBoxItem  Content="10" />
+                    <ComboBoxItem IsSelected="True" Content="12" />
+                    <ComboBoxItem  Content="14" />
+                    <ComboBoxItem Content="16" />
+                </ComboBox>
+
+                <ToggleButton />
+            </ToolBar>
+        </ToolBarTray>
+    </Grid>
+</UserControl>

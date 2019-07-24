@@ -39,6 +39,8 @@ namespace ProjectModule.ViewModels
             set { SetProperty(ref dialogTitle, value); }
         }
 
+        public string NavigatePath { get; set; }
+
         private ObservableCollection<Project> projects;
         public ObservableCollection<Project> Projects
         {
@@ -117,6 +119,8 @@ namespace ProjectModule.ViewModels
 
         private void Navigate(string navigatePath)
         {
+            NavigatePath = navigatePath;
+
             switch (navigatePath)
             {
                 case "IndexPage":
@@ -126,7 +130,7 @@ namespace ProjectModule.ViewModels
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
                     break;
                 case "RegistrationPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "2".Equals(p.Type) ));
                     break;
                 case "SettingPage":
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type) ));
@@ -139,11 +143,25 @@ namespace ProjectModule.ViewModels
 
         private void AddProject()
         {
+            if (string.IsNullOrWhiteSpace(NavigatePath))
+                return;
             // 新增项目的初始化
             Project.ID = Guid.NewGuid();
             Project.UptateTime = DateTime.Now;
-            Project.Type = "1";
+            
             Project.State = "0";
+            switch (NavigatePath)
+            {
+                case "RealEstatePage":
+                    Project.Type = "1";
+                    break;
+                case "RegistrationPage":
+                    Project.Type = "2";
+                    break;
+                default:
+                    Project.Type = "-1";
+                    break;
+            }
 
             projectDal.Add(Project);
             CloseDialogAndRefreshProjectList();
@@ -168,7 +186,19 @@ namespace ProjectModule.ViewModels
         private void RefreshProjectList()
         {
             Project = null;
-            Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type)));
+            switch (NavigatePath)
+            {
+                case "RealEstatePage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type)));
+                    break;
+                case "RegistrationPage":
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "2".Equals(p.Type)));
+                    break;
+                default:
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "-1".Equals(p.Type)));
+                    break;
+            }
+           
         }
     }
 }

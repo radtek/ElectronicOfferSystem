@@ -1,5 +1,4 @@
-﻿using Prism.Regions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +16,13 @@ using System.Windows.Shapes;
 namespace RegistrationModule.Views
 {
     /// <summary>
-    /// RegistrationPage.xaml 的交互逻辑
+    /// FileManagerPage.xaml 的交互逻辑
     /// </summary>
-    public partial class RegistrationPage : UserControl
+    public partial class FileManagerPage : UserControl
     {
-        public RegistrationPage(IRegionManager regionManager)
+        public FileManagerPage()
         {
             InitializeComponent();
-
-            // view discovery
-            regionManager.RegisterViewWithRegion("RegistrationToolBarRegion", typeof(RegistrationToolBar));
-            regionManager.RegisterViewWithRegion("TransferPageRegion", typeof(TransferPage));
         }
     }
 }

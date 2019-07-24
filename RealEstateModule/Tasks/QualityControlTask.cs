@@ -37,6 +37,7 @@ namespace RealEstateModule.Tasks
                 Task task = new Task(() =>
                 {
                     QualityControl qualityControl = new QualityControl();
+                    qualityControl.Project = Project;
                     try
                     {
                         ErrorMsg.AddRange(qualityControl.Check());
@@ -65,8 +66,10 @@ namespace RealEstateModule.Tasks
                             else
                             {
 
-                                TaskInfoDialog.Messages.Add("质检通过");
-
+                                TaskInfoDialog.Messages.Add("质检合格");
+                                ProjectDal projectDal = new ProjectDal();
+                                Project.State = "1";
+                                projectDal.Modify(Project);
                             }
                         }, null);
                     });

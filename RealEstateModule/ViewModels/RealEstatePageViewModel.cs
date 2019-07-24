@@ -6,12 +6,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
@@ -120,11 +115,14 @@ namespace RealEstateModule.ViewModels
 
         private void Navigate(string navigatePath)
         {
+            if (navigatePath == null) return;
+            if (Project == null) return;
+            // 若不是楼盘项目，返回
+            if (!"1".Equals(Project.Type)) return;
             // 加载该项目的数据
             Project = ProjectDal.InitialRealEstateProject(Project);
 
-            if (navigatePath == null) return;
-            if (Project == null) return;
+
             NavigatePath = navigatePath;
             Businesses = new ObservableCollection<Business>();
             switch (navigatePath)
@@ -180,13 +178,12 @@ namespace RealEstateModule.ViewModels
 
             }
 
-           
-
             // 页面跳转
             var parameters = new NavigationParameters();
             parameters.Add("Project", Project);
             RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
         }
+
         private void NavigationComplete(NavigationResult result)
         {
             //System.Windows.MessageBox.Show(String.Format("Navigation to {0} complete. ", result.Context.Uri));

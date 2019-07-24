@@ -15,6 +15,8 @@ namespace RegistrationModule
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<RegistrationPage>();
+            containerRegistry.RegisterForNavigation<TransferPage>();
+            containerRegistry.RegisterForNavigation<FileManagerPage>();
         }
     }
 }

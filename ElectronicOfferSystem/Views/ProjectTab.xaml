@@ -42,13 +42,13 @@
                                  IsChecked="False"
                                  Cursor="Hand"
                                  Content="登记业务项目" />
-                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                    <!--<RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
                                  CommandParameter="SettingPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="设置" />
+                                 Content="设置" />-->
                 </StackPanel>
                 <Button Style="{StaticResource MaterialDesignRaisedButton}"
                         materialDesign:ButtonProgressAssist.Value="-1"

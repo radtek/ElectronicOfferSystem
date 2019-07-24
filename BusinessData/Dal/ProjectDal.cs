@@ -35,5 +35,19 @@ namespace BusinessData.Dal
             }
             return project;
         }
+
+        public Project InitialRegistrationProject(Project project)
+        {
+            if (project == null)
+            {
+                return null;
+            }
+
+            if ("2".Equals(project.Type))
+            {
+
+            }
+            return project;
+        }
     }
 }
