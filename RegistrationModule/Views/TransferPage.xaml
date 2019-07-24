@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RegistrationModule.Views"
+             xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
@@ -22,11 +23,19 @@
                 <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
+
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="IsEditable" Value="False"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <materialDesign:DrawerHost Margin="0" BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <!-- 隐藏框 -->
             <materialDesign:DrawerHost.TopDrawerContent>
                 <GroupBox Header="开发商信息" Style="{DynamicResource MaterialDesignGroupBox}"
                           Margin="2" materialDesign:ShadowAssist.ShadowDepth="Depth3"
@@ -67,60 +76,84 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Floor.MYC}"
+                        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Project.ProjectName}"
                                  materialDesign:HintAssist.Hint="项目名称" />
-                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Floor.MYC}"
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Project.DeveloperName}"
                                  materialDesign:HintAssist.Hint="开发商名称" />
-                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Floor.MYC}"
+                        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Transfer.ContractNum}"
                                  materialDesign:HintAssist.Hint="批量合同号" />
                         <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}"
-                                Command="{Binding AddOrEditDeveloperCommand}" 
-                               Content="确认"/>
+                                Command="{Binding EditTransferCommand}" 
+                               Content="确认修改"/>
                     </Grid>
                 </GroupBox>
             </materialDesign:DrawerHost.TopDrawerContent>
+            <!-- 隐藏框 End -->
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <!-- List -->
-                <Grid Grid.Column="0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                        <StackPanel  Margin="8 0 2 0">
-                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                <!-- Left -->
+                <materialDesign:Card Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <!-- Top -->
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0"
+                                          Height="40" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                            <TextBlock Margin="20,10,0,0" 
+                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                               Text="申请人列表"/>
+                        </materialDesign:ColorZone>
+
+                        <!-- List -->
+                        <Grid Grid.Row="1">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                <StackPanel  Margin="8 0 2 0">
+                                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              Cursor="Hand"
-                              Name="BusinessList"
-                              ItemsSource="{Binding Businesses}">
-                                <i:Interaction.Triggers>
-                                    
-                                </i:Interaction.Triggers>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" FontSize="15" />
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="新增" Command="{Binding AddBusinessCommand}" >
-                                            <MenuItem.Icon>
-                                                <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
-                                            </MenuItem.Icon>
-                                        </MenuItem>
-                                        <MenuItem Header="删除选中项" Command="{Binding DelBusinessCommand}" >
-                                            <MenuItem.Icon>
-                                                <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
-                                            </MenuItem.Icon>
-                                        </MenuItem>
-                                    </ContextMenu>
-                                </ListView.ContextMenu>
-                            </ListView>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-                <!-- List End -->
+                              Cursor="Hand" Name="ApplicantList"
+                              ItemsSource="{Binding Applicants}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectApplicantCommand}"
+                                                       CommandParameter="{Binding ElementName=ApplicantList}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding SQRXM}" FontSize="15" />
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <ListView.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="新增" Command="{Binding AddApplicantCommand}" >
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="删除选中项" Command="{Binding DelApplicantCommand}" >
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </ListView.ContextMenu>
+                                    </ListView>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                        <!-- List End -->
+
+                    </Grid>
+                </materialDesign:Card>
+                <!-- Left End -->
+
 
                 <!-- Main -->
                 <Grid Grid.Column="1">
@@ -142,6 +175,9 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Button Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                                     CommandParameter="{x:Static Dock.Top}"
@@ -149,12 +185,124 @@
                                     Grid.Row="0" Grid.Column="1" Margin="4">
                                 <materialDesign:PackIcon Kind="ArrowDown" />
                             </Button>
+                            <TextBox Grid.Row="1" Grid.Column="0" 
+                                     materialDesign:HintAssist.Hint="不动产单元号*" >
+                                <TextBox.Text>
+                                    <Binding Path="Applicant.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
+                                             NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox Grid.Row="1" Grid.Column="1" 
+                                     materialDesign:HintAssist.Hint="不动产权证号*" >
+                                <TextBox.Text>
+                                    <Binding Path="Applicant.BDCQZH" UpdateSourceTrigger="PropertyChanged" 
+                                             NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox Grid.Row="1" Grid.Column="2" 
+                                     materialDesign:HintAssist.Hint="申请人姓名*" >
+                                <TextBox.Text>
+                                    <Binding Path="Applicant.SQRXM" UpdateSourceTrigger="PropertyChanged" 
+                                             NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding XBList}" 
+                                      materialDesign:HintAssist.Hint="性别"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.XB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding XBList}" 
+                                      materialDesign:HintAssist.Hint="证件类型"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.ZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="2" Grid.Column="2" 
+                                     materialDesign:HintAssist.Hint="证件号*" >
+                                <TextBox.Text>
+                                    <Binding Path="Applicant.ZJH" UpdateSourceTrigger="PropertyChanged" 
+                                             NotifyOnValidationError="True">
+                                        <Binding.ValidationRules>
+                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding GJDQList}" 
+                                      materialDesign:HintAssist.Hint="国家地区"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.GJDQ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding HJSZSSList}" 
+                                      materialDesign:HintAssist.Hint="户籍所在省市"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.HJSZSS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="3" Grid.Column="2" ItemsSource="{Binding SSHYList}" 
+                                      materialDesign:HintAssist.Hint="所属行业"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.SSHY,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Applicant.GZDW}"
+                                     materialDesign:HintAssist.Hint="工作单位"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Applicant.TXDZ}"
+                                     materialDesign:HintAssist.Hint="通讯地址"/>
+                            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Applicant.LXDH}"
+                                     materialDesign:HintAssist.Hint="联系电话"/>
+                            <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Applicant.DZYJ}"
+                                     materialDesign:HintAssist.Hint="电子邮件"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Applicant.YZBM}"
+                                     materialDesign:HintAssist.Hint="邮政编码"/>
+                            <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding ZJLXList}" 
+                                      materialDesign:HintAssist.Hint="法定代表人证件类型"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.FRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Applicant.FRXM}"
+                                     materialDesign:HintAssist.Hint="法定代表人"/>
+                            <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding QLRLXList}" 
+                                      materialDesign:HintAssist.Hint="申请人类型"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.SQRLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Applicant.FRDH}"
+                                     materialDesign:HintAssist.Hint="法定代表人电话"/>
+                            <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Applicant.DLRXM}"
+                                     materialDesign:HintAssist.Hint="代理人姓名"/>
+                            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Applicant.DLJGMC}"
+                                     materialDesign:HintAssist.Hint="代理机构名称"/>
+                            <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Applicant.DLRDH}"
+                                     materialDesign:HintAssist.Hint="代理人电话"/>
+                            <ComboBox Grid.Row="8" Grid.Column="0" ItemsSource="{Binding GYFSList}" 
+                                      materialDesign:HintAssist.Hint="共有方式"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.GYFS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="8" Grid.Column="1" ItemsSource="{Binding SQRLXList}" 
+                                      materialDesign:HintAssist.Hint="申请人类别"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.SQRLB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="8" Grid.Column="2" ItemsSource="{Binding SFList}" 
+                                      materialDesign:HintAssist.Hint="是否持证人"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.SFCZR,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <ComboBox Grid.Row="9" Grid.Column="0" ItemsSource="{Binding BDCDYLXList}" 
+                                      materialDesign:HintAssist.Hint="不动产单元类型"
+                                      SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                                      SelectedValue="{Binding Applicant.BDCDYLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Grid.Row="10" Grid.Column="1" 
+                                    Command="{Binding AddOrEditApplicantCommand}" 
+                                    Content="{Binding ApplicantButtonContent}" />
                         </Grid>
                     </ScrollViewer>
                 </Grid>
                 <!-- Main End -->
 
             </Grid>
+
         </materialDesign:DrawerHost>
     </Grid>
 </UserControl>

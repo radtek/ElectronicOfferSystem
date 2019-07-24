@@ -14,6 +14,9 @@
     <EntitySet Name="Household" EntityType="ElectronicOfferSystem.Store.Household" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.Store.BDCS_CONST" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.Store.BDCS_CONSTCLS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Applicant" EntityType="ElectronicOfferSystem.Store.Applicant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transfer" EntityType="ElectronicOfferSystem.Store.Transfer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FileInfo" EntityType="ElectronicOfferSystem.Store.FileInfo" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="Project">
     <Key>
@@ -235,6 +238,67 @@
     <Property Name="CREATETIME" Type="datetime" Nullable="true" />
     <Property Name="MODIFYTIME" Type="datetime" Nullable="true" />
   </EntityType>
+  <EntityType Name="Applicant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="BDCDYH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="BDCQZH" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="SQRXM" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="XB" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZJLX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZJLXMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ZJH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FZJG" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="GJDQ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="HJSZSS" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="GZDW" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SSHY" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="LXDH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="TXDZ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YZBM" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DZYJ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FRXM" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FRZJLX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="FRDH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SQRLX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SQRLXMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DLRXM" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DLJGMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DLRDH" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="YXBZ" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="GYFS" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SQRLB" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SQRLBMC" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="SFCZR" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="BDCDYLX" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Transfer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="DeveloperName" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="ContractNum" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="true" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="FileInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProjectID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Path" Type="nvarchar" Nullable="true" />
+    <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="true" />
+  </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -248,6 +312,9 @@
           <EntitySet Name="Household" EntityType="ElectronicOfferSystem.Household" />
           <EntitySet Name="BDCS_CONST" EntityType="ElectronicOfferSystem.CONST" />
           <EntitySet Name="BDCS_CONSTCLS" EntityType="ElectronicOfferSystem.CONSTCLS" />
+          <EntitySet Name="Applicant" EntityType="ElectronicOfferSystem.Applicant" />
+          <EntitySet Name="Transfer" EntityType="ElectronicOfferSystem.Transfer" />
+          <EntitySet Name="FileInfo" EntityType="ElectronicOfferSystem.FileInfo" />
         </EntityContainer>
         <EntityType Name="Project">
           <Documentation>
@@ -1127,6 +1194,252 @@
           <Property Name="CREATETIME" Type="DateTime" Precision="3" />
           <Property Name="MODIFYTIME" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Applicant">
+          <Documentation>
+            <Summary>申请人</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ProjectID" Type="Guid" Nullable="false" >
+            <Documentation>
+              <Summary>项目ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BDCDYH" Type="String" Nullable="false" MaxLength="60" >
+            <Documentation>
+              <Summary>不动产单元号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BDCQZH" Type="String" Nullable="false" MaxLength="60" >
+            <Documentation>
+              <Summary>不动产权证号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SQRXM" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>申请人姓名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="XB" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>性别</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ZJLX" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>证件类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ZJLXMC" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>证件类型名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ZJH" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>证件号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FZJG" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>发证机关</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="GJDQ" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>国家地区</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="HJSZSS" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>户籍所在省市</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="GZDW" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>工作单位</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SSHY" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>所属行业</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LXDH" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>联系电话</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="TXDZ" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>通讯地址</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="YZBM" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>邮政编码</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DZYJ" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>电子邮件</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FRXM" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>法人姓名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FRZJLX" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>法人证件类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FRDH" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>法人电话</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SQRLX" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>申请人类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SQRLXMC" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>申请人类型名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DLRXM" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>代理人姓名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DLJGMC" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>代理机构名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DLRDH" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>代理人电话</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="YXBZ" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>有效标志</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="GYFS" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>共有方式</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SQRLB" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>申请人类别</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SQRLBMC" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>申请人类别名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SFCZR" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>是否持证人</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BDCDYLX" Type="String" Nullable="true" MaxLength="60">
+            <Documentation>
+              <Summary>不动产单元类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UpdateTime" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Documentation>
+            <Summary>转移信息</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ProjectID" Type="Guid" Nullable="false" >
+            <Documentation>
+              <Summary>项目ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ProjectName" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>项目名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DeveloperName" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>开发商名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ContractNum" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>批量合同号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UpdateTime" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>更新时间</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="300" >
+            <Documentation>
+              <Summary>备注</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="FileInfo">
+          <Documentation>
+            <Summary>附件信息</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" >
+            <Documentation>
+              <Summary>ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ProjectID" Type="Guid" Nullable="false" >
+            <Documentation>
+              <Summary>项目ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Name" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>文件名称</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Path" Type="String" Nullable="true" >
+            <Documentation>
+              <Summary>存储路径</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Type" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>文件类型</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UpdateTime" Type="DateTime" Nullable="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1358,6 +1671,70 @@
           <ScalarProperty Name="BZ" ColumnName="BZ" />
           <ScalarProperty Name="CREATETIME" ColumnName="CREATETIME" />
           <ScalarProperty Name="MODIFYTIME" ColumnName="MODIFYTIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applicant">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Applicant)">
+        <MappingFragment StoreEntitySet="Applicant">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="BDCDYH" ColumnName="BDCDYH" />
+          <ScalarProperty Name="BDCQZH" ColumnName="BDCQZH" />
+          <ScalarProperty Name="SQRXM" ColumnName="SQRXM" />
+          <ScalarProperty Name="XB" ColumnName="XB" />
+          <ScalarProperty Name="ZJLX" ColumnName="ZJLX" />
+          <ScalarProperty Name="ZJLXMC" ColumnName="ZJLXMC" />
+          <ScalarProperty Name="ZJH" ColumnName="ZJH" />
+          <ScalarProperty Name="FZJG" ColumnName="FZJG" />
+          <ScalarProperty Name="GJDQ" ColumnName="GJDQ" />
+          <ScalarProperty Name="HJSZSS" ColumnName="HJSZSS" />
+          <ScalarProperty Name="GZDW" ColumnName="GZDW" />
+          <ScalarProperty Name="SSHY" ColumnName="SSHY" />
+          <ScalarProperty Name="LXDH" ColumnName="LXDH" />
+          <ScalarProperty Name="TXDZ" ColumnName="TXDZ" />
+          <ScalarProperty Name="YZBM" ColumnName="YZBM" />
+          <ScalarProperty Name="DZYJ" ColumnName="DZYJ" />
+          <ScalarProperty Name="FRXM" ColumnName="FRXM" />
+          <ScalarProperty Name="FRZJLX" ColumnName="FRZJLX" />
+          <ScalarProperty Name="FRDH" ColumnName="FRDH" />
+          <ScalarProperty Name="SQRLX" ColumnName="SQRLX" />
+          <ScalarProperty Name="SQRLXMC" ColumnName="SQRLXMC" />
+          <ScalarProperty Name="DLRXM" ColumnName="DLRXM" />
+          <ScalarProperty Name="DLJGMC" ColumnName="DLJGMC" />
+          <ScalarProperty Name="DLRDH" ColumnName="DLRDH" />
+          <ScalarProperty Name="YXBZ" ColumnName="YXBZ" />
+          <ScalarProperty Name="GYFS" ColumnName="GYFS" />
+          <ScalarProperty Name="SQRLB" ColumnName="SQRLB" />
+          <ScalarProperty Name="SQRLBMC" ColumnName="SQRLBMC" />
+          <ScalarProperty Name="SFCZR" ColumnName="SFCZR" />
+          <ScalarProperty Name="BDCDYLX" ColumnName="BDCDYLX" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transfer">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.Transfer)">
+        <MappingFragment StoreEntitySet="Transfer">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+          <ScalarProperty Name="ContractNum" ColumnName="ContractNum" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.FileInfo)">
+        <MappingFragment StoreEntitySet="FileInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

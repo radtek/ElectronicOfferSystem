@@ -55,31 +55,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessData.cs" />
+    <Compile Include="Dal\ApplicantDal.cs" />
     <Compile Include="Dal\BaseDal.cs" />
     <Compile Include="Dal\CONSTCLSDal.cs" />
     <Compile Include="Dal\CONSTDal.cs" />
     <Compile Include="Dal\ElectronicOfferSystemDB.Context.cs" />
+    <Compile Include="Dal\Entities\Applicant.cs" />
     <Compile Include="Dal\Entities\CONST.cs" />
     <Compile Include="Dal\Entities\CONSTCLS.cs" />
+    <Compile Include="Dal\Entities\FileInfo.cs" />
     <Compile Include="Dal\Entities\Floor.cs" />
     <Compile Include="Dal\Entities\Household.cs" />
     <Compile Include="Dal\Entities\LogicalBuilding.cs" />
     <Compile Include="Dal\Entities\NaturalBuilding.cs" />
     <Compile Include="Dal\Entities\Obligee.cs" />
     <Compile Include="Dal\Entities\Project.cs" />
+    <Compile Include="Dal\Entities\Transfer.cs" />
+    <Compile Include="Dal\FileInfoDal.cs" />
     <Compile Include="Dal\FloorDal.cs" />
     <Compile Include="Dal\HouseholdDal.cs" />
     <Compile Include="Dal\LogicalBuildingDal.cs" />
     <Compile Include="Dal\NaturalBuildingDal.cs" />
     <Compile Include="Dal\ObligeeDal.cs" />
     <Compile Include="Dal\ProjectDal.cs" />
+    <Compile Include="Dal\TransferDal.cs" />
+    <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\Business.cs" />
+    <Compile Include="Models\FileInfo.cs" />
     <Compile Include="Models\Floor.cs" />
     <Compile Include="Models\Household.cs" />
     <Compile Include="Models\LogicalBuilding.cs" />
     <Compile Include="Models\NaturalBuilding.cs" />
     <Compile Include="Models\Obligee.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Transfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

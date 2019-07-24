@@ -35,7 +35,11 @@ namespace BusinessData.Dal
             }
             return project;
         }
-
+        /// <summary>
+        /// 初始化登记业务项目
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
         public Project InitialRegistrationProject(Project project)
         {
             if (project == null)
@@ -45,7 +49,12 @@ namespace BusinessData.Dal
 
             if ("2".Equals(project.Type))
             {
-
+                ApplicantDal applicantDal = new ApplicantDal();
+                TransferDal transferDal = new TransferDal();
+                FileInfoDal fileInfoDal = new FileInfoDal();
+                project.Applicants = applicantDal.GetListBy(a => a.ProjectID == project.ID);
+                project.Transfer = transferDal.GetModel(t => t.ProjectID == project.ID);
+                project.FileInfos = fileInfoDal.GetListBy(f => f.ProjectID == project.ID);
             }
             return project;
         }

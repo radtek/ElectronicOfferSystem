@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/23/2019 22:08:01
+-- Date Created: 07/24/2019 13:18:50
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -259,6 +259,67 @@ CREATE TABLE [BDCS_CONSTCLS] (
 );
 GO
 
+-- Creating table 'Applicant'
+CREATE TABLE [Applicant] (
+    [ID] uniqueidentifier  NOT NULL,
+    [ProjectID] uniqueidentifier  NOT NULL,
+    [BDCDYH] nvarchar(60)  NOT NULL,
+    [BDCQZH] nvarchar(60)  NOT NULL,
+    [SQRXM] nvarchar(60)  NULL,
+    [XB] nvarchar(60)  NULL,
+    [ZJLX] nvarchar(60)  NULL,
+    [ZJLXMC] nvarchar(60)  NULL,
+    [ZJH] nvarchar(60)  NULL,
+    [FZJG] nvarchar(60)  NULL,
+    [GJDQ] nvarchar(60)  NULL,
+    [HJSZSS] nvarchar(60)  NULL,
+    [GZDW] nvarchar(60)  NULL,
+    [SSHY] nvarchar(60)  NULL,
+    [LXDH] nvarchar(60)  NULL,
+    [TXDZ] nvarchar(60)  NULL,
+    [YZBM] nvarchar(60)  NULL,
+    [DZYJ] nvarchar(60)  NULL,
+    [FRXM] nvarchar(60)  NULL,
+    [FRZJLX] nvarchar(60)  NULL,
+    [FRDH] nvarchar(60)  NULL,
+    [SQRLX] nvarchar(60)  NULL,
+    [SQRLXMC] nvarchar(60)  NULL,
+    [DLRXM] nvarchar(60)  NULL,
+    [DLJGMC] nvarchar(60)  NULL,
+    [DLRDH] nvarchar(60)  NULL,
+    [YXBZ] nvarchar(60)  NULL,
+    [GYFS] nvarchar(60)  NULL,
+    [SQRLB] nvarchar(60)  NULL,
+    [SQRLBMC] nvarchar(60)  NULL,
+    [SFCZR] nvarchar(60)  NULL,
+    [BDCDYLX] nvarchar(60)  NULL,
+    [UpdateTime] datetime  NULL
+);
+GO
+
+-- Creating table 'Transfer'
+CREATE TABLE [Transfer] (
+    [ID] uniqueidentifier  NOT NULL,
+    [ProjectID] uniqueidentifier  NOT NULL,
+    [ProjectName] nvarchar(60)  NULL,
+    [DeveloperName] nvarchar(60)  NULL,
+    [ContractNum] nvarchar(60)  NULL,
+    [UpdateTime] datetime  NULL,
+    [Remark] nvarchar(300)  NULL
+);
+GO
+
+-- Creating table 'FileInfo'
+CREATE TABLE [FileInfo] (
+    [ID] uniqueidentifier  NOT NULL,
+    [ProjectID] uniqueidentifier  NOT NULL,
+    [Name] nvarchar(60)  NULL,
+    [Path] nvarchar(4000)  NULL,
+    [Type] nvarchar(60)  NULL,
+    [UpdateTime] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -309,6 +370,24 @@ GO
 ALTER TABLE [BDCS_CONSTCLS]
 ADD CONSTRAINT [PK_BDCS_CONSTCLS]
     PRIMARY KEY ([MBBSM] );
+GO
+
+-- Creating primary key on [ID] in table 'Applicant'
+ALTER TABLE [Applicant]
+ADD CONSTRAINT [PK_Applicant]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'Transfer'
+ALTER TABLE [Transfer]
+ADD CONSTRAINT [PK_Transfer]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'FileInfo'
+ALTER TABLE [FileInfo]
+ADD CONSTRAINT [PK_FileInfo]
+    PRIMARY KEY ([ID] );
 GO
 
 -- --------------------------------------------------

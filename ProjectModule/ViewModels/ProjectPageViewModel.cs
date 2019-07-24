@@ -157,6 +157,13 @@ namespace ProjectModule.ViewModels
                     break;
                 case "RegistrationPage":
                     Project.Type = "2";
+                    // 同时新增转移信息
+                    TransferDal transferDal = new TransferDal();
+                    Transfer transfer = new Transfer();
+                    transfer.ID = Guid.NewGuid();
+                    transfer.ProjectID = Project.ID;
+                    transfer.UpdateTime = DateTime.Now;
+                    transferDal.Add(transfer);
                     break;
                 default:
                     Project.Type = "-1";

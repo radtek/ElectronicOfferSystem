@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusinessData
+namespace ElectronicOfferSystem
 {
     using System;
     using System.Data.Entity;
@@ -18,7 +18,6 @@ namespace BusinessData
         public ElectronicOfferSystemDBContainer()
             : base("name=ElectronicOfferSystemDBContainer")
         {
-            Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
