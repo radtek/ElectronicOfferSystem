@@ -89,14 +89,14 @@ namespace RealEstateModule.Tasks
                             else
                             {
                                 // 压缩成报盘
-                                //ZipHelper zipHelper = new ZipHelper();
-                                //int start = SaveFileName.LastIndexOf("\\");
-                                //int end = SaveFileName.LastIndexOf(".");
-                                //String filename = SaveFileName.Substring(start + 1, end - start);
-                                ////zipClass.ZipFile(SaveFileName, filename + ".bpf", 5, 500);
-                                //zipHelper.ZipFile(SaveFileName, SaveFileName.Replace(".xls", ".bpf"), 5, 500);
-                                //// 删除excel
-                                //File.Delete(SaveFileName);
+                                ZipHelper zipHelper = new ZipHelper();
+                                int start = SaveFileName.LastIndexOf("\\");
+                                int end = SaveFileName.LastIndexOf(".");
+                                String filename = SaveFileName.Substring(start + 1, end - start);
+                                //zipClass.ZipFile(SaveFileName, filename + ".bpf", 5, 500);
+                                zipHelper.ZipFile(SaveFileName, SaveFileName.Replace(".xls", ".bpf"), 5, 500);
+                                // 删除excel
+                                File.Delete(SaveFileName);
                                 TaskInfoDialog.Messages.Add("导出成功");
                                 //errordoalog.CloseDialog();
                             }

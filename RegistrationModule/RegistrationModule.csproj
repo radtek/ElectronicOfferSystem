@@ -63,7 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\FileManagerPageViewMode.cs" />
+    <Compile Include="ViewModels\FileManagerPageViewModel.cs" />
     <Compile Include="ViewModels\RegistrationPageViewModel.cs" />
     <Compile Include="ViewModels\RegistrationToolBarViewModel.cs" />
     <Compile Include="ViewModels\TransferPageViewModel.cs" />

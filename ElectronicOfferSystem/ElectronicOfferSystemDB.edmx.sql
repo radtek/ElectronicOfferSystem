@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/24/2019 13:18:50
+-- Date Created: 07/24/2019 21:18:22
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -33,6 +33,12 @@ GO
     DROP TABLE [BDCS_CONST];
 GO
     DROP TABLE [BDCS_CONSTCLS];
+GO
+    DROP TABLE [Applicant];
+GO
+    DROP TABLE [Transfer];
+GO
+    DROP TABLE [FileInfo];
 GO
 
 -- --------------------------------------------------

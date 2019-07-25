@@ -53,7 +53,9 @@
     <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
+    <Compile Include="Events\NotifyPropertyChangedExtension.cs" />
     <Compile Include="GlobalCommands.cs" />
+    <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -27,7 +27,8 @@ namespace RegistrationModule.Views
 
             // view discovery
             regionManager.RegisterViewWithRegion("RegistrationToolBarRegion", typeof(RegistrationToolBar));
-            regionManager.RegisterViewWithRegion("TransferPageRegion", typeof(TransferPage));
+            //regionManager.RegisterViewWithRegion("TransferPageRegion", typeof(TransferPage));
+            //regionManager.RegisterViewWithRegion("FileManagerPageRegion", typeof(FileManagerPage));
         }
     }
 }

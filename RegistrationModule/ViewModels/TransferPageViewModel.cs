@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Utils;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -57,6 +58,99 @@ namespace RegistrationModule.ViewModels
             set { SetProperty(ref transfer, value); }
         }
 
+        #region 字典
+        /// <summary>
+        /// 性别
+        /// </summary>
+        private Dictionary<string, string> xbList;
+        public Dictionary<string, string> XBList
+        {
+            get { return xbList; }
+            set { SetProperty(ref xbList, value); }
+        }
+        /// <summary>
+        /// 证件类型
+        /// </summary>
+        private Dictionary<string, string> zjlxList;
+        public Dictionary<string, string> ZJLXList
+        {
+            get { return zjlxList; }
+            set { SetProperty(ref zjlxList, value); }
+        }
+        /// <summary>
+        /// 国家
+        /// </summary>
+        private Dictionary<string, string> gjList;
+        public Dictionary<string, string> GJList
+        {
+            get { return gjList; }
+            set { SetProperty(ref gjList, value); }
+        }
+        /// <summary>
+        /// 省市
+        /// </summary>
+        private Dictionary<string, string> ssList;
+        public Dictionary<string, string> SSList
+        {
+            get { return ssList; }
+            set { SetProperty(ref ssList, value); }
+        }
+        /// <summary>
+        /// 所属行业
+        /// </summary>
+        private Dictionary<string, string> sshyList;
+        public Dictionary<string, string> SSHYList
+        {
+            get { return sshyList; }
+            set { SetProperty(ref sshyList, value); }
+        }
+        /// <summary>
+        /// 权利人类型
+        /// </summary>
+        private Dictionary<string, string> qlrlxList;
+        public Dictionary<string, string> QLRLXList
+        {
+            get { return qlrlxList; }
+            set { SetProperty(ref qlrlxList, value); }
+        }
+        /// <summary>
+        /// 共有方式
+        /// </summary>
+        private Dictionary<string, string> gyfsList;
+        public Dictionary<string, string> GYFSList
+        {
+            get { return gyfsList; }
+            set { SetProperty(ref gyfsList, value); }
+        }
+        /// <summary>
+        /// 申请人类别
+        /// </summary>
+        private Dictionary<string, string> sqrlbList;
+        public Dictionary<string, string> SQRLBList
+        {
+            get { return sqrlbList; }
+            set { SetProperty(ref sqrlbList, value); }
+        }
+        /// <summary>
+        /// 不动产单元类型
+        /// </summary>
+        private Dictionary<string, string> bdcdylxList;
+        public Dictionary<string, string> BDCDYLXList
+        {
+            get { return bdcdylxList; }
+            set { SetProperty(ref bdcdylxList, value); }
+        }
+        /// <summary>
+        /// 是否
+        /// </summary>
+        private Dictionary<string, string> sfList;
+        public Dictionary<string, string> SFList
+        {
+            get { return sfList; }
+            set { SetProperty(ref sfList, value); }
+        }
+        #endregion
+
 
         /// <summary>
         /// 项目
@@ -80,6 +174,8 @@ namespace RegistrationModule.ViewModels
             ApplicantDal = new ApplicantDal();
             TransferDal = new TransferDal();
 
+            // 初始化下拉框
+            InitialComboBoxList();
 
             AddOrEditApplicantCommand = new DelegateCommand(()=> {
                 switch (ApplicantButtonContent)
@@ -214,6 +310,41 @@ namespace RegistrationModule.ViewModels
             ApplicantDal.Del(Applicant);
             // 重新加载页面
             OnNavigatedTo(NavigationContext);
+        }
+
+        private void InitialComboBoxList()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic = DictionaryUtil.GetDictionaryByName("性别");
+            XBList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("证件类型");
+            ZJLXList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("国家和地区");
+            GJList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("省市");
+            SSList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("所属行业");
+            SSHYList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("权利人类型");
+            QLRLXList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("共有方式");
+            GYFSList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("申请人类别");
+            SQRLBList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("不动产单元类型");
+            BDCDYLXList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("是否字典");
+            SFList = dic;
+
         }
     }
 }

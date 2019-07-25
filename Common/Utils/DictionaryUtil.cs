@@ -46,6 +46,12 @@ namespace Common.Utils
                 dic.Add("8", "集体建设用地使用权 / 房屋（构筑物）所有权");
                 return dic;
             }
+            if ("不动产单元类型".Equals(name))
+            {
+                dic.Add("1", "实测户");
+                dic.Add("2", "预测户");
+                dic.Add("3", "使用权宗地");
+            }
 
             CONSTCLSDal constclsDal = new CONSTCLSDal();
             CONSTDal constDal = new CONSTDal();

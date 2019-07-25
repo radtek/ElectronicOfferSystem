@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegistrationModule.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace RegistrationModule.Views
         public FileManagerPage()
         {
             InitializeComponent();
+            DataContext = new FileManagerPageViewMode();
+        }
+        public FileManagerPageViewMode ViewModel => DataContext as FileManagerPageViewMode;
+        /// <summary>
+        /// TreesView's SelectedItem is read-only. Hence we can't bind it. There is a way to obtain a selected item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (ViewModel == null) return;
+
+            ViewModel.SelectedTreeNode = e.NewValue;
         }
     }
 }

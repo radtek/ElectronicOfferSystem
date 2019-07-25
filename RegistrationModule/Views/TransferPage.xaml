@@ -222,7 +222,7 @@
                                       materialDesign:HintAssist.Hint="性别"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.XB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding XBList}" 
+                            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ZJLXList}" 
                                       materialDesign:HintAssist.Hint="证件类型"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.ZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -237,11 +237,11 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <ComboBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding GJDQList}" 
+                            <ComboBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding GJList}" 
                                       materialDesign:HintAssist.Hint="国家地区"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.GJDQ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding HJSZSSList}" 
+                            <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding SSList}" 
                                       materialDesign:HintAssist.Hint="户籍所在省市"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.HJSZSS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -281,7 +281,7 @@
                                       materialDesign:HintAssist.Hint="共有方式"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.GYFS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            <ComboBox Grid.Row="8" Grid.Column="1" ItemsSource="{Binding SQRLXList}" 
+                            <ComboBox Grid.Row="8" Grid.Column="1" ItemsSource="{Binding SQRLBList}" 
                                       materialDesign:HintAssist.Hint="申请人类别"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.SQRLB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

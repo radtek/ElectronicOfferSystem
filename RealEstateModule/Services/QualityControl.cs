@@ -118,7 +118,7 @@ namespace RealEstateModule.Services
                 CheckNUllAndInt(table, index, LogicalBuilding.DSCS, "地上层数");
                 CheckNUllAndInt(table, index, LogicalBuilding.DXCS, "地下层数");
                 // 表间检查
-                int count = Project.NaturalBuildings.Count(n=>LogicalBuilding.ZRZH.Equals(n.BSM));
+                int count = Project.NaturalBuildings.Count(n=>LogicalBuilding.ZRZH.Equals(n.ZRZH));
                 if (count < 1)
                 {
                     ErrorMsg.Add("逻辑幢表中，自然幢号【" + LogicalBuilding.ZRZH + "】没有对应的自然幢");
@@ -156,7 +156,7 @@ namespace RealEstateModule.Services
                 CheckNUllAndNumic(table, index, Floor.CG, "层高");
                 CheckNUllAndNumic(table, index, Floor.SPTYMJ, "水平投影面积");
                 // 表间检查
-                int count = Project.NaturalBuildings.Count(n => Floor.ZRZH.Equals(n.BSM));
+                int count = Project.NaturalBuildings.Count(n => Floor.ZRZH.Equals(n.ZRZH));
                 if (count < 1)
                 {
                     ErrorMsg.Add("层表中，自然幢号【" + Floor.ZRZH + "】没有对应的自然幢");
@@ -209,7 +209,7 @@ namespace RealEstateModule.Services
                 CheckNUllAndNumic(table, index, Household.GYTDMJ, "共有土地面积");
                 CheckNUllAndNumic(table, index, Household.FDCJYJG, "房地产交易价格");
                 // 表间检查
-                int count = Project.NaturalBuildings.Count(n => Household.ZRZH.Equals(n.BSM));
+                int count = Project.NaturalBuildings.Count(n => Household.ZRZH.Equals(n.ZRZH));
                 if (count < 1)
                 {
                     ErrorMsg.Add("户表中，自然幢号【" + Household.ZRZH + "】没有对应的自然幢");
