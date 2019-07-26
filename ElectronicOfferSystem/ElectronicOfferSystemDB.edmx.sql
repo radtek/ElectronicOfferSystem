@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/24/2019 21:18:22
+-- Date Created: 07/25/2019 15:39:29
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -39,6 +39,8 @@ GO
     DROP TABLE [Transfer];
 GO
     DROP TABLE [FileInfo];
+GO
+    DROP TABLE [FileType];
 GO
 
 -- --------------------------------------------------
@@ -322,7 +324,15 @@ CREATE TABLE [FileInfo] (
     [Name] nvarchar(60)  NULL,
     [Path] nvarchar(4000)  NULL,
     [Type] nvarchar(60)  NULL,
-    [UpdateTime] datetime  NULL
+    [UpdateTime] datetime  NULL,
+    [Extension] nvarchar(60)  NOT NULL
+);
+GO
+
+-- Creating table 'FileType'
+CREATE TABLE [FileType] (
+    [ID] nvarchar(4000)  NOT NULL,
+    [Name] nvarchar(60)  NULL
 );
 GO
 
@@ -393,6 +403,12 @@ GO
 -- Creating primary key on [ID] in table 'FileInfo'
 ALTER TABLE [FileInfo]
 ADD CONSTRAINT [PK_FileInfo]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'FileType'
+ALTER TABLE [FileType]
+ADD CONSTRAINT [PK_FileType]
     PRIMARY KEY ([ID] );
 GO
 

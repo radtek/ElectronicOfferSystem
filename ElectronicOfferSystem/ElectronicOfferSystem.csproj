@@ -59,6 +59,12 @@
     <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.SqlServerCompact.6.2.0\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
     </Reference>
+    <Reference Include="HeBianGu.Base.WpfBase, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HeBianGu.Base.WpfBase.1.0.3\lib\net45\HeBianGu.Base.WpfBase.dll</HintPath>
+    </Reference>
+    <Reference Include="HeBianGu.General.WpfControlLib, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HeBianGu.General.WpfControlLib.1.0.3\lib\net45\HeBianGu.General.WpfControlLib.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -147,6 +153,9 @@
     <Compile Include="FileInfo.cs">
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FileType.cs">
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Floor.cs">
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
@@ -169,6 +178,7 @@
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ProjectTabViewModel.cs" />
     <Compile Include="ViewModels\WindowTopViewModel.cs" />
     <Compile Include="Views\IndexPage.xaml.cs">
@@ -176,6 +186,9 @@
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuBar.xaml.cs">
+      <DependentUpon>MenuBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectTab.xaml.cs">
       <DependentUpon>ProjectTab.xaml</DependentUpon>
@@ -210,6 +223,7 @@
     <None Include="ElectronicOfferSystemDB.edmx.diagram">
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -263,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

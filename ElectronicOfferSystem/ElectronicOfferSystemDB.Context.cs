@@ -36,5 +36,6 @@ namespace ElectronicOfferSystem
         public virtual DbSet<Applicant> Applicant { get; set; }
         public virtual DbSet<Transfer> Transfer { get; set; }
         public virtual DbSet<FileInfo> FileInfo { get; set; }
+        public virtual DbSet<FileType> FileType { get; set; }
     }
 }

@@ -20,6 +20,7 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <!-- Top -->
         <Grid Grid.Row="0">
             <ContentControl prism:RegionManager.RegionName="WindowTopRegion"
@@ -41,7 +42,7 @@
                 </Grid.RowDefinitions>
                 <!-- Menu -->
                 <Grid Grid.Row="0">
-                    <Menu IsMainMenu="True" Margin="0 -10 0 0" Height="40" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+                    <!--<Menu IsMainMenu="True" Margin="0 -10 0 0" Height="40" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
                         <MenuItem Header="楼盘表项目">
                             <MenuItem Header="新建">
                                 <MenuItem.Icon>
@@ -131,7 +132,8 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </MenuItem>
-                    </Menu>
+                    </Menu>-->
+                    <ContentControl Margin="0" prism:RegionManager.RegionName="MenuBarRegion"/>
                 </Grid>
                 <!-- Menu End -->
 

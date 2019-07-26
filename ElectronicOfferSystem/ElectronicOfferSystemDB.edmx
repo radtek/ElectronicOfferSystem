@@ -17,6 +17,7 @@
     <EntitySet Name="Applicant" EntityType="ElectronicOfferSystem.Store.Applicant" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Transfer" EntityType="ElectronicOfferSystem.Store.Transfer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FileInfo" EntityType="ElectronicOfferSystem.Store.FileInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FileType" EntityType="ElectronicOfferSystem.Store.FileType" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="Project">
     <Key>
@@ -298,6 +299,14 @@
     <Property Name="Path" Type="nvarchar" Nullable="true" />
     <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="UpdateTime" Type="datetime" Nullable="true" />
+    <Property Name="Extension" Type="nvarchar" Nullable="false" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="FileType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="60" />
   </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -315,6 +324,7 @@
           <EntitySet Name="Applicant" EntityType="ElectronicOfferSystem.Applicant" />
           <EntitySet Name="Transfer" EntityType="ElectronicOfferSystem.Transfer" />
           <EntitySet Name="FileInfo" EntityType="ElectronicOfferSystem.FileInfo" />
+          <EntitySet Name="FileType" EntityType="ElectronicOfferSystem.FileType" />
         </EntityContainer>
         <EntityType Name="Project">
           <Documentation>
@@ -1439,6 +1449,25 @@
             </Documentation>
           </Property>
           <Property Name="UpdateTime" Type="DateTime" Nullable="true" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="60" >
+            <Documentation>
+              <Summary>文件扩展名</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="FileType">
+          <Documentation>
+            <Summary>附件类型</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>类型名称</Summary>
+            </Documentation>
+          </Property>
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1735,6 +1764,15 @@
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileType">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.FileType)">
+        <MappingFragment StoreEntitySet="FileType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

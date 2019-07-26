@@ -15,7 +15,8 @@
         <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="0.625" PointY="1.875" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Applicant" Width="1.5" PointX="1" PointY="3.875" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Transfer" Width="1.875" PointX="3" PointY="3.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.FileInfo" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.FileInfo" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.FileType" Width="1.5" PointX="4.625" PointY="1.875" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,4 +1,5 @@
-﻿using ElectronicOfferSystem.ViewModels;
+﻿using Common.ViewModels;
+using ElectronicOfferSystem.ViewModels;
 using Prism.Regions;
 using ProjectModule.Views;
 using System;
@@ -25,8 +26,10 @@ namespace ElectronicOfferSystem.Views
         public MainWindow(IRegionManager regionManager)
         {
             InitializeComponent();
+
             // View Discovery
             regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
+            regionManager.RegisterViewWithRegion("MenuBarRegion", typeof(MenuBar));
             regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
             regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
 

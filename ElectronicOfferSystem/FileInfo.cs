@@ -41,5 +41,9 @@ namespace ElectronicOfferSystem
         /// 
         /// </summary>
         public Nullable<System.DateTime> UpdateTime { get; set; }
+        /// <summary>
+        /// 文件扩展名
+        /// </summary>
+        public string Extension { get; set; }
     }
 }
