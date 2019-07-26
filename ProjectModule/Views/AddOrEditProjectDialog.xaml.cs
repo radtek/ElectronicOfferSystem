@@ -26,7 +26,7 @@ namespace ProjectModule.Views
         public AddOrEditProjectDialog()
         {
             InitializeComponent();
-            DataContext = new AddOrEditProjectDialogViewModel();
+            DataContext = AddOrEditProjectDialogViewModel.getInstance();
         }
        
     }

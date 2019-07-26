@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -53,8 +54,9 @@ namespace RealEstateModule.ViewModels
         #region 质检
         private async void QualityControl()
         {
-            if (Project == null)
+            if (Project == null || !"1".Equals(Project.Type))
             {
+                MessageBox.Show("请选择楼盘项目", "提示");
                 return;
             }
             var view = new TaskInfoDialog();
@@ -92,7 +94,7 @@ namespace RealEstateModule.ViewModels
             String FullPath = FileTextBox.Text;
             if (string.IsNullOrEmpty(FullPath))
             {
-                //DevComponents.DotNetBar.MessageBoxEx.Show(this, "请选择文件", "提示");
+                MessageBox.Show("请选择文件", "提示");
                 return;
             }
             // 判断项目名称是否已经存在
@@ -101,7 +103,7 @@ namespace RealEstateModule.ViewModels
             var projectList = projectDal.GetListBy(p => p.ProjectName == projectName && p.Type == "1");
             if (projectList.Count > 0)
             {
-                //DevComponents.DotNetBar.MessageBoxEx.Show("项目名称已存在，请更改excel名称");
+                MessageBox.Show("项目名称已存在，请更改excel名称", "提示");
                 return;
             }
             // 开始导入
@@ -127,11 +129,13 @@ namespace RealEstateModule.ViewModels
             if (Project == null)
             {
                 // 请选择导出项目
+                MessageBox.Show("请选择导出项目", "提示");
                 return;
             }
             if ("0".Equals(Project.State))
             {
                 // 请确认此项目质检合格
+                MessageBox.Show("请确认此项目质检合格", "提示");
                 return;
             }
             var view = new ExportRealEstateDialog();

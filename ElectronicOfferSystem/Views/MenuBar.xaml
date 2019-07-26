@@ -36,12 +36,12 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="登记业务项目">
-                <MenuItem Header="新建">
+                <MenuItem Header="新建" Command="{Binding AddRegistrationProjectCommand}"  CommandParameter="新增项目">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="AddCircle" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="另存为">
+                <MenuItem Header="另存为" Command="{Binding ExportRegistrationProjectCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="ContentSave" />
                     </MenuItem.Icon>
@@ -54,7 +54,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="检查">
-                <MenuItem Header="楼盘表质检">
+                <MenuItem Header="楼盘表质检" Command="{Binding QualityControlCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="ShieldCheck" />
                     </MenuItem.Icon>

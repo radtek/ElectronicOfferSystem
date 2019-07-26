@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RegistrationModule.ViewModels.Dialogs
 {
-    class ExportRegistrationDialogViewModel : BindableBase
+    public class ExportRegistrationDialogViewModel : BindableBase
     {
         private string filePath;
         public string FilePath

@@ -12,12 +12,37 @@ using System.Threading.Tasks;
 
 namespace ProjectModule.ViewModels
 {
-    class AddOrEditProjectDialogViewModel : BindableBase
+    public class AddOrEditProjectDialogViewModel : BindableBase
     {
+
+        private Project project;
+        public Project Project
+        {
+            get { return project; }
+            set { SetProperty(ref project, value); }
+        }
+
+        private string dialogTitle;
+        public string DialogTitle
+        {
+            get { return dialogTitle; }
+            set
+            {
+                SetProperty(ref dialogTitle, value);
+            }
+        }
+
+        private static AddOrEditProjectDialogViewModel addOrEditProjectDialogViewModel = new AddOrEditProjectDialogViewModel();
+
 
         public AddOrEditProjectDialogViewModel()
         {
-                      
+           // Project = new Project();
+        }
+
+        public static AddOrEditProjectDialogViewModel getInstance()
+        {
+            return addOrEditProjectDialogViewModel;
         }
 
     }

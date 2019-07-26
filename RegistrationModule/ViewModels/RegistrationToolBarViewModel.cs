@@ -15,7 +15,7 @@ using System.Windows.Controls;
 
 namespace RegistrationModule.ViewModels
 {
-    class RegistrationToolBarViewModel : BindableBase
+    public class RegistrationToolBarViewModel : BindableBase
     {
         public Project Project { get; set; }
         public ExportRegistrationDialogViewModel ExportRegistrationViewModel { get; set; }

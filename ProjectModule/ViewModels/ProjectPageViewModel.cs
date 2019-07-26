@@ -1,6 +1,8 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Views;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -48,12 +50,13 @@ namespace ProjectModule.ViewModels
             set { SetProperty(ref projects, value); }
         }
 
+        public AddOrEditProjectDialogViewModel AddOrEditProjectDialog { get; set; }
+
         /// <summary>
         /// 页面导航
         /// </summary>
         public DelegateCommand<string> NavigateCommand { get; set; }
         public DelegateCommand<string> OpenAddOrEditProjectDialogCommand { get; private set; }
-        public DelegateCommand AcceptCommand { get; set; }
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand DelProjectCommand { get; set; }
@@ -61,6 +64,8 @@ namespace ProjectModule.ViewModels
 
         public ProjectPageViewModel()
         {
+            AddOrEditProjectDialog = AddOrEditProjectDialogViewModel.getInstance();
+
             // 页面导航
             NavigateCommand = new DelegateCommand<string>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
@@ -83,29 +88,19 @@ namespace ProjectModule.ViewModels
                 Project = null;
             });
 
-            // 模态框的确认按钮
-            AcceptCommand = new DelegateCommand(()=> {
-                switch (DialogTitle)
-                {
-                    case "新增项目":
-                        AddProject();
-                        break;
-                    case "编辑项目":
-                        UpdProject();
-                        break;
-                    default:
-                        break;
-                }
-            });
-
             // 打开模态框
-            OpenAddOrEditProjectDialogCommand = new DelegateCommand<string>((string dialogTitle) => {
+            OpenAddOrEditProjectDialogCommand = new DelegateCommand<string>(async (string dialogTitle) => {
                 DialogTitle = dialogTitle;
                 if ("新增项目".Equals(DialogTitle))
                 {
                     Project = new Project();
                 }
-                IsAddOrEditProjectDialogOpen = true;
+                var view = new AddOrEditProjectDialog();
+                AddOrEditProjectDialog.DialogTitle = DialogTitle;
+                AddOrEditProjectDialog.Project = Project;
+                var result = await DialogHost.Show(view, "RootDialog", ConfirAddOrEditProjectEventHandler);
+                
+                //IsAddOrEditProjectDialogOpen = true;
             });
             // 删除项目
             DelProjectCommand = new DelegateCommand(()=> {
@@ -114,6 +109,41 @@ namespace ProjectModule.ViewModels
                 RefreshProjectList();
             });
 
+
+        }
+
+        private void OpenedEventHandler(object sender, DialogOpenedEventArgs eventargs)
+        {
+            AddOrEditProjectDialog.DialogTitle = DialogTitle;
+            AddOrEditProjectDialog.Project = Project;
+        }
+
+        private void ConfirAddOrEditProjectEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            if ((bool)eventArgs.Parameter == false) return;
+
+            //cancel the close...
+            eventArgs.Cancel();
+
+            DialogTitle = AddOrEditProjectDialog.DialogTitle;
+            Project = AddOrEditProjectDialog.Project;
+            switch (DialogTitle)
+            {
+                case "新增项目":
+                    AddProject();
+                    break;
+                case "编辑项目":
+                    UpdProject();
+                    break;
+                default:
+                    break;
+            }
+
+            // 显示加载1s
+            eventArgs.Session.UpdateContent(new SampleProgressDialog());
+            Task.Delay(TimeSpan.FromSeconds(1))
+                .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
+                    TaskScheduler.FromCurrentSynchronizationContext());
 
         }
 
