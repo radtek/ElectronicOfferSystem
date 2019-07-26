@@ -22,7 +22,7 @@ using System.Windows.Input;
 
 namespace RealEstateModule.ViewModels
 {
-    class RealEstateToolBarViewModel : BindableBase
+    public class RealEstateToolBarViewModel : BindableBase
     {
         public Project Project { get; set; }
 
@@ -136,6 +136,7 @@ namespace RealEstateModule.ViewModels
             }
             var view = new ExportRealEstateDialog();
             ExportRealEstateViewModel = new ExportRealEstateDialogViewModel();
+            ExportRealEstateViewModel.Project = Project;
             //show the dialog
             var result = await DialogHost.Show(view, "RootDialog", ConfirExportRealEstateEventHandler);
 

@@ -25,65 +25,13 @@
     </UserControl.Resources>
     <Grid>
         <materialDesign:DialogHost IsOpen="{Binding IsAddOrEditProjectDialogOpen}">
-            <materialDesign:DialogHost.DialogContent>
-                <!--Dialog Content-->
+            <!--<materialDesign:DialogHost.DialogContent>
+                --><!--Dialog Content-->
                 <!--<ContentControl prism:RegionManager.RegionName="AddOrEditProjectDialogRegion"/>-->
-                <Grid>
-                    <materialDesign:ColorZone Mode="Light"
-                                                    Name="ProjectDialog"
-                                                    materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                        <StackPanel Margin="16">
-                            <TextBlock Text="{Binding DialogTitle}" HorizontalAlignment="Center" TextAlignment="Center" />
-                            <TextBox materialDesign:HintAssist.Hint="项目名称"
-                                     Margin="0 10 0 0"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                                <TextBox.Text>
-                                    <Binding Path="Project.ProjectName"  
-                                             UpdateSourceTrigger="PropertyChanged" 
-                                             NotifyOnValidationError="True">
-                                        <Binding.ValidationRules>
-                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <TextBox materialDesign:HintAssist.Hint="开发商名称"
-                                     Margin="0 10 0 0"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     Text="{Binding Project.DeveloperName}"/>
-                            <TextBox materialDesign:HintAssist.Hint="备注"
-                                     Margin="0 10 0 0"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     Text="{Binding Project.Remark}"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            IsDefault="True"
-                            Margin="0 8 8 0"
-                            Command="{Binding AcceptCommand}">
-                                    <Button.CommandParameter>
-                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                            True
-                                        </system:Boolean>
-                                    </Button.CommandParameter>
-                                    确定
-                                </Button>
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            IsCancel="True"
-                            Margin="0 8 8 0"
-                            Command="{Binding CancelAddOrEditProjectDialogCommand}">
-                                    <Button.CommandParameter>
-                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                            False
-                                        </system:Boolean>
-                                    </Button.CommandParameter>
-                                    取消
-                                </Button>
-                            </StackPanel>
-                        </StackPanel>
-                    </materialDesign:ColorZone>
-                </Grid>
-                <!--Dialog Content End--> 
-            </materialDesign:DialogHost.DialogContent>
+            
+                    
+                <!--Dialog Content End--><!-- 
+            </materialDesign:DialogHost.DialogContent>-->
             <Grid>
 
                 <materialDesign:Card>

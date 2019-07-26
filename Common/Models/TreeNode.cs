@@ -9,6 +9,7 @@ namespace Common.Models
 {
     public class TreeNode
     {
+        public string ID { get; set; }
         public string Name { get; set; } // 名称
 
         public ObservableCollection<TreeNode> Children { get; set; }
@@ -16,12 +17,14 @@ namespace Common.Models
         public bool IsExpanded { get; set; } // 节点是否展开
         public bool IsSelected { get; set; } // 节点是否选中
 
-        public TreeNode(string name)
+        public TreeNode(string id, string name)
         {
+            ID = id;
             Name = name;
         }
-        public TreeNode(string name, params TreeNode[] children)
+        public TreeNode(string id, string name, params TreeNode[] children)
         {
+            ID = id;
             Name = name;
             Children = new ObservableCollection<TreeNode>(children);
         }

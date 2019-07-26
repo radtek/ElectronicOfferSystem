@@ -1,26 +1,21 @@
 ﻿using BusinessData;
-using BusinessData.Dal;
-using Common.Utils;
 using Common.ViewModels;
-using RealEstateModule.Services.Export;
+using RegistrationModule.Services.Export;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealEstateModule.Tasks
+namespace RegistrationModule.Tasks
 {
-    public class ExportRealEstateTask
+    public class ExportRegistrationTask
     {
         /// <summary>
         /// 保存路径
         /// </summary>
         public string SaveFileName { get; set; }
-
-        public string TemplateFileName { get; set; }
         /// <summary>
         /// 项目
         /// </summary>
@@ -29,13 +24,14 @@ namespace RealEstateModule.Tasks
         public List<string> ErrorMsg { get; set; }
 
         public TaskInfoDialogViewModel TaskInfoDialog { get; set; }
+        public ExportRegistration exportRegistration { get; set; }
 
-        public ExportRealEstateBook book { get; set; }
-
-        public ExportRealEstateTask()
+        public ExportRegistrationTask()
         {
             ErrorMsg = new List<string>();
+            exportRegistration = new ExportRegistration();
         }
+
         public void Ongo()
         {
             try
@@ -43,31 +39,20 @@ namespace RealEstateModule.Tasks
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
                 TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
 
-                NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
-                LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
-                FloorDal floorDal = new FloorDal();
-                HouseholdDal householdDal = new HouseholdDal();
-                ObligeeDal obligeeDal = new ObligeeDal();
 
                 Task task = new Task(() =>
                 {
                     try
                     {
-                        book.NaturalBuildings = naturalBuildingDal.GetListBy(n => n.ProjectID == Project.ID);
-                        book.LogicalBuildings = logicalBuildingDal.GetListBy(l => l.ProjectID == Project.ID);
-                        book.Floors = floorDal.GetListBy(f => f.ProjectID == Project.ID);
-                        book.Households = householdDal.GetListBy(h => h.ProjectID == Project.ID);
-                        book.Obligees = obligeeDal.GetListBy(o => o.ProjectID == Project.ID);
-
-                        book.Open(TemplateFileName);
-                        book.Write();
-                        book.SaveAsExcel(SaveFileName);
+                        exportRegistration.SaveFileName = SaveFileName;
+                        exportRegistration.Project = Project;
+                        exportRegistration.write();
                     }
                     catch (Exception ex)
                     {
                         ErrorMsg.Add(ex.Message);
                     }
-                    ErrorMsg.AddRange(book.ErrorMsg);
+                    ErrorMsg.AddRange(exportRegistration.ErrorMsg);
                 });
                 task.Start();
                 task.ContinueWith(t =>
@@ -88,18 +73,11 @@ namespace RealEstateModule.Tasks
                                 TaskInfoDialog.Messages.Add("导出失败");
                             else
                             {
-                                // 压缩成报盘
-                                ZipHelper zipHelper = new ZipHelper();
-                                //zipClass.ZipFile(SaveFileName, filename + ".bpf", 5, 500);
-                                zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
-                                // 删除excel
-                                File.Delete(SaveFileName.Replace(".bpf", ".xls"));
                                 TaskInfoDialog.Messages.Add("导出成功");
-                                //errordoalog.CloseDialog();
                             }
                         }, null);
                     });
-                   
+
                 });
 
             }

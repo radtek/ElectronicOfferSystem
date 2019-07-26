@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace ProjectModule.ViewModels
 {
-    class ProjectPageViewModel : BindableBase
+    public class ProjectPageViewModel : BindableBase
     {
         private Project project;
         public Project Project

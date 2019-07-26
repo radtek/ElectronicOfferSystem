@@ -25,6 +25,8 @@ namespace RegistrationModule.Views
         {
             InitializeComponent();
             DataContext = new FileManagerPageViewMode();
+            var messageQueue = SnackbarThree.MessageQueue;
+            ViewModel.MessageQueue = messageQueue;
         }
         public FileManagerPageViewMode ViewModel => DataContext as FileManagerPageViewMode;
         /// <summary>
@@ -37,6 +39,7 @@ namespace RegistrationModule.Views
             if (ViewModel == null) return;
 
             ViewModel.SelectedTreeNode = e.NewValue;
+            ViewModel.SelectNodeCommand.Execute();
         }
     }
 }

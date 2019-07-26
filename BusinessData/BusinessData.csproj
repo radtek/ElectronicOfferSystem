@@ -64,6 +64,7 @@
     <Compile Include="Dal\Entities\CONST.cs" />
     <Compile Include="Dal\Entities\CONSTCLS.cs" />
     <Compile Include="Dal\Entities\FileInfo.cs" />
+    <Compile Include="Dal\Entities\FileType.cs" />
     <Compile Include="Dal\Entities\Floor.cs" />
     <Compile Include="Dal\Entities\Household.cs" />
     <Compile Include="Dal\Entities\LogicalBuilding.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Dal\Entities\Project.cs" />
     <Compile Include="Dal\Entities\Transfer.cs" />
     <Compile Include="Dal\FileInfoDal.cs" />
+    <Compile Include="Dal\FileTypeDal.cs" />
     <Compile Include="Dal\FloorDal.cs" />
     <Compile Include="Dal\HouseholdDal.cs" />
     <Compile Include="Dal\LogicalBuildingDal.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\FileInfo.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Floor.cs" />
     <Compile Include="Models\Household.cs" />
     <Compile Include="Models\LogicalBuilding.cs" />

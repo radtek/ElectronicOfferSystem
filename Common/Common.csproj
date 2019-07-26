@@ -55,6 +55,7 @@
     <Compile Include="Events\FilePathEvent.cs" />
     <Compile Include="Events\NotifyPropertyChangedExtension.cs" />
     <Compile Include="GlobalCommands.cs" />
+    <Compile Include="Models\RegistrationResult.cs" />
     <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -84,8 +85,16 @@
     <Compile Include="ValidationRules\NumbericAndNotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\NumbericValidationRule.cs" />
     <Compile Include="ValidationRules\SimpleDateValidationRule.cs" />
+    <Compile Include="ViewModels\MessageDialogViewModel.cs" />
     <Compile Include="ViewModels\SampleDialogViewModel.cs" />
+    <Compile Include="ViewModels\SnackBarMessage.cs" />
     <Compile Include="ViewModels\TaskInfoDialogViewModel.cs" />
+    <Compile Include="Views\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OMessageBox.xaml.cs">
+      <DependentUpon>OMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SampleDialog.xaml.cs">
       <DependentUpon>SampleDialog.xaml</DependentUpon>
     </Compile>
@@ -118,6 +127,9 @@
     <PackageReference Include="Aspose.Words">
       <Version>19.7.0</Version>
     </PackageReference>
+    <PackageReference Include="Expression.Interaction">
+      <Version>3.0.40218</Version>
+    </PackageReference>
     <PackageReference Include="MaterialDesignThemes">
       <Version>2.6.0</Version>
     </PackageReference>
@@ -134,6 +146,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\MessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SampleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

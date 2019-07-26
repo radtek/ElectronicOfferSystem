@@ -23,13 +23,16 @@
 
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
+                                                 x:Name="SnackbarThree" />
         <!-- Left -->
-        <TreeView Width="250" Padding="0" Margin="0" BorderThickness="1" 
+        <TreeView Width="250" Padding="0" Margin="0" BorderThickness="1" Grid.Column="0"
                   ItemsSource="{Binding TreeList}"
                   SelectedItemChanged="TreeView_SelectedItemChanged">
             <!--<i:Interaction.Triggers>
@@ -63,12 +66,27 @@
                   ItemsSource="{Binding FileInfoList}"
                   CanUserSortColumns="True"
                   CanUserAddRows="False" AutoGenerateColumns="False" >
-
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding ID}" Header="附件编码"/>
-                    <DataGridTextColumn Binding="{Binding Name}" Header="附件名称" />
-                    <DataGridTextColumn Binding="{Binding Path}" Header="相对路径"/>
-                    <DataGridTextColumn Binding="{Binding UpdateTime}" Header="更新时间"/>
+                    <DataGridTextColumn Binding="{Binding ID}" Header="附件编码" 
+                                        MinWidth="50" Width="150" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="附件名称" 
+                                        MinWidth="50" Width="150"  />
+                    <DataGridTextColumn Binding="{Binding Extension}" Header="附件扩展名"
+                                        MinWidth="50"/>
+                    <DataGridTextColumn Binding="{Binding Path}" Header="相对路径" Width="150"
+                                        MinWidth="50"/>
+                    <DataGridTextColumn Binding="{Binding UpdateTime, StringFormat='yyyy-MM-dd HH:mm:ss'}" 
+                                        MinWidth="50" Header="更新时间" />
+                    <!--操作-->
+                    <DataGridTemplateColumn Header="操作" MinWidth="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="删除"
+                                        Command="{Binding DataContext.DelFileCommand}"
+                                        CommandParameter="{Binding ID}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
