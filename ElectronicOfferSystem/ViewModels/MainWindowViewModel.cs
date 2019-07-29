@@ -12,7 +12,7 @@ namespace ElectronicOfferSystem.ViewModels
     {
         public MainWindowViewModel()
         {
-
+            
         }
     }
 }

@@ -8,6 +8,7 @@
              xmlns:prism="http://prismlibrary.com/"  
              xmlns:local="clr-namespace:ProjectModule.Views"
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              xmlns:common="clr-namespace:Common;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -19,125 +20,161 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
+            <ToolTip x:Key="ProjectInfoTip">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="开发商：" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=DeveloperName}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="备注：" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Remark}"/>
+                    <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="更新时间：" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=UpdateTime,StringFormat='{}{yyyy/MM/dd}'}"/>-->
+                </Grid>
+            </ToolTip>
+            <Style x:Key="InforTipStyle" TargetType="{x:Type ListViewItem}">
+                <Setter Property="ToolTip" Value="{Binding Source={StaticResource ProjectInfoTip}}" />
+            </Style>
+            <Converts:StateToIcon x:Key="StateToIcon"/>
+            <Converts:StateToColor x:Key="StateToColor"/>
+            <Converts:StateToTip x:Key="StateToTip"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <materialDesign:DialogHost IsOpen="{Binding IsAddOrEditProjectDialogOpen}">
-            <!--<materialDesign:DialogHost.DialogContent>
-                --><!--Dialog Content-->
-                <!--<ContentControl prism:RegionManager.RegionName="AddOrEditProjectDialogRegion"/>-->
-            
-                    
-                <!--Dialog Content End--><!-- 
-            </materialDesign:DialogHost.DialogContent>-->
-            <Grid>
+    <Grid Background="#f5f5f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="42"/>
+        </Grid.RowDefinitions>
 
-                <materialDesign:Card>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="50" />
-                        </Grid.RowDefinitions>
-                        <!-- Top -->
-                        <materialDesign:ColorZone Mode="PrimaryMid"
-                                          Name="NavBar"
-                                          Height="40" 
-                                          materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                            <TextBlock Margin="20,10,0,0" 
-                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                               Text="项目列表"/>
-                        </materialDesign:ColorZone>
-                        <Button Grid.Row="0"
+        <!-- Top -->
+        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Height="40"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2">
+
+            <TextBlock Margin="20,10,0,0" Text="项目列表"
+                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+        </materialDesign:ColorZone>
+        <Button Grid.Row="0" IsEnabled="{Binding IsBtnEnabled}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                         Command="{Binding OpenAddOrEditProjectDialogCommand}"
                         CommandParameter="新增项目"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="0 0 16 -10"
+                        Margin="0 0 10 0"
                         ToolTip="新增项目">
-                            <materialDesign:PackIcon Kind="Plus" />
-                        </Button>
-                        <!-- Top End -->
-
-                        <!-- ProjectList -->
-                        <Grid Grid.Row="1" Margin="0 15 0 0">
-                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                            <StackPanel  Margin="8 0 2 0">
-                                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              Cursor="Hand"
-                              Name="ProjectList"
-                              ItemsSource="{Binding Projects}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectProjectCommand}"
+            <materialDesign:PackIcon Kind="Plus" />
+        </Button>
+        <materialDesign:ColorZone Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+            Mode="Standard" Width="135" CornerRadius="6"
+            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+            Margin="2 0 0 -8">
+            <DockPanel  LastChildFill="True">
+                <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                        Command="{Binding SearchProjectCommand}"
+                        ToolTip="按项目名称搜索"
+                        Margin="8 -6 8 -6"
+                        DockPanel.Dock="Right">
+                    <materialDesign:PackIcon Kind="Magnify" />
+                </Button>
+                <TextBox FontSize="11" Text="{Binding SearchProjectName}"
+                         VerticalAlignment="Center" FontStyle="Italic"
+                         materialDesign:HintAssist.Hint="搜索" Margin="5 0 0 0"
+                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                         BorderThickness="0"/>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <!-- Top End -->
+        <!-- ProjectList -->
+        <Grid Grid.Row="1" Margin="0 10 0 0">
+            <ListView ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Cursor="Hand" Name="ProjectList"
+                      ItemsSource="{Binding Projects}"
+                      >
+                <!--SelectedItem="{Binding SelectedProject, Mode=TwoWay}"-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectProjectCommand}"
                                                        CommandParameter="{Binding ElementName=ProjectList}" />
-                                        </i:EventTrigger>
-                                            <i:EventTrigger EventName="MouseDoubleClick">
-                                                <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
                                                                        CommandParameter="编辑项目"/>
-                                            </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" >
-                                                    <!--<TextBlock Text="{Binding ID}" Visibility="Collapsed" />-->
-                                                    <TextBlock Text="{Binding ProjectName}" FontSize="15" />
-                                                    <TextBlock Text="{Binding DeveloperName}" FontSize="10" Foreground="Gray" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <ListView.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem Header="新增" Command="{Binding OpenAddOrEditProjectDialogCommand}"
-                                                          CommandParameter="新增项目" >
-                                                    <MenuItem.Icon>
-                                                        <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="编辑选中项" Command="{Binding OpenAddOrEditProjectDialogCommand}"
-                                                          CommandParameter="编辑项目" >
-                                                <MenuItem.Icon>
-                                                        <materialDesign:PackIcon Kind="SquareEditOutline" />
-                                                </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="删除选中项" Command="{Binding DelProjectCommand}" >
-                                                    <MenuItem.Icon>
-                                                        <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                            </ContextMenu>
-                                        </ListView.ContextMenu>
-                                    </ListView>
-                            
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon Kind="{Binding State,Converter={StaticResource StateToIcon}}" 
+                                                         Foreground="{Binding State,Converter={StaticResource StateToColor}}"
+                                                         ToolTipService.ToolTip="{Binding State,Converter={StaticResource StateToTip}}"/>
+                            <TextBlock Text="{Binding ProjectName}" FontSize="15" Width="130"
+                                               Margin="5 0 0 0"
+                                               ToolTipService.ToolTip="{Binding Source={StaticResource ProjectInfoTip}}" />
                         </StackPanel>
-                        </ScrollViewer>
-                        </Grid>
-                        <!-- ProjectList End -->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="新增" Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                                  CommandParameter="新增项目" IsEnabled="{Binding IsBtnEnabled}" >
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="编辑选中项" Command="{Binding OpenAddOrEditProjectDialogCommand}"
+                                  CommandParameter="编辑项目" IsEnabled="{Binding IsBtnEnabled}">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="SquareEditOutline" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="删除选中项" Command="{Binding DelProjectCommand}"
+                                  IsEnabled="{Binding IsBtnEnabled}">
+                            <MenuItem.Icon>
+                                <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+        </Grid>
+        <!-- ProjectList End -->
 
-                        <!-- Bottom -->
-                        <StackPanel HorizontalAlignment="Right"
-                            Grid.Row="2"
-                            Orientation="Horizontal"
-                            Margin="8">
-                            <Button Style="{StaticResource MaterialDesignToolButton}"
-                                    Command="{Binding DelProjectCommand}"
+        <!-- Bottom -->
+        <materialDesign:ColorZone Mode="Light" Grid.Row="2" Height="40"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Orientation="Horizontal" Margin="8 0">
+                <Button Style="{StaticResource MaterialDesignToolButton}"
+                        Command="{Binding DelProjectCommand}"
+                        IsEnabled="{Binding IsBtnEnabled}"
                             Width="30"
                             Padding="2 0 2 0"
                             Foreground="Red"
                             materialDesign:RippleAssist.IsCentered="True"
                             ToolTip="删除项目">
-                                <materialDesign:PackIcon Kind="DeleteForever" />
-                            </Button>
+                    <materialDesign:PackIcon Kind="DeleteForever" />
+                </Button>
+                <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}"
+                                     Padding="2 0 2 0">
+                    <StackPanel>
+                        <Button Content="按名称排序" />
+                        <Button Content="按更新时间排序" />
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <!-- Bottom End -->
 
-                        </StackPanel>
-                        <!-- Bottom End -->
-                    </Grid>
-                </materialDesign:Card>
-            </Grid>
-        </materialDesign:DialogHost>
     </Grid>
 </UserControl>

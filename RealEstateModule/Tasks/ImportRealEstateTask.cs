@@ -173,7 +173,7 @@ namespace RealEstateModule.Tasks
             }
             catch (Exception ex)
             {
-                //DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
+                throw;
             }
         }
 

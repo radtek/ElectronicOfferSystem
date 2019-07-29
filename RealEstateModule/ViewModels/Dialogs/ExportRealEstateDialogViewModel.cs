@@ -1,4 +1,5 @@
 ﻿using BusinessData;
+using Common.ViewModels;
 using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RealEstateModule.ViewModels.Dialogs
 {
@@ -48,7 +50,7 @@ namespace RealEstateModule.ViewModels.Dialogs
                     }
                     else
                     {
-                        //DevComponents.DotNetBar.MessageBoxEx.Show(this, "文件夹路径不能为空", "提示");
+                        MessageBox.Show("文件夹路径不能为空", "提示");
                         return;
                     }
                 }
@@ -56,11 +58,20 @@ namespace RealEstateModule.ViewModels.Dialogs
 
             ExportRealEstateCommand = new DelegateCommand(()=> {
                 ExportRealEstateTask task = new ExportRealEstateTask();
-                task.SaveFileName = FilePath;
-                task.book = new ExportRealEstateBook();
-                task.TemplateFileName = System.AppDomain.CurrentDomain.BaseDirectory + @"Templates\补录-批量导入户数据模板.xlt";
-                task.Project = Project;
-                task.Ongo();
+                try
+                {
+                    task.SaveFileName = FilePath;
+                    task.book = new ExportRealEstateBook();
+                    task.TemplateFileName = System.AppDomain.CurrentDomain.BaseDirectory + @"Templates\补录-批量导入户数据模板.xlt";
+                    task.Project = Project;
+                    task.Ongo();
+                }
+                catch (Exception ex)
+                {
+                    ErrorDialogViewModel.getInstance().show(ex);
+                    return;
+                }
+
             });
         }
     }

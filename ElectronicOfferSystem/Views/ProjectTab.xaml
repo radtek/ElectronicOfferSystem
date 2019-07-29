@@ -34,7 +34,7 @@
                                  CommandParameter="RealEstatePage"
                                  Margin="4"
                                  Cursor="Hand"
-                                 Content="楼盘项目" />
+                                 Content="楼盘表项目" />
                 <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
                                  CommandParameter="RegistrationPage"

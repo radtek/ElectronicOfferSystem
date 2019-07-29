@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
         </ResourceDictionary>
@@ -94,49 +95,81 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- List -->
-                <Grid Grid.Column="0">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                        <StackPanel  Margin="8 0 2 0">
-                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              Cursor="Hand"
+                <Grid Grid.Column="0" Background="#f5f5f5" Margin="5 0 0 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <materialDesign:ColorZone Grid.Row="0" Mode="Standard"  CornerRadius="6"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                             Margin="2">
+                        <DockPanel LastChildFill="True">
+                            <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                                    ToolTip="搜索"
+                                    Margin="8 -6 8 -6"
+                                    DockPanel.Dock="Right">
+                                <materialDesign:PackIcon Kind="Magnify" />
+                            </Button>
+                            <TextBox FontSize="11" VerticalAlignment="Center" FontStyle="Italic"
+                                     materialDesign:HintAssist.Hint="搜索" Margin="5 0 0 0"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                     BorderThickness="0"/>
+                        </DockPanel>
+                    </materialDesign:ColorZone>
+                    <ListView ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Cursor="Hand" Grid.Row="1"
                               Name="BusinessList"
                               ItemsSource="{Binding Businesses}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectBusinessCommand}"
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectBusinessCommand}"
                                                        CommandParameter="{Binding ElementName=BusinessList}" />
-                                    </i:EventTrigger>
-                                    <!--<i:EventTrigger EventName="MouseDoubleClick">
+                            </i:EventTrigger>
+                            <!--<i:EventTrigger EventName="MouseDoubleClick">
                                         <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
                                                                        CommandParameter="编辑项目"/>
                                     </i:EventTrigger>-->
-                                </i:Interaction.Triggers>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <!--<StackPanel Orientation="Horizontal" Height="50" >
+                        </i:Interaction.Triggers>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <!--<StackPanel Orientation="Horizontal" Height="50" >
                                             <TextBlock Text="{Binding Name}" FontSize="15" />
                                         </StackPanel>-->
-                                        <TextBlock Text="{Binding Name}" FontSize="15" />
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="新增" Command="{Binding AddBusinessCommand}" >
-                                            <MenuItem.Icon>
-                                                <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
-                                            </MenuItem.Icon>
-                                        </MenuItem>
-                                        <MenuItem Header="删除选中项" Command="{Binding DelBusinessCommand}" >
-                                            <MenuItem.Icon>
-                                                <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
-                                            </MenuItem.Icon>
-                                        </MenuItem>
-                                    </ContextMenu>
-                                </ListView.ContextMenu>
-                            </ListView>
+                                <TextBlock Text="{Binding Name}" FontSize="15" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="新增" Command="{Binding AddBusinessCommand}" >
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="删除选中项" Command="{Binding DelBusinessCommand}" >
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                    <!-- Bottom -->
+                    <materialDesign:ColorZone Mode="Light" Grid.Row="2" Height="38"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Orientation="Horizontal" Margin="8 0">
+
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}"
+                                     Padding="2 0 2 0">
+                                <StackPanel>
+                                    <Button Content="按名称排序" />
+                                    <Button Content="按更新时间排序" />
+                                </StackPanel>
+                            </materialDesign:PopupBox>
                         </StackPanel>
-                    </ScrollViewer>
+                    </materialDesign:ColorZone>
+                    <!-- Bottom End -->
                 </Grid>
 
 

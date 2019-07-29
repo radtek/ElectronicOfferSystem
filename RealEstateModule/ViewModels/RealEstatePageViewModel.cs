@@ -2,16 +2,19 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Events;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
 {
-    class RealEstatePageViewModel : BindableBase
+    public class RealEstatePageViewModel : BindableBase
     {
         private Project project;
         public Project Project
@@ -31,8 +34,8 @@ namespace RealEstateModule.ViewModels
 
         public Business Business { get; set; }
 
-        private readonly IRegionManager RegionManager;
-        IEventAggregator EA;
+        private IRegionManager RegionManager;
+        private IEventAggregator EA;
         public DelegateCommand<string> BusinessNavCommand { get; private set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
@@ -49,7 +52,7 @@ namespace RealEstateModule.ViewModels
             // 导航到不同的业务数据页面
             BusinessNavCommand = new DelegateCommand<string>(Navigate);
             // 在业务表执行增删改之后
-            EA.GetEvent<PubSubEvent<string>>().Subscribe((navPage)=> {
+            EA.GetEvent<RefreshBusinessEvent>().Subscribe((navPage)=> {
                 BusinessNavCommand.Execute(navPage);
             });
 
@@ -78,7 +81,104 @@ namespace RealEstateModule.ViewModels
                 Navigate(NavigatePath);
             });
 
-            DelBusinessCommand = new DelegateCommand(() => {
+            DelBusinessCommand = new DelegateCommand(DelBusiness);
+        }
+
+        private void Navigate(string navigatePath)
+        {
+            if (navigatePath == null) return;
+            if (Project == null) return;
+            // 若不是楼盘项目，返回
+            if (!"1".Equals(Project.Type)) return;
+
+            // 点击业务的导航页后发送通知
+            EA.GetEvent<NavBusinessEvent>().Publish(navigatePath);
+            NavigatePath = navigatePath;
+            Businesses = new ObservableCollection<Business>();
+
+            try
+            {
+                // 加载该项目的数据
+                Project = ProjectDal.InitialRealEstateProject(Project);
+
+                switch (navigatePath)
+                {
+                    case "NaturalBuildingPage":
+                        // 加载数据列表
+                        foreach (NaturalBuilding naturalBuilding in Project.NaturalBuildings)
+                        {
+                            Business business = new Business();
+                            business.Name = naturalBuilding.ZRZH;
+                            business.NaturalBuilding = naturalBuilding;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case "LogicalBuildingPage":
+                        foreach (LogicalBuilding logicalBuilding in Project.LogicalBuildings)
+                        {
+                            Business business = new Business();
+                            business.Name = logicalBuilding.LJZH;
+                            business.LogicalBuilding = logicalBuilding;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case "FloorPage":
+                        foreach (Floor floor in Project.Floors)
+                        {
+                            Business business = new Business();
+                            business.Name = floor.CH;
+                            business.Floor = floor;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case "HouseholdPage":
+                        foreach (Household household in Project.Households)
+                        {
+                            Business business = new Business();
+                            business.Name = household.HBSM;
+                            business.Household = household;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case "ObligeePage":
+                        foreach (Obligee obligee in Project.Obligees)
+                        {
+                            Business business = new Business();
+                            business.Name = obligee.QLRMC;
+                            business.Obligee = obligee;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
+
+                // 页面跳转
+                var parameters = new NavigationParameters();
+                parameters.Add("Project", Project);
+                RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
+
+
+        }
+
+        private void NavigationComplete(NavigationResult result)
+        {
+            //System.Windows.MessageBox.Show(String.Format("Navigation to {0} complete. ", result.Context.Uri));
+            //Businesses = null;
+        }
+
+        private void DelBusiness()
+        {
+            try
+            {
                 switch (NavigatePath)
                 {
                     case "NaturalBuildingPage":
@@ -110,84 +210,13 @@ namespace RealEstateModule.ViewModels
                         break;
                 }
                 BusinessNavCommand.Execute(NavigatePath);
-            });
-        }
-
-        private void Navigate(string navigatePath)
-        {
-            if (navigatePath == null) return;
-            if (Project == null) return;
-            // 若不是楼盘项目，返回
-            if (!"1".Equals(Project.Type)) return;
-            // 加载该项目的数据
-            Project = ProjectDal.InitialRealEstateProject(Project);
-
-
-            NavigatePath = navigatePath;
-            Businesses = new ObservableCollection<Business>();
-            switch (navigatePath)
+            }
+            catch (Exception ex)
             {
-                case "NaturalBuildingPage":
-                    // 加载数据列表
-                    foreach (NaturalBuilding naturalBuilding in Project.NaturalBuildings)
-                    {
-                        Business business = new Business();
-                        business.Name = naturalBuilding.ZRZH;
-                        business.NaturalBuilding = naturalBuilding;
-                        Businesses.Add(business);                      
-                    }
-                    break;
-                case "LogicalBuildingPage":
-                    foreach (LogicalBuilding logicalBuilding in Project.LogicalBuildings)
-                    {
-                        Business business = new Business();
-                        business.Name = logicalBuilding.LJZH;
-                        business.LogicalBuilding = logicalBuilding;
-                        Businesses.Add(business);
-                    }
-                    break;
-                case "FloorPage":
-                    foreach (Floor floor in Project.Floors)
-                    {
-                        Business business = new Business();
-                        business.Name = floor.CH;
-                        business.Floor = floor;
-                        Businesses.Add(business);
-                    }
-                    break;
-                case "HouseholdPage":
-                    foreach (Household household in Project.Households)
-                    {
-                        Business business = new Business();
-                        business.Name = household.HBSM;
-                        business.Household = household;
-                        Businesses.Add(business);
-                    }
-                    break;
-                case "ObligeePage":
-                    foreach (Obligee obligee in Project.Obligees)
-                    {
-                        Business business = new Business();
-                        business.Name = obligee.QLRMC;
-                        business.Obligee = obligee;
-                        Businesses.Add(business);
-                    }
-                    break;
-                default:
-                    break;
-
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
             }
 
-            // 页面跳转
-            var parameters = new NavigationParameters();
-            parameters.Add("Project", Project);
-            RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
-        }
-
-        private void NavigationComplete(NavigationResult result)
-        {
-            //System.Windows.MessageBox.Show(String.Format("Navigation to {0} complete. ", result.Context.Uri));
-            //Businesses = null;
         }
 
     }

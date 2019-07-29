@@ -23,7 +23,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Width="300">
         <materialDesign:ColorZone Mode="Light" Name="ProjectDialog"
                                   materialDesign:ShadowAssist.ShadowDepth="Depth1">
             <StackPanel Margin="16">

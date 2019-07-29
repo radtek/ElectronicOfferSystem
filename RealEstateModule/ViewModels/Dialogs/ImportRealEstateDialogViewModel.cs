@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -44,9 +45,16 @@ namespace RealEstateModule.ViewModels.Dialogs
                 //FinishInteraction?.Invoke();
                 
                 ImportRealEstateTask task = new ImportRealEstateTask();
-                task.FullPath = FilePath;
-                task.Ongo();
-
+                try
+                {
+                    task.FullPath = FilePath;
+                    task.Ongo();
+                }
+                catch (Exception ex)
+                {
+                    ErrorDialogViewModel.getInstance().show(ex);
+                    return;
+                }
             });
         }
 

@@ -2,8 +2,10 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Events;
 using Common.Utils;
 using Common.ValidationRules;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -11,6 +13,7 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
@@ -96,24 +99,6 @@ namespace RealEstateModule.ViewModels
         {
             get { return gyfsList; }
             set { SetProperty(ref gyfsList, value); }
-        }
-        /// <summary>
-        /// 法人证件类型
-        /// </summary>
-        private Dictionary<string, string> frzjlxList;
-        public Dictionary<string, string> FRZJLXList
-        {
-            get { return frzjlxList; }
-            set { SetProperty(ref frzjlxList, value); }
-        }
-        /// <summary>
-        /// 代理人证件类型
-        /// </summary>
-        private Dictionary<string, string> dlrzjlxList;
-        public Dictionary<string, string> DLRZJLXList
-        {
-            get { return dlrzjlxList; }
-            set { SetProperty(ref dlrzjlxList, value); }
         }
 
         #endregion
@@ -204,37 +189,81 @@ namespace RealEstateModule.ViewModels
 
         private void SelectBusiness(object obj)
         {
-            // 加载权利人数据
-            ListView listView = obj as ListView;
-            Business business = new Business();
-            business = listView.SelectedItem as Business;
-            Obligee = business?.Obligee;
+            try
+            {
+                // 加载权利人数据
+                ListView listView = obj as ListView;
+                Business business = new Business();
+                business = listView.SelectedItem as Business;
+                Obligee = business?.Obligee;
 
-            // 按钮为修改状态
-            ButtonContent = "确认修改";
+                // 按钮为修改状态
+                ButtonContent = "确认修改";
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void EditObligee()
         {
-            if (Obligee == null) return;
-            Obligee.UpdateTime = DateTime.Now;
-            ObligeeDal.Modify(Obligee);
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("ObligeePage");
+            if (Obligee == null)
+            {
+                MessageBox.Show("请选择权利人", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Obligee.UpdateTime = DateTime.Now;
+                ObligeeDal.Modify(Obligee);
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("ObligeePage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void AddObligee()
         {
-            if (Project == null) return;
-            if (Obligee == null) return;
-            Obligee.ProjectID = Project.ID;
-            Obligee.ID = Guid.NewGuid();
-            Obligee.UpdateTime = DateTime.Now;
-            ObligeeDal.Add(Obligee);
+            if (Project == null)
+            {
+                MessageBox.Show("请选择项目", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Obligee.ProjectID = Project.ID;
+                Obligee.ID = Guid.NewGuid();
+                Obligee.UpdateTime = DateTime.Now;
+                ObligeeDal.Add(Obligee);
 
-            Obligee = null;
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("ObligeePage");
+                Obligee = null;
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("ObligeePage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void InitialComboBoxList()
@@ -258,11 +287,33 @@ namespace RealEstateModule.ViewModels
             dic = DictionaryUtil.GetDictionaryByName("共有方式");
             GYFSList = dic;
 
-            dic = DictionaryUtil.GetDictionaryByName("权利人类型");
-            FRZJLXList = dic;
+        }
 
-            dic = DictionaryUtil.GetDictionaryByName("权利人类型");
-            DLRZJLXList = dic;
+        /// <summary>
+        /// 能否执行新增或修改操作
+        /// </summary>
+        /// <returns></returns>
+        private bool canExecute()
+        {
+            if (Obligee == null) return false;
+
+            bool isValid = true;
+            CultureInfo cultureInfo = new CultureInfo("");
+            // 非空验证
+            NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
+            isValid &= notEmptyValidationRule.Validate(Obligee.HBSM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.QLRMC, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.ZJZL, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.ZJH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.GJ, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.QLRLX, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.QLLX, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.GYFS, cultureInfo).IsValid;
+            // 数字验证
+            NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
+            isValid &= numbericValidationRule.Validate(Obligee.QLMJ, cultureInfo).IsValid;
+            
+            return isValid;
         }
     }
 }

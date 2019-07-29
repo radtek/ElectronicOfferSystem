@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.ViewModels;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
@@ -13,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -27,13 +29,6 @@ namespace ProjectModule.ViewModels
             set { SetProperty(ref project, value); }
         }
 
-        private bool isAddOrEditProjectDialogOpen;
-        public bool IsAddOrEditProjectDialogOpen
-        {
-            get { return isAddOrEditProjectDialogOpen; }
-            set { SetProperty(ref isAddOrEditProjectDialogOpen, value); }
-        }
-
         private string dialogTitle;
         public string DialogTitle
         {
@@ -43,12 +38,28 @@ namespace ProjectModule.ViewModels
 
         public string NavigatePath { get; set; }
 
+        private bool isBtnEnabled;
+        public bool IsBtnEnabled
+        {
+            get { return isBtnEnabled; }
+            set { SetProperty(ref isBtnEnabled, value); }
+        }
+
+
         private ObservableCollection<Project> projects;
         public ObservableCollection<Project> Projects
         {
             get { return projects; }
             set { SetProperty(ref projects, value); }
         }
+
+        private Project selectedProject;
+        public Project SelectedProject
+        {
+            get { return selectedProject; }
+            set { SetProperty(ref selectedProject, value); }
+        }
+
 
         public AddOrEditProjectDialogViewModel AddOrEditProjectDialog { get; set; }
 
@@ -84,12 +95,11 @@ namespace ProjectModule.ViewModels
 
             // 关闭模态框
             CancelAddOrEditProjectDialogCommand = new DelegateCommand(() => {
-                IsAddOrEditProjectDialogOpen = false;
                 Project = null;
             });
 
             // 打开模态框
-            OpenAddOrEditProjectDialogCommand = new DelegateCommand<string>(async (string dialogTitle) => {
+            OpenAddOrEditProjectDialogCommand = new DelegateCommand<string>((string dialogTitle) => {
                 DialogTitle = dialogTitle;
                 if ("新增项目".Equals(DialogTitle))
                 {
@@ -98,24 +108,15 @@ namespace ProjectModule.ViewModels
                 var view = new AddOrEditProjectDialog();
                 AddOrEditProjectDialog.DialogTitle = DialogTitle;
                 AddOrEditProjectDialog.Project = Project;
-                var result = await DialogHost.Show(view, "RootDialog", ConfirAddOrEditProjectEventHandler);
+                var result = DialogHost.Show(view, "RootDialog", ConfirAddOrEditProjectEventHandler);
                 
-                //IsAddOrEditProjectDialogOpen = true;
             });
             // 删除项目
-            DelProjectCommand = new DelegateCommand(()=> {
-                if (Project == null) return;
-                projectDal.Del(Project);
-                RefreshProjectList();
-            });
+            DelProjectCommand = new DelegateCommand(DelProject);
 
-
-        }
-
-        private void OpenedEventHandler(object sender, DialogOpenedEventArgs eventargs)
-        {
-            AddOrEditProjectDialog.DialogTitle = DialogTitle;
-            AddOrEditProjectDialog.Project = Project;
+            // 初始化
+            Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type)));
+            IsBtnEnabled = false;
         }
 
         private void ConfirAddOrEditProjectEventHandler(object sender, DialogClosingEventArgs eventArgs)
@@ -127,40 +128,54 @@ namespace ProjectModule.ViewModels
 
             DialogTitle = AddOrEditProjectDialog.DialogTitle;
             Project = AddOrEditProjectDialog.Project;
-            switch (DialogTitle)
-            {
-                case "新增项目":
-                    AddProject();
-                    break;
-                case "编辑项目":
-                    UpdProject();
-                    break;
-                default:
-                    break;
-            }
 
-            // 显示加载1s
-            eventArgs.Session.UpdateContent(new SampleProgressDialog());
-            Task.Delay(TimeSpan.FromSeconds(1))
-                .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
-                    TaskScheduler.FromCurrentSynchronizationContext());
+            try
+            {
+                switch (DialogTitle)
+                {
+                    case "新增项目":
+                        AddProject();
+                        break;
+                    case "编辑项目":
+                        UpdProject();
+                        break;
+                    default:
+                        break;
+                }
+                // 显示加载1s
+                eventArgs.Session.UpdateContent(new SampleProgressDialog());
+                Task.Delay(TimeSpan.FromSeconds(0.5))
+                    .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
+                        TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().updateShow(ex, eventArgs.Session);
+                return;
+            }
 
         }
 
         private void Navigate(string navigatePath)
         {
             NavigatePath = navigatePath;
-
+            IsBtnEnabled = true;
             switch (navigatePath)
             {
                 case "IndexPage":
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>!"-1".Equals(p.Type)));
+                    IsBtnEnabled = false;
                     break;
                 case "RealEstatePage":
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
+
+                    //Project = Projects.FirstOrDefault();
+                    SelectedProject = Projects.FirstOrDefault();
                     break;
                 case "RegistrationPage":
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "2".Equals(p.Type) ));
+                    //Project = Projects.FirstOrDefault();
+                    SelectedProject = Projects.FirstOrDefault();
                     break;
                 case "SettingPage":
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type) ));
@@ -168,13 +183,16 @@ namespace ProjectModule.ViewModels
                 default:
                     break;
             }
-
+            
         }
 
         private void AddProject()
         {
             if (string.IsNullOrWhiteSpace(NavigatePath))
+            {
+                MessageBox.Show("请选择项目类型", "提示");
                 return;
+            }
             // 新增项目的初始化
             Project.ID = Guid.NewGuid();
             Project.UptateTime = DateTime.Now;
@@ -199,24 +217,47 @@ namespace ProjectModule.ViewModels
                     Project.Type = "-1";
                     break;
             }
+                projectDal.Add(Project);
 
-            projectDal.Add(Project);
-            CloseDialogAndRefreshProjectList();
+            RefreshProjectList();
         }
-
+        /// <summary>
+        /// 修改项目
+        /// </summary>
         private void UpdProject()
-        {  
-            if (Project != null)
-            {
-                Project.UptateTime = DateTime.Now;
-                projectDal.Modify(Project);
-                CloseDialogAndRefreshProjectList();
-            }
-        }
-
-        private void CloseDialogAndRefreshProjectList()
         {
-            IsAddOrEditProjectDialogOpen = false;
+            if (Project == null)
+            {
+                MessageBox.Show("请选择一个项目", "提示");
+                return;
+            }
+
+            Project.UptateTime = DateTime.Now;
+            projectDal.Modify(Project);
+            RefreshProjectList();
+            
+        }
+        /// <summary>
+        /// 删除项目
+        /// </summary>
+        private void DelProject()
+        {
+            if (Project == null)
+            {
+                MessageBox.Show("请选择一个项目", "提示");
+                return;
+            }
+            try
+            {
+                projectDal.Del(Project);
+
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+            
             RefreshProjectList();
         }
 

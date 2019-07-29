@@ -33,9 +33,11 @@ namespace RealEstateModule.Tasks
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
                 TaskInfoDialog.Messages.Add("开始质检项目：" + Project.ProjectName);
+   
 
                 Task task = new Task(() =>
                 {
+                    //Thread.Sleep(2000);
                     QualityControl qualityControl = new QualityControl();
                     qualityControl.Project = Project;
                     try
@@ -56,19 +58,24 @@ namespace RealEstateModule.Tasks
                         System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Application.Current.Dispatcher));
                         SynchronizationContext.Current.Post(pl =>
                         {
-
+                            ProjectDal projectDal = new ProjectDal();
                             foreach (var error in ErrorMsg)
                             {
                                 TaskInfoDialog.Messages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
+                            {
                                 TaskInfoDialog.Messages.Add("质检不通过");
+                                Project.State = "0";
+                                Project.UptateTime = DateTime.Now;
+                                projectDal.Modify(Project);
+                            }
                             else
                             {
 
                                 TaskInfoDialog.Messages.Add("质检合格");
-                                ProjectDal projectDal = new ProjectDal();
                                 Project.State = "1";
+                                Project.UptateTime = DateTime.Now;
                                 projectDal.Modify(Project);
                             }
                         }, null);
@@ -79,7 +86,7 @@ namespace RealEstateModule.Tasks
             }
             catch (Exception ex)
             {
-                //DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
+                throw;
             }
         }
 

@@ -14,17 +14,17 @@
     <Grid>
         <ToolBarTray>
             <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
-                <Button ToolTip="新增">
+                <Button ToolTip="新增" Command="{Binding AddBusinessCommand}" Foreground="GreenYellow">
                     <materialDesign:PackIcon Kind="AddBox" />
                 </Button>
-                <Button ToolTip="编辑">
+                <!--<Button ToolTip="编辑">
                     <materialDesign:PackIcon Kind="SquareEditOutline" />
-                </Button>
-                <Button ToolTip="删除">
+                </Button>-->
+                <Button ToolTip="删除" Command="{Binding DelBusinessCommand}" Foreground="Red">
                     <materialDesign:PackIcon Kind="DeleteForever" />
                 </Button>
                 <Separator />
-                <Button ToolTip="楼盘表质检" Command="{Binding QualityControlCommand}">
+                <Button ToolTip="楼盘表质检" Command="{Binding QualityControlCommand}" Foreground="Green">
                     <materialDesign:PackIcon Kind="ShieldCheck" />
                 </Button>
                 <Separator />

@@ -85,7 +85,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="帮助">
-                <MenuItem Header="查看帮助">
+                <MenuItem Header="查看帮助" Command="{Binding ShowHelpCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="Help" />
                     </MenuItem.Icon>

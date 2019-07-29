@@ -12,7 +12,9 @@ namespace BusinessData
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Validation;
+    using System.Linq;
+
     public partial class ElectronicOfferSystemDBContainer : DbContext
     {
         public ElectronicOfferSystemDBContainer()
@@ -25,7 +27,31 @@ namespace BusinessData
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException exception)
+            {
+                var errorMessages =
+                    exception.EntityValidationErrors
+                        .SelectMany(validationResult => validationResult.ValidationErrors)
+                        .Select(m => m.ErrorMessage);
+
+                var fullErrorMessage = string.Join(" ", errorMessages);
+                //记录日志
+                //Log.Error(fullErrorMessage);
+                var exceptionMessage = string.Concat(exception.Message, "\nEntityValidationErrors is: ", fullErrorMessage);
+                //throw new Exception(exceptionMessage);
+                throw new DbEntityValidationException(exceptionMessage, exception.EntityValidationErrors);
+            }
+
+            //其他异常throw到上层
+        }
+
         public virtual DbSet<Project> Project { get; set; }
         public virtual DbSet<NaturalBuilding> NaturalBuilding { get; set; }
         public virtual DbSet<LogicalBuilding> LogicalBuilding { get; set; }

@@ -30,14 +30,18 @@
                         <SolidColorBrush Color="#3448A1" />
                     </Polygon.Fill>
                 </Polygon>
-                --><!--第二个多边形--><!--
+                -->
+                <!--第二个多边形-->
+                <!--
                 <Polygon Points="700,0 780,0 740,40 "
                              StrokeThickness="1">
                     <Polygon.Fill>
                         <SolidColorBrush Color="#3E58C9" />
                     </Polygon.Fill>
                 </Polygon>
-                --><!--第一个多边形--><!--
+                -->
+                <!--第一个多边形-->
+                <!--
                 <Polygon Points="0,0 700,0 756,40 0,40"
                              StrokeThickness="1">
                     <Polygon.Fill>
@@ -46,15 +50,15 @@
                 </Polygon>-->
                 <Ellipse Cursor="Hand"
                              HorizontalAlignment="Left"
-                             Margin="20 5 5 5"
+                             Margin="20,5,0,0"
                              Width="40"
-                             Height="30">
+                             Height="30" VerticalAlignment="Top">
                     <Ellipse.Fill>
                         <ImageBrush  ImageSource="/Images/logo.png" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <!-- Top Center -->
-                <Grid HorizontalAlignment="Center" Width="400">
+                <Grid HorizontalAlignment="Left" Width="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>

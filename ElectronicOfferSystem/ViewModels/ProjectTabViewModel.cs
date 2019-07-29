@@ -1,27 +1,38 @@
 ﻿using Common;
 using Common.Views;
+using ElectronicOfferSystem.Views;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using ProjectModule.Views;
+using RealEstateModule.Views;
+using RegistrationModule.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity;
 
 namespace ElectronicOfferSystem.ViewModels
 {
     class ProjectTabViewModel : BindableBase
     {
-        private readonly IRegionManager RegionManager;
+        private IRegionManager RegionManager;
+        private IUnityContainer Container;
+
+        public IndexPage IndexPage { get; set; }
+        public RealEstatePage RealEstatePage { get; set; }
+        public RegistrationPage RegistrationPage { get; set; }
+
         public DelegateCommand<string> NavigateCommand { get; set; }
         public DelegateCommand OpenTaskInfoDialogCommand { get; set; }
 
         public ProjectTabViewModel(IRegionManager regionManager)
         {
             RegionManager = regionManager;
-
+            
             // 页面导航
             NavigateCommand = new DelegateCommand<string>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
@@ -37,11 +48,15 @@ namespace ElectronicOfferSystem.ViewModels
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
-                RegionManager.RequestNavigate("ContentRegion", navigatePath, NavigationComplete);
+            {
+               RegionManager.RequestNavigate("ContentRegion", navigatePath, NavigationComplete);        
+            }
         }
 
         private void NavigationComplete(NavigationResult result)
         {
+            //var view = Container.Resolve<ProjectPage>();
+            
             //System.Windows.MessageBox.Show(String.Format("Navigation to {0} complete. ", result.Context.Uri));
         }
     }

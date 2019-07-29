@@ -78,7 +78,7 @@ namespace RegistrationModule.ViewModels
         }
 
         public DelegateCommand FileUpLoadCommand { get; set; }
-
+        public DelegateCommand<object> DelFileCommand { get; set; }
         public DelegateCommand SelectNodeCommand { get; set; }
 
         public FileInfoDal FileInfoDal { get; set; }
@@ -91,12 +91,15 @@ namespace RegistrationModule.ViewModels
             //EA = ea;
             FileInfo = new FileInfo();
             ProjectDal = new ProjectDal();
+            FileInfoDal = new FileInfoDal();
             // 初始化树
             InitTreeView();
 
             FileUpLoadCommand = new DelegateCommand(FileUpLoad);
 
             SelectNodeCommand = new DelegateCommand(SelectNode);
+
+            DelFileCommand = new DelegateCommand<object>(DelFile);
         }
 
         private void SelectNode()
@@ -133,7 +136,10 @@ namespace RegistrationModule.ViewModels
             Project = ProjectDal.InitialRegistrationProject(Project);
             // 获取附件集合
             FileInfoList = new ObservableCollection<FileInfo>(Project.FileInfos);
-
+            for (int i = 0; i < FileInfoList.Count; i++)
+            {
+                FileInfoList[i].FullPath = "D:\\vs-workspace\\Test\\" + FileInfoList[i].Path + FileInfoList[i].ID + FileInfoList[i].Extension;
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -163,14 +169,6 @@ namespace RegistrationModule.ViewModels
             if (TreeNode == null || TreeNode.ID.Length != 6)
             {
                 MessageBox.Show("请选择叶节点", "提示");
-
-                //string message = "请选择叶节点";
-                //Task.Factory.StartNew(() => MessageQueue.Enqueue(message));
-                //MessageService.ShowSnackMessageWithNotice("这是提示消息？");
-
-                //MessageDialogViewModel messageDialog = MessageDialogViewModel.getInstance();
-                //messageDialog.Message = "请选择叶节点";
-                //messageDialog.show();
                 return;
             }
 
@@ -247,11 +245,12 @@ namespace RegistrationModule.ViewModels
                 }
                 if (isShow)
                 {
-                    // DevComponents.DotNetBar.MessageBoxEx.Show("上传的每张图片大小不能超过2M");
+                    MessageBox.Show("上传的每张图片大小不能超过2M", "提示");
                 }
 
             }
         }
+
 
         /// <summary>
         /// 根据节点ID返回该节点的完整路径
@@ -318,18 +317,29 @@ namespace RegistrationModule.ViewModels
             }
         }
 
-        private void DelFile()
+        private void DelFile(object obj)
         {
-            // 删除数据
-            //FileManageService.DeleteFileManageById(id);
-            //_fileManages.Remove(fileManage);
-            //// 删除文件
-            //List<UserSet> userSets = UserSetService.SelectUserSet();
-            //FileInfo file = new FileInfo(userSets[0].Path + "\\" + path);
-            //if (file.Exists)
-            //{
-            //    file.Delete();
-            //}
+            try
+            {
+                DataGrid dataGrid = obj as DataGrid;
+                FileInfo = dataGrid.SelectedItem as FileInfo;
+
+                // 删除数据
+                FileInfoDal.Del(FileInfo);
+                FileInfoList.Remove(FileInfo);
+                // 删除文件
+                string path = @"D:\vs-workspace\Test";
+                System.IO.FileInfo file = new System.IO.FileInfo(path + "\\" + FileInfo.Path + "\\" + FileInfo.ID + FileInfo.Extension);
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
         }
 
         /// <summary>

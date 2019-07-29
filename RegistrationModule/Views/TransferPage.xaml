@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                 <Setter Property="Margin" Value="20 10" />
@@ -97,61 +98,93 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Left -->
-                <materialDesign:Card Grid.Column="0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="40" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <!-- Top -->
-                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0"
-                                          Height="40" materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                            <TextBlock Margin="20,10,0,0" 
-                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                               Text="申请人列表"/>
-                        </materialDesign:ColorZone>
+                <Grid Background="#f5f5f5" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
 
-                        <!-- List -->
-                        <Grid Grid.Row="1">
-                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                <StackPanel  Margin="8 0 2 0">
-                                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    <!-- Top -->
+                    <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="0" Height="40"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                        <TextBlock Margin="20,10,0,0" Text="申请人列表"
+                               Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                    </materialDesign:ColorZone>
+
+                    <materialDesign:ColorZone Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                              Mode="Standard" Width="150" CornerRadius="6"
+                                              materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                              Margin="2 0 0 0">
+                        <DockPanel  LastChildFill="True">
+                            <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                                    Command="{Binding SearchApplicantCommand}"
+                                    ToolTip="按申请人名称搜索"
+                                    Margin="8 -6 8 -6"
+                                    DockPanel.Dock="Right">
+                                <materialDesign:PackIcon Kind="Magnify" />
+                            </Button>
+                            <TextBox FontSize="11" Text="{Binding SearchApplicantName}" Style="{StaticResource MaterialDesignTextBox}"
+                                     VerticalAlignment="Center" FontStyle="Italic"
+                                     materialDesign:HintAssist.Hint="搜索" Margin="5 0 0 0"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                     BorderThickness="0"/>
+                        </DockPanel>
+                    </materialDesign:ColorZone>
+                    <!-- Top End -->
+                    <!-- List -->
+                    <Grid Grid.Row="1">
+                        <ListView ScrollViewer.HorizontalScrollBarVisibility="Auto"
                               Cursor="Hand" Name="ApplicantList"
                               ItemsSource="{Binding Applicants}">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding SelectApplicantCommand}"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectApplicantCommand}"
                                                        CommandParameter="{Binding ElementName=ApplicantList}" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding SQRXM}" FontSize="15" />
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <ListView.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem Header="新增" Command="{Binding AddApplicantCommand}" >
-                                                    <MenuItem.Icon>
-                                                        <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                                <MenuItem Header="删除选中项" Command="{Binding DelApplicantCommand}" >
-                                                    <MenuItem.Icon>
-                                                        <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
-                                                    </MenuItem.Icon>
-                                                </MenuItem>
-                                            </ContextMenu>
-                                        </ListView.ContextMenu>
-                                    </ListView>
-                                </StackPanel>
-                            </ScrollViewer>
-                        </Grid>
-                        <!-- List End -->
-
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding SQRXM}" FontSize="15" />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="新增" Command="{Binding AddApplicantCommand}" >
+                                                <MenuItem.Icon>
+                                                    <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                            <MenuItem Header="删除选中项" Command="{Binding DelApplicantCommand}" >
+                                                <MenuItem.Icon>
+                                                    <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                                                </MenuItem.Icon>
+                                            </MenuItem>
+                                        </ContextMenu>
+                                    </ListView.ContextMenu>
+                                </ListView>
                     </Grid>
-                </materialDesign:Card>
+                    <!-- List End -->
+                    <!-- Bottom -->
+                    <materialDesign:ColorZone Mode="Light" Grid.Row="2" Height="38"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Orientation="Horizontal" Margin="8 0">
+
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignToolPopupBox}"
+                                     Padding="2 0 2 0">
+                                <StackPanel>
+                                    <Button Content="按名称排序" />
+                                    <Button Content="按更新时间排序" />
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </StackPanel>
+                    </materialDesign:ColorZone>
+                    <!-- Bottom End -->
+
+                </Grid>
+
+
                 <!-- Left End -->
 
 
@@ -191,7 +224,7 @@
                                     <Binding Path="Applicant.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                              NotifyOnValidationError="True">
                                         <Binding.ValidationRules>
-                                            <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                            <ValidationRules:BDCDYHValidationRule ValidatesOnTargetUpdated="True" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>

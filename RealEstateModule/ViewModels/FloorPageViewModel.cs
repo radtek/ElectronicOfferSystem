@@ -2,15 +2,20 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Events;
+using Common.ValidationRules;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
@@ -132,38 +137,101 @@ namespace RealEstateModule.ViewModels
         /// <param name="obj"></param>
         private void SelectBusiness(object obj)
         {
-            // 加载层数据
-            ListView listView = obj as ListView;
-            Business business = new Business();
-            business = listView.SelectedItem as Business;
-            Floor = business?.Floor;
+            try
+            {
+                // 加载层数据
+                ListView listView = obj as ListView;
+                Business business = new Business();
+                business = listView.SelectedItem as Business;
+                Floor = business?.Floor;
 
-            // 按钮为修改状态
-            ButtonContent = "确认修改";
+                // 按钮为修改状态
+                ButtonContent = "确认修改";
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void EditFloor()
         {
-            if (Floor == null) return;
-            Floor.UpdateTime = DateTime.Now;
-            FloorDal.Modify(Floor);
+            if (Floor == null)
+            {
+                MessageBox.Show("请选择层", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Floor.UpdateTime = DateTime.Now;
+                FloorDal.Modify(Floor);
 
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("FloorPage");
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("FloorPage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void AddFloor()
         {
-            if (Project == null) return;
-            if (Floor == null) return;
-            Floor.ProjectID = Project.ID;
-            Floor.ID = Guid.NewGuid();
-            Floor.UpdateTime = DateTime.Now;
-            FloorDal.Add(Floor);
+            if (Project == null)
+            {
+                MessageBox.Show("请选择项目", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Floor.ProjectID = Project.ID;
+                Floor.ID = Guid.NewGuid();
+                Floor.UpdateTime = DateTime.Now;
+                FloorDal.Add(Floor);
 
-            Floor = null;
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("FloorPage");
+                Floor = null;
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("FloorPage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
+        }
+
+        /// <summary>
+        /// 能否执行新增或修改操作
+        /// </summary>
+        /// <returns></returns>
+        private bool canExecute()
+        {
+            if (Floor == null) return false;
+
+            bool isValid = true;
+            CultureInfo cultureInfo = new CultureInfo("");
+            // 非空验证
+            NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
+            isValid &= notEmptyValidationRule.Validate(Floor.CH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Floor.ZRZH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Floor.YSDM, cultureInfo).IsValid;
+
+            return isValid;
         }
     }
 }

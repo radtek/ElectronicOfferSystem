@@ -223,6 +223,9 @@
     <None Include="ElectronicOfferSystemDB.edmx.diagram">
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </None>
+    <None Include="Help\报盘系统帮助文档.chm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -244,6 +247,7 @@
       <LastGenOutput>ElectronicOfferSystemDB.cs</LastGenOutput>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Content>
+    <Resource Include="Images\index.png" />
     <Resource Include="Images\logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +297,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

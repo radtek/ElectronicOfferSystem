@@ -14,7 +14,7 @@ namespace BusinessData.Dal
     /// <typeparam name="T"></typeparam>
     public class BaseDal<T> where T : class, new()
     {
-        protected DbContext db = new ElectronicOfferSystemDBContainer();
+        protected DbContext db;
 
         #region 1.0 新增实体，返回受影响的行数 +  int Add(T model)  
         /// <summary>  
@@ -24,6 +24,8 @@ namespace BusinessData.Dal
         /// <returns>返回受影响的行数</returns>  
         public int Add(T model)
         {
+            // 新创建dbContext，清除异常信息
+            db = new ElectronicOfferSystemDBContainer();
             db.Set<T>().Add(model);
             //保存成功后，会将自增的id设置给model的主键属性，并返回受影响的行数。  
             return db.SaveChanges();
@@ -38,6 +40,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public T AddReturnModel(T model)
         {
+            db = new ElectronicOfferSystemDBContainer();
             db.Set<T>().Add(model);
             db.SaveChanges();
             return model;
@@ -52,6 +55,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public int Del(T model)
         {
+            db = new ElectronicOfferSystemDBContainer();
             db.Set<T>().Attach(model);
             db.Set<T>().Remove(model);
             return db.SaveChanges();
@@ -65,6 +69,7 @@ namespace BusinessData.Dal
         /// <returns>返回受影响的行数</returns>  
         public int DelBy(Expression<Func<T, bool>> delWhere)
         {
+            db = new ElectronicOfferSystemDBContainer();
             //2.1.1 查询要删除的数据  
             List<T> listDeleting = db.Set<T>().Where(delWhere).ToList();
             //2.1.2 将要删除的数据 用删除方法添加到 EF 容器中  
@@ -86,6 +91,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public int Modify(T model)
         {
+            db = new ElectronicOfferSystemDBContainer();
             DbEntityEntry entry = db.Entry<T>(model);
             entry.State = EntityState.Modified;
             return db.SaveChanges();
@@ -100,6 +106,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public int Modify(T model, params string[] propertyNames)
         {
+            db = new ElectronicOfferSystemDBContainer();
             //3.1.1 将对象添加到EF中  
             DbEntityEntry entry = db.Entry<T>(model);
             //3.1.2 先设置对象的包装状态为 Unchanged  
@@ -123,6 +130,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public int ModifyBy(T model, Expression<Func<T, bool>> whereLambda, params string[] modifiedPropertyNames)
         {
+            db = new ElectronicOfferSystemDBContainer();
             //3.2.1 查询要修改的数据  
             List<T> listModifing = db.Set<T>().Where(whereLambda).ToList();
             //3.2.2 获取实体类类型对象  
@@ -171,6 +179,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public T GetModel(Expression<Func<T, bool>> whereLambda)
         {
+            db = new ElectronicOfferSystemDBContainer();
             return db.Set<T>().Where(whereLambda).AsNoTracking().FirstOrDefault();
         }
         #endregion
@@ -185,6 +194,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public T GetModel<TKey>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderLambda, bool isAsc = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             if (isAsc)
             {
                 return db.Set<T>().Where(whereLambda).OrderBy(orderLambda).AsNoTracking().FirstOrDefault();
@@ -205,6 +215,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetListBy(Expression<Func<T, bool>> whereLambda)
         {
+            db = new ElectronicOfferSystemDBContainer();
             return db.Set<T>().Where(whereLambda).AsNoTracking().ToList();
         }
         #endregion
@@ -219,6 +230,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetListBy<TKey>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderLambda, bool isAsc = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             if (isAsc)
             {
                 return db.Set<T>().Where(whereLambda).OrderBy(orderLambda).AsNoTracking().ToList();
@@ -241,6 +253,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetListBy<TKey>(int top, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderLambda, bool isAsc = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             if (isAsc)
             {
                 return db.Set<T>().Where(whereLambda).OrderBy(orderLambda).Take(top).AsNoTracking().ToList();
@@ -265,6 +278,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetListBy<TKey1, TKey2>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey1>> orderLambda1, Expression<Func<T, TKey2>> orderLambda2, bool isAsc1 = true, bool isAsc2 = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             if (isAsc1)
             {
                 if (isAsc2)
@@ -304,6 +318,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetListBy<TKey1, TKey2>(int top, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey1>> orderLambda1, Expression<Func<T, TKey2>> orderLambda2, bool isAsc1 = true, bool isAsc2 = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             if (isAsc1)
             {
                 if (isAsc2)
@@ -342,6 +357,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetPagedList<TKey>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderByLambda, bool isAsc = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             // 分页 一定注意： Skip 之前一定要 OrderBy  
             if (isAsc)
             {
@@ -367,6 +383,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetPagedList<TKey>(int pageIndex, int pageSize, ref int rowCount, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderByLambda, bool isAsc = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             rowCount = db.Set<T>().Where(whereLambda).Count();
             if (isAsc)
             {
@@ -394,6 +411,7 @@ namespace BusinessData.Dal
         /// <returns></returns>  
         public List<T> GetPagedList<TKey1, TKey2>(int pageIndex, int pageSize, ref int rowCount, Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey1>> orderByLambda1, Expression<Func<T, TKey2>> orderByLambda2, bool isAsc1 = true, bool isAsc2 = true)
         {
+            db = new ElectronicOfferSystemDBContainer();
             rowCount = db.Set<T>().Where(whereLambda).Count();
             if (isAsc1)
             {

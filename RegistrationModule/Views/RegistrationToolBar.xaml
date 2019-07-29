@@ -13,13 +13,13 @@
     <Grid>
         <ToolBarTray>
             <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
-                <Button ToolTip="新增">
+                <Button ToolTip="新增" Command="{Binding AddApplicantCommand}" Foreground="GreenYellow">
                     <materialDesign:PackIcon Kind="AddBox" />
                 </Button>
-                <Button ToolTip="编辑">
+                <!--<Button ToolTip="编辑">
                     <materialDesign:PackIcon Kind="SquareEditOutline" />
-                </Button>
-                <Button ToolTip="删除">
+                </Button>-->
+                <Button ToolTip="删除" Command="{Binding DelApplicantCommand}" Foreground="Red">
                     <materialDesign:PackIcon Kind="DeleteForever" />
                 </Button>
                 <Separator />

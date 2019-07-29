@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Events;
 using Common.ViewModels;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
@@ -8,6 +9,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
+using Prism.Regions;
 using RealEstateModule.Tasks;
 using RealEstateModule.ViewModels.Dialogs;
 using RealEstateModule.Views.Dialogs;
@@ -26,17 +28,38 @@ namespace RealEstateModule.ViewModels
     public class RealEstateToolBarViewModel : BindableBase
     {
         public Project Project { get; set; }
+        public string NavigatePath { get; set; }
 
+        public RealEstatePageViewModel RealEstatePageViewModel { get; set; }
         public ImportRealEstateDialogViewModel ImportRealEstateViewModel { get; set; }
         public ExportRealEstateDialogViewModel ExportRealEstateViewModel { get; set; }
 
+
+        public DelegateCommand AddBusinessCommand { get; set; }
+        public DelegateCommand DelBusinessCommand { get; set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand OpenImportRealEstateDialogCommand { get; set; }
         public DelegateCommand OpenExportRealEstateDialogCommand { get; set; }
         public DelegateCommand QualityControlCommand { get; set; }
 
-        public RealEstateToolBarViewModel()
+        public RealEstateToolBarViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
+
+            RealEstatePageViewModel = new RealEstatePageViewModel(regionManager, ea);
+
+            // 点击业务的导航页后
+            ea.GetEvent<NavBusinessEvent>().Subscribe((navPage) => {
+                NavigatePath = navPage;
+            });
+
+            AddBusinessCommand = new DelegateCommand(() => {
+                RealEstatePageViewModel.NavigatePath = NavigatePath;
+                RealEstatePageViewModel.AddBusinessCommand.Execute();
+            });
+            DelBusinessCommand = new DelegateCommand(() => {
+                RealEstatePageViewModel.NavigatePath = NavigatePath;
+                RealEstatePageViewModel.DelBusinessCommand.Execute();
+            });
             QualityControlCommand = new DelegateCommand(QualityControl);
             OpenImportRealEstateDialogCommand = new DelegateCommand(ExecuteImportRealEstateDialog);
             OpenExportRealEstateDialogCommand = new DelegateCommand(ExecuteExportRealEstateDialog);
@@ -52,7 +75,7 @@ namespace RealEstateModule.ViewModels
         }
 
         #region 质检
-        private async void QualityControl()
+        private  void QualityControl()
         {
             if (Project == null || !"1".Equals(Project.Type))
             {
@@ -60,10 +83,22 @@ namespace RealEstateModule.ViewModels
                 return;
             }
             var view = new TaskInfoDialog();
-            var result = await DialogHost.Show(view, "RootDialog");
+            TaskInfoDialogViewModel TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
+            //TaskInfoDialog.Messages.Add("开始质检项目：" + Project.ProjectName);
+            var result = DialogHost.Show(view, "RootDialog");
+            
             QualityControlTask task = new QualityControlTask();
-            task.Project = Project;
-            task.Ongo();
+            try
+            {
+                task.Project = Project;
+                task.Ongo();
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
         #endregion
 

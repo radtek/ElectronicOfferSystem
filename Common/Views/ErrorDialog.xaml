@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Common.Views.ErrorDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Common.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Width="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Dialog Top -->
+        <materialDesign:ColorZone Mode="PrimaryMid" Name="DialogTop" Grid.Row="0"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="10 10" Text="异常信息"/>
+                <Button Height="40" Grid.Column="1" HorizontalAlignment="Right"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                    <Button.CommandParameter>
+                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                            False
+                        </system:Boolean>
+                    </Button.CommandParameter>
+                    <Viewbox Width="25" Height="25">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                  Fill="White" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+            </Grid>
+        </materialDesign:ColorZone>
+        <!-- Dialog Top End -->
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Expander HorizontalAlignment="Stretch">
+                <Expander.Header>
+                    <TextBlock Text="{Binding ErrorMessage.Message}"
+                               TextWrapping="Wrap"/>
+                </Expander.Header>
+
+                <StackPanel Orientation="Vertical"
+                        TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
+                        Margin="24,8,24,16">
+                    <TextBlock Text="异常栈信息" />
+
+                    <TextBox Opacity=".68" IsReadOnly="True"
+                           Text="{Binding ErrorMessage.StackTrace}"
+                           TextWrapping="Wrap" />
+                </StackPanel>
+            </Expander>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" 
+                    Margin="0 10" Orientation="Horizontal">
+
+            <Button Content="复制异常信息" Command="Copy"/>
+            <Button IsCancel="True" Margin="15 0"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                <Button.CommandParameter>
+                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                        False
+                    </system:Boolean>
+                </Button.CommandParameter>
+                关闭
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

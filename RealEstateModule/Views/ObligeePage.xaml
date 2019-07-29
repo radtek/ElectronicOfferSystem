@@ -145,7 +145,7 @@
                  materialDesign:HintAssist.Hint="权利比例" />
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Obligee.FRXM}"
                  materialDesign:HintAssist.Hint="法人姓名" />
-        <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding FRZJLXList}" 
+        <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding QLRLXList}" 
                   materialDesign:HintAssist.Hint="法人证件类型"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.FRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -155,7 +155,7 @@
                  materialDesign:HintAssist.Hint="法人电话" />
         <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Obligee.DLRXM}"
                  materialDesign:HintAssist.Hint="代理人姓名" />
-        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding DLRZJLXList}" 
+        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding QLRLXList}" 
                   materialDesign:HintAssist.Hint="代理人证件类型"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.DLRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

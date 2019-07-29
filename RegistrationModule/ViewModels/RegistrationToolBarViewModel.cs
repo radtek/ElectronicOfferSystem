@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace RegistrationModule.ViewModels
@@ -19,22 +20,33 @@ namespace RegistrationModule.ViewModels
     {
         public Project Project { get; set; }
         public ExportRegistrationDialogViewModel ExportRegistrationViewModel { get; set; }
+        public TransferPageViewModel TransferPageViewModel { get; set; }
 
         public DelegateCommand<object> SelectProjectCommand { get; set; }
+        public DelegateCommand AddApplicantCommand { get; set; }
+        public DelegateCommand DelApplicantCommand { get; set; }
         public DelegateCommand OpenExportRegistrationDialogCommand { get; set; }
 
         public RegistrationToolBarViewModel()
         {
             OpenExportRegistrationDialogCommand = new DelegateCommand(ExecuteExportRegistrationDialog);
+            TransferPageViewModel = new TransferPageViewModel();
 
             // 在项目列表选择一个项目之后执行
             SelectProjectCommand = new DelegateCommand<object>((obj) =>
             {
-
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
+
+            AddApplicantCommand = new DelegateCommand(() => {
+                TransferPageViewModel.AddApplicantCommand.Execute();
+            });
+
+            DelApplicantCommand = new DelegateCommand(() => {
+                TransferPageViewModel.DelApplicantCommand.Execute();
+            });
         }
 
         /// <summary>
@@ -42,9 +54,10 @@ namespace RegistrationModule.ViewModels
         /// </summary>
         private async void ExecuteExportRegistrationDialog()
         {
-            if (Project == null)
+            if (Project == null || !"2".Equals(Project.Type))
             {
                 // 请选择导出项目
+                MessageBox.Show("请选择登记业务项目", "提示");
                 return;
             }
             var view = new ExportRegistrationDialog();

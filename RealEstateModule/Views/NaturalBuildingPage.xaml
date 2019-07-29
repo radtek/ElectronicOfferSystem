@@ -79,7 +79,7 @@
                 <Binding Path="NaturalBuilding.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:BDCDYHValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -90,7 +90,7 @@
                 <Binding Path="NaturalBuilding.ZDDM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:ZDDMValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>

@@ -2,8 +2,10 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Events;
 using Common.Utils;
 using Common.ValidationRules;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -11,6 +13,7 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
@@ -81,29 +84,11 @@ namespace RealEstateModule.ViewModels
         /// <summary>
         /// 房屋用途1
         /// </summary>
-        private Dictionary<string, string> fwyt1List;
-        public  Dictionary<string, string> FWYT1List
+        private Dictionary<string, string> fwytList;
+        public  Dictionary<string, string> FWYTList
         {
-            get { return fwyt1List; }
-            set { SetProperty(ref fwyt1List, value); }
-        }
-        /// <summary>
-        /// 房屋用途2
-        /// </summary>
-        private Dictionary<string, string> fwyt2List;
-        public Dictionary<string, string> FWYT2List
-        {
-            get { return fwyt2List; }
-            set { SetProperty(ref fwyt2List, value); }
-        }
-        /// <summary>
-        /// 房屋用途3
-        /// </summary>
-        private Dictionary<string, string> fwyt3List;
-        public Dictionary<string, string> FWYT3List
-        {
-            get { return fwyt3List; }
-            set { SetProperty(ref fwyt3List, value); }
+            get { return fwytList; }
+            set { SetProperty(ref fwytList, value); }
         }
         /// <summary>
         /// 房屋性质
@@ -232,38 +217,82 @@ namespace RealEstateModule.ViewModels
         /// <param name="obj"></param>
         private void SelectBusiness(object obj)
         {
-            // 加载户数据
-            ListView listView = obj as ListView;
-            Business business = new Business();
-            business = listView.SelectedItem as Business;
-            Household = business?.Household;
+            try
+            {
+                // 加载户数据
+                ListView listView = obj as ListView;
+                Business business = new Business();
+                business = listView.SelectedItem as Business;
+                Household = business?.Household;
 
-            // 按钮为修改状态
-            ButtonContent = "确认修改";
+                // 按钮为修改状态
+                ButtonContent = "确认修改";
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void EditHousehold()
         {
-            if (Household == null) return;
-            Household.UpdateTime = DateTime.Now;
-            HouseholdDal.Modify(Household);
+            if (Household == null)
+            {
+                MessageBox.Show("请选择户", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Household.UpdateTime = DateTime.Now;
+                HouseholdDal.Modify(Household);
 
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("HouseholdPage");
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("HouseholdPage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void AddHousehold()
         {
-            if (Project == null) return;
-            if (Household == null) return;
-            Household.ProjectID = Project.ID;
-            Household.ID = Guid.NewGuid();
-            Household.UpdateTime = DateTime.Now;
-            HouseholdDal.Add(Household);
+            if (Project == null)
+            {
+                MessageBox.Show("请选择项目", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Household.ProjectID = Project.ID;
+                Household.ID = Guid.NewGuid();
+                Household.UpdateTime = DateTime.Now;
+                HouseholdDal.Add(Household);
 
-            Household = null;
-            // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-            EA.GetEvent<PubSubEvent<string>>().Publish("HouseholdPage");
+                Household = null;
+                // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
+                EA.GetEvent<RefreshBusinessEvent>().Publish("HouseholdPage");
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         /// <summary>
@@ -282,9 +311,7 @@ namespace RealEstateModule.ViewModels
             HXList = dic;
 
             dic = DictionaryUtil.GetDictionaryByName("房屋用途");
-            FWYT1List = dic;
-            FWYT2List = dic;
-            FWYT3List = dic;
+            FWYTList = dic;
 
             dic = DictionaryUtil.GetDictionaryByName("房屋结构");
             FWJGList = dic;
@@ -301,6 +328,50 @@ namespace RealEstateModule.ViewModels
             dic = DictionaryUtil.GetDictionaryByName("不动产单元状态");
             ZTList = dic;
 
+        }
+
+        /// <summary>
+        /// 能否执行新增或修改操作
+        /// </summary>
+        /// <returns></returns>
+        private bool canExecute()
+        {
+            if (Household == null) return false;
+
+            bool isValid = true;
+            CultureInfo cultureInfo = new CultureInfo("");
+            // 非空验证
+            NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
+            isValid &= notEmptyValidationRule.Validate(Household.HBSM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.FWBM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.YSDM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.ZRZH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.ZL, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.SZC, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.QSC, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.MJDW, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.SHBW, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.ZZC, cultureInfo).IsValid;
+           // 数字验证
+            NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
+            isValid &= numbericValidationRule.Validate(Household.YCTNJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.YCFTJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.YCJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.YCQTJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.YCDXBFJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.SCTNJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.SCFTJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.SCJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.SCQTJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.SCDXBFJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.FTTDMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.DYTDMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Household.GYTDMJ, cultureInfo).IsValid;
+            // 不动产单元号验证
+            BDCDYHValidationRule bDCDYHValidationRule = new BDCDYHValidationRule();
+            isValid &= bDCDYHValidationRule.Validate(Household.BDCDYH, cultureInfo).IsValid;
+
+            return isValid;
         }
     }
 }

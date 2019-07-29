@@ -51,6 +51,7 @@ namespace Common.Utils
                 dic.Add("1", "实测户");
                 dic.Add("2", "预测户");
                 dic.Add("3", "使用权宗地");
+                return dic;
             }
 
             CONSTCLSDal constclsDal = new CONSTCLSDal();

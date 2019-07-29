@@ -1,6 +1,8 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common.Utils;
+using Common.ValidationRules;
+using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -9,13 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace RegistrationModule.ViewModels
 {
-    class TransferPageViewModel : BindableBase, INavigationAware
+    public class TransferPageViewModel : BindableBase, INavigationAware
     {
-        IEventAggregator EA;
 
         /// <summary>
         /// 新增/修改按钮内容
@@ -167,9 +169,8 @@ namespace RegistrationModule.ViewModels
         public DelegateCommand AddApplicantCommand { get; set; }
         public DelegateCommand DelApplicantCommand { get; set; }
 
-        public TransferPageViewModel(IEventAggregator ea)
+        public TransferPageViewModel()
         {
-            EA = ea;
             ProjectDal = new ProjectDal();
             ApplicantDal = new ApplicantDal();
             TransferDal = new TransferDal();
@@ -210,12 +211,21 @@ namespace RegistrationModule.ViewModels
         /// <param name="obj"></param>
         private void SelectApplicant(object obj)
         {
-            // 加载申请人数据
-            ListView listView = obj as ListView;
-            Applicant = listView.SelectedItem as Applicant;
+            try
+            {
+                // 加载申请人数据
+                ListView listView = obj as ListView;
+                Applicant = listView.SelectedItem as Applicant;
 
-            // 按钮为修改状态
-            ApplicantButtonContent = "确认修改";
+                // 按钮为修改状态
+                ApplicantButtonContent = "确认修改";
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         /// <summary>
@@ -225,22 +235,31 @@ namespace RegistrationModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             NavigationContext = navigationContext;
-            // 获取选中项目
-            Project project = navigationContext.Parameters["Project"] as Project;
-            if (project != null)
+            try
             {
-                Project = project;
-            }
-            // 初始化登记项目
-            Project = ProjectDal.InitialRegistrationProject(Project);
-            // 获取申请人集合
-            Applicants = new ObservableCollection<Applicant>(Project.Applicants);
+                // 获取选中项目
+                Project project = navigationContext.Parameters["Project"] as Project;
+                if (project != null)
+                {
+                    Project = project;
+                }
+                // 初始化登记项目
+                Project = ProjectDal.InitialRegistrationProject(Project);
+                // 获取申请人集合
+                Applicants = new ObservableCollection<Applicant>(Project.Applicants);
 
-            // 初始申请人与转移信息
-            Applicant = new Applicant();
-            Transfer = Project.Transfer;
-            // 按钮为新增状态
-            ApplicantButtonContent = "确认新增";
+                // 初始申请人与转移信息
+                Applicant = new Applicant();
+                Transfer = Project.Transfer;
+                // 按钮为新增状态
+                ApplicantButtonContent = "确认新增";
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -266,11 +285,23 @@ namespace RegistrationModule.ViewModels
         /// </summary>
         private void EditTransfer()
         {
-            if (Project == null) return;
-            if (Transfer == null) return;
-            Transfer.UpdateTime = DateTime.Now;
-            ProjectDal.Modify(Project);
-            TransferDal.Modify(Transfer);
+            if (Project == null)
+            {
+                MessageBox.Show("请选择项目", "提示");
+                return;
+            }
+            try
+            {
+                Transfer.UpdateTime = DateTime.Now;
+                ProjectDal.Modify(Project);
+                TransferDal.Modify(Transfer);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
 
@@ -279,12 +310,30 @@ namespace RegistrationModule.ViewModels
         /// </summary>
         private void EditApplicant()
         {
-            if (Applicant == null) return;
-            Applicant.UpdateTime = DateTime.Now;
-            ApplicantDal.Modify(Applicant);
+            if (Applicant == null)
+            {
+                MessageBox.Show("请选择申请人", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Applicant.UpdateTime = DateTime.Now;
+                ApplicantDal.Modify(Applicant);
 
-            // 重新加载页面
-            OnNavigatedTo(NavigationContext);
+                // 重新加载页面
+                OnNavigatedTo(NavigationContext);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         /// <summary>
@@ -292,24 +341,55 @@ namespace RegistrationModule.ViewModels
         /// </summary>
         private void AddApplicant()
         {
-            if (Project == null) return;
-            if (Applicant == null) return;
-            Applicant.ProjectID = Project.ID;
-            Applicant.ID = Guid.NewGuid();
-            Applicant.UpdateTime = DateTime.Now;
-            ApplicantDal.Add(Applicant);
+            if (Project == null)
+            {
+                MessageBox.Show("请选择项目", "提示");
+                return;
+            }
+            if (!canExecute())
+            {
+                MessageBox.Show("验证失败", "提示");
+                return;
+            }
+            try
+            {
+                Applicant.ProjectID = Project.ID;
+                Applicant.ID = Guid.NewGuid();
+                Applicant.UpdateTime = DateTime.Now;
+                ApplicantDal.Add(Applicant);
 
-            Applicant = null;
-            // 重新加载页面
-            OnNavigatedTo(NavigationContext);
+                Applicant = null;
+                // 重新加载页面
+                OnNavigatedTo(NavigationContext);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void DelApplicant()
         {
-            if (Applicant == null) return;
-            ApplicantDal.Del(Applicant);
-            // 重新加载页面
-            OnNavigatedTo(NavigationContext);
+            if (Applicant == null)
+            {
+                MessageBox.Show("请选择申请人", "提示");
+                return;
+            }
+
+            try
+            {
+                ApplicantDal.Del(Applicant);
+                // 重新加载页面
+                OnNavigatedTo(NavigationContext);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
+
         }
 
         private void InitialComboBoxList()
@@ -345,6 +425,33 @@ namespace RegistrationModule.ViewModels
             dic = DictionaryUtil.GetDictionaryByName("是否字典");
             SFList = dic;
 
+        }
+
+        /// <summary>
+        /// 能否执行新增或修改操作
+        /// </summary>
+        /// <returns></returns>
+        private bool canExecute()
+        {
+            if (Applicant == null) return false;
+
+            bool isValid = true;
+            CultureInfo cultureInfo = new CultureInfo("");
+            // 非空验证
+            NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
+            isValid &= notEmptyValidationRule.Validate(Applicant.BDCQZH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.SQRXM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.ZJLX, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.ZJH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.SQRLX, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.GYFS, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.SQRLB, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Applicant.BDCDYLX, cultureInfo).IsValid;
+            // 不动产单元号验证
+            BDCDYHValidationRule bDCDYHValidationRule = new BDCDYHValidationRule();
+            isValid &= bDCDYHValidationRule.Validate(Applicant.BDCDYH, cultureInfo).IsValid;
+            
+            return isValid;
         }
     }
 }

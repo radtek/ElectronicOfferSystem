@@ -80,7 +80,7 @@
                 <Binding Path="Household.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:BDCDYHValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -199,15 +199,15 @@
                   materialDesign:HintAssist.Hint="户型"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.HX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <ComboBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding FWYT1List}" 
+        <ComboBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding FWYTList}" 
                   materialDesign:HintAssist.Hint="房屋用途1"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.FWYT1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding FWYT2List}" 
+        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding FWYTList}" 
                   materialDesign:HintAssist.Hint="房屋用途2"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.FWYT2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <ComboBox Grid.Row="7" Grid.Column="2" ItemsSource="{Binding FWYT3List}" 
+        <ComboBox Grid.Row="7" Grid.Column="2" ItemsSource="{Binding FWYTList}" 
                   materialDesign:HintAssist.Hint="房屋用途3"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Household.FWYT3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />

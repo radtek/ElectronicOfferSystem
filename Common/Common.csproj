@@ -52,9 +52,16 @@
   <ItemGroup>
     <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="CommonModule.cs" />
+    <Compile Include="Converts\StateToColor.cs" />
+    <Compile Include="Converts\StateToIcon.cs" />
+    <Compile Include="Converts\StateToTip.cs" />
+    <Compile Include="Converts\StringToBitmapSource.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
+    <Compile Include="Events\NavBusinessEvent.cs" />
     <Compile Include="Events\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Events\RefreshBusinessEvent.cs" />
     <Compile Include="GlobalCommands.cs" />
+    <Compile Include="Models\ErrorMessage.cs" />
     <Compile Include="Models\RegistrationResult.cs" />
     <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -79,16 +86,23 @@
     <Compile Include="Utils\Office\WordBase.cs" />
     <Compile Include="Utils\Office\WordOperator.cs" />
     <Compile Include="Utils\ZipHelper.cs" />
+    <Compile Include="ValidationRules\BDCDYHValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerAndNotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerValidationRule.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\NumbericAndNotEmptyValidationRule.cs" />
+    <Compile Include="ValidationRules\NumbericAndWordValidationRule.cs" />
     <Compile Include="ValidationRules\NumbericValidationRule.cs" />
     <Compile Include="ValidationRules\SimpleDateValidationRule.cs" />
+    <Compile Include="ValidationRules\ZDDMValidationRule.cs" />
+    <Compile Include="ViewModels\ErrorDialogViewModel.cs" />
     <Compile Include="ViewModels\MessageDialogViewModel.cs" />
     <Compile Include="ViewModels\SampleDialogViewModel.cs" />
     <Compile Include="ViewModels\SnackBarMessage.cs" />
     <Compile Include="ViewModels\TaskInfoDialogViewModel.cs" />
+    <Compile Include="Views\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
@@ -146,6 +160,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

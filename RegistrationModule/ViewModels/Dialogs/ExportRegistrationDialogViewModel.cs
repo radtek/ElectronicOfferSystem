@@ -1,4 +1,5 @@
 ﻿using BusinessData;
+using Common.ViewModels;
 using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RegistrationModule.ViewModels.Dialogs
 {
@@ -44,7 +46,7 @@ namespace RegistrationModule.ViewModels.Dialogs
                     }
                     else
                     {
-                        //DevComponents.DotNetBar.MessageBoxEx.Show(this, "文件夹路径不能为空", "提示");
+                        MessageBox.Show("文件夹路径不能为空", "提示");
                         return;
                     }
                 }
@@ -52,9 +54,18 @@ namespace RegistrationModule.ViewModels.Dialogs
 
             ExportRegistrationCommand = new DelegateCommand(() => {
                 ExportRegistrationTask task = new ExportRegistrationTask();
-                task.SaveFileName = FilePath;
-                task.Project = Project;
-                task.Ongo();
+                try
+                {
+                    task.SaveFileName = FilePath;
+                    task.Project = Project;
+                    task.Ongo();
+                }
+                catch (Exception ex)
+                {
+                    ErrorDialogViewModel.getInstance().show(ex);
+                    return;
+                }
+
             });
         }
     }
