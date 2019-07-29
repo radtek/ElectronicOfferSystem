@@ -48,7 +48,7 @@ namespace RegistrationModule.ViewModels
                 if (Project != null && "2".Equals(Project.Type))
                 {
                     // 项目信息初始化
-                    Project = ProjectDal.InitialRegistrationProject(Project);
+                    //Project = ProjectDal.InitialRegistrationProject(Project);
                     // 初始进入转移信息页面
                     RegistrationNavCommand.Execute("TransferPage");
 

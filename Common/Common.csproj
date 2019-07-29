@@ -58,6 +58,7 @@
     <Compile Include="Converts\StringToBitmapSource.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
     <Compile Include="Events\NavBusinessEvent.cs" />
+    <Compile Include="Events\NavRegistrationEvent.cs" />
     <Compile Include="Events\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Events\RefreshBusinessEvent.cs" />
     <Compile Include="GlobalCommands.cs" />

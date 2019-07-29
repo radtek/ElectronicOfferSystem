@@ -53,7 +53,6 @@ namespace RealEstateModule.ViewModels
             });
 
             AddBusinessCommand = new DelegateCommand(() => {
-                RealEstatePageViewModel.NavigatePath = NavigatePath;
                 RealEstatePageViewModel.AddBusinessCommand.Execute();
             });
             DelBusinessCommand = new DelegateCommand(() => {

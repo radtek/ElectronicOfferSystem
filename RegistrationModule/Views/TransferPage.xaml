@@ -94,6 +94,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="2"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
@@ -137,32 +138,32 @@
                         <ListView ScrollViewer.HorizontalScrollBarVisibility="Auto"
                               Cursor="Hand" Name="ApplicantList"
                               ItemsSource="{Binding Applicants}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding SelectApplicantCommand}"
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectApplicantCommand}"
                                                        CommandParameter="{Binding ElementName=ApplicantList}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding SQRXM}" FontSize="15" />
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <ListView.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="新增" Command="{Binding AddApplicantCommand}" >
-                                                <MenuItem.Icon>
-                                                    <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
-                                                </MenuItem.Icon>
-                                            </MenuItem>
-                                            <MenuItem Header="删除选中项" Command="{Binding DelApplicantCommand}" >
-                                                <MenuItem.Icon>
-                                                    <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
-                                                </MenuItem.Icon>
-                                            </MenuItem>
-                                        </ContextMenu>
-                                    </ListView.ContextMenu>
-                                </ListView>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SQRXM}" FontSize="15" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="新增" Command="{Binding AddApplicantCommand}" >
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="AddBox" Foreground="GreenYellow" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="删除选中项" Command="{Binding DelApplicantCommand}" >
+                                        <MenuItem.Icon>
+                                            <materialDesign:PackIcon Kind="DeleteForeverOutline" Foreground="Red" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
                     </Grid>
                     <!-- List End -->
                     <!-- Bottom -->
@@ -183,13 +184,12 @@
                     <!-- Bottom End -->
 
                 </Grid>
-
-
                 <!-- Left End -->
-
+                
+                <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="4 8 -4 8" BorderBrush="LightGray" BorderThickness="1"/>
 
                 <!-- Main -->
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="2">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Grid Margin="5" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
@@ -326,7 +326,7 @@
                                       materialDesign:HintAssist.Hint="不动产单元类型"
                                       SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
                                       SelectedValue="{Binding Applicant.BDCDYLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            <Button Grid.Row="10" Grid.Column="1" 
+                            <Button Grid.Row="10" Grid.Column="1" Margin="0 30"
                                     Command="{Binding AddOrEditApplicantCommand}" 
                                     Content="{Binding ApplicantButtonContent}" />
                         </Grid>

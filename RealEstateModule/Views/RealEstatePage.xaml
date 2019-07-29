@@ -91,6 +91,7 @@
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="2"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -172,8 +173,9 @@
                     <!-- Bottom End -->
                 </Grid>
 
+                <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="4 8 -4 8" BorderBrush="LightGray" BorderThickness="1"/>
 
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="2" ShowGridLines="True">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ContentControl Margin="5 0" prism:RegionManager.RegionName="BusinessContentRegion"/>
                     </ScrollViewer>

@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:common="clr-namespace:Common;assembly=Common"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -13,6 +16,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
                 <!-- throw in some extra colour for our floating action button -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -20,7 +24,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16">
             <Grid.ColumnDefinitions>
@@ -31,23 +37,40 @@
 
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap">欢迎使用不动产登记电子报盘系统</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Binoculars" />
-                        <TextBlock Margin="8 0 0 0">浏览</TextBlock>
+                        <materialDesign:PackIcon Kind="SettingsOutline" />
+                        <TextBlock Margin="8 0 0 0">项目路径设置</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
         </Grid>
-        <materialDesign:Card Grid.Row="1" Margin="20">
-            <Image Source="/Images/index.png" Stretch="Uniform"  />
-        </materialDesign:Card>
-        <!--<Image Grid.Row="1">
-            <Image.Source>
-                <BitmapImage DecodePixelWidth="320" UriSource="/Images/index.png" />
-            </Image.Source>
-        </Image>-->
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="420" Margin="4 2 8 16" Height="270"
+                        Command="{x:Static common:GlobalCommands.NavigateCommand}"
+                        CommandParameter="RealEstatePage"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <TextBlock TextWrapping="Wrap" FontSize="20"
+                               Text="楼盘表项目：&#x0A;新建、编辑、删除 &#x0A;导入、质检、导出"/>
+
+                </Button>
+                <Button Width="420" Margin="4 2 8 16" Height="270"
+                        Command="{x:Static common:GlobalCommands.NavigateCommand}"
+                        CommandParameter="RegistrationPage"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                        materialDesign:ColorZoneAssist.Mode="Standard">
+                    <TextBlock TextWrapping="Wrap" FontSize="20"
+                               Text="登记业务项目：&#x0A;新建、编辑、删除 &#x0A;附件上传、导出"/>
+
+                </Button>
+
+            </StackPanel>
+        </ScrollViewer>
+        
+   
+
     </Grid>
 </UserControl>

@@ -177,6 +177,7 @@
     <Compile Include="Transfer.cs">
       <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\IndexPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ProjectTabViewModel.cs" />
@@ -247,8 +248,25 @@
       <LastGenOutput>ElectronicOfferSystemDB.cs</LastGenOutput>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Content>
+    <Resource Include="Images\Icon_Add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icon_Del.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icon_Export.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icon_Import.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icon_Safe.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\index.png" />
-    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

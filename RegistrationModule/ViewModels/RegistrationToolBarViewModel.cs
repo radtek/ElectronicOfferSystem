@@ -1,9 +1,12 @@
 ﻿using BusinessData;
 using Common;
+using Common.Events;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using RegistrationModule.ViewModels.Dialogs;
 using RegistrationModule.Views.Dialogs;
 using System;
@@ -20,17 +23,19 @@ namespace RegistrationModule.ViewModels
     {
         public Project Project { get; set; }
         public ExportRegistrationDialogViewModel ExportRegistrationViewModel { get; set; }
-        public TransferPageViewModel TransferPageViewModel { get; set; }
+
+        public RegistrationPageViewModel RegistrationPageViewModel { get; set; }
 
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand AddApplicantCommand { get; set; }
         public DelegateCommand DelApplicantCommand { get; set; }
         public DelegateCommand OpenExportRegistrationDialogCommand { get; set; }
 
-        public RegistrationToolBarViewModel()
+        public RegistrationToolBarViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
+
             OpenExportRegistrationDialogCommand = new DelegateCommand(ExecuteExportRegistrationDialog);
-            TransferPageViewModel = new TransferPageViewModel();
+            RegistrationPageViewModel = new RegistrationPageViewModel(regionManager, ea);
 
             // 在项目列表选择一个项目之后执行
             SelectProjectCommand = new DelegateCommand<object>((obj) =>
@@ -41,11 +46,10 @@ namespace RegistrationModule.ViewModels
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             AddApplicantCommand = new DelegateCommand(() => {
-                TransferPageViewModel.AddApplicantCommand.Execute();
+                RegistrationPageViewModel.RegistrationNavCommand.Execute("TransferPage");
             });
 
             DelApplicantCommand = new DelegateCommand(() => {
-                TransferPageViewModel.DelApplicantCommand.Execute();
             });
         }
 

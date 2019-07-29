@@ -157,7 +157,15 @@ namespace RegistrationModule.ViewModels
         /// <summary>
         /// 项目
         /// </summary>
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
+        private Project project;
+
+        public Project Project
+        {
+            get { return project; }
+            set { SetProperty(ref project, value); }
+        }
+
         public ProjectDal ProjectDal { get; set; }
         public ApplicantDal ApplicantDal { get; set; }
         public TransferDal TransferDal { get; set; }
@@ -244,7 +252,7 @@ namespace RegistrationModule.ViewModels
                     Project = project;
                 }
                 // 初始化登记项目
-                Project = ProjectDal.InitialRegistrationProject(Project);
+                //Project = ProjectDal.InitialRegistrationProject(Project);
                 // 获取申请人集合
                 Applicants = new ObservableCollection<Applicant>(Project.Applicants);
 

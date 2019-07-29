@@ -43,6 +43,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0"
                  materialDesign:HintAssist.Hint="层号*">
@@ -169,7 +170,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button Grid.Row="5" Grid.Column="1" 
+        <Button Grid.Row="5" Grid.Column="1" Margin="0 30"
                 Command="{Binding AddOrEditFloorCommand}" 
                 Content="{Binding ButtonContent}" />
 

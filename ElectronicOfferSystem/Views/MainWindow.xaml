@@ -11,20 +11,18 @@
         mc:Ignorable="d"
         Title="不动产登记电子报盘系统" Icon="/Images/logo.png" 
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        ResizeMode="NoResize"
         Height="800" Width="1100">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <!--<RowDefinition Height="50" />-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Top -->
         <Grid Grid.Row="0">
-            <ContentControl prism:RegionManager.RegionName="WindowTopRegion"
-                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>
+            <!--<ContentControl prism:RegionManager.RegionName="WindowTopRegion" Name="WindowTop"
+                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>-->
         </Grid>
         <!-- Top End -->
 

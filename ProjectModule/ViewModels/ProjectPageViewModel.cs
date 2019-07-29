@@ -60,6 +60,20 @@ namespace ProjectModule.ViewModels
             set { SetProperty(ref selectedProject, value); }
         }
 
+        private string searchProjectName;
+        public string SearchProjectName
+        {
+            get { return searchProjectName; }
+            set { SetProperty(ref searchProjectName, value); }
+        }
+
+        private string projectType;
+        public string ProjectType
+        {
+            get { return projectType; }
+            set { SetProperty(ref projectType, value); }
+        }
+
 
         public AddOrEditProjectDialogViewModel AddOrEditProjectDialog { get; set; }
 
@@ -71,6 +85,7 @@ namespace ProjectModule.ViewModels
         public DelegateCommand CancelAddOrEditProjectDialogCommand { get; set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand DelProjectCommand { get; set; }
+        public DelegateCommand SearchProjectCommand { get; set; }
         ProjectDal projectDal = new ProjectDal();
 
         public ProjectPageViewModel()
@@ -90,6 +105,7 @@ namespace ProjectModule.ViewModels
             {
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
+                //if (Project == null) return;
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
@@ -113,6 +129,10 @@ namespace ProjectModule.ViewModels
             });
             // 删除项目
             DelProjectCommand = new DelegateCommand(DelProject);
+
+            SearchProjectCommand = new DelegateCommand(()=> {
+                Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>ProjectType.Equals(p.Type) && p.ProjectName.Contains(SearchProjectName)));
+            });
 
             // 初始化
             Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type)));
@@ -163,22 +183,26 @@ namespace ProjectModule.ViewModels
             switch (navigatePath)
             {
                 case "IndexPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>!"-1".Equals(p.Type)));
+                    ProjectType = "-1";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p=>!ProjectType.Equals(p.Type)));
                     IsBtnEnabled = false;
                     break;
                 case "RealEstatePage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type) ));
+                    ProjectType = "1";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type) ));
 
                     //Project = Projects.FirstOrDefault();
                     SelectedProject = Projects.FirstOrDefault();
                     break;
                 case "RegistrationPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "2".Equals(p.Type) ));
+                    ProjectType = "2";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type) ));
                     //Project = Projects.FirstOrDefault();
                     SelectedProject = Projects.FirstOrDefault();
                     break;
                 case "SettingPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type) ));
+                    ProjectType = "-1";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !ProjectType.Equals(p.Type) ));
                     break;
                 default:
                     break;
@@ -267,13 +291,16 @@ namespace ProjectModule.ViewModels
             switch (NavigatePath)
             {
                 case "RealEstatePage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "1".Equals(p.Type)));
+                    ProjectType = "1";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type)));
                     break;
                 case "RegistrationPage":
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "2".Equals(p.Type)));
+                    ProjectType = "2";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type)));
                     break;
                 default:
-                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => "-1".Equals(p.Type)));
+                    ProjectType = "-1";
+                    Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type)));
                     break;
             }
            

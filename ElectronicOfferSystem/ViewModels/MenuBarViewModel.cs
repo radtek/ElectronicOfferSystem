@@ -32,7 +32,7 @@ namespace ElectronicOfferSystem.ViewModels
         {
             ProjectPageViewModel projectPageViewModel = new ProjectPageViewModel();
             RealEstateToolBarViewModel realEstateToolBarViewModel = new RealEstateToolBarViewModel(regionManager, ea);
-            RegistrationToolBarViewModel registrationToolBarViewModel = new RegistrationToolBarViewModel();
+            RegistrationToolBarViewModel registrationToolBarViewModel = new RegistrationToolBarViewModel(regionManager, ea);
 
             AddRealEstateProjectCommand = new DelegateCommand<string>((str) =>
             {
