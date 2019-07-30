@@ -11,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Menu IsMainMenu="True" Margin="0 -10 0 0" Height="40" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
+        <Menu IsMainMenu="True" Margin="0 -7 0 0" Height="40" materialDesign:ColorZoneAssist.Mode="PrimaryMid">
             <MenuItem Header="楼盘表项目">
                 <MenuItem Header="新建" Command="{Binding AddRealEstateProjectCommand}" CommandParameter="新增项目">
                     <MenuItem.Icon>

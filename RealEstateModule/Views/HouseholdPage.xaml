@@ -398,7 +398,7 @@
                   materialDesign:HintAssist.Hint="状态"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.ZT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="18" Grid.Column="1" Margin="0 30"
+        <Button Grid.Row="18" Grid.Column="1" Margin="0 50"
                 Command="{Binding AddOrEditHouseholdCommand}" 
                 Content="{Binding ButtonContent}" />
     </Grid>

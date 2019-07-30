@@ -170,7 +170,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button Grid.Row="5" Grid.Column="1" Margin="0 30"
+        <Button Grid.Row="5" Grid.Column="1" Margin="0 50"
                 Command="{Binding AddOrEditFloorCommand}" 
                 Content="{Binding ButtonContent}" />
 

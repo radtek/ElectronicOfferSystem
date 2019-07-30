@@ -171,7 +171,7 @@
                  materialDesign:HintAssist.Hint="电子邮件" />
         <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Obligee.BZ}"
                  materialDesign:HintAssist.Hint="备注" />
-        <Button Grid.Row="9" Grid.Column="1" Margin="0 30"
+        <Button Grid.Row="9" Grid.Column="1" Margin="0 50"
                 Command="{Binding AddOrEditObligeeCommand}" 
                 Content="{Binding ButtonContent}" />
        

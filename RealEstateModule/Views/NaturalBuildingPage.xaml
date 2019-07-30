@@ -229,7 +229,7 @@
                   SelectedValue="{Binding NaturalBuilding.ZT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NaturalBuilding.BZ}"
                  materialDesign:HintAssist.Hint="备注"/>
-        <Button Grid.Row="8" Grid.Column="1" Margin="0 30"
+        <Button Grid.Row="8" Grid.Column="1" Margin="0 50"
                 Command="{Binding AddOrEditNaturalBuildingCommand}" 
                 Content="{Binding ButtonContent}" />
     </Grid>
