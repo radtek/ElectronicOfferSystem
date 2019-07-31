@@ -7,22 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ElectronicOfferSystem
+namespace BusinessData
 {
     using System;
     using System.Collections.Generic;
     
     /// <summary>
-    /// 权利人
+    /// 抵押信息
     /// </summary>
-    public partial class Obligee
+    public partial class Mortgage
     {
         /// <summary>
-        /// ID
+        /// 
         /// </summary>
         public System.Guid ID { get; set; }
         /// <summary>
-        /// 
+        /// 项目编号
         /// </summary>
         public System.Guid ProjectID { get; set; }
         /// <summary>
@@ -38,25 +38,13 @@ namespace ElectronicOfferSystem
         /// </summary>
         public string BDCQZH { get; set; }
         /// <summary>
-        /// 证件种类
+        /// 证件类型
         /// </summary>
-        public string ZJZL { get; set; }
+        public string ZJLX { get; set; }
         /// <summary>
         /// 证件号
         /// </summary>
         public string ZJH { get; set; }
-        /// <summary>
-        /// 国家/地区
-        /// </summary>
-        public string GJ { get; set; }
-        /// <summary>
-        /// 性别
-        /// </summary>
-        public string XB { get; set; }
-        /// <summary>
-        /// 权利人类型
-        /// </summary>
-        public string QLRLX { get; set; }
         /// <summary>
         /// 电话
         /// </summary>
@@ -69,22 +57,6 @@ namespace ElectronicOfferSystem
         /// 地址
         /// </summary>
         public string DZ { get; set; }
-        /// <summary>
-        /// 权利类型
-        /// </summary>
-        public string QLLX { get; set; }
-        /// <summary>
-        /// 共有方式
-        /// </summary>
-        public string GYFS { get; set; }
-        /// <summary>
-        /// 权利面积
-        /// </summary>
-        public string QLMJ { get; set; }
-        /// <summary>
-        /// 权利比例
-        /// </summary>
-        public string QLBL { get; set; }
         /// <summary>
         /// 法人姓名
         /// </summary>
@@ -102,41 +74,85 @@ namespace ElectronicOfferSystem
         /// </summary>
         public string FRDH { get; set; }
         /// <summary>
-        /// 代理人姓名
+        /// 备注
         /// </summary>
-        public string DLRXM { get; set; }
+        public string BZ { get; set; }
         /// <summary>
-        /// 代理人证件类型
+        /// 抵押方式
         /// </summary>
-        public string DLRZJLX { get; set; }
+        public string DYFS { get; set; }
         /// <summary>
-        /// 代理人证件号
+        /// 债权单位
         /// </summary>
-        public string DLRZJH { get; set; }
+        public string ZQDW { get; set; }
         /// <summary>
-        /// 代理人电话
+        /// 抵押人
         /// </summary>
-        public string DLRDH { get; set; }
+        public string DYR { get; set; }
         /// <summary>
-        /// 工作单位
+        /// 抵押人证件类型
         /// </summary>
-        public string GZDW { get; set; }
+        public string DYRZJLX { get; set; }
         /// <summary>
-        /// 代理机构名称
+        /// 抵押人证件号
         /// </summary>
-        public string DLJGMC { get; set; }
+        public string DYRZJH { get; set; }
         /// <summary>
-        /// 电子邮件
+        /// 抵押不动产类型
         /// </summary>
-        public string DZYJ { get; set; }
+        public string DYBDCLX { get; set; }
+        /// <summary>
+        /// 持证方式
+        /// </summary>
+        public string CZFS { get; set; }
+        /// <summary>
+        /// 抵押评估价值
+        /// </summary>
+        public string DYPGJZ { get; set; }
+        /// <summary>
+        /// 被担保主债权数额
+        /// </summary>
+        public string BDBZZQSE { get; set; }
+        /// <summary>
+        /// 最高债券数额
+        /// </summary>
+        public string ZGZQSE { get; set; }
+        /// <summary>
+        /// 债务人
+        /// </summary>
+        public string ZWR { get; set; }
+        /// <summary>
+        /// 最高债权确定事实
+        /// </summary>
+        public string ZGZQQDSS { get; set; }
+        /// <summary>
+        /// 在建建筑物坐落
+        /// </summary>
+        public string ZJJZWZL { get; set; }
+        /// <summary>
+        /// 在建建筑物抵押范围
+        /// </summary>
+        public string ZJJZWDYFW { get; set; }
+        /// <summary>
+        /// 债务履行起始时间
+        /// </summary>
+        public Nullable<System.DateTime> ZWLXQSSJ { get; set; }
+        /// <summary>
+        /// 债务履行结束时间
+        /// </summary>
+        public Nullable<System.DateTime> ZWLXJSSJ { get; set; }
+        /// <summary>
+        /// 登记时间
+        /// </summary>
+        public Nullable<System.DateTime> DJSJ { get; set; }
         /// <summary>
         /// 登簿人
         /// </summary>
         public string DBR { get; set; }
         /// <summary>
-        /// 备注
+        /// 附记
         /// </summary>
-        public string BZ { get; set; }
+        public string FJ { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

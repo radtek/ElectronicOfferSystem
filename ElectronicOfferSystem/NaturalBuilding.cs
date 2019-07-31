@@ -110,13 +110,13 @@ namespace ElectronicOfferSystem
         /// </summary>
         public string JZWJBYT { get; set; }
         /// <summary>
-        /// 状态
-        /// </summary>
-        public string ZT { get; set; }
-        /// <summary>
         /// 备注
         /// </summary>
         public string BZ { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string ZT { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>

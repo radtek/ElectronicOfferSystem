@@ -130,6 +130,10 @@ namespace BusinessData
         /// </summary>
         public string DZYJ { get; set; }
         /// <summary>
+        /// 登簿人
+        /// </summary>
+        public string DBR { get; set; }
+        /// <summary>
         /// 备注
         /// </summary>
         public string BZ { get; set; }

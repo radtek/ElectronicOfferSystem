@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/25/2019 15:39:29
+-- Date Created: 07/31/2019 09:53:49
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -52,8 +52,10 @@ CREATE TABLE [Project] (
     [ID] uniqueidentifier  NOT NULL,
     [ProjectName] nvarchar(60)  NOT NULL,
     [DeveloperName] nvarchar(60)  NULL,
-    [Type] nvarchar(60)  NOT NULL,
+    [Type] nvarchar(60)  NULL,
     [State] nvarchar(4000)  NULL,
+    [OwnershipType] nvarchar(60)  NULL,
+    [MappingType] nvarchar(60)  NULL,
     [UptateTime] datetime  NOT NULL,
     [Remark] nvarchar(400)  NULL
 );
@@ -65,7 +67,7 @@ CREATE TABLE [NaturalBuilding] (
     [ProjectID] uniqueidentifier  NOT NULL,
     [BSM] nvarchar(60)  NOT NULL,
     [YSDM] nvarchar(60)  NOT NULL,
-    [BDCDYH] nvarchar(60)  NOT NULL,
+    [BDCDYH] nvarchar(60)  NULL,
     [ZDDM] nvarchar(60)  NOT NULL,
     [ZRZH] nvarchar(60)  NOT NULL,
     [XMMC] nvarchar(60)  NULL,
@@ -80,12 +82,12 @@ CREATE TABLE [NaturalBuilding] (
     [DSCS] nvarchar(60)  NOT NULL,
     [DXCS] nvarchar(60)  NOT NULL,
     [DXSD] nvarchar(60)  NULL,
-    [GHYT] nvarchar(60)  NULL,
+    [GHYT] nvarchar(60)  NOT NULL,
     [FWJG] nvarchar(60)  NOT NULL,
     [ZTS] nvarchar(4000)  NOT NULL,
     [JZWJBYT] nvarchar(60)  NULL,
-    [ZT] nvarchar(60)  NOT NULL,
     [BZ] nvarchar(200)  NULL,
+    [ZT] nvarchar(60)  NOT NULL,
     [UpdateTime] datetime  NOT NULL
 );
 GO
@@ -151,7 +153,7 @@ CREATE TABLE [Obligee] (
     [ZJZL] nvarchar(60)  NOT NULL,
     [ZJH] nvarchar(60)  NOT NULL,
     [GJ] nvarchar(60)  NOT NULL,
-    [XB] nvarchar(60)  NULL,
+    [XB] nvarchar(60)  NOT NULL,
     [QLRLX] nvarchar(60)  NOT NULL,
     [DH] nvarchar(4000)  NULL,
     [YB] nvarchar(4000)  NULL,
@@ -171,7 +173,8 @@ CREATE TABLE [Obligee] (
     [GZDW] nvarchar(4000)  NULL,
     [DLJGMC] nvarchar(4000)  NULL,
     [DZYJ] nvarchar(4000)  NULL,
-    [BZ] nvarchar(4000)  NULL,
+    [DBR] nvarchar(60)  NULL,
+    [BZ] nvarchar(300)  NULL,
     [UpdateTime] datetime  NOT NULL
 );
 GO
@@ -182,10 +185,10 @@ CREATE TABLE [Household] (
     [ProjectID] uniqueidentifier  NOT NULL,
     [HBSM] nvarchar(60)  NOT NULL,
     [YXTBS] nvarchar(60)  NULL,
-    [BDCDYH] nvarchar(60)  NOT NULL,
+    [BDCDYH] nvarchar(60)  NULL,
     [FWBM] nvarchar(60)  NOT NULL,
     [YSDM] nvarchar(4000)  NOT NULL,
-    [ZRZH] nvarchar(60)  NOT NULL,
+    [ZRZH] nvarchar(60)  NULL,
     [LJZH] nvarchar(60)  NULL,
     [DYH] nvarchar(60)  NULL,
     [ZCS] nvarchar(60)  NULL,
@@ -232,7 +235,7 @@ CREATE TABLE [Household] (
     [QTGSB] nvarchar(4000)  NULL,
     [TDSYQR] nvarchar(4000)  NULL,
     [FCFHT] nvarchar(4000)  NULL,
-    [ZT] nvarchar(60)  NULL,
+    [ZT] nvarchar(60)  NOT NULL,
     [UpdateTime] datetime  NOT NULL
 );
 GO
@@ -336,6 +339,68 @@ CREATE TABLE [FileType] (
 );
 GO
 
+-- Creating table 'Mortgage'
+CREATE TABLE [Mortgage] (
+    [ID] uniqueidentifier  NOT NULL,
+    [ProjectID] uniqueidentifier  NOT NULL,
+    [HBSM] nvarchar(60)  NOT NULL,
+    [QLRMC] nvarchar(60)  NOT NULL,
+    [BDCQZH] nvarchar(60)  NULL,
+    [ZJLX] nvarchar(60)  NOT NULL,
+    [ZJH] nvarchar(60)  NOT NULL,
+    [DH] nvarchar(60)  NULL,
+    [YB] nvarchar(60)  NULL,
+    [DZ] nvarchar(60)  NULL,
+    [FRXM] nvarchar(60)  NULL,
+    [FRZJLX] nvarchar(60)  NULL,
+    [FRZJH] nvarchar(60)  NULL,
+    [FRDH] nvarchar(60)  NULL,
+    [BZ] nvarchar(300)  NULL,
+    [DYFS] nvarchar(60)  NOT NULL,
+    [ZQDW] nvarchar(60)  NULL,
+    [DYR] nvarchar(60)  NOT NULL,
+    [DYRZJLX] nvarchar(60)  NOT NULL,
+    [DYRZJH] nvarchar(60)  NOT NULL,
+    [DYBDCLX] nvarchar(60)  NOT NULL,
+    [CZFS] nvarchar(60)  NOT NULL,
+    [DYPGJZ] nvarchar(60)  NULL,
+    [BDBZZQSE] nvarchar(60)  NULL,
+    [ZGZQSE] nvarchar(60)  NULL,
+    [ZWR] nvarchar(60)  NOT NULL,
+    [ZGZQQDSS] nvarchar(60)  NULL,
+    [ZJJZWZL] nvarchar(100)  NULL,
+    [ZJJZWDYFW] nvarchar(60)  NULL,
+    [ZWLXQSSJ] datetime  NULL,
+    [ZWLXJSSJ] datetime  NULL,
+    [DJSJ] datetime  NULL,
+    [DBR] nvarchar(60)  NOT NULL,
+    [FJ] nvarchar(300)  NULL,
+    [UpdateTime] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'Sequestration'
+CREATE TABLE [Sequestration] (
+    [ID] uniqueidentifier  NOT NULL,
+    [ProjectID] uniqueidentifier  NOT NULL,
+    [HBSM] nvarchar(60)  NOT NULL,
+    [CFJG] nvarchar(60)  NULL,
+    [CFLX] nvarchar(60)  NOT NULL,
+    [CFWJ] nvarchar(60)  NULL,
+    [CFWH] nvarchar(60)  NULL,
+    [JFWJ] nvarchar(60)  NULL,
+    [JFWH] nvarchar(60)  NULL,
+    [CFQSSJ] datetime  NULL,
+    [CFJSSJ] datetime  NULL,
+    [DJSJ] datetime  NULL,
+    [DBR] nvarchar(60)  NOT NULL,
+    [LHCX] nvarchar(60)  NULL,
+    [CFSJ] datetime  NOT NULL,
+    [FJ] nvarchar(60)  NULL,
+    [UpdateTime] datetime  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -409,6 +474,18 @@ GO
 -- Creating primary key on [ID] in table 'FileType'
 ALTER TABLE [FileType]
 ADD CONSTRAINT [PK_FileType]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'Mortgage'
+ALTER TABLE [Mortgage]
+ADD CONSTRAINT [PK_Mortgage]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'Sequestration'
+ALTER TABLE [Sequestration]
+ADD CONSTRAINT [PK_Sequestration]
     PRIMARY KEY ([ID] );
 GO
 

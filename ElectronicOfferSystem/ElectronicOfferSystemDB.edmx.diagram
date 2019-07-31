@@ -4,19 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="86" DisplayType="true" >
+      <Diagram DiagramId="cc3d6ca1c03344dbb5b4e5ac379c2db3" Name="Diagram1" ZoomLevel="85" DisplayType="true" >
         <EntityTypeShape EntityType="ElectronicOfferSystem.Project" Width="1.375" PointX="0.625" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.NaturalBuilding" Width="1.5" PointX="2.375" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.LogicalBuilding" Width="1.5" PointX="4.5" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Floor" Width="1.5" PointX="6.625" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Obligee" Width="1.5" PointX="10.75" PointY="1.125" IsExpanded="false" />
         <EntityTypeShape EntityType="ElectronicOfferSystem.Household" Width="1.5" PointX="8.75" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.CONST" Width="1.5" PointX="2.375" PointY="1.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="0.625" PointY="1.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.Applicant" Width="1.5" PointX="1" PointY="3.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.Transfer" Width="1.875" PointX="3" PointY="3.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.FileInfo" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="false" />
-        <EntityTypeShape EntityType="ElectronicOfferSystem.FileType" Width="1.5" PointX="4.625" PointY="1.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONST" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.CONSTCLS" Width="1.5" PointX="0.5" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Applicant" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Transfer" Width="1.875" PointX="0.5" PointY="5.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.FileInfo" Width="1.5" PointX="0.5" PointY="5.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.FileType" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Mortgage" Width="1.5" PointX="4.75" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="ElectronicOfferSystem.Sequestration" Width="1.5" PointX="6.75" PointY="2" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

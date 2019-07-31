@@ -30,13 +30,21 @@ namespace BusinessData
         /// </summary>
         public string DeveloperName { get; set; }
         /// <summary>
-        /// 项目类型
+        /// 项目类型（1.楼盘项目 2.登记业务项目）
         /// </summary>
         public string Type { get; set; }
         /// <summary>
         /// 项目状态
         /// </summary>
         public string State { get; set; }
+        /// <summary>
+        /// 权籍类型（1.权籍调查 2.权籍补录）
+        /// </summary>
+        public string OwnershipType { get; set; }
+        /// <summary>
+        /// 测绘类型（1.预测绘 2.实测绘）
+        /// </summary>
+        public string MappingType { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
