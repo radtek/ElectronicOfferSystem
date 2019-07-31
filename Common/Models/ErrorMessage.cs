@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
+    /// <summary>
+    /// 异常信息
+    /// </summary>
     public class ErrorMessage
     {
         public string Message { get; set; }

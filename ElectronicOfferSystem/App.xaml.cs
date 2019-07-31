@@ -72,7 +72,7 @@ namespace ElectronicOfferSystem
                 //MessageBox.Show("捕获未处理异常:" + e.Exception.Message);
                 ErrorDialogViewModel.getInstance().show("捕获未处理异常："+e.Exception.Message , e.Exception.StackTrace);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //此时程序出现严重异常，将强制结束退出
                 MessageBox.Show("程序发生致命错误，将终止，请联系管理员！");

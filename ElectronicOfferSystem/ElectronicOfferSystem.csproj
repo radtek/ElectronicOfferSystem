@@ -126,62 +126,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Applicant.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CONST.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CONSTCLS.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ElectronicOfferSystemDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ElectronicOfferSystemDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ElectronicOfferSystemDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="ElectronicOfferSystemDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="FileInfo.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FileType.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Floor.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Household.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LogicalBuilding.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Mortgage.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NaturalBuilding.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Obligee.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Project.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Sequestration.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Transfer.cs">
-      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\IndexPageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

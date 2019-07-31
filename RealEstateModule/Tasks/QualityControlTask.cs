@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Models;
 using Common.ViewModels;
 using RealEstateModule.Services;
 using System;
@@ -32,14 +33,17 @@ namespace RealEstateModule.Tasks
             try
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-                TaskInfoDialog.Messages.Add("开始质检项目：" + Project.ProjectName);
-   
-
+                //TaskInfoDialog.Messages.Add("开始质检项目：" + Project.ProjectName);
+                TaskMessage taskMessage = new TaskMessage();
+                taskMessage.Title = "质检项目：" + Project.ProjectName;
+                taskMessage.Progress = 0.0;
+                TaskInfoDialog.Messages.Insert(0, taskMessage);
                 Task task = new Task(() =>
                 {
                     //Thread.Sleep(2000);
                     QualityControl qualityControl = new QualityControl();
                     qualityControl.Project = Project;
+                    qualityControl.TaskMessage = taskMessage;
                     try
                     {
                         ErrorMsg.AddRange(qualityControl.Check());
@@ -61,11 +65,11 @@ namespace RealEstateModule.Tasks
                             ProjectDal projectDal = new ProjectDal();
                             foreach (var error in ErrorMsg)
                             {
-                                TaskInfoDialog.Messages.Add(error);
+                                taskMessage.DetailMessages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
                             {
-                                TaskInfoDialog.Messages.Add("质检不通过");
+                                taskMessage.DetailMessages.Add("质检不通过");
                                 Project.State = "0";
                                 Project.UptateTime = DateTime.Now;
                                 projectDal.Modify(Project);
@@ -73,7 +77,7 @@ namespace RealEstateModule.Tasks
                             else
                             {
 
-                                TaskInfoDialog.Messages.Add("质检合格");
+                                taskMessage.DetailMessages.Add("质检合格");
                                 Project.State = "1";
                                 Project.UptateTime = DateTime.Now;
                                 projectDal.Modify(Project);
@@ -86,7 +90,7 @@ namespace RealEstateModule.Tasks
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

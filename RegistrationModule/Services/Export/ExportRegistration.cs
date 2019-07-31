@@ -146,9 +146,9 @@ namespace RegistrationModule.Services.Export
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

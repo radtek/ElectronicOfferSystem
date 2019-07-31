@@ -15,6 +15,8 @@ namespace BusinessData
             this.Floors = new HashSet<Floor>();
             this.Households = new HashSet<Household>();
             this.Obligees = new HashSet<Obligee>();
+            this.Mortgages = new HashSet<Mortgage>();
+            this.Sequestrations = new HashSet<Sequestration>();
             this.Applicants = new HashSet<Applicant>();
             this.FileInfos = new HashSet<FileInfo>();
             this.Transfer = new Transfer();
@@ -50,7 +52,16 @@ namespace BusinessData
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Obligee> Obligees { get; set; }
-
+        /// <summary>
+        /// 抵押信息集合
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Mortgage> Mortgages { get; set; }
+        /// <summary>
+        /// 查封信息集合
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sequestration> Sequestrations { get; set; }
         /// <summary>
         /// 申请人集合
         /// </summary>

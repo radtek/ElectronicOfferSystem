@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/31/2019 09:53:49
+-- Date Created: 07/31/2019 10:46:30
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -41,6 +41,10 @@ GO
     DROP TABLE [FileInfo];
 GO
     DROP TABLE [FileType];
+GO
+    DROP TABLE [Mortgage];
+GO
+    DROP TABLE [Sequestration];
 GO
 
 -- --------------------------------------------------

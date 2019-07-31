@@ -37,7 +37,7 @@ namespace RegistrationModule.Tasks
             try
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-                TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
+                //TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
 
 
                 Task task = new Task(() =>
@@ -67,13 +67,15 @@ namespace RegistrationModule.Tasks
 
                             foreach (var error in ErrorMsg)
                             {
-                                TaskInfoDialog.Messages.Add(error);
+                                //TaskInfoDialog.Messages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
-                                TaskInfoDialog.Messages.Add("导出失败");
+                            {
+                                //TaskInfoDialog.Messages.Add("导出失败");
+                            }
                             else
                             {
-                                TaskInfoDialog.Messages.Add("导出成功");
+                                //TaskInfoDialog.Messages.Add("导出成功");
                             }
                         }, null);
                     });
@@ -83,7 +85,7 @@ namespace RegistrationModule.Tasks
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }

@@ -1,7 +1,10 @@
 ﻿using BusinessData;
+using Common;
+using Common.Models;
 using Common.Rules;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +14,34 @@ namespace RealEstateModule.Services
     public class QualityControl
     {
         public Project Project { get; set; }
-        public List<string> ErrorMsg { get; set; }
+        public ObservableCollection<string> ErrorMsg { get; set; }
+        public TaskMessage TaskMessage { get; set; }
+        public int TotalCount { get; set; }
+        public double index { get; set; }
 
         public QualityControl()
         {
-            ErrorMsg = new List<string>();
+            ErrorMsg = new ObservableCollection<string>();
         }
         /// <summary>
         /// 质检
         /// </summary>
         /// <returns></returns>
-        public List<string> Check()
+        public ObservableCollection<string> Check()
         {
+            
+            int? totalCount = Project.NaturalBuildings?.Count + Project.LogicalBuildings?.Count 
+                       + Project.Floors?.Count + Project.Households?.Count 
+                       + Project.Obligees?.Count + Project.Mortgages?.Count 
+                       + Project.Sequestrations?.Count; // 获取总共的条数
+            if (totalCount == null)
+            {
+                ErrorMsg.Add("该项目无数据");
+                return ErrorMsg;
+            }
+            TotalCount = (int)totalCount;
+            index = 0.0;
+
             CheckNaturalBuilding();
             CheckLogicalBuilding();
             CheckFloor();
@@ -41,10 +60,8 @@ namespace RealEstateModule.Services
             String table = "自然幢";
             HashSet<String> ZRZHSet = new HashSet<string>();
             HashSet<String> BSMSet = new HashSet<string>();
-            int index = 0;
             foreach (var NaturalBuilding in Project.NaturalBuildings)
             {
-                index++;
                 // 重复检查
                 if (!ZRZHSet.Add(NaturalBuilding.ZRZH))
                 {
@@ -58,32 +75,31 @@ namespace RealEstateModule.Services
                 string id = "自然幢号为【" + NaturalBuilding.ZRZH +"】";
                 CheckNull(table, id, NaturalBuilding.BSM, "标识码");
                 CheckNull(table, id, NaturalBuilding.YSDM, "要素代码");
-                CheckNull(table, id, NaturalBuilding.ZRZH, "自然幢号");
-                CheckZDDM(table, id, NaturalBuilding.ZDDM, "宗地代码");
                 CheckBDCDYH(table, id, NaturalBuilding.BDCDYH, "不动产单元号");
-                CheckNumic(table, id, NaturalBuilding.ZYDMJ, "幢用地面积");
-                CheckNumic(table, id, NaturalBuilding.ZZDMJ, "幢占地面积");
+                CheckZDDM(table, id, NaturalBuilding.ZDDM, "宗地代码");
+                CheckNull(table, id, NaturalBuilding.ZRZH, "自然幢号");
+                CheckNUllAndNumic(table, id, NaturalBuilding.ZYDMJ, "幢用地面积");
+                CheckNUllAndNumic(table, id, NaturalBuilding.ZZDMJ, "幢占地面积");
                 CheckNumic(table, id, NaturalBuilding.DSCS, "地上层数");
                 CheckNumic(table, id, NaturalBuilding.ZCS, "总层数");
                 CheckNumic(table, id, NaturalBuilding.DXCS, "地下层数");
                 CheckNull(table, id, NaturalBuilding.FWJG, "房屋结构");
                 CheckNumic(table, id, NaturalBuilding.ZTS, "总套数");
                 CheckNUllAndNumic(table, id, NaturalBuilding.JZWGD, "建筑物高度");
-                CheckNUllAndNumic(table, id, NaturalBuilding.SCJZMJ, "实测建筑面积");
-                CheckNUllAndNumic(table, id, NaturalBuilding.YCJZMJ, "预测建筑面积");
                 CheckNUllAndNumic(table, id, NaturalBuilding.DXSD, "地下深度");
-                // 表间检查
-                //if (Project.LogicalBuildings == null || Project.LogicalBuildings.Count == 0)
-                //{
-                //}
-                //else
-                //{
-                //    int count = Project.LogicalBuildings.Count(l => l.ZRZH == NaturalBuilding.BSM);
-                //    if (count < 1)
-                //    {
-                //        ErrorMsg.Add("自然幢表中，标识码【" + NaturalBuilding.BSM + "】没有对应的逻辑幢");
-                //    }
-                //}
+
+                if (EMappingType.PredictiveMapping.ToString().Equals(Project.MappingType)) // 若是预测绘项目
+                {
+                    CheckNUllAndNumic(table, id, NaturalBuilding.YCJZMJ, "预测建筑面积");
+                }
+                else if (EMappingType.SurveyingMapping.ToString().Equals(Project.MappingType)) // 若是实测绘项目
+                {
+                    CheckNUllAndNumic(table, id, NaturalBuilding.SCJZMJ, "实测建筑面积");
+                }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
 
@@ -96,10 +112,8 @@ namespace RealEstateModule.Services
             if (Project.LogicalBuildings == null || Project.LogicalBuildings.Count == 0) return;
             String table = "逻辑幢";
             HashSet<String> LJZHSet = new HashSet<string>();
-            int index = 0;
             foreach (var LogicalBuilding in Project.LogicalBuildings)
             {
-                index++;
                 // 重复检查
                 if (!LJZHSet.Add(LogicalBuilding.LJZH))
                 {
@@ -125,6 +139,10 @@ namespace RealEstateModule.Services
                 {
                     ErrorMsg.Add("逻辑幢表中，自然幢号【" + LogicalBuilding.ZRZH + "】没有对应的自然幢");
                 }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
 
@@ -136,10 +154,8 @@ namespace RealEstateModule.Services
             if (Project.Floors == null || Project.Floors.Count == 0) return;
             String table = "层";
             HashSet<String> CHSet = new HashSet<string>();
-            int index = 0;
             foreach (var Floor in Project.Floors)
             {
-                index++;
                 if (!CHSet.Add(Floor.CH))
                 {
                     ErrorMsg.Add("层表中，层号【" + Floor.CH + "】重复存在");
@@ -164,6 +180,10 @@ namespace RealEstateModule.Services
                 {
                     ErrorMsg.Add("层表中，自然幢号【" + Floor.ZRZH + "】没有对应的自然幢");
                 }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
 
@@ -175,10 +195,8 @@ namespace RealEstateModule.Services
             if (Project.Households == null || Project.Households.Count == 0) return;
             String table = "户";
             HashSet<String> HBSMSet = new HashSet<string>();
-            int index = 0;
             foreach (var Household in Project.Households)
             {
-                index++;
                 if (!HBSMSet.Add(Household.HBSM))
                 {
                     ErrorMsg.Add("户表中，户标识码【" + Household.HBSM + "】重复存在");
@@ -223,6 +241,10 @@ namespace RealEstateModule.Services
                 {
                     ErrorMsg.Add("户表中，户标识码【" + Household.HBSM + "】没有对应的权利人");
                 }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
 
@@ -234,10 +256,8 @@ namespace RealEstateModule.Services
             if (Project.Obligees == null || Project.Obligees.Count == 0) return;
             String table = "权利人";
             HashSet<String> ZJHSet = new HashSet<string>();
-            int index = 0;
             foreach (var Obligee in Project.Obligees)
             {
-                index++;
                 if (!ZJHSet.Add(Obligee.ZJH))
                 {
                     ErrorMsg.Add("权利人表中，证件号【" + Obligee.ZJH + "】重复存在");
@@ -263,6 +283,10 @@ namespace RealEstateModule.Services
                 {
                     ErrorMsg.Add("权利人表中，户标识码【" + Obligee.HBSM + "】没有对应的户");
                 }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
 
@@ -290,6 +314,16 @@ namespace RealEstateModule.Services
         /// <param name="name"></param>
         private void CheckNumic(String table, String id, String value, String name)
         {
+            if (RuleHelper.IsNotEmpty(value))
+            {
+                if (!RuleHelper.IsNumberic(value))
+                {
+                    ErrorMsg.Add(table + "表中，" + id + "的" + name + "格式错误，应是数字");
+                }
+            }
+        }
+        private void CheckNUllAndNumic(String table, String id, String value, String name)
+        {
             if (!RuleHelper.IsNotEmpty(value))
             {
                 //ErrorMsg.Add(table + "表中，第" + rownum + "行的" + name + "为空");
@@ -301,18 +335,6 @@ namespace RealEstateModule.Services
                 ErrorMsg.Add(table + "表中，" + id + "的" + name + "格式错误，应是数字");
                 //ErrorMsg.Add(table + "表中，第" + rownum + "行的" + name + "格式错误，应是数字");
             }
-        }
-        private void CheckNUllAndNumic(String table, String id, String value, String name)
-        {
-            if (RuleHelper.IsNotEmpty(value))
-            {
-                if (!RuleHelper.IsNumberic(value))
-                {
-                    ErrorMsg.Add(table + "表中，" + id + "的" + name + "格式错误，应是数字");
-                    //ErrorMsg.Add(table + "表中，第" + rownum + "行的" + name + "格式错误，应是数字");
-                }
-            }
-
         }
 
         private void CheckNUllAndInt(String table, String id, String value, String name)
@@ -337,12 +359,6 @@ namespace RealEstateModule.Services
         /// <param name="name"></param>
         private void CheckBDCDYH(String table, String id, String value, String name)
         {
-            if (!RuleHelper.IsNotEmpty(value))
-            {
-                ErrorMsg.Add(table + "表中，" + id + "的" + name + "为空");
-                //ErrorMsg.Add(table + "表中，第" + rownum + "行的" + name + "为空");
-                return;
-            }
             if (!RuleHelper.IsNumberAndWord(value))
             {
                 ErrorMsg.Add(table + "表中，" + id + "的" + name + "格式错误，应是数字或字母");

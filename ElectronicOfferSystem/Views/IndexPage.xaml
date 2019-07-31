@@ -37,10 +37,10 @@
 
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap">欢迎使用不动产登记电子报盘系统</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ImportDictionaryCommand}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="SettingsOutline" />
-                        <TextBlock Margin="8 0 0 0">项目路径设置</TextBlock>
+                        <TextBlock Margin="8 0 0 0">导入字典</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>

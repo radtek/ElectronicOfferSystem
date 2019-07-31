@@ -25,6 +25,20 @@ namespace Common.Views
         {
             InitializeComponent();
             DataContext = TaskInfoDialogViewModel.getInstance();
+
+            // 解决鼠标中轴滚动问题
+            UseTheScrollViewerScrolling(Messages);
         }
+
+        public void UseTheScrollViewerScrolling(FrameworkElement fElement)
+         {
+             fElement.PreviewMouseWheel += (sender, e) =>
+             {
+                 var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+                 eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+                 eventArg.Source = sender;
+                 fElement.RaiseEvent(eventArg);
+             };
+         }
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="Converts\StateToIcon.cs" />
     <Compile Include="Converts\StateToTip.cs" />
     <Compile Include="Converts\StringToBitmapSource.cs" />
+    <Compile Include="Enums\EMappingType.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
     <Compile Include="Events\NavBusinessEvent.cs" />
     <Compile Include="Events\NavRegistrationEvent.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="Models\ErrorMessage.cs" />
     <Compile Include="Models\RegistrationResult.cs" />
+    <Compile Include="Models\TaskMessage.cs" />
     <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

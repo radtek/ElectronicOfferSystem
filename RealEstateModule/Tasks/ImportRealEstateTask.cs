@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Models;
 using Common.ViewModels;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
@@ -31,16 +32,22 @@ namespace RealEstateModule.Tasks
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
                 String FileName = Path.GetFileName(FullPath);
-                TaskInfoDialog.Messages.Add("开始导入：" + FileName);
-
+                //TaskInfoDialog.Messages.Add("开始导入：" + FileName);
+                TaskMessage taskMessage = new TaskMessage();
+                taskMessage.Title = "导入项目：" + FileName;
+                taskMessage.Progress = 0.0;
+                TaskInfoDialog.Messages.Insert(0, taskMessage);
                 Task task = new Task(() =>
                 {
                     ImportRealEstateBook import = new ImportRealEstateBook();
                     import.FileName = FullPath;
                     import.Read();
-                    var canContinue = import.ReadInformation();
+
+                    bool canContinue = import.ReadInformation();
+
                     if (canContinue)
                     {
+                        taskMessage.Progress = 50.00;
                         //var naturalEffective = NaturalEffective(import.ZRZList);
                         var isNaturalBuildingUnique = IsNaturalBuildingUnique(import.NaturalBuildings);
                         var isHouseholdUnique = IsHouseholdUnique(import.Households);
@@ -134,8 +141,8 @@ namespace RealEstateModule.Tasks
                             }
 
                         }
+
                     }
-                    //ErrorList = import.ErrorList;
                     ErrorMsg.AddRange(import.ErrorMsg);
 
                 });
@@ -151,15 +158,16 @@ namespace RealEstateModule.Tasks
 
                          foreach (var error in ErrorMsg)
                          {
-                             TaskInfoDialog.Messages.Add(error);
+                             taskMessage.DetailMessages.Add(error);
                          }
                          if (ErrorMsg != null && ErrorMsg.Count > 0)
                          {
-                             TaskInfoDialog.Messages.Add("导入失败");
+                             taskMessage.DetailMessages.Add("导入失败");
                          }
                          else
                          {
-                             TaskInfoDialog.Messages.Add("导入成功");
+                             taskMessage.Progress = 1.00;
+                             taskMessage.DetailMessages.Add("导入成功");
                              // 刷新项目列表
 
                          }
@@ -173,7 +181,7 @@ namespace RealEstateModule.Tasks
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

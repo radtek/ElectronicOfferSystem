@@ -19,40 +19,42 @@ namespace Common.Utils
         {
             if (name == null) return null;
             Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            // TODO: 删除这段代码，显示完整的字典
             // 处理特例
-            if ("房屋用途".Equals(name))
-            {
-                dic.Add("10", "住宅");
-                dic.Add("11", "成套住宅");
-                dic.Add("111", "别墅");
-                dic.Add("112", "高档公寓");
-                return dic;
-            }
-            if ("国家和地区".Equals(name))
-            {
-                dic.Add("142", "中华人民共和国");
-                dic.Add("1421", "香港特别行政区");
-                return dic;
-            }
-            if ("权利类型".Equals(name))
-            {
-                dic.Add("1", "集体土地所有权");
-                dic.Add("2", "国家土地所有权");
-                dic.Add("3", "国有建设用地使用权");
-                dic.Add("4", "国有建设用地使用权 / 房屋（构筑物）所有权");
-                dic.Add("5", "宅基地使用权");
-                dic.Add("6", "宅基地使用权 / 房屋（构筑物）所有权");
-                dic.Add("7", "集体建设用地使用权");
-                dic.Add("8", "集体建设用地使用权 / 房屋（构筑物）所有权");
-                return dic;
-            }
-            if ("不动产单元类型".Equals(name))
-            {
-                dic.Add("1", "实测户");
-                dic.Add("2", "预测户");
-                dic.Add("3", "使用权宗地");
-                return dic;
-            }
+            //if ("房屋用途".Equals(name))
+            //{
+            //    dic.Add("10", "住宅");
+            //    dic.Add("11", "成套住宅");
+            //    dic.Add("111", "别墅");
+            //    dic.Add("112", "高档公寓");
+            //    return dic;
+            //}
+            //if ("国家和地区".Equals(name))
+            //{
+            //    dic.Add("142", "中华人民共和国");
+            //    dic.Add("1421", "香港特别行政区");
+            //    return dic;
+            //}
+            //if ("权利类型".Equals(name))
+            //{
+            //    dic.Add("1", "集体土地所有权");
+            //    dic.Add("2", "国家土地所有权");
+            //    dic.Add("3", "国有建设用地使用权");
+            //    dic.Add("4", "国有建设用地使用权 / 房屋（构筑物）所有权");
+            //    dic.Add("5", "宅基地使用权");
+            //    dic.Add("6", "宅基地使用权 / 房屋（构筑物）所有权");
+            //    dic.Add("7", "集体建设用地使用权");
+            //    dic.Add("8", "集体建设用地使用权 / 房屋（构筑物）所有权");
+            //    return dic;
+            //}
+            //if ("不动产单元类型".Equals(name))
+            //{
+            //    dic.Add("1", "实测户");
+            //    dic.Add("2", "预测户");
+            //    dic.Add("3", "使用权宗地");
+            //    return dic;
+            //}
 
             CONSTCLSDal constclsDal = new CONSTCLSDal();
             CONSTDal constDal = new CONSTDal();

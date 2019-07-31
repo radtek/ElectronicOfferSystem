@@ -83,7 +83,6 @@ namespace RealEstateModule.ViewModels
             }
             var view = new TaskInfoDialog();
             TaskInfoDialogViewModel TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-            //TaskInfoDialog.Messages.Add("开始质检项目：" + Project.ProjectName);
             var result = DialogHost.Show(view, "RootDialog");
             
             QualityControlTask task = new QualityControlTask();

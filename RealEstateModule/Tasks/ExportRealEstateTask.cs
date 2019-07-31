@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RealEstateModule.Tasks
 {
@@ -41,7 +42,7 @@ namespace RealEstateModule.Tasks
             try
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-                TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
+                //TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
 
                 NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
                 LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
@@ -82,10 +83,12 @@ namespace RealEstateModule.Tasks
 
                             foreach (var error in ErrorMsg)
                             {
-                                TaskInfoDialog.Messages.Add(error);
+                                //TaskInfoDialog.Messages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
-                                TaskInfoDialog.Messages.Add("导出失败");
+                            {
+                                //TaskInfoDialog.Messages.Add("导出失败");
+                            }
                             else
                             {
                                 // 压缩成报盘
@@ -94,7 +97,7 @@ namespace RealEstateModule.Tasks
                                 zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
                                 // 删除excel
                                 File.Delete(SaveFileName.Replace(".bpf", ".xls"));
-                                TaskInfoDialog.Messages.Add("导出成功");
+                                //TaskInfoDialog.Messages.Add("导出成功");
                                 //errordoalog.CloseDialog();
                             }
                         }, null);
@@ -106,6 +109,7 @@ namespace RealEstateModule.Tasks
             catch (Exception ex)
             {
                 //DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
+                throw ex;
             }
         }
     }
