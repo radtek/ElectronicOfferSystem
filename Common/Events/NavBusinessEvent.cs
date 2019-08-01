@@ -1,4 +1,5 @@
-﻿using Prism.Events;
+﻿using Common.Enums;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Common.Events
 {
-    public class NavBusinessEvent : PubSubEvent<string>
+    public class NavBusinessEvent : PubSubEvent<ERealEstatePage>
     {
     }
 }

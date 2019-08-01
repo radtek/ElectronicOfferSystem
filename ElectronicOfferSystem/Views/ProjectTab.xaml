@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
              xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -22,27 +23,42 @@
                 </Grid.ColumnDefinitions>
             
             <StackPanel Orientation="Horizontal" Margin="2" Grid.Column="0" >
-                    
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
-                                 CommandParameter="IndexPage"
                                  Margin="4"
                                  IsChecked="True"
                                  Cursor="Hand"
-                                 Content="首页" />
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Content="首页">
+                        <RadioButton.CommandParameter>
+                        <Enums:EMainPage>
+                                IndexPage
+                            </Enums:EMainPage>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
-                                 CommandParameter="RealEstatePage"
                                  Margin="4"
                                  Cursor="Hand"
-                                 Content="楼盘表项目" />
-                <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Content="楼盘表项目">
+                        <RadioButton.CommandParameter>
+                            <Enums:EMainPage>
+                                RealEstatePage
+                            </Enums:EMainPage>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
-                                 CommandParameter="RegistrationPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="登记业务项目" />
+                                 Content="登记业务项目">
+                        <RadioButton.CommandParameter>
+                            <Enums:EMainPage>
+                                RegistrationPage
+                            </Enums:EMainPage>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
                     <!--<RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
                                  CommandParameter="SettingPage"

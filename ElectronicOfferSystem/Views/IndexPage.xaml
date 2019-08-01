@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -49,22 +50,29 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="420" Margin="4 2 8 16" Height="270"
                         Command="{x:Static common:GlobalCommands.NavigateCommand}"
-                        CommandParameter="RealEstatePage"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Button.CommandParameter>
+                        <Enums:EMainPage>
+                            RealEstatePage
+                        </Enums:EMainPage>
+                    </Button.CommandParameter>
                     <TextBlock TextWrapping="Wrap" FontSize="20"
                                Text="楼盘表项目：&#x0A;新建、编辑、删除 &#x0A;导入、质检、导出"/>
 
                 </Button>
                 <Button Width="420" Margin="4 2 8 16" Height="270"
                         Command="{x:Static common:GlobalCommands.NavigateCommand}"
-                        CommandParameter="RegistrationPage"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
                         materialDesign:ColorZoneAssist.Mode="Standard">
+                    <Button.CommandParameter>
+                        <Enums:EMainPage>
+                            RegistrationPage
+                        </Enums:EMainPage>
+                    </Button.CommandParameter>
                     <TextBlock TextWrapping="Wrap" FontSize="20"
                                Text="登记业务项目：&#x0A;新建、编辑、删除 &#x0A;附件上传、导出"/>
-
                 </Button>
 
             </StackPanel>

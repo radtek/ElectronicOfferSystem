@@ -10,6 +10,7 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -21,16 +22,40 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="IsEditable" Value="False"/>
+            </Style>
+
+            <Converts:ProjectTypeToVisibility x:Key="ProjectTypeToVisibility"/>
         </ResourceDictionary>
+        
     </UserControl.Resources>
-    <Grid Width="300">
+    <Grid Width="400">
         <materialDesign:ColorZone Mode="Light" Name="ProjectDialog"
                                   materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel Margin="16">
-                <TextBlock Text="{Binding DialogTitle}" HorizontalAlignment="Center" TextAlignment="Center" />
-                <TextBox materialDesign:HintAssist.Hint="项目名称"
-                                     Margin="0 10"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Grid Margin="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding DialogTitle}" HorizontalAlignment="Center" TextAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="0" materialDesign:HintAssist.Hint="项目名称">
                     <TextBox.Text>
                         <Binding Path="Project.ProjectName"  
                                              UpdateSourceTrigger="PropertyChanged" 
@@ -41,8 +66,7 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox materialDesign:HintAssist.Hint="开发商名称" Margin="0 10"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox Grid.Row="1" Grid.Column="1" materialDesign:HintAssist.Hint="开发商名称">
                     <TextBox.Text>
                         <Binding Path="Project.DeveloperName"  
                                              UpdateSourceTrigger="PropertyChanged" 
@@ -53,13 +77,23 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox materialDesign:HintAssist.Hint="备注"
-                                     Margin="0 10"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     Text="{Binding Project.Remark}"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            IsDefault="True" Margin="0 8 8 0"
+                <ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OwnershipTypeList}" Visibility="{Binding Path=Project.Type, Converter={StaticResource ProjectTypeToVisibility}}"
+                  materialDesign:HintAssist.Hint="权籍调查/补录"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Project.OwnershipType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding MappingTypeList}" Visibility="{Binding Project.Type, Converter={StaticResource ProjectTypeToVisibility}}"
+                  materialDesign:HintAssist.Hint="测绘类型"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Project.MappingType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Grid.Row="3" Grid.ColumnSpan="2" Margin="20 20"
+                         Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                         VerticalAlignment="Top" Height="60"
+                         AcceptsReturn="True" TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         materialDesign:HintAssist.Hint="备注"
+                         Text="{Binding Project.Remark}"/>
+                <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            IsDefault="True" Margin="20 10"
                             Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -68,8 +102,8 @@
                         </Button.CommandParameter>
                         确定
                     </Button>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            IsCancel="True" Margin="0 8 8 0"
+                <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource MaterialDesignFlatButton}"
+                            IsCancel="True" Margin="20 10"
                              Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -78,8 +112,7 @@
                         </Button.CommandParameter>
                         取消
                     </Button>
-                </StackPanel>
-            </StackPanel>
+            </Grid>
         </materialDesign:ColorZone>
     </Grid>
 </UserControl>

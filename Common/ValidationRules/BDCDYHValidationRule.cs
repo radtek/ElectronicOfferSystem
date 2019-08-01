@@ -8,10 +8,7 @@ namespace Common.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // 非空验证
-            NotEmptyValidationRule notEmptyValidation = new NotEmptyValidationRule();
-            if (!notEmptyValidation.Validate(value, cultureInfo).IsValid)
-                return notEmptyValidation.Validate(value, cultureInfo);
+            if (value == null) return ValidationResult.ValidResult;
             // 数字和字母验证
             NumbericAndWordValidationRule numbericAndWordValidation = new NumbericAndWordValidationRule();
             if(!numbericAndWordValidation.Validate(value, cultureInfo).IsValid)

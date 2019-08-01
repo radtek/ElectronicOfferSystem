@@ -11,6 +11,9 @@ namespace BusinessData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Project()
         {
+            this.OwnershipType = "1"; // 默认权籍调查
+            this.MappingType = "1"; // 默认权籍补录
+
             this.LogicalBuildings = new HashSet<LogicalBuilding>();
             this.Floors = new HashSet<Floor>();
             this.Households = new HashSet<Household>();

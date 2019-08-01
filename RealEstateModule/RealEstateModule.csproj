@@ -74,10 +74,12 @@
     <Compile Include="ViewModels\FloorPageViewModel.cs" />
     <Compile Include="ViewModels\HouseholdPageViewModel.cs" />
     <Compile Include="ViewModels\LogicalBuildingPageViewModel.cs" />
+    <Compile Include="ViewModels\MortgagePageViewModel.cs" />
     <Compile Include="ViewModels\NaturalBuildingPageViewModel.cs" />
     <Compile Include="ViewModels\ObligeePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstatePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
+    <Compile Include="ViewModels\SequestrationPageViewModel.cs" />
     <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>
@@ -96,6 +98,9 @@
     <Compile Include="Views\LogicalBuildingPage.xaml.cs">
       <DependentUpon>LogicalBuildingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MortgagePage.xaml.cs">
+      <DependentUpon>MortgagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NaturalBuildingPage.xaml.cs">
       <DependentUpon>NaturalBuildingPage.xaml</DependentUpon>
     </Compile>
@@ -107,6 +112,9 @@
     </Compile>
     <Compile Include="Views\RealEstateToolBar.xaml.cs">
       <DependentUpon>RealEstateToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SequestrationPage.xaml.cs">
+      <DependentUpon>SequestrationPage.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -161,6 +169,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MortgagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NaturalBuildingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RealEstateToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SequestrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Enums;
 using Common.Models;
 using Common.ViewModels;
 using Common.Views;
@@ -20,20 +21,20 @@ namespace ElectronicOfferSystem.ViewModels
     public class IndexPageViewModel : BindableBase
     {
 
-        public DelegateCommand<string> NavigateCommand { get; set; }
+        public DelegateCommand<EMainPage?> NavigateCommand { get; set; }
         public DelegateCommand ImportDictionaryCommand { get; set; }
 
         public IndexPageViewModel()
         {
             // 页面导航
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            NavigateCommand = new DelegateCommand<EMainPage?>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
             ImportDictionaryCommand = new DelegateCommand(ImportDictionary);
         }
 
 
-        private void Navigate(string obj)
+        private void Navigate(EMainPage? obj)
         {
         }
 

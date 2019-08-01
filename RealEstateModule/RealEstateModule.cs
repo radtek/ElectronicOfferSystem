@@ -21,6 +21,8 @@ namespace RealEstateModule
             containerRegistry.RegisterForNavigation<FloorPage>();
             containerRegistry.RegisterForNavigation<HouseholdPage>();
             containerRegistry.RegisterForNavigation<ObligeePage>();
+            containerRegistry.RegisterForNavigation<MortgagePage>();
+            containerRegistry.RegisterForNavigation<SequestrationPage>();
         }
     }
 }

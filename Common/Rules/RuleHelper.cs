@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessData;
+using BusinessData.Dal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,7 +70,6 @@ namespace Common.Rules
             if (value == null) return false;
             return value.ToString().Length == length;
         }
-
 
     }
 }

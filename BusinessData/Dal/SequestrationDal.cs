@@ -9,7 +9,7 @@ namespace BusinessData.Dal
     /// <summary>
     /// 查封信息数据访问层
     /// </summary>
-    public class SequestrationDal : BaseDal<SequestrationDal>
+    public class SequestrationDal : BaseDal<Sequestration>
     {
     }
 }

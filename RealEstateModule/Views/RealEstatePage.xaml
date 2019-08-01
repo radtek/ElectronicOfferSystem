@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
              xmlns:local="clr-namespace:RealEstateModule.Views"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -49,39 +50,88 @@
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
-                                 CommandParameter="NaturalBuildingPage"
                                  Margin="4"
                                  IsChecked="True"
                                  Cursor="Hand"
-                                 Content="自然幢" />
+                                 Content="自然幢">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    NaturalBuildingPage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
-                                 CommandParameter="LogicalBuildingPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="逻辑幢" />
+                                 Content="逻辑幢">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    LogicalBuildingPage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
-                                 CommandParameter="FloorPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="层信息" />
+                                 Content="层信息" >
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    FloorPage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
-                                 CommandParameter="HouseholdPage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="户信息" />
+                                 Content="户信息">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    HouseholdPage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
-                                 CommandParameter="ObligeePage"
                                  Margin="4"
                                  IsChecked="False"
                                  Cursor="Hand"
-                                 Content="权利人" />
+                                 Content="权利人">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    ObligeePage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding BusinessNavCommand}"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="抵押信息">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    MortgagePage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Command="{Binding BusinessNavCommand}"
+                                 Margin="4"
+                                 IsChecked="False"
+                                 Cursor="Hand"
+                                 Content="查封信息">
+                            <RadioButton.CommandParameter>
+                                <Enums:ERealEstatePage>
+                                    SequestrationPage
+                                </Enums:ERealEstatePage>
+                            </RadioButton.CommandParameter>
+                        </RadioButton>
                     </StackPanel>
                 </materialDesign:ColorZone>
             </Grid>

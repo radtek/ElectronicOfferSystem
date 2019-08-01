@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="RealEstateModule.Views.SequestrationPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RealEstateModule.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- note you only need bring in these extra resource dictionaries when using non-default styles, so only bring them into your controls where the default style is not what you want -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ComboBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="IsEditable" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="5" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+            <ColumnDefinition Width="*" MinWidth="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="0" 
+                 materialDesign:HintAssist.Hint="户标识码*" >
+            <TextBox.Text>
+                <Binding Path="Sequestration.HBSM" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Sequestration.CFJG}"
+                 materialDesign:HintAssist.Hint="查封机关"/>
+        <ComboBox Grid.Row="0" Grid.Column="2" ItemsSource="{Binding CFLXList}" 
+                  materialDesign:HintAssist.Hint="查封类型*"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Sequestration.CFLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Sequestration.CFWJ}"
+                 materialDesign:HintAssist.Hint="查封文件"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Sequestration.CFWH}"
+                 materialDesign:HintAssist.Hint="查封文号"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Sequestration.JFWJ}"
+                 materialDesign:HintAssist.Hint="解封文件"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Sequestration.JFWH}"
+                 materialDesign:HintAssist.Hint="解封文号"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Sequestration.CFQSSJ}"
+                    materialDesign:HintAssist.Hint="查封起始时间"
+                    Margin="20 10"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+        <DatePicker Grid.Row="2" Grid.Column="2" SelectedDate="{Binding Sequestration.CFQJSJ}"
+                    materialDesign:HintAssist.Hint="查封结束时间"
+                    Margin="20 10"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+        <DatePicker Grid.Row="3" Grid.Column="0" SelectedDate="{Binding Sequestration.DJSJ}"
+                    materialDesign:HintAssist.Hint="登记时间"
+                    Margin="20 10"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" 
+                 materialDesign:HintAssist.Hint="登簿人*" >
+            <TextBox.Text>
+                <Binding Path="Sequestration.DBR" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Sequestration.LHCX}"
+                 materialDesign:HintAssist.Hint="轮候次序"/>
+        <DatePicker Grid.Row="4" Grid.Column="0" SelectedDate="{Binding Sequestration.CFSJ}"
+                    materialDesign:HintAssist.Hint="查封时间*"
+                    Margin="20 10"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Sequestration.FJ}"
+                 materialDesign:HintAssist.Hint="附记"/>
+        
+        <Button Grid.Row="5" Grid.Column="1" Margin="0 50"
+                Command="{Binding AddOrEditSequestrationCommand}" 
+                Content="{Binding ButtonContent}" />
+    </Grid>
+</UserControl>

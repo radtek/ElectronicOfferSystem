@@ -4,6 +4,7 @@ using BusinessData.Models;
 using Common;
 using Common.Enums;
 using Common.Events;
+using Common.Utils;
 using Common.ValidationRules;
 using Common.ViewModels;
 using Prism.Commands;
@@ -11,14 +12,16 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
 {
-    class LogicalBuildingPageViewModel : BindableBase, INavigationAware
+    public class SequestrationPageViewModel : BindableBase, INavigationAware
     {
+
         #region Properties
         IEventAggregator EA;
         /// <summary>
@@ -36,83 +39,69 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref buttonContent, value); }
         }
 
-        /// <summary>
-        /// 逻辑幢信息
-        /// </summary>
-        private LogicalBuilding logicalBuilding;
-        public LogicalBuilding LogicalBuilding
+        private Sequestration sequestration;
+        public Sequestration Sequestration
         {
-            get { return logicalBuilding; }
-            set
-            {
-                SetProperty(ref logicalBuilding, value);
-            }
+            get { return sequestration; }
+            set { SetProperty(ref sequestration, value); }
         }
+
+        #region 字典
+        /// <summary>
+        /// 查封类型
+        /// </summary>
+        private Dictionary<string, string> cflxList;
+        public Dictionary<string, string> CFLXList
+        {
+            get { return cflxList; }
+            set { SetProperty(ref cflxList, value); }
+        }
+        #endregion
 
         #region 命令
         /// <summary>
-        /// 新增或修改逻辑幢
+        /// 新增或修改查封信息
         /// </summary>
-        public DelegateCommand AddOrEditLogicalBuildingCommand { get; set; }
+        public DelegateCommand AddOrEditSequestrationCommand { get; set; }
         /// <summary>
         /// 在项目列表选择一个项目
         /// </summary>
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         /// <summary>
-        /// 在逻辑幢列表选择一个逻辑幢
+        /// 在查封信息列表选择一个查封信息
         /// </summary>
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
         #endregion 
 
-        LogicalBuildingDal LogicalBuildingDal = new LogicalBuildingDal();
+        SequestrationDal SequestrationDal = new SequestrationDal();
 
         #endregion
 
-        #region ctor
-        public LogicalBuildingPageViewModel(IEventAggregator ea)
+
+        public SequestrationPageViewModel(IEventAggregator ea)
         {
             EA = ea;
-            // 新增或修改逻辑幢信息
-            AddOrEditLogicalBuildingCommand = new DelegateCommand(() => {
+            // 初始化下拉框
+            InitialComboBoxList();
+            // 新增或修改查封信息
+            AddOrEditSequestrationCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
                 {
                     case "确认新增":
-                        AddLogicalBuilding();
+                        AddSequestration();
                         break;
                     case "确认修改":
-                        EditLogicalBuilding();
+                        EditSequestration();
                         break;
                     default:
                         break;
                 }
             });
 
-            // 选中逻辑幢列表中的一项
+            // 选中查封信息列表中的一项
             SelectBusinessCommand = new DelegateCommand<object>(SelectBusiness);
             GlobalCommands.SelectBusinessCommand.RegisterCommand(SelectBusinessCommand);
         }
-        #endregion
-
-        /// <summary>
-        /// 页面加载
-        /// </summary>
-        /// <param name="navigationContext"></param>
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            // 获取选中项目
-            Project project = navigationContext.Parameters["Project"] as Project;
-            if (project != null)
-            {
-                Project = project;
-            }
-
-            // 初始逻辑幢数据
-            InitialLogicalBuilding();
-            // 按钮为新增状态
-            ButtonContent = "确认新增";
-        }
-
-
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
@@ -129,21 +118,38 @@ namespace RealEstateModule.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+           
         }
 
-        /// <summary>
-        /// 选择逻辑幢列表中的一项
-        /// </summary>
-        /// <param name="obj"></param>
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            // 获取选中项目
+            Project project = navigationContext.Parameters["Project"] as Project;
+            if (project != null)
+            {
+                Project = project;
+            }
+
+            // 初始查封信息数据
+            InitialSequestration();
+            // 按钮为新增状态
+            ButtonContent = "确认新增";
+        }
+
+        private void InitialSequestration()
+        {
+            Sequestration = new Sequestration();
+        }
+
         private void SelectBusiness(object obj)
         {
             try
             {
-                // 加载自然幢数据
+                // 加载查封数据
                 ListView listView = obj as ListView;
                 Business business = new Business();
                 business = listView.SelectedItem as Business;
-                LogicalBuilding = business?.LogicalBuilding;
+                Sequestration = business?.Sequestration;
 
                 // 按钮为修改状态
                 ButtonContent = "确认修改";
@@ -153,12 +159,9 @@ namespace RealEstateModule.ViewModels
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
             }
-
         }
-        /// <summary>
-        /// 新增逻辑幢
-        /// </summary>
-        private void AddLogicalBuilding()
+
+        private void AddSequestration()
         {
             if (Project == null)
             {
@@ -172,30 +175,27 @@ namespace RealEstateModule.ViewModels
             }
             try
             {
-                LogicalBuilding.ProjectID = Project.ID;
-                LogicalBuilding.ID = Guid.NewGuid();
-                LogicalBuilding.UpdateTime = DateTime.Now;
-                LogicalBuildingDal.Add(LogicalBuilding);
+                Sequestration.ProjectID = Project.ID;
+                Sequestration.ID = Guid.NewGuid();
+                Sequestration.UpdateTime = DateTime.Now;
+                SequestrationDal.Add(Sequestration);
 
-                LogicalBuilding = null;
+                Sequestration = null;
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.LogicalBuildingPage);
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.SequestrationPage);
             }
             catch (Exception ex)
             {
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
             }
-
         }
-        /// <summary>
-        /// 修改逻辑幢
-        /// </summary>
-        private void EditLogicalBuilding()
+
+        private void EditSequestration()
         {
-            if (LogicalBuilding == null)
+            if (Sequestration == null)
             {
-                MessageBox.Show("请选择逻辑幢", "提示");
+                MessageBox.Show("请选择查封信息", "提示");
                 return;
             }
             if (!canExecute())
@@ -205,50 +205,42 @@ namespace RealEstateModule.ViewModels
             }
             try
             {
-                LogicalBuilding.UpdateTime = DateTime.Now;
-                LogicalBuildingDal.Modify(LogicalBuilding);
+                Sequestration.UpdateTime = DateTime.Now;
+                SequestrationDal.Modify(Sequestration);
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.LogicalBuildingPage);
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.SequestrationPage);
             }
             catch (Exception ex)
             {
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
             }
-
         }
 
 
-        private void InitialLogicalBuilding()
-        {
-            LogicalBuilding = new LogicalBuilding();
-        }
-
-        /// <summary>
-        /// 能否执行新增或修改操作
-        /// </summary>
-        /// <returns></returns>
         private bool canExecute()
         {
-            if (LogicalBuilding == null) return false;
+            if (Sequestration == null) return false;
 
             bool isValid = true;
             CultureInfo cultureInfo = new CultureInfo("");
             // 非空验证
             NotEmptyValidationRule notEmptyValidationRule = new NotEmptyValidationRule();
-            isValid &= notEmptyValidationRule.Validate(LogicalBuilding.LJZH, cultureInfo).IsValid;
-            isValid &= notEmptyValidationRule.Validate(LogicalBuilding.ZRZH, cultureInfo).IsValid;
-            isValid &= notEmptyValidationRule.Validate(LogicalBuilding.YSDM, cultureInfo).IsValid;
-            // 数字验证
-            NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.YCJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.YCDXMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.YCQTMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.SCJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.SCDXMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(LogicalBuilding.SCQTMJ, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Sequestration.HBSM, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Sequestration.CFLX, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Sequestration.DBR, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Sequestration.CFSJ, cultureInfo).IsValid;
 
             return isValid;
         }
+
+        private void InitialComboBoxList()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic = DictionaryUtil.GetDictionaryByName("查封类型");
+            CFLXList = dic;
+        }
+
+
     }
 }

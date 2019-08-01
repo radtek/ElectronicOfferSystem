@@ -52,11 +52,16 @@
   <ItemGroup>
     <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="CommonModule.cs" />
+    <Compile Include="Converts\ProjectTypeToVisibility.cs" />
     <Compile Include="Converts\StateToColor.cs" />
     <Compile Include="Converts\StateToIcon.cs" />
     <Compile Include="Converts\StateToTip.cs" />
     <Compile Include="Converts\StringToBitmapSource.cs" />
+    <Compile Include="Enums\EMainPage.cs" />
     <Compile Include="Enums\EMappingType.cs" />
+    <Compile Include="Enums\EOwnershipType.cs" />
+    <Compile Include="Enums\EProjectType.cs" />
+    <Compile Include="Enums\ERealEstatePage.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
     <Compile Include="Events\NavBusinessEvent.cs" />
     <Compile Include="Events\NavRegistrationEvent.cs" />
@@ -96,6 +101,7 @@
     <Compile Include="ValidationRules\NumbericAndNotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\NumbericAndWordValidationRule.cs" />
     <Compile Include="ValidationRules\NumbericValidationRule.cs" />
+    <Compile Include="ValidationRules\ProjectNameUniqueValidationRule.cs" />
     <Compile Include="ValidationRules\SimpleDateValidationRule.cs" />
     <Compile Include="ValidationRules\ZDDMValidationRule.cs" />
     <Compile Include="ViewModels\ErrorDialogViewModel.cs" />

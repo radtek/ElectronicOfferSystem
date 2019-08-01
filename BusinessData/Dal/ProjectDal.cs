@@ -27,11 +27,15 @@ namespace BusinessData.Dal
                 FloorDal floorDal = new FloorDal();
                 HouseholdDal householdDal = new HouseholdDal();
                 ObligeeDal obligeeDal = new ObligeeDal();
+                MortgageDal mortgageDal = new MortgageDal();
+                SequestrationDal sequestrationDal = new SequestrationDal();
                 project.NaturalBuildings = naturalBuildingDal.GetListBy((n) => n.ProjectID == project.ID);
                 project.LogicalBuildings = logicalBuildingDal.GetListBy((l) => l.ProjectID == project.ID);
                 project.Floors = floorDal.GetListBy((f) => f.ProjectID == project.ID);
                 project.Households = householdDal.GetListBy((h) => h.ProjectID == project.ID);
                 project.Obligees = obligeeDal.GetListBy((o) => o.ProjectID == project.ID);
+                project.Mortgages = mortgageDal.GetListBy(m => m.ProjectID == project.ID);
+                project.Sequestrations = sequestrationDal.GetListBy(s => s.ProjectID == project.ID);
             }
             return project;
         }

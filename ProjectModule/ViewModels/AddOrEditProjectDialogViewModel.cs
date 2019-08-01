@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Utils;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -32,12 +33,35 @@ namespace ProjectModule.ViewModels
             }
         }
 
+        #region 字典
+        /// <summary>
+        /// 权籍调查/补录
+        /// </summary>
+        private Dictionary<string, string> ownershipTypeList;
+        public Dictionary<string, string> OwnershipTypeList
+        {
+            get { return ownershipTypeList; }
+            set { SetProperty(ref ownershipTypeList, value); }
+        }
+        /// <summary>
+        /// 测绘类型
+        /// </summary>
+        private Dictionary<string, string> mappingTypeList;
+        public Dictionary<string, string> MappingTypeList
+        {
+            get { return mappingTypeList; }
+            set { SetProperty(ref mappingTypeList, value); }
+        }
+        #endregion
+
         private static AddOrEditProjectDialogViewModel addOrEditProjectDialogViewModel = new AddOrEditProjectDialogViewModel();
 
 
         public AddOrEditProjectDialogViewModel()
         {
-           // Project = new Project();
+            // Project = new Project();
+            // 初始化下拉框
+            InitialComboBoxList();
         }
 
         public static AddOrEditProjectDialogViewModel getInstance()
@@ -45,5 +69,14 @@ namespace ProjectModule.ViewModels
             return addOrEditProjectDialogViewModel;
         }
 
+        private void InitialComboBoxList()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic = DictionaryUtil.GetDictionaryByName("权籍调查/补录");
+            OwnershipTypeList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("测绘类型");
+            MappingTypeList = dic;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Enums;
 using Common.Events;
 using Common.Utils;
 using Common.ValidationRules;
@@ -221,7 +222,7 @@ namespace RealEstateModule.ViewModels
 
                 NaturalBuilding = null;
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish("NaturalBuildingPage");
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.NaturalBuildingPage);
             }
             catch (Exception ex)
             {
@@ -252,7 +253,7 @@ namespace RealEstateModule.ViewModels
                 NaturalBuildingDal.Modify(NaturalBuilding);
 
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish("NaturalBuildingPage");
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.NaturalBuildingPage);
             }
             catch (Exception ex)
             {

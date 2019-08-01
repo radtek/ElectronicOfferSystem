@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Common.Enums
 {
     /// <summary>
-    /// 测绘类型
+    /// 调查类型
     /// </summary>
-    public enum EMappingType
+    public enum EOwnershipType
     {
         /// <summary>
-        /// 预测绘
+        /// 权籍调查
         /// </summary>
-        PredictiveMapping = 1,
-
+        OwnershipSurvey = 1,
         /// <summary>
-        /// 实测绘
+        /// 权籍补录
         /// </summary>
-        SurveyingMapping = 2
+        OwnershipMakeup = 2
     }
 }

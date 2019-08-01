@@ -1,4 +1,5 @@
-﻿using Common.Events;
+﻿using Common.Enums;
+using Common.Events;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -17,8 +18,8 @@ namespace ElectronicOfferSystem.ViewModels
 {
     public class MenuBarViewModel : BindableBase
     {
-        private IRegionManager RegionManager;
-        private IEventAggregator EA;
+        //private IRegionManager RegionManager;
+        //private IEventAggregator EA;
 
         public DelegateCommand<string> AddRealEstateProjectCommand { get; set; }
         public DelegateCommand<string> AddRegistrationProjectCommand { get; set; }
@@ -36,12 +37,14 @@ namespace ElectronicOfferSystem.ViewModels
 
             AddRealEstateProjectCommand = new DelegateCommand<string>((str) =>
             {
-                projectPageViewModel.NavigatePath = "RealEstatePage";
+                projectPageViewModel.ProjectType = "1";
+                projectPageViewModel.NavigatePath = EMainPage.RealEstatePage;
                 projectPageViewModel.OpenAddOrEditProjectDialogCommand.Execute(str);
             });
             AddRegistrationProjectCommand = new DelegateCommand<string>((str) =>
             {
-                projectPageViewModel.NavigatePath = "RegistrationPage";
+                projectPageViewModel.ProjectType = "2";
+                projectPageViewModel.NavigatePath = EMainPage.RegistrationPage;
                 projectPageViewModel.OpenAddOrEditProjectDialogCommand.Execute(str);
             });
 

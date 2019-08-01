@@ -74,7 +74,7 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="0" Grid.Column="2" 
-                 materialDesign:HintAssist.Hint="不动产单元号*" >
+                 materialDesign:HintAssist.Hint="不动产单元号" >
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">

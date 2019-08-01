@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Common.Enums
 {
     /// <summary>
-    /// 测绘类型
+    /// 项目类型
     /// </summary>
-    public enum EMappingType
+    public enum EProjectType
     {
-        /// <summary>
-        /// 预测绘
-        /// </summary>
-        PredictiveMapping = 1,
 
+        Default = -1,
         /// <summary>
-        /// 实测绘
+        /// 楼盘表项目
         /// </summary>
-        SurveyingMapping = 2
+        RealEstate = 1,
+        /// <summary>
+        /// 登记业务项目
+        /// </summary>
+        Registration = 2
     }
 }

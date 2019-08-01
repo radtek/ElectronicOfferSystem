@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using Common.Views;
 using ElectronicOfferSystem.Views;
 using MaterialDesignThemes.Wpf;
@@ -20,13 +21,13 @@ namespace ElectronicOfferSystem.ViewModels
     class ProjectTabViewModel : BindableBase
     {
         private IRegionManager RegionManager;
-        private IUnityContainer Container;
+        //private IUnityContainer Container;
 
         public IndexPage IndexPage { get; set; }
         public RealEstatePage RealEstatePage { get; set; }
         public RegistrationPage RegistrationPage { get; set; }
 
-        public DelegateCommand<string> NavigateCommand { get; set; }
+        public DelegateCommand<EMainPage?> NavigateCommand { get; set; }
         public DelegateCommand OpenTaskInfoDialogCommand { get; set; }
 
         public ProjectTabViewModel(IRegionManager regionManager)
@@ -34,7 +35,7 @@ namespace ElectronicOfferSystem.ViewModels
             RegionManager = regionManager;
             
             // 页面导航
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            NavigateCommand = new DelegateCommand<EMainPage?>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
             OpenTaskInfoDialogCommand = new DelegateCommand(() =>{
@@ -45,11 +46,11 @@ namespace ElectronicOfferSystem.ViewModels
             });
         }
 
-        private void Navigate(string navigatePath)
+        private void Navigate(EMainPage? navigatePath)
         {
             if (navigatePath != null)
             {
-               RegionManager.RequestNavigate("ContentRegion", navigatePath, NavigationComplete);        
+               RegionManager.RequestNavigate("ContentRegion", navigatePath.ToString(), NavigationComplete);        
             }
         }
 

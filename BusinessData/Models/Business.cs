@@ -14,6 +14,7 @@ namespace BusinessData.Models
         public Floor Floor { get; set; }
         public Household Household { get; set; }
         public Obligee Obligee { get; set; }
-
+        public Mortgage Mortgage { get; set; }
+        public Sequestration Sequestration { get; set; }
     }
 }

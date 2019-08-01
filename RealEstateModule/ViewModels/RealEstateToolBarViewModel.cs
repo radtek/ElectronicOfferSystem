@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Enums;
 using Common.Events;
 using Common.ViewModels;
 using Common.Views;
@@ -28,7 +29,7 @@ namespace RealEstateModule.ViewModels
     public class RealEstateToolBarViewModel : BindableBase
     {
         public Project Project { get; set; }
-        public string NavigatePath { get; set; }
+        public ERealEstatePage NavigatePath { get; set; }
 
         public RealEstatePageViewModel RealEstatePageViewModel { get; set; }
         public ImportRealEstateDialogViewModel ImportRealEstateViewModel { get; set; }

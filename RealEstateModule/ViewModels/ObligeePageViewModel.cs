@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Enums;
 using Common.Events;
 using Common.Utils;
 using Common.ValidationRules;
@@ -18,7 +19,7 @@ using System.Windows.Controls;
 
 namespace RealEstateModule.ViewModels
 {
-    class ObligeePageViewModel : BindableBase, INavigationAware
+    public class ObligeePageViewModel : BindableBase, INavigationAware
     {
 
         #region Properties
@@ -128,7 +129,7 @@ namespace RealEstateModule.ViewModels
             EA = ea;
             // 初始化下拉框
             InitialComboBoxList();
-            // 新增或修改自然幢信息
+            // 新增或修改权利人信息
             AddOrEditObligeeCommand = new DelegateCommand(() => {
                 switch (ButtonContent)
                 {
@@ -225,7 +226,7 @@ namespace RealEstateModule.ViewModels
                 Obligee.UpdateTime = DateTime.Now;
                 ObligeeDal.Modify(Obligee);
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish("ObligeePage");
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.ObligeePage);
             }
             catch (Exception ex)
             {
@@ -256,7 +257,7 @@ namespace RealEstateModule.ViewModels
 
                 Obligee = null;
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
-                EA.GetEvent<RefreshBusinessEvent>().Publish("ObligeePage");
+                EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.ObligeePage);
             }
             catch (Exception ex)
             {

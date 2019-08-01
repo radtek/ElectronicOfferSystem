@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Enums;
 using Common.Events;
 using Common.ViewModels;
 using Prism.Commands;
@@ -23,7 +24,7 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref project, value); }
         }
 
-        public string NavigatePath { get; set; }
+        public ERealEstatePage NavigatePath { get; set; }
 
         private ObservableCollection<Business> businesses;
         public ObservableCollection<Business> Businesses
@@ -36,7 +37,7 @@ namespace RealEstateModule.ViewModels
 
         private IRegionManager RegionManager;
         private IEventAggregator EA;
-        public DelegateCommand<string> BusinessNavCommand { get; private set; }
+        public DelegateCommand<ERealEstatePage?> BusinessNavCommand { get; private set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
         public DelegateCommand AddBusinessCommand { get; set; }
@@ -50,7 +51,7 @@ namespace RealEstateModule.ViewModels
             RegionManager = regionManager;
 
             // 导航到不同的业务数据页面
-            BusinessNavCommand = new DelegateCommand<string>(Navigate);
+            BusinessNavCommand = new DelegateCommand<ERealEstatePage?>(Navigate);
             // 在业务表执行增删改之后
             EA.GetEvent<RefreshBusinessEvent>().Subscribe((navPage)=> {
                 BusinessNavCommand.Execute(navPage);
@@ -64,7 +65,7 @@ namespace RealEstateModule.ViewModels
                 // 加载该项目的数据
                 //Project = ProjectDal.InitialRealEstateProject(Project); 
                 // 初始进入自然幢页面
-                BusinessNavCommand.Execute("NaturalBuildingPage");
+                BusinessNavCommand.Execute(ERealEstatePage.NaturalBuildingPage);
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
@@ -84,16 +85,15 @@ namespace RealEstateModule.ViewModels
             DelBusinessCommand = new DelegateCommand(DelBusiness);
         }
 
-        private void Navigate(string navigatePath)
+        private void Navigate(ERealEstatePage? navigatePath)
         {
-            if (navigatePath == null) return;
             if (Project == null) return;
             // 若不是楼盘项目，返回
             if (!"1".Equals(Project.Type)) return;
 
             // 点击业务的导航页后发送通知
-            EA.GetEvent<NavBusinessEvent>().Publish(navigatePath);
-            NavigatePath = navigatePath;
+            NavigatePath = (ERealEstatePage)navigatePath;
+            EA.GetEvent<NavBusinessEvent>().Publish(NavigatePath);
             Businesses = new ObservableCollection<Business>();
 
             try
@@ -101,9 +101,9 @@ namespace RealEstateModule.ViewModels
                 // 加载该项目的数据
                 Project = ProjectDal.InitialRealEstateProject(Project);
 
-                switch (navigatePath)
+                switch (NavigatePath)
                 {
-                    case "NaturalBuildingPage":
+                    case ERealEstatePage.NaturalBuildingPage:
                         // 加载数据列表
                         foreach (NaturalBuilding naturalBuilding in Project.NaturalBuildings)
                         {
@@ -113,7 +113,7 @@ namespace RealEstateModule.ViewModels
                             Businesses.Add(business);
                         }
                         break;
-                    case "LogicalBuildingPage":
+                    case ERealEstatePage.LogicalBuildingPage:
                         foreach (LogicalBuilding logicalBuilding in Project.LogicalBuildings)
                         {
                             Business business = new Business();
@@ -122,7 +122,7 @@ namespace RealEstateModule.ViewModels
                             Businesses.Add(business);
                         }
                         break;
-                    case "FloorPage":
+                    case ERealEstatePage.FloorPage:
                         foreach (Floor floor in Project.Floors)
                         {
                             Business business = new Business();
@@ -131,7 +131,7 @@ namespace RealEstateModule.ViewModels
                             Businesses.Add(business);
                         }
                         break;
-                    case "HouseholdPage":
+                    case ERealEstatePage.HouseholdPage:
                         foreach (Household household in Project.Households)
                         {
                             Business business = new Business();
@@ -140,12 +140,30 @@ namespace RealEstateModule.ViewModels
                             Businesses.Add(business);
                         }
                         break;
-                    case "ObligeePage":
+                    case ERealEstatePage.ObligeePage:
                         foreach (Obligee obligee in Project.Obligees)
                         {
                             Business business = new Business();
                             business.Name = obligee.QLRMC;
                             business.Obligee = obligee;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case ERealEstatePage.MortgagePage:
+                        foreach (Mortgage mortgage in Project.Mortgages)
+                        {
+                            Business business = new Business();
+                            business.Name = mortgage.QLRMC;
+                            business.Mortgage = mortgage;
+                            Businesses.Add(business);
+                        }
+                        break;
+                    case ERealEstatePage.SequestrationPage:
+                        foreach (Sequestration sequestration in Project.Sequestrations)
+                        {
+                            Business business = new Business();
+                            business.Name = sequestration.DBR;
+                            business.Sequestration = sequestration;
                             Businesses.Add(business);
                         }
                         break;
@@ -157,7 +175,7 @@ namespace RealEstateModule.ViewModels
                 // 页面跳转
                 var parameters = new NavigationParameters();
                 parameters.Add("Project", Project);
-                RegionManager.RequestNavigate("BusinessContentRegion", navigatePath, NavigationComplete, parameters);
+                RegionManager.RequestNavigate("BusinessContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
             }
             catch (Exception ex)
             {
@@ -181,30 +199,40 @@ namespace RealEstateModule.ViewModels
             {
                 switch (NavigatePath)
                 {
-                    case "NaturalBuildingPage":
+                    case ERealEstatePage.NaturalBuildingPage:
                         NaturalBuilding naturalBuilding = Business.NaturalBuilding;
                         NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
                         naturalBuildingDal.Del(naturalBuilding);
                         break;
-                    case "LogicalBuildingPage":
+                    case ERealEstatePage.LogicalBuildingPage:
                         LogicalBuilding logicalBuilding = Business.LogicalBuilding;
                         LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
                         logicalBuildingDal.Del(logicalBuilding);
                         break;
-                    case "FloorPage":
+                    case ERealEstatePage.FloorPage:
                         Floor floor = Business.Floor;
                         FloorDal floorDal = new FloorDal();
                         floorDal.Del(floor);
                         break;
-                    case "HouseholdPage":
+                    case ERealEstatePage.HouseholdPage:
                         Household household = Business.Household;
                         HouseholdDal householdDal = new HouseholdDal();
                         householdDal.Del(household);
                         break;
-                    case "ObligeePage":
+                    case ERealEstatePage.ObligeePage:
                         Obligee obligee = Business.Obligee;
                         ObligeeDal obligeeDal = new ObligeeDal();
                         obligeeDal.Del(obligee);
+                        break;
+                    case ERealEstatePage.MortgagePage:
+                        Mortgage mortgage = Business.Mortgage;
+                        MortgageDal mortgageDal = new MortgageDal();
+                        mortgageDal.Del(mortgage);
+                        break;
+                    case ERealEstatePage.SequestrationPage:
+                        Sequestration sequestration = Business.Sequestration;
+                        SequestrationDal sequestrationDal = new SequestrationDal();
+                        sequestrationDal.Del(sequestration);
                         break;
                     default:
                         break;

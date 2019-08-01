@@ -166,7 +166,7 @@ namespace RealEstateModule.Tasks
                          }
                          else
                          {
-                             taskMessage.Progress = 1.00;
+                             taskMessage.Progress = 100.00;
                              taskMessage.DetailMessages.Add("导入成功");
                              // 刷新项目列表
 
