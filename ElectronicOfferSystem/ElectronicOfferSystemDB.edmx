@@ -20,6 +20,7 @@
     <EntitySet Name="FileType" EntityType="ElectronicOfferSystem.Store.FileType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Mortgage" EntityType="ElectronicOfferSystem.Store.Mortgage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Sequestration" EntityType="ElectronicOfferSystem.Store.Sequestration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserInfo" EntityType="ElectronicOfferSystem.Store.UserInfo" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="Project">
     <Key>
@@ -32,8 +33,9 @@
     <Property Name="State" Type="nvarchar" Nullable="true" />
     <Property Name="OwnershipType" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="MappingType" Type="nvarchar" Nullable="true" MaxLength="60" />
-    <Property Name="UptateTime" Type="datetime" Nullable="false" />
     <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="400" />
+    <Property Name="UptateTime" Type="datetime" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="NaturalBuilding">
     <Key>
@@ -375,6 +377,22 @@
     <Property Name="FJ" Type="nvarchar" Nullable="true" MaxLength="60" />
     <Property Name="UpdateTime" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Account" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="UserName" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Password" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Tel" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="LastLoginTime" Type="datetime" Nullable="true" />
+    <Property Name="LastLogoutTime" Type="datetime" Nullable="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="true" />
+    <Property Name="IsAdmin" Type="nvarchar" Nullable="false" />
+  </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -394,6 +412,7 @@
           <EntitySet Name="FileType" EntityType="ElectronicOfferSystem.FileType" />
           <EntitySet Name="Mortgage" EntityType="ElectronicOfferSystem.Mortgage" />
           <EntitySet Name="Sequestration" EntityType="ElectronicOfferSystem.Sequestration" />
+          <EntitySet Name="UserInfo" EntityType="ElectronicOfferSystem.UserInfo" />
         </EntityContainer>
         <EntityType Name="Project">
           <Documentation>
@@ -439,14 +458,19 @@
               <Summary>测绘类型（1.预测绘 2.实测绘）</Summary>
             </Documentation>
           </Property>
-          <Property Name="UptateTime" Type="DateTime" Nullable="false" >
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="400" >
+            <Documentation>
+              <Summary>备注</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UptateTime" Type="DateTime" Nullable="false">
             <Documentation>
               <Summary>更新时间</Summary>
             </Documentation>
           </Property>
-          <Property Name="Remark" Type="String" Nullable="true" MaxLength="400" >
+          <Property Name="CreateTime" Type="DateTime" Nullable="true" >
             <Documentation>
-              <Summary>备注</Summary>
+              <Summary>创建时间</Summary>
             </Documentation>
           </Property>
         </EntityType>
@@ -1821,6 +1845,65 @@
             </Documentation>
           </Property>
           </EntityType>
+        <EntityType Name="UserInfo">
+          <Documentation>
+            <Summary>用户信息</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Account" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>账号</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserName" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>用户名</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Password" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>密码</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Tel" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>联系方式</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Email" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>邮件</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Address" Type="String" Nullable="true" MaxLength="60" >
+            <Documentation>
+              <Summary>地址</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LastLoginTime" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>最近登录时间</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LastLogoutTime" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>最近登出时间</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreateTime" Type="DateTime" Nullable="true" >
+            <Documentation>
+              <Summary>创建时间</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsAdmin" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>是否管理员（0.否 1.是）</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1837,8 +1920,9 @@
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="OwnershipType" ColumnName="OwnershipType" />
           <ScalarProperty Name="MappingType" ColumnName="MappingType" />
-          <ScalarProperty Name="UptateTime" ColumnName="UptateTime" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="UptateTime" ColumnName="UptateTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2192,6 +2276,23 @@
           <ScalarProperty Name="CFSJ" ColumnName="CFSJ" />
           <ScalarProperty Name="FJ" ColumnName="FJ" />
           <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(ElectronicOfferSystem.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+          <ScalarProperty Name="LastLogoutTime" ColumnName="LastLogoutTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

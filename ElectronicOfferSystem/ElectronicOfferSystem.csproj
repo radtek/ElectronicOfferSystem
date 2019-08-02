@@ -126,18 +126,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ElectronicOfferSystemDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectronicOfferSystemDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="ElectronicOfferSystemDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\IndexPageViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ProjectTabViewModel.cs" />
     <Compile Include="ViewModels\WindowTopViewModel.cs" />
     <Compile Include="Views\IndexPage.xaml.cs">
       <DependentUpon>IndexPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -202,6 +211,7 @@
       <LastGenOutput>ElectronicOfferSystemDB.cs</LastGenOutput>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Content>
+    <Resource Include="Images\login.jpg" />
     <Resource Include="Images\Icon_Add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -249,6 +259,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\IndexPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

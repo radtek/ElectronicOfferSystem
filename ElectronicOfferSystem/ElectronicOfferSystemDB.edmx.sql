@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 07/31/2019 10:46:30
+-- Date Created: 08/01/2019 21:49:21
 -- Generated from EDMX file: D:\vs-workspace\ElectronicOfferSystem\ElectronicOfferSystem\ElectronicOfferSystemDB.edmx
 -- --------------------------------------------------
 
@@ -60,8 +60,9 @@ CREATE TABLE [Project] (
     [State] nvarchar(4000)  NULL,
     [OwnershipType] nvarchar(60)  NULL,
     [MappingType] nvarchar(60)  NULL,
+    [Remark] nvarchar(400)  NULL,
     [UptateTime] datetime  NOT NULL,
-    [Remark] nvarchar(400)  NULL
+    [CreateTime] datetime  NULL
 );
 GO
 
@@ -405,6 +406,22 @@ CREATE TABLE [Sequestration] (
 );
 GO
 
+-- Creating table 'UserInfo'
+CREATE TABLE [UserInfo] (
+    [ID] uniqueidentifier  NOT NULL,
+    [Account] nvarchar(60)  NULL,
+    [UserName] nvarchar(60)  NULL,
+    [Password] nvarchar(60)  NULL,
+    [Tel] nvarchar(60)  NULL,
+    [Email] nvarchar(60)  NULL,
+    [Address] nvarchar(60)  NULL,
+    [LastLoginTime] datetime  NULL,
+    [LastLogoutTime] datetime  NULL,
+    [CreateTime] datetime  NULL,
+    [IsAdmin] nvarchar(4000)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -490,6 +507,12 @@ GO
 -- Creating primary key on [ID] in table 'Sequestration'
 ALTER TABLE [Sequestration]
 ADD CONSTRAINT [PK_Sequestration]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'UserInfo'
+ALTER TABLE [UserInfo]
+ADD CONSTRAINT [PK_UserInfo]
     PRIMARY KEY ([ID] );
 GO
 

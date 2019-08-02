@@ -74,6 +74,7 @@
     <Compile Include="Dal\Entities\Project.cs" />
     <Compile Include="Dal\Entities\Sequestration.cs" />
     <Compile Include="Dal\Entities\Transfer.cs" />
+    <Compile Include="Dal\Entities\UserInfo.cs" />
     <Compile Include="Dal\FileInfoDal.cs" />
     <Compile Include="Dal\FileTypeDal.cs" />
     <Compile Include="Dal\FloorDal.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Dal\ProjectDal.cs" />
     <Compile Include="Dal\SequestrationDal.cs" />
     <Compile Include="Dal\TransferDal.cs" />
+    <Compile Include="Dal\UserInfoDal.cs" />
     <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\Business.cs" />
     <Compile Include="Models\FileInfo.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Sequestration.cs" />
     <Compile Include="Models\Transfer.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

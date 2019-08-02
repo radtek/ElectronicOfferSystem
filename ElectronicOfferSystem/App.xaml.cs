@@ -24,13 +24,11 @@ namespace ElectronicOfferSystem
         }
         protected override Window CreateShell()
         {
-
             return Container.Resolve<MainWindow>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
         }
 
         /// <summary>
@@ -52,6 +50,9 @@ namespace ElectronicOfferSystem
         /// <param name="e"></param>
         private void App_Startup(object sender, StartupEventArgs e)
         {
+
+
+
             //UI线程未捕获异常处理事件
             this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
             //非UI线程未捕获异常处理事件

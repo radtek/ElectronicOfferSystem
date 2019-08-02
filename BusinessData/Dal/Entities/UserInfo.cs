@@ -13,49 +13,53 @@ namespace BusinessData
     using System.Collections.Generic;
     
     /// <summary>
-    /// 项目
+    /// 用户信息
     /// </summary>
-    public partial class Project
+    public partial class UserInfo
     {
         /// <summary>
-        /// ID
+        /// 
         /// </summary>
         public System.Guid ID { get; set; }
         /// <summary>
-        /// 项目名称
+        /// 账号
         /// </summary>
-        public string ProjectName { get; set; }
+        public string Account { get; set; }
         /// <summary>
-        /// 开发商名称
+        /// 用户名
         /// </summary>
-        public string DeveloperName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
-        /// 项目类型（1.楼盘项目 2.登记业务项目）
+        /// 密码
         /// </summary>
-        public string Type { get; set; }
+        public string Password { get; set; }
         /// <summary>
-        /// 项目状态
+        /// 联系方式
         /// </summary>
-        public string State { get; set; }
+        public string Tel { get; set; }
         /// <summary>
-        /// 权籍类型（1.权籍调查 2.权籍补录）
+        /// 邮件
         /// </summary>
-        public string OwnershipType { get; set; }
+        public string Email { get; set; }
         /// <summary>
-        /// 测绘类型（1.预测绘 2.实测绘）
+        /// 地址
         /// </summary>
-        public string MappingType { get; set; }
+        public string Address { get; set; }
         /// <summary>
-        /// 备注
+        /// 最近登录时间
         /// </summary>
-        public string Remark { get; set; }
+        public Nullable<System.DateTime> LastLoginTime { get; set; }
         /// <summary>
-        /// 更新时间
+        /// 最近登出时间
         /// </summary>
-        public System.DateTime UptateTime { get; set; }
+        public Nullable<System.DateTime> LastLogoutTime { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
         public Nullable<System.DateTime> CreateTime { get; set; }
+        /// <summary>
+        /// 是否管理员（0.否 1.是）
+        /// </summary>
+        public string IsAdmin { get; set; }
     }
 }

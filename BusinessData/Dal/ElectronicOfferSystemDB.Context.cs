@@ -66,5 +66,6 @@ namespace BusinessData
         public virtual DbSet<FileType> FileType { get; set; }
         public virtual DbSet<Mortgage> Mortgage { get; set; }
         public virtual DbSet<Sequestration> Sequestration { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
     }
 }
