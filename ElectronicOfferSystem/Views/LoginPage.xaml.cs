@@ -1,7 +1,4 @@
-﻿using ElectronicOfferSystem.ViewModels;
-using Prism.Regions;
-using ProjectModule.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,30 +11,26 @@ using System.Windows.Input;
 using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ElectronicOfferSystem.Views
 {
     /// <summary>
-    /// Login.xaml 的交互逻辑
+    /// LoginPage.xaml 的交互逻辑
     /// </summary>
-    public partial class Login : Window
+    public partial class LoginPage : UserControl
     {
-        public Login(IRegionManager regionManager)
+        public LoginPage()
         {
             InitializeComponent();
-            // View Discovery
-            regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
-            regionManager.RegisterViewWithRegion("MenuBarRegion", typeof(MenuBar));
-            regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
-            regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
 
-            DataContext = new LoginViewModel(regionManager);
         }
 
         private void NavBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            Window mainWindow = Application.Current.Windows[0];
+            mainWindow.DragMove();
         }
     }
 

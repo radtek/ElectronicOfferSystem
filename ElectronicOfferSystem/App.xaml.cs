@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Text;
 using Common.ViewModels;
+using ElectronicOfferSystem.ViewModels;
 
 namespace ElectronicOfferSystem
 {
@@ -29,6 +30,8 @@ namespace ElectronicOfferSystem
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<LoginPage>();
+            containerRegistry.RegisterForNavigation<MainPage>();
         }
 
         /// <summary>
@@ -50,8 +53,6 @@ namespace ElectronicOfferSystem
         /// <param name="e"></param>
         private void App_Startup(object sender, StartupEventArgs e)
         {
-
-
 
             //UI线程未捕获异常处理事件
             this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);

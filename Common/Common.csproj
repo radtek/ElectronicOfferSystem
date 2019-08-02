@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="CommonModule.cs" />
+    <Compile Include="Configurations\LocalConfiguration.cs" />
     <Compile Include="Converts\ProjectTypeToVisibility.cs" />
     <Compile Include="Converts\StateToColor.cs" />
     <Compile Include="Converts\StateToIcon.cs" />
@@ -86,7 +87,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Rules\RuleHelper.cs" />
+    <Compile Include="Utils\CEncoder.cs" />
     <Compile Include="Utils\DictionaryUtil.cs" />
+    <Compile Include="Utils\IniFileHelper.cs" />
     <Compile Include="Utils\Office\ExcelBase.cs" />
     <Compile Include="Utils\Office\ExcelHelper.cs" />
     <Compile Include="Utils\Office\PrinterOperator.cs" />

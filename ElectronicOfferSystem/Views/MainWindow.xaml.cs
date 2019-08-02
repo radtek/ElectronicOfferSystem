@@ -28,10 +28,14 @@ namespace ElectronicOfferSystem.Views
             InitializeComponent();
 
             // View Discovery
-            regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
-            regionManager.RegisterViewWithRegion("MenuBarRegion", typeof(MenuBar));
-            regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
-            regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
+            //regionManager.RegisterViewWithRegion("WindowTopRegion", typeof(WindowTop));
+            //regionManager.RegisterViewWithRegion("MenuBarRegion", typeof(MenuBar));
+            //regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
+            //regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
+
+
+            // View Discovery
+            regionManager.RegisterViewWithRegion("MainRegion", typeof(LoginPage));
 
             DataContext = new MainWindowViewModel();
         }

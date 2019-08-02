@@ -12,63 +12,7 @@
         Title="不动产登记电子报盘系统" Icon="/Images/logo.png" 
         WindowStartupLocation="CenterScreen"
         Height="800" Width="1100">
-
     <Grid>
-        <Grid.RowDefinitions>
-            <!--<RowDefinition Height="50" />-->
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <!-- Top -->
-        <Grid Grid.Row="0">
-            <!--<ContentControl prism:RegionManager.RegionName="WindowTopRegion" Name="WindowTop"
-                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"/>-->
-        </Grid>
-        <!-- Top End -->
-
-        <materialDesign:DialogHost Identifier="RootDialog" Grid.Row="1"
-                                   Style="{StaticResource MaterialDesignEmbeddedDialogHost}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <!-- Menu -->
-                <Grid Grid.Row="0">
-                    <ContentControl Margin="0" prism:RegionManager.RegionName="MenuBarRegion"/>
-                </Grid>
-                <!-- Menu End -->
-
-                <!-- Tab -->
-                <Grid Grid.Row="1">
-                    <ContentControl Margin="0" prism:RegionManager.RegionName="ProjectTabRegion"/>
-                </Grid>
-                <!-- Tab End -->
-
-                <!-- Main -->
-                <Grid Grid.Row="2" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <!-- ProjectPage -->
-                    <Grid Grid.Column="0">
-                        <ContentControl prism:RegionManager.RegionName="ProjectPageRegion"/>
-                    </Grid>
-                    <!-- ProjectPage End -->
-
-                    <!-- MainPage -->
-                    <Grid Grid.Column="1">
-                        <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="ContentRegion"/>
-                    </Grid>
-                    <!-- MainPage End -->
-                </Grid>
-                <!-- Main End -->
-            </Grid>
-        </materialDesign:DialogHost>
-
-
-
+        <ContentControl Margin="0" prism:RegionManager.RegionName="MainRegion"/>
     </Grid>
 </Window>
