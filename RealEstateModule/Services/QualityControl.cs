@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using Common;
+using Common.Enums;
 using Common.Models;
 using Common.Rules;
 using System;

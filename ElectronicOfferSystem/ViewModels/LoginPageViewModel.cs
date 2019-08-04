@@ -194,15 +194,14 @@ namespace ElectronicOfferSystem.ViewModels
                                 }));
                                 return;
                             }
-                            
 
                             App.Current.Dispatcher.Invoke((Action)(() =>
                             {
                                 Report = "初始化首页 . . .";
                             }));
+
+                            App.Current.Properties["User"] = user;
                             canLogin = true;
-
-
                         }
                     });
                 task.Start();
@@ -212,6 +211,7 @@ namespace ElectronicOfferSystem.ViewModels
                     {
                         if (canLogin)
                         {
+                            
                             RegionManager.RequestNavigate("MainRegion", "MainPage", NavigationComplete);
                         }
                     }));

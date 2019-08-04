@@ -8,6 +8,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
              xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              xmlns:local="clr-namespace:RealEstateModule.Views"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
@@ -22,6 +23,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
+
+            <Converts:EnumToBool x:Key="EnumToBool" />
+            <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -50,8 +54,8 @@
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.NaturalBuildingPage}}"
                                  Margin="4"
-                                 IsChecked="True"
                                  Cursor="Hand"
                                  Content="自然幢">
                             <RadioButton.CommandParameter>
@@ -62,8 +66,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.LogicalBuildingPage}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="逻辑幢">
                             <RadioButton.CommandParameter>
@@ -74,8 +78,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.FloorPage}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="层信息" >
                             <RadioButton.CommandParameter>
@@ -86,8 +90,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.HouseholdPage}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="户信息">
                             <RadioButton.CommandParameter>
@@ -98,8 +102,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.ObligeePage}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="权利人">
                             <RadioButton.CommandParameter>
@@ -110,8 +114,9 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.MortgagePage}}"
+                                 Visibility="{Binding Path=OwnershipType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EOwnershipType.OwnershipMakeup}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="抵押信息">
                             <RadioButton.CommandParameter>
@@ -122,8 +127,9 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding BusinessNavCommand}"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERealEstatePage.SequestrationPage}}"
+                                 Visibility="{Binding Path=OwnershipType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EOwnershipType.OwnershipMakeup}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="查封信息">
                             <RadioButton.CommandParameter>

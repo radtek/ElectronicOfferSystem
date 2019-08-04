@@ -8,6 +8,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -30,6 +32,8 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
+
+            <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
@@ -212,7 +216,8 @@
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Household.FWYT3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="8" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="预测套内建筑面积">
+                 materialDesign:HintAssist.Hint="预测套内建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -223,7 +228,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="8" Grid.Column="1"
-                 materialDesign:HintAssist.Hint="预测分摊建筑面积">
+                 materialDesign:HintAssist.Hint="预测分摊建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -234,7 +240,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="8" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="预测建筑面积">
+                 materialDesign:HintAssist.Hint="预测建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -245,7 +252,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="9" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="预测其他建筑面积">
+                 materialDesign:HintAssist.Hint="预测其他建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -256,9 +264,11 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Household.YCFTXS}"
-                 materialDesign:HintAssist.Hint="预测分摊系数" />
+                 materialDesign:HintAssist.Hint="预测分摊系数"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}"/>
         <TextBox Grid.Row="9" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="预测地下部分建筑面积">
+                 materialDesign:HintAssist.Hint="预测地下部分建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -269,7 +279,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="10" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="实测套内建筑面积">
+                 materialDesign:HintAssist.Hint="实测套内建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -280,7 +291,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="10" Grid.Column="1"
-                 materialDesign:HintAssist.Hint="实测分摊建筑面积">
+                 materialDesign:HintAssist.Hint="实测分摊建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -291,7 +303,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="10" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="实测建筑面积">
+                 materialDesign:HintAssist.Hint="实测建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -302,7 +315,8 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="11" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="实测其他建筑面积">
+                 materialDesign:HintAssist.Hint="实测其他建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -313,9 +327,11 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Household.SCFTXS}"
-                 materialDesign:HintAssist.Hint="实测分摊系数" />
+                 materialDesign:HintAssist.Hint="实测分摊系数"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}"/>
         <TextBox Grid.Row="11" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="实测地下部分建筑面积">
+                 materialDesign:HintAssist.Hint="实测地下部分建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">

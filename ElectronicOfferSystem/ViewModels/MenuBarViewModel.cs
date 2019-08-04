@@ -27,6 +27,7 @@ namespace ElectronicOfferSystem.ViewModels
         public DelegateCommand ExportRealEstateProjectCommand { get; set; }
         public DelegateCommand ExportRegistrationProjectCommand { get; set; }
         public DelegateCommand QualityControlCommand { get; set; }
+        public DelegateCommand SetProjectPathCommand { get; set; }
         public DelegateCommand ShowHelpCommand { get; set; }
 
         public MenuBarViewModel(IRegionManager regionManager, IEventAggregator ea)
@@ -61,6 +62,10 @@ namespace ElectronicOfferSystem.ViewModels
 
             QualityControlCommand = new DelegateCommand(() => {
                 realEstateToolBarViewModel.QualityControlCommand.Execute();
+            });
+
+            SetProjectPathCommand = new DelegateCommand(() => {
+
             });
 
             ShowHelpCommand = new DelegateCommand(() => {

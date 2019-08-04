@@ -24,7 +24,20 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref project, value); }
         }
 
-        public ERealEstatePage NavigatePath { get; set; }
+        private ERealEstatePage navigatePath;
+        public ERealEstatePage NavigatePath
+        {
+            get { return navigatePath; }
+            set { SetProperty(ref navigatePath, value); }
+        }
+
+        private EOwnershipType ownershipType;
+        public EOwnershipType OwnershipType
+        {
+            get { return ownershipType; }
+            set { SetProperty(ref ownershipType, value); }
+        }
+
 
         private ObservableCollection<Business> businesses;
         public ObservableCollection<Business> Businesses
@@ -62,6 +75,10 @@ namespace RealEstateModule.ViewModels
 
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
+                if(Project != null && "1".Equals(Project.Type))
+                {
+                OwnershipType = (EOwnershipType)int.Parse(Project.OwnershipType);
+                }
                 // 加载该项目的数据
                 //Project = ProjectDal.InitialRealEstateProject(Project); 
                 // 初始进入自然幢页面

@@ -27,6 +27,14 @@ namespace ElectronicOfferSystem.ViewModels
         public RealEstatePage RealEstatePage { get; set; }
         public RegistrationPage RegistrationPage { get; set; }
 
+        private EMainPage mainPage;
+        public EMainPage MainPage
+        {
+            get { return mainPage; }
+            set { SetProperty(ref mainPage, value); }
+        }
+
+
         public DelegateCommand<EMainPage?> NavigateCommand { get; set; }
         public DelegateCommand OpenTaskInfoDialogCommand { get; set; }
 
@@ -46,10 +54,11 @@ namespace ElectronicOfferSystem.ViewModels
             });
         }
 
-        private void Navigate(EMainPage? navigatePath)
+        public void Navigate(EMainPage? navigatePath)
         {
             if (navigatePath != null)
             {
+                MainPage = (EMainPage)navigatePath;
                RegionManager.RequestNavigate("ContentRegion", navigatePath.ToString(), NavigationComplete);        
             }
         }

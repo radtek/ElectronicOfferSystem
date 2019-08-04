@@ -29,6 +29,14 @@ namespace RealEstateModule.ViewModels
         /// </summary>
         public Project Project { get; set; }
 
+        private EMappingType mappingType;
+        public EMappingType MappingType
+        {
+            get { return mappingType; }
+            set { SetProperty(ref mappingType, value); }
+        }
+
+
         /// <summary>
         /// 新增/修改按钮内容
         /// </summary>
@@ -145,6 +153,7 @@ namespace RealEstateModule.ViewModels
             if (project != null)
             {
                 Project = project;
+                MappingType = (EMappingType)int.Parse(Project.MappingType);
             }
 
             // 初始自然幢数据

@@ -1,10 +1,14 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
 using Common;
+using Common.Configurations;
 using Common.Enums;
 using Common.Models;
+using Common.Utils;
 using Common.ViewModels;
 using Common.Views;
+using ElectronicOfferSystem.ViewModels.Dialogs;
+using ElectronicOfferSystem.Views.Dialogs;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -15,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ElectronicOfferSystem.ViewModels
 {
@@ -23,6 +28,9 @@ namespace ElectronicOfferSystem.ViewModels
 
         public DelegateCommand<EMainPage?> NavigateCommand { get; set; }
         public DelegateCommand ImportDictionaryCommand { get; set; }
+        public DelegateCommand OpenProjectPathDialogCommand { get; set; }
+
+        ProjectPathDialogViewModel ProjectPathDialogViewModel;
 
         public IndexPageViewModel()
         {
@@ -30,6 +38,7 @@ namespace ElectronicOfferSystem.ViewModels
             NavigateCommand = new DelegateCommand<EMainPage?>(Navigate);
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
+            OpenProjectPathDialogCommand = new DelegateCommand(ExecuteProjectPathDialog);
             ImportDictionaryCommand = new DelegateCommand(ImportDictionary);
         }
 
@@ -37,6 +46,58 @@ namespace ElectronicOfferSystem.ViewModels
         private void Navigate(EMainPage? obj)
         {
         }
+
+
+        /// <summary>
+        /// 打开导入框
+        /// </summary>
+        private async void ExecuteProjectPathDialog()
+        {
+            var view = new ProjectPathDialog();
+            ProjectPathDialogViewModel = new ProjectPathDialogViewModel();
+            //show the dialog
+            var result = await DialogHost.Show(view, "RootDialog", ConfirSaveProjectPathHandler);
+
+        }
+        /// <summary>
+        /// 点击按钮，确认/取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private void ConfirSaveProjectPathHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            if ("False".Equals(eventArgs.Parameter.ToString())) return;
+            // cancel the close
+            eventArgs.Cancel();
+
+            var FileTextBox = eventArgs.Parameter as System.Windows.Controls.TextBox;
+            String FullPath = FileTextBox.Text;
+            if (string.IsNullOrEmpty(FullPath))
+            {
+                MessageBox.Show("请选择文件", "提示");
+                return;
+            }
+
+            try
+            {
+                string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
+                IniFileHelper ini = new IniFileHelper(cfgINI);
+                ini.IniWriteValue("Project", "FilePath", FullPath);
+
+                // 显示加载1s
+                eventArgs.Session.UpdateContent(new SampleProgressDialog());
+                Task.Delay(TimeSpan.FromSeconds(0.3))
+                    .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
+                        TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().updateShow(ex, eventArgs.Session);
+                return;
+            }
+
+        }
+
 
         private void ImportDictionary()
         {

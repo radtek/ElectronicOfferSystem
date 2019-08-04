@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
              xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
-             xmlns:local="clr-namespace:ElectronicOfferSystem.Views"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Converts:EnumToBool x:Key="EnumToBool" />
+    </UserControl.Resources>
     <Grid>
         <materialDesign:ColorZone Mode="PrimaryMid"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2"
@@ -26,8 +30,8 @@
 
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
+                                 IsChecked="{Binding Path=MainPage,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:EMainPage.IndexPage}}"
                                  Margin="4"
-                                 IsChecked="True"
                                  Cursor="Hand"
                                  Content="首页">
                         <RadioButton.CommandParameter>
@@ -38,6 +42,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
+                                 IsChecked="{Binding Path=MainPage,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:EMainPage.RealEstatePage}}"
                                  Margin="4"
                                  Cursor="Hand"
                                  Content="楼盘表项目">
@@ -49,8 +54,8 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{x:Static common:GlobalCommands.NavigateCommand}"
+                                 IsChecked="{Binding Path=MainPage,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:EMainPage.RegistrationPage}}"
                                  Margin="4"
-                                 IsChecked="False"
                                  Cursor="Hand"
                                  Content="登记业务项目">
                         <RadioButton.CommandParameter>

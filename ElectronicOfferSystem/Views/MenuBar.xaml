@@ -61,7 +61,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="设置">
-                <MenuItem Header="项目路径">
+                <MenuItem Header="项目路径" Command="{Binding SetProjectPathCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="FolderMove" />
                     </MenuItem.Icon>

@@ -53,6 +53,8 @@
     <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="Configurations\LocalConfiguration.cs" />
+    <Compile Include="Converts\EnumToBool.cs" />
+    <Compile Include="Converts\EnumToVisibility.cs" />
     <Compile Include="Converts\ProjectTypeToVisibility.cs" />
     <Compile Include="Converts\StateToColor.cs" />
     <Compile Include="Converts\StateToIcon.cs" />

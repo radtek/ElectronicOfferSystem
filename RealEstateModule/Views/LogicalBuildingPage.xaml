@@ -8,6 +8,8 @@
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:RealEstateModule.Views"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -24,6 +26,8 @@
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
+
+            <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
@@ -79,8 +83,16 @@
         </TextBox>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding LogicalBuilding.MPH}"
                  materialDesign:HintAssist.Hint="门牌号" />
-        <TextBox Grid.Row="1" Grid.Column="1"
-                 materialDesign:HintAssist.Hint="预测建筑面积">
+        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding LogicalBuilding.JGRQ}"
+                    materialDesign:HintAssist.Hint="竣工日期"
+                    Margin="20 10"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+        </DatePicker>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding LogicalBuilding.JZWZT}"
+                 materialDesign:HintAssist.Hint="建筑物状态" />
+        <TextBox Grid.Row="2" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="预测建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -90,8 +102,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="1" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="预测地下面积">
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="预测地下面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.YCDXMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -101,8 +114,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="2" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="预测其他面积">
+        <TextBox Grid.Row="2" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="预测其他面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.YCQTMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -112,8 +126,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="2" Grid.Column="1"
-                 materialDesign:HintAssist.Hint="实测建筑面积">
+        <TextBox Grid.Row="3" Grid.Column="0"
+                 materialDesign:HintAssist.Hint="实测建筑面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -123,8 +138,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="2" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="实测地下面积">
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="实测地下面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.SCDXMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -134,8 +150,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="3" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="实测其他面积">
+        <TextBox Grid.Row="3" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="实测其他面积"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="LogicalBuilding.SCQTMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -145,19 +162,14 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding LogicalBuilding.JGRQ}"
-                    materialDesign:HintAssist.Hint="竣工日期"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
-        </DatePicker>
-        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding LogicalBuilding.FWJG1}"
+
+        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding LogicalBuilding.FWJG1}"
                  materialDesign:HintAssist.Hint="房屋结构1" />
-        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding LogicalBuilding.FWJG2}"
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding LogicalBuilding.FWJG2}"
                  materialDesign:HintAssist.Hint="房屋结构2" />
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding LogicalBuilding.FWJG3}"
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding LogicalBuilding.FWJG3}"
                  materialDesign:HintAssist.Hint="房屋结构3" />
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding LogicalBuilding.JZWZT}"
-                 materialDesign:HintAssist.Hint="建筑物状态" />
+        
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding LogicalBuilding.FWYT1}"
                  materialDesign:HintAssist.Hint="房屋用途1" />
         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding LogicalBuilding.FWYT2}"
