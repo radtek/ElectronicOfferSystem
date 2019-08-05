@@ -310,10 +310,17 @@ namespace RealEstateModule.ViewModels
             isValid &= notEmptyValidationRule.Validate(NaturalBuilding.BSM, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(NaturalBuilding.YSDM, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(NaturalBuilding.ZRZH, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.GHYT, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.FWJG, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(NaturalBuilding.ZT, cultureInfo).IsValid;
             // 数字和非空验证
             NumbericAndNotEmptyValidationRule numbericAndNotEmptyValidationRule = new NumbericAndNotEmptyValidationRule();
             isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.ZYDMJ, cultureInfo).IsValid;
             isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.ZZDMJ, cultureInfo).IsValid;
+            if (MappingType == EMappingType.PredictiveMapping)
+                isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.YCJZMJ, cultureInfo).IsValid;
+            else if(MappingType == EMappingType.SurveyingMapping)
+                isValid &= numbericAndNotEmptyValidationRule.Validate(NaturalBuilding.SCJZMJ, cultureInfo).IsValid;
             // 整数和非空验证
             IntegerAndNotEmptyValidationRule integerAndNotEmptyValidationRule = new IntegerAndNotEmptyValidationRule();
             isValid &= integerAndNotEmptyValidationRule.Validate(NaturalBuilding.DSCS, cultureInfo).IsValid;
@@ -323,8 +330,8 @@ namespace RealEstateModule.ViewModels
             // 数字验证
             NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
             isValid &= numbericValidationRule.Validate(NaturalBuilding.JZWGD, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(NaturalBuilding.SCJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(NaturalBuilding.YCJZMJ, cultureInfo).IsValid;
+            //isValid &= numbericValidationRule.Validate(NaturalBuilding.SCJZMJ, cultureInfo).IsValid;
+            //isValid &= numbericValidationRule.Validate(NaturalBuilding.YCJZMJ, cultureInfo).IsValid;
             // 不动产单元号验证
             BDCDYHValidationRule bDCDYHValidationRule = new BDCDYHValidationRule();
             isValid &= bDCDYHValidationRule.Validate(NaturalBuilding.BDCDYH, cultureInfo).IsValid;

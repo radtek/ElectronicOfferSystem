@@ -56,7 +56,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" 
-                 materialDesign:HintAssist.Hint="自然幢唯一码*" >
+                 materialDesign:HintAssist.Hint="自然幢标识码*" >
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.BSM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -152,52 +152,30 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="3" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="实测建筑面积"
+                 materialDesign:HintAssist.Hint="实测建筑面积*"
                  Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="3" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="预测建筑面积"
+                 materialDesign:HintAssist.Hint="预测建筑面积*"
                  Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
         <TextBox Grid.Row="4" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="地上层数*">
-            <TextBox.Text>
-                <Binding Path="NaturalBuilding.DSCS" UpdateSourceTrigger="PropertyChanged" 
-                               NotifyOnValidationError="True">
-                    <Binding.ValidationRules>
-                        <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox Grid.Row="4" Grid.Column="1"
-                 materialDesign:HintAssist.Hint="地下层数*">
-            <TextBox.Text>
-                <Binding Path="NaturalBuilding.DXCS" UpdateSourceTrigger="PropertyChanged" 
-                               NotifyOnValidationError="True">
-                    <Binding.ValidationRules>
-                        <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox Grid.Row="4" Grid.Column="2"
                  materialDesign:HintAssist.Hint="总层数*">
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.ZCS" UpdateSourceTrigger="PropertyChanged" 
@@ -208,15 +186,45 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-
+        <TextBox Grid.Row="4" Grid.Column="1"
+                 materialDesign:HintAssist.Hint="地上层数*">
+            <TextBox.Text>
+                <Binding Path="NaturalBuilding.DSCS" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="4" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="地下层数*">
+            <TextBox.Text>
+                <Binding Path="NaturalBuilding.DXCS" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:IntegerAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding NaturalBuilding.DXSD}"
                  materialDesign:HintAssist.Hint="地下深度"/>
         <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding FWJGList}" 
-                  materialDesign:HintAssist.Hint="房屋结构*" SelectedIndex="0"
+                  materialDesign:HintAssist.Hint="房屋结构*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding NaturalBuilding.FWJG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding NaturalBuilding.GHYT}"
-                 materialDesign:HintAssist.Hint="规划用途"/>
+        <TextBox Grid.Row="5" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="规划用途*" >
+            <TextBox.Text>
+                <Binding Path="NaturalBuilding.GHYT" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding NaturalBuilding.JZWJBYT}"
                  materialDesign:HintAssist.Hint="建筑物基本用途"/>
         <TextBox Grid.Row="6" Grid.Column="1"
@@ -232,7 +240,7 @@
         </TextBox>
         <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding ZTList}" 
                   materialDesign:HintAssist.Hint="状态*"
-                  SelectedValuePath="Key"  DisplayMemberPath="Value" SelectedIndex="0"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding NaturalBuilding.ZT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding NaturalBuilding.BZ}"
                  materialDesign:HintAssist.Hint="备注"/>

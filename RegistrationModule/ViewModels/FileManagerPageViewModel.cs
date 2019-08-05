@@ -28,7 +28,7 @@ namespace RegistrationModule.ViewModels
 {
     public class FileManagerPageViewMode : BindableBase, INavigationAware
     {
-        IEventAggregator EA;
+        //IEventAggregator EA;
 
 
         public Project Project { get; set; }

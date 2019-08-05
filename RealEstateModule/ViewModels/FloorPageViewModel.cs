@@ -231,6 +231,16 @@ namespace RealEstateModule.ViewModels
             isValid &= notEmptyValidationRule.Validate(Floor.CH, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Floor.ZRZH, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Floor.YSDM, cultureInfo).IsValid;
+            // 数字验证
+            NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
+            isValid &= numbericValidationRule.Validate(Floor.CJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CTNJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CYTMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CGYJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CFTJZMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CBQMJ, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.CG, cultureInfo).IsValid;
+            isValid &= numbericValidationRule.Validate(Floor.SPTYMJ, cultureInfo).IsValid;
 
             return isValid;
         }

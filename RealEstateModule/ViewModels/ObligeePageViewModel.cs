@@ -50,11 +50,11 @@ namespace RealEstateModule.ViewModels
         /// <summary>
         /// 证件种类
         /// </summary>
-        private Dictionary<string, string> zjzlList;
-        public Dictionary<string, string> ZJZLList
+        private Dictionary<string, string> zjlxList;
+        public Dictionary<string, string> ZJLXList
         {
-            get { return zjzlList; }
-            set { SetProperty(ref zjzlList, value); }
+            get { return zjlxList; }
+            set { SetProperty(ref zjlxList, value); }
         }
         /// <summary>
         /// 国家
@@ -224,6 +224,7 @@ namespace RealEstateModule.ViewModels
             try
             {
                 Obligee.UpdateTime = DateTime.Now;
+                SetPerson();
                 ObligeeDal.Modify(Obligee);
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
                 EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.ObligeePage);
@@ -253,6 +254,9 @@ namespace RealEstateModule.ViewModels
                 Obligee.ProjectID = Project.ID;
                 Obligee.ID = Guid.NewGuid();
                 Obligee.UpdateTime = DateTime.Now;
+
+                SetPerson();
+
                 ObligeeDal.Add(Obligee);
 
                 Obligee = null;
@@ -264,14 +268,29 @@ namespace RealEstateModule.ViewModels
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
             }
+        }
 
+        private void SetPerson()
+        {
+            if (string.IsNullOrWhiteSpace(Obligee.FRXM)) // 若法人姓名为空
+            {
+                Obligee.FRZJLX = null;
+                Obligee.FRZJH = null;
+                Obligee.FRDH = null;
+            }
+            if (string.IsNullOrWhiteSpace(Obligee.DLRXM)) // 若代理人姓名为空
+            {
+                Obligee.DLRZJLX = null;
+                Obligee.DLRZJH = null;
+                Obligee.DLRDH = null;
+            }
         }
 
         private void InitialComboBoxList()
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic = DictionaryUtil.GetDictionaryByName("证件类型");
-            ZJZLList = dic;
+            ZJLXList = dic;
 
             dic = DictionaryUtil.GetDictionaryByName("国家和地区");
             GJList = dic;
@@ -307,9 +326,22 @@ namespace RealEstateModule.ViewModels
             isValid &= notEmptyValidationRule.Validate(Obligee.ZJZL, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Obligee.ZJH, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Obligee.GJ, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Obligee.XB, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Obligee.QLRLX, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Obligee.QLLX, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Obligee.GYFS, cultureInfo).IsValid;
+
+            if (!string.IsNullOrWhiteSpace(Obligee.FRXM)) // 若法人姓名不为空
+            {
+                isValid &= notEmptyValidationRule.Validate(Obligee.FRZJLX, cultureInfo).IsValid;
+                isValid &= notEmptyValidationRule.Validate(Obligee.FRZJH, cultureInfo).IsValid;
+            }
+            if (!string.IsNullOrWhiteSpace(Obligee.DLRXM)) // 若代理人姓名不为空
+            {
+                isValid &= notEmptyValidationRule.Validate(Obligee.DLRZJLX, cultureInfo).IsValid;
+                isValid &= notEmptyValidationRule.Validate(Obligee.DLRZJH, cultureInfo).IsValid;
+            }
+
             // 数字验证
             NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
             isValid &= numbericValidationRule.Validate(Obligee.QLMJ, cultureInfo).IsValid;

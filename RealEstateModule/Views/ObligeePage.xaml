@@ -8,6 +8,7 @@
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -30,6 +31,8 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
+
+            <Converts:NameToVisibility x:Key="NameToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
@@ -66,7 +69,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="户唯一码*" >
+                 materialDesign:HintAssist.Hint="户标识码*" >
             <TextBox.Text>
                 <Binding Path="Obligee.HBSM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -89,7 +92,7 @@
         </TextBox>
         <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Obligee.BDCQZH}"
                  materialDesign:HintAssist.Hint="不动产权证号" />
-        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ZJZLList}" 
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ZJLXList}" 
                   materialDesign:HintAssist.Hint="证件种类*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.ZJZL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -109,7 +112,7 @@
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.GJ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox Grid.Row="2" Grid.Column="0" ItemsSource="{Binding XBList}" 
-                  materialDesign:HintAssist.Hint="性别"
+                  materialDesign:HintAssist.Hint="性别*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.XB,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding QLRLXList}" 
@@ -143,28 +146,54 @@
         </TextBox>
         <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Obligee.QLBL}"
                  materialDesign:HintAssist.Hint="权利比例" />
-        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Obligee.FRXM}"
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Obligee.GZDW}"
+                 materialDesign:HintAssist.Hint="工作单位" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Obligee.FRXM}"
                  materialDesign:HintAssist.Hint="法人姓名" />
-        <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding QLRLXList}" 
-                  materialDesign:HintAssist.Hint="法人证件类型"
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Obligee.DLRXM}"
+                 materialDesign:HintAssist.Hint="代理人姓名" />
+        <ComboBox Grid.Row="6" Grid.Column="0" ItemsSource="{Binding ZJLXList}" 
+                  materialDesign:HintAssist.Hint="法人证件类型*"
+                  Visibility="{Binding Path=Obligee.FRXM, Converter={StaticResource NameToVisibility}}"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.FRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Obligee.FRZJH}"
-                 materialDesign:HintAssist.Hint="法人证件号" />
-        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Obligee.FRDH}"
+        <TextBox Grid.Row="6" Grid.Column="1"
+                 Visibility="{Binding Path=Obligee.FRXM, Converter={StaticResource NameToVisibility}}"
+                 materialDesign:HintAssist.Hint="法人证件号*" >
+            <TextBox.Text>
+                <Binding Path="Obligee.FRZJH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Obligee.FRDH}"
+                 Visibility="{Binding Path=Obligee.FRXM, Converter={StaticResource NameToVisibility}}"
                  materialDesign:HintAssist.Hint="法人电话" />
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Obligee.DLRXM}"
-                 materialDesign:HintAssist.Hint="代理人姓名" />
-        <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding QLRLXList}" 
-                  materialDesign:HintAssist.Hint="代理人证件类型"
+        
+        <ComboBox Grid.Row="7" Grid.Column="0" ItemsSource="{Binding ZJLXList}" 
+                  Visibility="{Binding Path=Obligee.DLRXM, Converter={StaticResource NameToVisibility}}"
+                  materialDesign:HintAssist.Hint="代理人证件类型*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Obligee.DLRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Obligee.DLRZJH}"
-                 materialDesign:HintAssist.Hint="代理人证件号" />
-        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Obligee.DLRDH}"
+        <TextBox Grid.Row="7" Grid.Column="1"
+                 Visibility="{Binding Path=Obligee.DLRXM, Converter={StaticResource NameToVisibility}}"
+                 materialDesign:HintAssist.Hint="代理人证件号*">
+            <TextBox.Text>
+                <Binding Path="Obligee.DLRZJH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Obligee.DLRDH}"
+                 Visibility="{Binding Path=Obligee.DLRXM, Converter={StaticResource NameToVisibility}}"
                  materialDesign:HintAssist.Hint="代理人电话" />
-        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Obligee.GZDW}"
-                 materialDesign:HintAssist.Hint="工作单位" />
+        
         <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Obligee.DLJGMC}"
                  materialDesign:HintAssist.Hint="代理机构名称" />
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Obligee.DZYJ}"

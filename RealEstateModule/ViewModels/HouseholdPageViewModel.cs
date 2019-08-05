@@ -90,7 +90,7 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref hxList, value); }
         }
         /// <summary>
-        /// 房屋用途1
+        /// 房屋用途
         /// </summary>
         private Dictionary<string, string> fwytList;
         public  Dictionary<string, string> FWYTList
@@ -354,25 +354,37 @@ namespace RealEstateModule.ViewModels
             isValid &= notEmptyValidationRule.Validate(Household.HBSM, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.FWBM, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.YSDM, cultureInfo).IsValid;
-            isValid &= notEmptyValidationRule.Validate(Household.ZRZH, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.ZL, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.MJDW, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.SZC, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.QSC, cultureInfo).IsValid;
-            isValid &= notEmptyValidationRule.Validate(Household.MJDW, cultureInfo).IsValid;
-            isValid &= notEmptyValidationRule.Validate(Household.SHBW, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Household.ZZC, cultureInfo).IsValid;
-           // 数字验证
+            isValid &= notEmptyValidationRule.Validate(Household.SHBW, cultureInfo).IsValid;
+            isValid &= notEmptyValidationRule.Validate(Household.ZT, cultureInfo).IsValid;
+            // 数字和非空验证
+            NumbericAndNotEmptyValidationRule numbericAndNotEmptyValidationRule = new NumbericAndNotEmptyValidationRule();
             NumbericValidationRule numbericValidationRule = new NumbericValidationRule();
-            isValid &= numbericValidationRule.Validate(Household.YCTNJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.YCFTJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.YCJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.YCQTJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.YCDXBFJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.SCTNJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.SCFTJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.SCJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.SCQTJZMJ, cultureInfo).IsValid;
-            isValid &= numbericValidationRule.Validate(Household.SCDXBFJZMJ, cultureInfo).IsValid;
+            if (MappingType == EMappingType.PredictiveMapping)
+            {
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.YCTNJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.YCFTJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.YCJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.YCQTJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.YCDXBFJZMJ, cultureInfo).IsValid;
+
+                isValid &= numbericValidationRule.Validate(Household.YCFTXS, cultureInfo).IsValid;
+            }
+            else if (MappingType == EMappingType.SurveyingMapping)
+            {
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.SCTNJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.SCFTJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.SCJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.SCQTJZMJ, cultureInfo).IsValid;
+                isValid &= numbericAndNotEmptyValidationRule.Validate(Household.SCDXBFJZMJ, cultureInfo).IsValid;
+
+                isValid &= numbericValidationRule.Validate(Household.SCFTXS, cultureInfo).IsValid;
+            }
+            // 数字验证
             isValid &= numbericValidationRule.Validate(Household.FTTDMJ, cultureInfo).IsValid;
             isValid &= numbericValidationRule.Validate(Household.DYTDMJ, cultureInfo).IsValid;
             isValid &= numbericValidationRule.Validate(Household.GYTDMJ, cultureInfo).IsValid;

@@ -66,7 +66,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0"
-                 materialDesign:HintAssist.Hint="户唯一码*">
+                 materialDesign:HintAssist.Hint="户标识码*">
             <TextBox.Text>
                 <Binding Path="Household.HBSM" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -79,7 +79,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Household.YXTBS}"
                  materialDesign:HintAssist.Hint="原系统标识" />
         <TextBox Grid.Row="0" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="不动产单元号*">
+                 materialDesign:HintAssist.Hint="不动产单元号">
             <TextBox.Text>
                 <Binding Path="Household.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
@@ -111,17 +111,8 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="1" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="自然幢号*">
-            <TextBox.Text>
-                <Binding Path="Household.ZRZH" UpdateSourceTrigger="PropertyChanged" 
-                               NotifyOnValidationError="True">
-                    <Binding.ValidationRules>
-                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Household.ZRZH}"
+                 materialDesign:HintAssist.Hint="自然幢号" />
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Household.LJZH}"
                  materialDesign:HintAssist.Hint="逻辑幢号" />
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Household.DYH}"
@@ -165,10 +156,18 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding MJDWList}" 
-                  materialDesign:HintAssist.Hint="面积单位*"
-                  SelectedValuePath="Key"  DisplayMemberPath="Value"
-                  SelectedValue="{Binding Household.MJDW,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="4" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="终止层*">
+            <TextBox.Text>
+                <Binding Path="Household.ZZC" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Household.HH}"
                  materialDesign:HintAssist.Hint="户号" />
         <TextBox Grid.Row="5" Grid.Column="1"
@@ -182,17 +181,10 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="5" Grid.Column="2"
-                 materialDesign:HintAssist.Hint="终止层*">
-            <TextBox.Text>
-                <Binding Path="Household.ZZC" UpdateSourceTrigger="PropertyChanged" 
-                               NotifyOnValidationError="True">
-                    <Binding.ValidationRules>
-                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding MJDWList}" 
+                  materialDesign:HintAssist.Hint="面积单位*"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Household.MJDW,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox Grid.Row="6" Grid.Column="0" ItemsSource="{Binding HXJGList}" 
                   materialDesign:HintAssist.Hint="户型结构"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
@@ -222,7 +214,7 @@
                 <Binding Path="Household.YCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -234,7 +226,7 @@
                 <Binding Path="Household.YCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -246,7 +238,7 @@
                 <Binding Path="Household.YCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -258,19 +250,28 @@
                 <Binding Path="Household.YCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Household.YCFTXS}"
-                 materialDesign:HintAssist.Hint="预测分摊系数"
-                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}"/>
-        <TextBox Grid.Row="9" Grid.Column="2"
+        <TextBox Grid.Row="9" Grid.Column="1"
                  materialDesign:HintAssist.Hint="预测地下部分建筑面积"
                  Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.YCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="9" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="预测分摊系数"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
+            <TextBox.Text>
+                <Binding Path="Household.YCFTXS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
@@ -278,6 +279,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
+
         <TextBox Grid.Row="10" Grid.Column="0"
                  materialDesign:HintAssist.Hint="实测套内建筑面积"
                  Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
@@ -285,7 +287,7 @@
                 <Binding Path="Household.SCTNJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -297,7 +299,7 @@
                 <Binding Path="Household.SCFTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -309,7 +311,7 @@
                 <Binding Path="Household.SCJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -321,19 +323,28 @@
                 <Binding Path="Household.SCQTJZMJ" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
-                        <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Household.SCFTXS}"
-                 materialDesign:HintAssist.Hint="实测分摊系数"
-                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}"/>
-        <TextBox Grid.Row="11" Grid.Column="2"
+        <TextBox Grid.Row="11" Grid.Column="1"
                  materialDesign:HintAssist.Hint="实测地下部分建筑面积"
                  Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
             <TextBox.Text>
                 <Binding Path="Household.SCDXBFJZMJ" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NumbericAndNotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Grid.Row="11" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="实测分摊系数"
+                 Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
+            <TextBox.Text>
+                <Binding Path="Household.SCFTXS" UpdateSourceTrigger="PropertyChanged" 
                                NotifyOnValidationError="True">
                     <Binding.ValidationRules>
                         <ValidationRules:NumbericValidationRule ValidatesOnTargetUpdated="True" />

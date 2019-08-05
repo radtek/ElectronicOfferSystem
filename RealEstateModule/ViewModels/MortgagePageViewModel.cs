@@ -82,6 +82,15 @@ namespace RealEstateModule.ViewModels
             get { return czfsList; }
             set { SetProperty(ref czfsList, value); }
         }
+        /// <summary>
+        /// 金额单位
+        /// </summary>
+        private Dictionary<string, string>jedwList;
+        public Dictionary<string, string> JEDWList
+        {
+            get { return jedwList; }
+            set { SetProperty(ref jedwList, value); }
+        }
         #endregion
 
         #region 命令
@@ -202,6 +211,8 @@ namespace RealEstateModule.ViewModels
                 Mortgage.ProjectID = Project.ID;
                 Mortgage.ID = Guid.NewGuid();
                 Mortgage.UpdateTime = DateTime.Now;
+                SetPerson();
+
                 MortgageDal.Add(Mortgage);
 
                 Mortgage = null;
@@ -231,6 +242,7 @@ namespace RealEstateModule.ViewModels
             try
             {
                 Mortgage.UpdateTime = DateTime.Now;
+                SetPerson();
                 MortgageDal.Modify(Mortgage);
                 // 发送通知，点击业务的导航页，也就是新增页，更新业务列表
                 EA.GetEvent<RefreshBusinessEvent>().Publish(ERealEstatePage.MortgagePage);
@@ -239,6 +251,16 @@ namespace RealEstateModule.ViewModels
             {
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
+            }
+        }
+
+        private void SetPerson()
+        {
+            if (string.IsNullOrWhiteSpace(Mortgage.FRXM)) // 若法人姓名为空
+            {
+                Mortgage.FRZJLX = null;
+                Mortgage.FRZJH = null;
+                Mortgage.FRDH = null;
             }
         }
 
@@ -262,7 +284,11 @@ namespace RealEstateModule.ViewModels
             isValid &= notEmptyValidationRule.Validate(Mortgage.CZFS, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Mortgage.ZWR, cultureInfo).IsValid;
             isValid &= notEmptyValidationRule.Validate(Mortgage.DBR, cultureInfo).IsValid;
-
+            if (!string.IsNullOrWhiteSpace(Mortgage.FRXM)) // 若法人姓名不为空
+            {
+                isValid &= notEmptyValidationRule.Validate(Mortgage.FRZJLX, cultureInfo).IsValid;
+                isValid &= notEmptyValidationRule.Validate(Mortgage.FRZJH, cultureInfo).IsValid;
+            }
             return isValid;
         }
 
@@ -281,6 +307,8 @@ namespace RealEstateModule.ViewModels
             dic = DictionaryUtil.GetDictionaryByName("持证方式");
             CZFSList = dic;
 
+            dic = DictionaryUtil.GetDictionaryByName("金额单位");
+            JEDWList = dic;
         }
 
     }

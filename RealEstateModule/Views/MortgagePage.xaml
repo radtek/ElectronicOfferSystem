@@ -8,6 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
              xmlns:prism="http://prismlibrary.com/"
+              xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -31,6 +32,8 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
+
+            <Converts:NameToVisibility x:Key="NameToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
@@ -104,12 +107,24 @@
         <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Mortgage.FRXM}"
                  materialDesign:HintAssist.Hint="法人姓名"/>
         <ComboBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding ZJLXList}" 
-                  materialDesign:HintAssist.Hint="法人证件类型"
+                  materialDesign:HintAssist.Hint="法人证件类型*"
+                  Visibility="{Binding Path=Mortgage.FRXM, Converter={StaticResource NameToVisibility}}"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Mortgage.FRZJLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Mortgage.FRZJH}"
-                 materialDesign:HintAssist.Hint="法人证件号"/>
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 Visibility="{Binding Path=Mortgage.FRXM, Converter={StaticResource NameToVisibility}}"
+                 materialDesign:HintAssist.Hint="法人证件号*">
+            <TextBox.Text>
+                <Binding Path="Mortgage.FRZJH" UpdateSourceTrigger="PropertyChanged" 
+                               NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <ValidationRules:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Mortgage.FRDH}"
+                 Visibility="{Binding Path=Mortgage.FRXM, Converter={StaticResource NameToVisibility}}"
                  materialDesign:HintAssist.Hint="法人电话"/>
         <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Mortgage.BZ}"
                  materialDesign:HintAssist.Hint="备注"/>
@@ -117,8 +132,10 @@
                   materialDesign:HintAssist.Hint="抵押方式*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Mortgage.DYFS,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Mortgage.ZQDW}"
-                 materialDesign:HintAssist.Hint="债权单位"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{Binding JEDWList}" 
+                  materialDesign:HintAssist.Hint="债权单位"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding Mortgage.ZQDW,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="5" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="抵押人*" >
             <TextBox.Text>

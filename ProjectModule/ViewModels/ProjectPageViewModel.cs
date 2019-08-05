@@ -207,19 +207,16 @@ namespace ProjectModule.ViewModels
                 case EMainPage.RealEstatePage:
                     ProjectType = ((int)EProjectType.RealEstate).ToString();
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type)));
-
-                    //Project = Projects.FirstOrDefault();
-                    SelectedProject = Projects.FirstOrDefault();
                     break;
                 case EMainPage.RegistrationPage:
                     ProjectType = ((int)EProjectType.Registration).ToString();
                     Projects = new ObservableCollection<Project>(projectDal.GetListBy((p) => ProjectType.Equals(p.Type)));
-                    //Project = Projects.FirstOrDefault();
-                    SelectedProject = Projects.FirstOrDefault();
                     break;
                 default:
                     break;
             }
+
+            SelectedProject = Projects.FirstOrDefault();
 
         }
 
