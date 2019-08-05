@@ -31,6 +31,7 @@ namespace ElectronicOfferSystem.Views
             regionManager.RegisterViewWithRegion("MenuBarRegion", typeof(MenuBar));
             regionManager.RegisterViewWithRegion("ProjectTabRegion", typeof(ProjectTab));
             regionManager.RegisterViewWithRegion("ProjectPageRegion", typeof(ProjectPage));
+            regionManager.RegisterViewWithRegion("UserInfoPageRegion", typeof(UserInfoPage));
         }
 
     }

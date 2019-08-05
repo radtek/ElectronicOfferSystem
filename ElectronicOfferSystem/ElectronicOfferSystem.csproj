@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MenuBarViewModel.cs" />
     <Compile Include="ViewModels\ProjectTabViewModel.cs" />
+    <Compile Include="ViewModels\UserInfoPageViewModel.cs" />
     <Compile Include="ViewModels\WindowTopViewModel.cs" />
     <Compile Include="Views\Dialogs\ProjectPathDialog.xaml.cs">
       <DependentUpon>ProjectPathDialog.xaml</DependentUpon>
@@ -164,6 +165,9 @@
     </Compile>
     <Compile Include="Views\ProjectTab.xaml.cs">
       <DependentUpon>ProjectTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserInfoPage.xaml.cs">
+      <DependentUpon>UserInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowTop.xaml.cs">
       <DependentUpon>WindowTop.xaml</DependentUpon>
@@ -291,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

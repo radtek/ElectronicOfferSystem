@@ -111,7 +111,7 @@ namespace ElectronicOfferSystem.ViewModels
             });
         }
 
-        private void InitalWindowStyle()
+        public void InitalWindowStyle()
         {
             Window mainWindow = Application.Current.Windows[0];
             mainWindow.WindowStyle = WindowStyle.None;
@@ -211,7 +211,6 @@ namespace ElectronicOfferSystem.ViewModels
                     {
                         if (canLogin)
                         {
-                            
                             RegionManager.RequestNavigate("MainRegion", "MainPage", NavigationComplete);
                         }
                     }));

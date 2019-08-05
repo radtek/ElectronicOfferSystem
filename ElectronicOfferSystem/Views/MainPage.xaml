@@ -57,11 +57,18 @@
                     <!-- MainPage -->
                     <Grid Grid.Column="1">
                         <ContentControl Margin="5 0 0 0" prism:RegionManager.RegionName="ContentRegion"/>
+                        
+                        <ContentControl prism:RegionManager.RegionName="UserInfoPageRegion"/>
+
                     </Grid>
-                    <!-- MainPage End -->
+                    <!-- MainPage End -->              
+                    
                 </Grid>
                 <!-- Main End -->
+                
             </Grid>
+                    
+            
         </materialDesign:DialogHost>
     </Grid>
 </UserControl>

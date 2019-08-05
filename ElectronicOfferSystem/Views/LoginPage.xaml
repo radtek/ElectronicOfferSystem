@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:Utils="clr-namespace:Common.Utils;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -47,9 +48,9 @@
             <PasswordBox Grid.Row="2" Name="pass" materialDesign:HintAssist.Hint="密 码" Width="180"
                          Foreground="White" BorderBrush="White"   HorizontalAlignment="Center"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"  
-                         local:PasswordBoxHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                         Utils:PasswordBoxHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Behaviors>
-                    <local:PasswordBoxBehavior />
+                    <Utils:PasswordBoxBehavior />
                 </i:Interaction.Behaviors>
             </PasswordBox>
             <CheckBox Grid.Row="3" Content="记住密码" IsChecked="{Binding UserChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 110 0" Foreground="White" />
