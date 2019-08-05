@@ -8,6 +8,10 @@ namespace BusinessData
 {
     public partial class Sequestration
     {
+        public Sequestration()
+        {
+            CFLX = "1"; // 查封 
+        }
         public virtual Project Project { get; set; }
         public virtual Household Household { get; set; }
     }

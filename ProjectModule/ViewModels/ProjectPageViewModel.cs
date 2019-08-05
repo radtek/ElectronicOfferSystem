@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using Common;
 using Common.Enums;
+using Common.Utils;
 using Common.ValidationRules;
 using Common.ViewModels;
 using Common.Views;
@@ -294,6 +295,33 @@ namespace ProjectModule.ViewModels
             }
             try
             {
+                if ("1".Equals(Project.Type)) // 楼盘表项目
+                {
+                    NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
+                    LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
+                    FloorDal floorDal = new FloorDal();
+                    HouseholdDal householdDal = new HouseholdDal();
+                    ObligeeDal obligeeDal = new ObligeeDal();
+                    MortgageDal mortgageDal = new MortgageDal();
+                    SequestrationDal sequestrationDal = new SequestrationDal();
+
+                    naturalBuildingDal.DelBy(t => t.ProjectID == Project.ID);
+                    logicalBuildingDal.DelBy(t => t.ProjectID == Project.ID);
+                    floorDal.DelBy(t => t.ProjectID == Project.ID);
+                    householdDal.DelBy(t => t.ProjectID == Project.ID);
+                    obligeeDal.DelBy(t => t.ProjectID == Project.ID);
+                    mortgageDal.DelBy(t => t.ProjectID == Project.ID);
+                    sequestrationDal.DelBy(t => t.ProjectID == Project.ID);
+                }
+                else if ("2".Equals(Project.Type)) // 登记业务项目
+                {
+                    TransferDal transferDal = new TransferDal();
+                    ApplicantDal applicantDal = new ApplicantDal();
+
+                    transferDal.DelBy(t => t.ProjectID == Project.ID);
+                    applicantDal.DelBy(t => t.ProjectID == Project.ID);
+                    FileHelper.DelDir(Project);
+                }
                 projectDal.Del(Project);
 
             }

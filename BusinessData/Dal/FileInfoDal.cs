@@ -11,5 +11,6 @@ namespace BusinessData.Dal
     /// </summary>
     public class FileInfoDal : BaseDal<FileInfo>
     {
+
     }
 }

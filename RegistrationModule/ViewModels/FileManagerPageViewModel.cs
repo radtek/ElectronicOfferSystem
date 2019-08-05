@@ -191,16 +191,16 @@ namespace RegistrationModule.ViewModels
                 string projectPath = @"D:\vs-workspace\Test\";
 
                 String[] SelectedFilePaths = openFileDialog.FileNames;
-                bool isShow = false;
+                //bool isShow = false;
                 foreach (String baseAddress in SelectedFilePaths)
                 {
                     // 判断图片大小，不能超过2m（1024*2）kb
                     System.IO.FileInfo selectedFileInfo = new System.IO.FileInfo(baseAddress);
-                    if (selectedFileInfo.Length > 1024 * 1024 * 2)
-                    {
-                        isShow = true;
-                        continue;
-                    }
+                    //if (selectedFileInfo.Length > 1024 * 1024 * 2)
+                    //{
+                    //    isShow = true;
+                    //    continue;
+                    //}
                     String filename = System.IO.Path.GetFileNameWithoutExtension(baseAddress); // 文件原名称
                     String extension = System.IO.Path.GetExtension(baseAddress); // 文件扩展名
                     String path = Project.ID + "\\" + GetTreeFullPath(TreeNode); // 相对路径
@@ -243,10 +243,10 @@ namespace RegistrationModule.ViewModels
                     FileInfoList.Add(uploadFile);
 
                 }
-                if (isShow)
-                {
-                    MessageBox.Show("上传的每张图片大小不能超过2M", "提示");
-                }
+                //if (isShow)
+                //{
+                //    MessageBox.Show("上传的每张图片大小不能超过2M", "提示");
+                //}
 
             }
         }
@@ -323,17 +323,8 @@ namespace RegistrationModule.ViewModels
             {
                 DataGrid dataGrid = obj as DataGrid;
                 FileInfo = dataGrid.SelectedItem as FileInfo;
-
-                // 删除数据
-                FileInfoDal.Del(FileInfo);
+                FileHelper.DelFile(fileInfo);
                 FileInfoList.Remove(FileInfo);
-                // 删除文件
-                string path = @"D:\vs-workspace\Test";
-                System.IO.FileInfo file = new System.IO.FileInfo(path + "\\" + FileInfo.Path + "\\" + FileInfo.ID + FileInfo.Extension);
-                if (file.Exists)
-                {
-                    file.Delete();
-                }
             }
             catch (Exception ex)
             {

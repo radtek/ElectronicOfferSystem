@@ -354,6 +354,17 @@ namespace RealEstateModule.Services
             {
                 string id = "证件号为【" + Mortgage.ZJH + "】";
                 CheckNull(table, id, Mortgage.HBSM, "户标识码");
+                CheckNull(table, id, Mortgage.QLRMC, "权利人名称");
+                CheckNull(table, id, Mortgage.ZJLX, "证件类型");
+                CheckNull(table, id, Mortgage.ZJH, "证件号");
+                CheckNull(table, id, Mortgage.DYFS, "抵押方式");
+                CheckNull(table, id, Mortgage.DYR, "抵押人");
+                CheckNull(table, id, Mortgage.DYRZJLX, "抵押人证件类型");
+                CheckNull(table, id, Mortgage.DYRZJH, "抵押人证件号");
+                CheckNull(table, id, Mortgage.DYBDCLX, "抵押不动产类型");
+                CheckNull(table, id, Mortgage.CZFS, "持证方式");
+                CheckNull(table, id, Mortgage.ZWR, "债务人");
+                CheckNull(table, id, Mortgage.DBR, "登簿人");
 
                 if (!string.IsNullOrWhiteSpace(Mortgage.FRXM)) // 若法人姓名不为空
                 {
@@ -380,6 +391,25 @@ namespace RealEstateModule.Services
         {
             if (Project.Sequestrations == null || Project.Sequestrations.Count == 0) return;
             String table = "查封信息";
+            foreach (var Sequestration in Project.Sequestrations)
+            {
+                string id = "户标识码为【" + Sequestration.HBSM + "】";
+                CheckNull(table, id, Sequestration.HBSM, "户标识码");
+                CheckNull(table, id, Sequestration.CFLX, "查封类型");
+                CheckNull(table, id, Sequestration.DBR, "登簿人");
+                CheckNull(table, id, Sequestration.CFSJ.ToString(), "查封时间");
+
+                // 表间检查
+                int count = Project.Sequestrations.Count(s => Sequestration.HBSM.Equals(s.HBSM));
+                if (count < 1)
+                {
+                    ErrorMsg.Add("查封信息表中，户标识码【" + Sequestration.HBSM + "】没有对应的户");
+                }
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
+            }
         }
 
         /// <summary>

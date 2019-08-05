@@ -8,7 +8,7 @@ namespace Common.ValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (value == null) return ValidationResult.ValidResult;
+            if (string.IsNullOrWhiteSpace(value?.ToString())) return ValidationResult.ValidResult;
             return RuleHelper.IsNumberAndWord(value)
                 ? ValidationResult.ValidResult
                 : new ValidationResult(false, "请输入数字和字母");

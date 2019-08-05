@@ -92,6 +92,7 @@
     <Compile Include="Rules\RuleHelper.cs" />
     <Compile Include="Utils\CEncoder.cs" />
     <Compile Include="Utils\DictionaryUtil.cs" />
+    <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\IniFileHelper.cs" />
     <Compile Include="Utils\Office\ExcelBase.cs" />
     <Compile Include="Utils\Office\ExcelHelper.cs" />
