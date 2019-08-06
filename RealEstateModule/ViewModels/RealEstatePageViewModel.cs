@@ -115,13 +115,6 @@ namespace RealEstateModule.ViewModels
 
             try
             {
-                // 加载该项目的数据
-                //Project = ProjectDal.InitialRealEstateProject(Project);
-
-                // 页面跳转
-                var parameters = new NavigationParameters();
-                parameters.Add("Project", Project);
-                RegionManager.RequestNavigate("BusinessContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
 
                 switch (NavigatePath)
                 {
@@ -201,16 +194,18 @@ namespace RealEstateModule.ViewModels
 
                 }
 
-
+                // 页面跳转
+                var parameters = new NavigationParameters();
+                parameters.Add("Project", Project);
+                RegionManager.RequestNavigate("BusinessContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
+                // 统计页面跳转
+                RegionManager.RequestNavigate("BusinessStatisticsRegion", NavigatePath.ToString() + "Statistics", NavigationComplete, parameters);
             }
             catch (Exception ex)
             {
                 ErrorDialogViewModel.getInstance().show(ex);
                 return;
             }
-
-
-
         }
 
         private void NavigationComplete(NavigationResult result)

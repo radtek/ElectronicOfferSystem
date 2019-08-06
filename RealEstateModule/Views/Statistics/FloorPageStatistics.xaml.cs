@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace RealEstateModule.Views.Statistics
 {
     /// <summary>
-    /// NaturalBuildingStatistics.xaml 的交互逻辑
+    /// FloorPageStatistics.xaml 的交互逻辑
     /// </summary>
-    public partial class NaturalBuildingStatistics : UserControl
+    public partial class FloorPageStatistics : UserControl
     {
-        public NaturalBuildingStatistics()
+        public FloorPageStatistics()
         {
             InitializeComponent();
         }

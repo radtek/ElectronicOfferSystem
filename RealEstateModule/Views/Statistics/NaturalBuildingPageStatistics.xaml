@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="RealEstateModule.Views.Statistics.NaturalBuildingPageStatistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RealEstateModule.Views.Statistics"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ValidationRules="clr-namespace:Common.ValidationRules;assembly=Common"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="{x:Type Separator}" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+                <Setter Property="BorderBrush" Value="LightGray" />
+                <Setter Property="BorderThickness" Value="0.8"/>
+                <Setter Property="Margin" Value="8 0"/>
+            </Style>
+            <Converts:EnumToVisibility x:Key="EnumToVisibility" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <!--<Grid.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" Opacity=".2" ShadowDepth="1"/>
+        </Grid.Effect>-->
+        <materialDesign:Card UniformCornerRadius="10"
+    materialDesign:ShadowAssist.ShadowDepth="Depth2"
+    Padding="10 10" Margin="20 15">
+
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Text="共有："/>
+                <TextBlock Text="{Binding Count}"/>
+                <TextBlock Text="幢"/>
+                <Separator/>
+                <TextBlock Text="总建筑物高度："/>
+                <TextBlock Text="{Binding JZWGD}"/>
+                <Separator/>
+                <TextBlock Text="总占地面积："/>
+                <TextBlock Text="{Binding ZDMJ}"/>
+                <Separator/>
+                <TextBlock Text="总用地面积："/>
+                <TextBlock Text="{Binding YDMJ}"/>
+                <StackPanel Orientation="Horizontal" 
+                            Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.PredictiveMapping}}">
+                <Separator/>
+                    <TextBlock Text="总预测建筑面积："/>
+                    <TextBlock Text="{Binding YCJZMJ}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Visibility="{Binding Path=MappingType,Converter={StaticResource EnumToVisibility},ConverterParameter={x:Static Enums:EMappingType.SurveyingMapping}}">
+                <Separator/>
+                    <TextBlock Text="总实测建筑面积："/>
+                    <TextBlock Text="{Binding SCJZMJ}"/>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

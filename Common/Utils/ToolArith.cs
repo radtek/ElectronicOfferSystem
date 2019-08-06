@@ -8,6 +8,21 @@ namespace Common.Utils
 {
     public class ToolArith
     {
+        /// <summary>
+        /// 字符串转小数，若字符串为空或不是数字，则返回0
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static double StringToDouble(string value)
+        {
+            if (MatchAllNumber(value))
+            {
+                return Convert.ToDouble(value);
+            }
+            return 0.0;
+        }
+
+
         public static string GetPercentString(int percent)
         {
             return string.Format("{0}%", percent);
