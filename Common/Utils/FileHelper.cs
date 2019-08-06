@@ -40,7 +40,7 @@ namespace Common.Utils
             {
                 // 删除目录
                 string basePath = ReadConfigInfo();
-                string path = basePath + "\\" + project.ID;
+                string path = basePath + "\\" + project.ID + "\\";
                 DirectoryInfo di = new DirectoryInfo(path);
                 if (di.Exists)
                 {
@@ -65,7 +65,7 @@ namespace Common.Utils
         /// <summary>
         /// 读取本地配置信息
         /// </summary>
-        private static string ReadConfigInfo()
+        public static string ReadConfigInfo()
         {
             string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
             

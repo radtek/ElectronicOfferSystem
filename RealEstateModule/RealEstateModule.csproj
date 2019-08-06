@@ -66,6 +66,7 @@
     <Compile Include="Services\Export\ExportRealEstateBook.cs" />
     <Compile Include="Services\Import\ImportRealEstateBook.cs" />
     <Compile Include="Services\QualityControl.cs" />
+    <Compile Include="Services\RealEstateStatistics.cs" />
     <Compile Include="Tasks\ExportRealEstateTask.cs" />
     <Compile Include="Tasks\ImportRealEstateTask.cs" />
     <Compile Include="Tasks\QualityControlTask.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="Views\SequestrationPage.xaml.cs">
       <DependentUpon>SequestrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Statistics\NaturalBuildingStatistics.xaml.cs">
+      <DependentUpon>NaturalBuildingStatistics.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -193,6 +197,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Statistics\NaturalBuildingStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessData\BusinessData.csproj">
@@ -228,6 +236,9 @@
     <Resource Include="Images\Icon_Import.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Statistics\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

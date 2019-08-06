@@ -152,7 +152,7 @@ namespace RealEstateModule.Tasks
                     ThreadPool.QueueUserWorkItem(delegate
                      {
                          SynchronizationContext.SetSynchronizationContext(new
-                     System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Application.Current.Dispatcher));
+                         System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Application.Current.Dispatcher));
                          SynchronizationContext.Current.Post(pl =>
                      {
 

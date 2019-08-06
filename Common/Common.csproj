@@ -101,6 +101,8 @@
     <Compile Include="Utils\Office\WordBase.cs" />
     <Compile Include="Utils\Office\WordOperator.cs" />
     <Compile Include="Utils\PasswordBoxHelper.cs" />
+    <Compile Include="Utils\ToolArith.cs" />
+    <Compile Include="Utils\ToolDate.cs" />
     <Compile Include="Utils\ZipHelper.cs" />
     <Compile Include="ValidationRules\BDCDYHValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerAndNotEmptyValidationRule.cs" />

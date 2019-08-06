@@ -7,9 +7,6 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ElectronicOfferSystem.ViewModels.Dialogs
@@ -29,46 +26,22 @@ namespace ElectronicOfferSystem.ViewModels.Dialogs
 
         public ProjectPathDialogViewModel()
         {
-            ReadConfigInfo();
+            FilePath = FileHelper.ReadConfigInfo();
 
-            ChooseFileCommand = new DelegateCommand(() => {
+            ChooseFileCommand = new DelegateCommand(() =>
+            {
 
                 //创建一个保存文件式的对话框
-                SaveFileDialog sfd = new SaveFileDialog();
-                //设置这个对话框的起始保存路径
-                //sfd.InitialDirectory = @"D:\";
-                // 默认文件名
-                //sfd.FileName = Project.ProjectName;
-                //设置保存的文件的类型，注意过滤器的语法
 
-                //调用ShowDialog()方法显示该对话框，该方法的返回值代表用户是否点击了确定按钮
-                if (sfd.ShowDialog() == true)
+                System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+                fbd.Description = "请选择一个目录";
+                if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (sfd.CheckPathExists)
-                    {
-                        FilePath = sfd.FileName;
-                    }
-                    else
-                    {
-                        MessageBox.Show("文件夹路径不能为空", "提示");
-                        return;
-                    }
+                    FilePath = fbd.SelectedPath;
                 }
+
             });
 
-        }
-
-        /// <summary>
-        /// 读取本地配置信息
-        /// </summary>
-        public void ReadConfigInfo()
-        {
-            string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
-            if (File.Exists(cfgINI))
-            {
-                IniFileHelper ini = new IniFileHelper(cfgINI);
-                FilePath = ini.IniReadValue("Project", "FilePath");
-            }
         }
     }
 }

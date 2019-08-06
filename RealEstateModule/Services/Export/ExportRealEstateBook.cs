@@ -1,4 +1,6 @@
 ﻿using BusinessData;
+using Common.Models;
+using Common.Utils;
 using Common.Utils.Office;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,12 @@ namespace RealEstateModule.Services.Export
         public List<Floor> Floors { get; set; }
         public List<LogicalBuilding> LogicalBuildings { get; set; }
         public List<Obligee> Obligees { get; set; }
+        public List<Mortgage> Mortgages { get; set; }
+        public List<Sequestration> Sequestrations { get; set; }
+
+        public TaskMessage TaskMessage { get; set; }
+        public int TotalCount { get; set; }
+        public double index { get; set; }
 
         public ExportRealEstateBook()
         {
@@ -29,6 +37,32 @@ namespace RealEstateModule.Services.Export
 
         public override void Write()
         {
+            TotalCount = 0;
+            index = 0.0;
+
+            // 获取总共的条数
+            if (NaturalBuildings != null)
+                TotalCount += NaturalBuildings.Count;
+            if (LogicalBuildings != null)
+                TotalCount += LogicalBuildings.Count;
+            if (Floors != null)
+                TotalCount += Floors.Count;
+            if (Households != null)
+                TotalCount += Households.Count;
+            if (Obligees != null)
+                TotalCount += Obligees.Count;
+            if (Mortgages != null)
+                TotalCount += Mortgages.Count;
+            if (Sequestrations != null)
+                TotalCount += Sequestrations.Count;
+
+            if (TotalCount == 0)
+            {
+                ErrorMsg.Add("该项目无数据");
+                return;
+            }
+            
+
             try
             {
                 WriteNaturalBuilding();
@@ -36,10 +70,12 @@ namespace RealEstateModule.Services.Export
                 WriteFloor();
                 WriteHouse();
                 WriteObligee();
+                WriteMortgage();
+                WriteSequestration();
             }
             catch (Exception ex)
             {
-                ErrorMsg.Add(ex.Message);
+                ErrorMsg.Add(ex.Message+ex.StackTrace);
             }
         }
 
@@ -48,12 +84,21 @@ namespace RealEstateModule.Services.Export
         {
             if (NaturalBuildings == null || NaturalBuildings.Count == 0)
                 return;
+
             SetSheetIndex(0);
+
             int rowIndex = 2;
+
+            InsertRowsCell(rowIndex, NaturalBuildings.Count-1);
+
             foreach (var NaturalBuilding in NaturalBuildings)
             {
                 InitalizeNaturalBuildingValue(NaturalBuilding, rowIndex);
                 rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
         private void InitalizeNaturalBuildingValue(NaturalBuilding NaturalBuilding, int rowIndex)
@@ -73,17 +118,17 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.JZWMC);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.JGRQ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(NaturalBuilding.JGRQ)); 
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.JZWGD.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.JZWGD);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.ZZDMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(NaturalBuilding.ZZDMJ, 2));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.ZYDMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(NaturalBuilding.ZYDMJ, 2));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.YCJZMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(NaturalBuilding.YCJZMJ, 2)); 
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.SCJZMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(NaturalBuilding.SCJZMJ, 2));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.ZCS);
             columnIndex++;
@@ -91,11 +136,11 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.DXCS);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.DXSD.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.DXSD);
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.GHYT);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.FWJG);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(NaturalBuilding.FWJG, "房屋结构"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.ZTS);
             columnIndex++;
@@ -103,7 +148,7 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.BZ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.ZT);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(NaturalBuilding.ZT, "不动产单元状态"));
         }
         #endregion
 
@@ -114,10 +159,15 @@ namespace RealEstateModule.Services.Export
                 return;
             SetSheetIndex(1);
             int rowIndex = 2;
+            InsertRowsCell(rowIndex, LogicalBuildings.Count-1);
             foreach (var LogicalBuilding in LogicalBuildings)
             {
                 InitalizeNaturalValue(LogicalBuilding, rowIndex);
                 rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
         private void InitalizeNaturalValue(LogicalBuilding LogicalBuilding, int rowIndex)
@@ -131,17 +181,17 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.MPH);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCJZMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCJZMJ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCDXMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCDXMJ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCQTMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.YCQTMJ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCJZMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCJZMJ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCDXMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCDXMJ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCQTMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.SCQTMJ);
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, LogicalBuilding.JGRQ.ToString());
             columnIndex++;
@@ -176,10 +226,15 @@ namespace RealEstateModule.Services.Export
                 return;
             SetSheetIndex(2);
             int rowIndex = 2;
+            InsertRowsCell(rowIndex, Floors.Count-1);
             foreach (var Floor in Floors)
             {
                 InitalizeWriteFloorValue(Floor, rowIndex);
                 rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
         private void InitalizeWriteFloorValue(Floor Floor, int rowIndex)
@@ -220,120 +275,125 @@ namespace RealEstateModule.Services.Export
                 return;
             SetSheetIndex(3);
             int rowIndex = 2;
+            InsertRowsCell(rowIndex, Households.Count-1);
             foreach (var Household in Households)
             {
                 InitalizeHouselValue(Household, rowIndex);
                 rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
         private void InitalizeHouselValue(Household Household, int rowIndex)
         {
             int columnIndex = 1;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.HBSM);
-            columnIndex++;                                        
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.YXTBS);
-            columnIndex++;                                       
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.BDCDYH);
-            columnIndex++;                                       
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.FWBM);
-            columnIndex++;                                       
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.YSDM);
-            columnIndex++;                                     
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.ZRZH);
-            columnIndex++;                                      
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.LJZH);
-            columnIndex++;                                     
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.DYH);
-            columnIndex++;                                       
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.ZCS);
-            columnIndex++;                                      
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.CH);
-            columnIndex++;                                     
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.FH);
-            columnIndex++;                                      
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.ZL);
-            columnIndex++;                                    
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.MJDW);
-            columnIndex++;                                    
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.MJDW, "面积单位"));
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.SZC);
-            columnIndex++;                                      
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.QSC);
-            columnIndex++;                                  
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.ZZC);
-            columnIndex++;                                 
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.HH);
-            columnIndex++;                                    
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.SHBW);
-            columnIndex++;                                      
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.HX);
-            columnIndex++;                                      
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.HXJG);
-            columnIndex++;                                      
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.GHYT);
-            columnIndex++;                                     
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWYT1);
-            columnIndex++;                                     
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWYT2);
-            columnIndex++;                                  
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWYT3);
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCJZMJ.ToString());
-            columnIndex++;                                    
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCTNJZMJ.ToString());
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCFTJZMJ.ToString());
-            columnIndex++;                                  
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCDXBFJZMJ.ToString());
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCQTJZMJ.ToString());
-            columnIndex++;                                 
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.YCFTXS);
-            columnIndex++;                                   
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCJZMJ.ToString());
-            columnIndex++;                                    
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCTNJZMJ.ToString());
-            columnIndex++;                                    
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCFTJZMJ.ToString());
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCDXBFJZMJ.ToString());
-            columnIndex++;                                   
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCQTJZMJ.ToString());
-            columnIndex++;                               
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.SCFTXS.ToString());
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.GYTDMJ.ToString());
-            columnIndex++;                               
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FTTDMJ.ToString());
-            columnIndex++;                                  
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.DYTDMJ.ToString());
-            columnIndex++;                                 
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWLX);
-            columnIndex++;                                     
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWJG);
-            columnIndex++;                                  
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWXZ);
-            columnIndex++;                                  
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.HX, "户型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.HXJG, "户型结构"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.GHYT, "房屋用途"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWYT1, "房屋用途"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWYT2, "房屋用途"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWYT3, "房屋用途"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCTNJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCFTJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCDXBFJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCQTJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.YCFTXS, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCTNJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCFTJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCDXBFJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCQTJZMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.SCFTXS, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.GYTDMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.FTTDMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolArith.SetNumbericFormat(Household.DYTDMJ, 2));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWLX, "房屋类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWJG, "房屋结构"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWXZ, "房屋性质"));
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.FDCJYJG);
-            columnIndex++;                                
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.JGSJ.ToString());
-            columnIndex++;                           
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.FWCB);
-            columnIndex++;                              
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Household.JGSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.FWCB, "房屋产别"));
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.CQLY);
-            columnIndex++;                                 
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.QTGSD);
-            columnIndex++;                         
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.QTGSN);
-            columnIndex++;                                 
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.QTGSX);
-            columnIndex++;                                
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.QTGSB);
-            columnIndex++;                              
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.TDSYQR);
-            columnIndex++;                                
+            columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Household.FCFHT);
-            columnIndex++;                                 
-            InitalizeRangeInformation(rowIndex, columnIndex, Household.ZT);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Household.ZT, "不动产单元状态"));
 
         }
         #endregion
@@ -345,10 +405,15 @@ namespace RealEstateModule.Services.Export
                 return;
             SetSheetIndex(4);
             int rowIndex = 2;
+            InsertRowsCell(rowIndex, Obligees.Count-1);
             foreach (var Obligee in Obligees)
             {
                 InitalizeObligeeValue(Obligee, rowIndex);
                 rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
             }
         }
         private void InitalizeObligeeValue(Obligee Obligee, int rowIndex)
@@ -360,15 +425,15 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.BDCQZH);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.ZJZL);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.ZJZL, "证件类型"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.ZJH);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.GJ);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.GJ, "国家和地区"));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.XB);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.XB, "性别"));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.QLRLX);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.QLRLX, "权利人类型"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.DH);
             columnIndex++;
@@ -376,17 +441,17 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.DZ);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.QLLX);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.QLLX, "权利类型"));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.GYFS);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.GYFS, "共有方式"));
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.QLMJ.ToString());
+            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.QLMJ);
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.QLBL);
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.FRXM);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.FRZJLX);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.FRZJLX, "证件类型"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.FRZJH);
             columnIndex++;
@@ -394,7 +459,7 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.DLRXM);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, Obligee.DLRZJLX);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Obligee.DLRZJLX, "证件类型"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.DLRZJH);
             columnIndex++;
@@ -409,5 +474,161 @@ namespace RealEstateModule.Services.Export
             InitalizeRangeInformation(rowIndex, columnIndex, Obligee.BZ);
         }
         #endregion
+
+        #region 抵押信息
+        private void WriteMortgage()
+        {
+            if (Mortgages == null || Mortgages.Count == 0)
+                return;
+            SetSheetIndex(5);
+            int rowIndex = 2;
+            InsertRowsCell(rowIndex, Mortgages.Count-1);
+            foreach (var Mortgage in Mortgages)
+            {
+                InitalizeMortgageValue(Mortgage, rowIndex);
+                rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
+            }
+        }
+        private void InitalizeMortgageValue(Mortgage Mortgage, int rowIndex)
+        {
+            int columnIndex = 1;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.HBSM);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.QLRMC);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.BDCQZH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.ZJLX, "证件类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZJH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.YB);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DZ);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.FRXM);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.FRZJLX, "证件类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.FRZJH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.FRDH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.BZ);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.DYFS, "抵押方式"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.ZQDW, "金额单位"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DYR);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.DYRZJLX, "证件类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DYRZJH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.DYBDCLX, "抵押不动产类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Mortgage.CZFS, "持证方式"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DYPGJZ);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.BDBZZQSE);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZGZQSE);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZWR);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZGZQQDSS);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZJJZWZL);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.ZJJZWDYFW);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Mortgage.ZWLXQSSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Mortgage.ZWLXJSSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Mortgage.DJSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.DBR);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Mortgage.FJ);
+
+        }
+        #endregion
+
+        #region 查封信息
+        private void WriteSequestration()
+        {
+            if (Sequestrations == null || Sequestrations.Count == 0)
+                return;
+            SetSheetIndex(6);
+            int rowIndex = 2;
+            InsertRowsCell(rowIndex, Sequestrations.Count-1);
+            foreach (var Sequestration in Sequestrations)
+            {
+                InitalizeSequestrationValue(Sequestration, rowIndex);
+                rowIndex++;
+
+                // 报告进度
+                index++;
+                TaskMessage.Progress = index / TotalCount * 100;
+            }
+        }
+        private void InitalizeSequestrationValue(Sequestration Sequestration, int rowIndex)
+        {
+            int columnIndex = 1;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.HBSM);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.CFJG);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(Sequestration.CFLX, "查封类型类型"));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.CFWJ);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.CFWH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.JFWJ);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.JFWH);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Sequestration.CFQSSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Sequestration.CFJSSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Sequestration.DJSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.DBR);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.LHCX);
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, ToolDate.GetSlashDate(Sequestration.CFSJ));
+            columnIndex++;
+            InitalizeRangeInformation(rowIndex, columnIndex, Sequestration.FJ);
+
+        }
+        #endregion
+
+        private void InsertRowsCell(int startRowIndex, int totalRow)
+        {
+            if (workSheet == null)
+            {
+                return;
+            }
+            try
+            {
+                workSheet.Cells.InsertRows(Math.Abs(startRowIndex), Math.Abs(totalRow));
+            }
+            catch (SystemException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+        }
     }
 }

@@ -32,18 +32,29 @@ namespace RealEstateModule.Services
         /// <returns></returns>
         public ObservableCollection<string> Check()
         {
-            
-            int? totalCount = Project.NaturalBuildings?.Count + Project.LogicalBuildings?.Count 
-                       + Project.Floors?.Count + Project.Households?.Count 
-                       + Project.Obligees?.Count + Project.Mortgages?.Count 
-                       + Project.Sequestrations?.Count; // 获取总共的条数
-            if (totalCount == null)
+            TotalCount = 0;
+            index = 0.0;
+
+            // 获取总共的条数
+            if (Project.NaturalBuildings != null)
+                TotalCount += Project.NaturalBuildings.Count;
+            if (Project.LogicalBuildings != null)
+                TotalCount += Project.LogicalBuildings.Count;
+            if (Project.Floors != null)
+                TotalCount += Project.Floors.Count;
+            if (Project.Households != null)
+                TotalCount += Project.Households.Count;
+            if (Project.Obligees != null)
+                TotalCount += Project.Obligees.Count;
+            if (Project.Mortgages != null)
+                TotalCount += Project.Mortgages.Count;
+            if (Project.Sequestrations != null)
+                TotalCount += Project.Sequestrations.Count;
+            if (TotalCount == 0)
             {
                 ErrorMsg.Add("该项目无数据");
                 return ErrorMsg;
             }
-            TotalCount = (int)totalCount;
-            index = 0.0;
 
             ProjectMappingType = (EMappingType)int.Parse(Project.MappingType);
             ProjectOwnershipType = (EOwnershipType)int.Parse(Project.OwnershipType);

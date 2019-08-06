@@ -187,8 +187,8 @@ namespace RegistrationModule.ViewModels
             var result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                // 暂时使用Test路径
-                string projectPath = @"D:\vs-workspace\Test\";
+                // 项目路径
+                string projectPath = FileHelper.ReadConfigInfo();
 
                 String[] SelectedFilePaths = openFileDialog.FileNames;
                 //bool isShow = false;
@@ -213,7 +213,7 @@ namespace RegistrationModule.ViewModels
                     uploadFile.Type = TreeNode.Name;
                     uploadFile.UpdateTime = DateTime.Now;
                     StringBuilder savePath = new StringBuilder(); // 文件保存路径
-                    savePath.Append(projectPath).Append(path);
+                    savePath.Append(projectPath).Append("\\").Append(path);
                     //address.Append(Project.ID).Append("\\").Append(TreeNode.Name);
                     if (!System.IO.Directory.Exists(savePath.ToString()))
                     {

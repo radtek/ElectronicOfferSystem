@@ -232,9 +232,13 @@
                 <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="4 8 -4 8" BorderBrush="LightGray" BorderThickness="1"/>
 
                 <Grid Grid.Column="2" ShowGridLines="True">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <ContentControl Margin="5 0" prism:RegionManager.RegionName="BusinessStatisticsRegion"/>
+
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <ContentControl Margin="5 0" prism:RegionManager.RegionName="BusinessContentRegion"/>
                     </ScrollViewer>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>

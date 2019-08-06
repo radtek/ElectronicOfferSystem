@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,17 @@ namespace BusinessData
             this.Applicants = new HashSet<Applicant>();
             this.FileInfos = new HashSet<FileInfo>();
             this.Transfer = new Transfer();
+
+
+            //LogicalBuildings = new ObservableCollection<LogicalBuilding>();
+            //Floors = new ObservableCollection<Floor>();
+            //Households = new ObservableCollection<Household>();
+            //Obligees = new ObservableCollection<Obligee>();
+            //Mortgages = new ObservableCollection<Mortgage>();
+            //Sequestrations = new ObservableCollection<Sequestration>();
+            //Applicants = new ObservableCollection<Applicant>();
+            //FileInfos = new ObservableCollection<FileInfo>();
+            //Transfer = new Transfer();
         }
 
         /// <summary>

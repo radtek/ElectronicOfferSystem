@@ -82,7 +82,7 @@ namespace RealEstateModule.ViewModels
                 // 加载该项目的数据
                 //Project = ProjectDal.InitialRealEstateProject(Project); 
                 // 初始进入自然幢页面
-                BusinessNavCommand.Execute(ERealEstatePage.NaturalBuildingPage);
+                Navigate(ERealEstatePage.NaturalBuildingPage);
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
@@ -116,11 +116,17 @@ namespace RealEstateModule.ViewModels
             try
             {
                 // 加载该项目的数据
-                Project = ProjectDal.InitialRealEstateProject(Project);
+                //Project = ProjectDal.InitialRealEstateProject(Project);
+
+                // 页面跳转
+                var parameters = new NavigationParameters();
+                parameters.Add("Project", Project);
+                RegionManager.RequestNavigate("BusinessContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
 
                 switch (NavigatePath)
                 {
                     case ERealEstatePage.NaturalBuildingPage:
+                        Project.NaturalBuildings = ProjectDal.InitialNaturalBuildings(Project);
                         // 加载数据列表
                         foreach (NaturalBuilding naturalBuilding in Project.NaturalBuildings)
                         {
@@ -131,6 +137,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.LogicalBuildingPage:
+                        Project.LogicalBuildings = ProjectDal.InitialLogicalBuildings(Project);
                         foreach (LogicalBuilding logicalBuilding in Project.LogicalBuildings)
                         {
                             Business business = new Business();
@@ -140,6 +147,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.FloorPage:
+                        Project.Floors = ProjectDal.InitialFloors(Project);
                         foreach (Floor floor in Project.Floors)
                         {
                             Business business = new Business();
@@ -149,6 +157,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.HouseholdPage:
+                        Project.Households = ProjectDal.InitialHouseholds(Project);
                         foreach (Household household in Project.Households)
                         {
                             Business business = new Business();
@@ -158,6 +167,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.ObligeePage:
+                        Project.Obligees = ProjectDal.InitialObligees(Project);
                         foreach (Obligee obligee in Project.Obligees)
                         {
                             Business business = new Business();
@@ -167,6 +177,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.MortgagePage:
+                        Project.Mortgages = ProjectDal.InitialMortgages(Project);
                         foreach (Mortgage mortgage in Project.Mortgages)
                         {
                             Business business = new Business();
@@ -176,6 +187,7 @@ namespace RealEstateModule.ViewModels
                         }
                         break;
                     case ERealEstatePage.SequestrationPage:
+                        Project.Sequestrations = ProjectDal.InitialSequestrations(Project);
                         foreach (Sequestration sequestration in Project.Sequestrations)
                         {
                             Business business = new Business();
@@ -189,10 +201,7 @@ namespace RealEstateModule.ViewModels
 
                 }
 
-                // 页面跳转
-                var parameters = new NavigationParameters();
-                parameters.Add("Project", Project);
-                RegionManager.RequestNavigate("BusinessContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
+
             }
             catch (Exception ex)
             {

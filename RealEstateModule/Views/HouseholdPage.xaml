@@ -189,8 +189,10 @@
                   materialDesign:HintAssist.Hint="户型结构"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.HXJG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Household.GHYT}"
-                 materialDesign:HintAssist.Hint="规划用途" />
+        <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding FWYTList}" 
+                  materialDesign:HintAssist.Hint="规划用途"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Household.GHYT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding HXList}" 
                   materialDesign:HintAssist.Hint="户型"
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 

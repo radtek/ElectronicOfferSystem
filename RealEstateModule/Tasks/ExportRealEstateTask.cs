@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Models;
 using Common.Utils;
 using Common.ViewModels;
 using RealEstateModule.Services.Export;
@@ -42,27 +43,38 @@ namespace RealEstateModule.Tasks
             try
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-                //TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
+                TaskMessage taskMessage = new TaskMessage();
+                taskMessage.Title = "导出项目：" + Project.ProjectName;
+                taskMessage.Progress = 0.0;
+                TaskInfoDialog.Messages.Insert(0, taskMessage);
 
                 NaturalBuildingDal naturalBuildingDal = new NaturalBuildingDal();
                 LogicalBuildingDal logicalBuildingDal = new LogicalBuildingDal();
                 FloorDal floorDal = new FloorDal();
                 HouseholdDal householdDal = new HouseholdDal();
                 ObligeeDal obligeeDal = new ObligeeDal();
+                MortgageDal mortgageDal = new MortgageDal();
+                SequestrationDal sequestrationDal = new SequestrationDal();
 
                 Task task = new Task(() =>
                 {
                     try
                     {
-                        book.NaturalBuildings = naturalBuildingDal.GetListBy(n => n.ProjectID == Project.ID);
-                        book.LogicalBuildings = logicalBuildingDal.GetListBy(l => l.ProjectID == Project.ID);
-                        book.Floors = floorDal.GetListBy(f => f.ProjectID == Project.ID);
-                        book.Households = householdDal.GetListBy(h => h.ProjectID == Project.ID);
-                        book.Obligees = obligeeDal.GetListBy(o => o.ProjectID == Project.ID);
-
+                        book.TaskMessage = taskMessage;
+                        book.NaturalBuildings = naturalBuildingDal.GetListBy(t => t.ProjectID == Project.ID);
+                        book.LogicalBuildings = logicalBuildingDal.GetListBy(t => t.ProjectID == Project.ID);
+                        book.Floors = floorDal.GetListBy(t => t.ProjectID == Project.ID);
+                        book.Households = householdDal.GetListBy(t => t.ProjectID == Project.ID);
+                        book.Obligees = obligeeDal.GetListBy(t => t.ProjectID == Project.ID);
+                        if ("2".Equals(Project.OwnershipType))
+                        {
+                            book.Mortgages = mortgageDal.GetListBy(t => t.ProjectID == Project.ID);
+                            book.Sequestrations = sequestrationDal.GetListBy(t => t.ProjectID == Project.ID);
+                        }
+                        
                         book.Open(TemplateFileName);
                         book.Write();
-                        book.SaveAsExcel(SaveFileName);
+                        //book.SaveAsExcel(SaveFileName);
                     }
                     catch (Exception ex)
                     {
@@ -83,22 +95,23 @@ namespace RealEstateModule.Tasks
 
                             foreach (var error in ErrorMsg)
                             {
-                                //TaskInfoDialog.Messages.Add(error);
+                                taskMessage.DetailMessages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
                             {
-                                //TaskInfoDialog.Messages.Add("导出失败");
+                                taskMessage.DetailMessages.Add("导出失败");
                             }
                             else
                             {
-                                // 压缩成报盘
-                                ZipHelper zipHelper = new ZipHelper();
-                                //zipClass.ZipFile(SaveFileName, filename + ".bpf", 5, 500);
-                                zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
-                                // 删除excel
-                                File.Delete(SaveFileName.Replace(".bpf", ".xls"));
-                                //TaskInfoDialog.Messages.Add("导出成功");
-                                //errordoalog.CloseDialog();
+                                book.SaveAsExcel(SaveFileName);
+                                //// 压缩成报盘
+                                //ZipHelper zipHelper = new ZipHelper();
+                                //zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
+                                //// 删除excel
+                                //File.Delete(SaveFileName.Replace(".bpf", ".xls"));
+
+                                //taskMessage.Progress = 100.00;
+                                taskMessage.DetailMessages.Add("导出成功");
                             }
                         }, null);
                     });
@@ -108,7 +121,6 @@ namespace RealEstateModule.Tasks
             }
             catch (Exception ex)
             {
-                //DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message);
                 throw ex;
             }
         }

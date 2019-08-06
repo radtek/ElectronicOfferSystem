@@ -47,6 +47,27 @@ namespace Common.Utils
         }
 
         /// <summary>
+        /// 根据键值和字典获取 键.值 格式的字符串
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="dicName"></param>
+        /// <returns></returns>
+        public static string GetStringByKeyAndDic(string key, string dicName)
+        {
+            StringBuilder res = new StringBuilder(key); 
+            Dictionary<string, string> dic = GetDictionaryByName(dicName);
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return string.Empty;
+            }
+            if (!dic.ContainsKey(key))
+            {
+                return key;
+            }
+            return res.Append(".").Append(dic[key]).ToString();
+        }
+
+        /// <summary>
         /// 自定义字典
         /// </summary>
         /// <param name="name"></param>
