@@ -81,7 +81,9 @@
     <Compile Include="ViewModels\RealEstatePageViewModel.cs" />
     <Compile Include="ViewModels\RealEstateToolBarViewModel.cs" />
     <Compile Include="ViewModels\SequestrationPageViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\HouseholdPageStatisticsViewModel.cs" />
     <Compile Include="ViewModels\Statistics\NaturalBuildingPageStatisticsViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\ObligeePageStatisticsViewModel.cs" />
     <Compile Include="Views\Dialogs\CustomDialog.xaml.cs">
       <DependentUpon>CustomDialog.xaml</DependentUpon>
     </Compile>

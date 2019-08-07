@@ -4,10 +4,7 @@ using Common.Utils;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateModule.ViewModels.Statistics
 {
@@ -123,8 +120,14 @@ namespace RealEstateModule.ViewModels.Statistics
             JZWGD = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.JZWGD)));
             ZDMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.ZZDMJ)));
             YDMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.ZYDMJ)));
-            YCJZMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.YCJZMJ)));
-            SCJZMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.SCJZMJ)));
+            if (MappingType == EMappingType.PredictiveMapping)
+            {
+                YCJZMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.YCJZMJ)));
+            }
+            if (MappingType == EMappingType.SurveyingMapping)
+            {
+                SCJZMJ = Math.Round(Project.NaturalBuildings.Sum(t => ToolArith.StringToDouble(t.SCJZMJ)));
+            }
         }
     }
 }

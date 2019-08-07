@@ -224,7 +224,12 @@
       <LastGenOutput>ElectronicOfferSystemDB.cs</LastGenOutput>
       <DependentUpon>ElectronicOfferSystemDB.edmx</DependentUpon>
     </Content>
-    <Resource Include="Images\login.jpg" />
+    <Resource Include="Images\login3.jpg" />
+    <Resource Include="Images\login2.jpg" />
+    <Resource Include="Images\login1.jpg" />
+    <Resource Include="Images\login.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Icon_Add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

@@ -35,6 +35,7 @@ namespace ElectronicOfferSystem.ViewModels
             ProjectPageViewModel projectPageViewModel = new ProjectPageViewModel();
             RealEstateToolBarViewModel realEstateToolBarViewModel = new RealEstateToolBarViewModel(regionManager, ea);
             RegistrationToolBarViewModel registrationToolBarViewModel = new RegistrationToolBarViewModel(regionManager, ea);
+            IndexPageViewModel indexPageViewModel = new IndexPageViewModel();
 
             AddRealEstateProjectCommand = new DelegateCommand<string>((str) =>
             {
@@ -65,7 +66,7 @@ namespace ElectronicOfferSystem.ViewModels
             });
 
             SetProjectPathCommand = new DelegateCommand(() => {
-
+                indexPageViewModel.OpenProjectPathDialogCommand.Execute();
             });
 
             ShowHelpCommand = new DelegateCommand(() => {
