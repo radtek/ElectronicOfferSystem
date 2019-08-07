@@ -71,19 +71,7 @@ namespace RealEstateModule.ViewModels
             });
 
             // 在项目列表选择一个项目之后执行
-            SelectProjectCommand = new DelegateCommand<object>((obj) => {
-
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
-                if(Project != null && "1".Equals(Project.Type))
-                {
-                OwnershipType = (EOwnershipType)int.Parse(Project.OwnershipType);
-                }
-                // 加载该项目的数据
-                //Project = ProjectDal.InitialRealEstateProject(Project); 
-                // 初始进入自然幢页面
-                Navigate(ERealEstatePage.NaturalBuildingPage);
-            });
+            SelectProjectCommand = new DelegateCommand<object>(Initialization);
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             // 选中业务列表中的一项
@@ -100,6 +88,21 @@ namespace RealEstateModule.ViewModels
             });
 
             DelBusinessCommand = new DelegateCommand(DelBusiness);
+
+        }
+
+        private void Initialization(object obj)
+        {
+            ListView listView = obj as ListView;
+            Project = listView.SelectedItem as Project;
+            if (Project != null && "1".Equals(Project.Type))
+            {
+                OwnershipType = (EOwnershipType)int.Parse(Project.OwnershipType);
+            }
+            // 加载该项目的数据
+            //Project = ProjectDal.InitialRealEstateProject(Project); 
+            // 初始进入自然幢页面
+            Navigate(ERealEstatePage.NaturalBuildingPage);
         }
 
         private void Navigate(ERealEstatePage? navigatePath)

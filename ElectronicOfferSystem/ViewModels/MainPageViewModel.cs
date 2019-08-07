@@ -30,6 +30,8 @@ namespace ElectronicOfferSystem.ViewModels
             //BrushConverter brushConverter = new BrushConverter();
             //Brush brush = (Brush)brushConverter.ConvertFromString("White");
             //mainWindow.Background = brush;
+
+            mainWindow.Visibility = Visibility.Visible;
         }
     }
 }

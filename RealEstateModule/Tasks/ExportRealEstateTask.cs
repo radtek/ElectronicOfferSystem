@@ -103,14 +103,20 @@ namespace RealEstateModule.Tasks
                             }
                             else
                             {
-                                book.SaveAsExcel(SaveFileName);
+                                string bufferPath = System.AppDomain.CurrentDomain.BaseDirectory + @"Buffer\" + Path.GetFileName(SaveFileName);
+                                book.SaveAsExcel(bufferPath);
+
                                 //// 压缩成报盘
                                 //ZipHelper zipHelper = new ZipHelper();
                                 //zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
                                 //// 删除excel
                                 //File.Delete(SaveFileName.Replace(".bpf", ".xls"));
 
+                                File.Move(bufferPath.Replace(".bpf", ".xls"), SaveFileName.Replace(".bpf", ".xls"));
+                                
                                 //taskMessage.Progress = 100.00;
+
+
                                 taskMessage.DetailMessages.Add("导出成功");
                             }
                         }, null);

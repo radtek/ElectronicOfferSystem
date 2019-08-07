@@ -28,10 +28,10 @@ namespace ProjectModule.Views
            
             // view discovery
             regionManager.RegisterViewWithRegion("AddOrEditProjectDialogRegion", typeof(AddOrEditProjectDialog));
-            DataContext = new ProjectPageViewModel();
+            DataContext = new ProjectPageViewModel(regionManager);
 
-           
         }
+
         private void OnListViewItemDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var vm = this.DataContext as ProjectPageViewModel;

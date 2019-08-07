@@ -98,10 +98,9 @@
         <!-- ProjectList -->
         <Grid Grid.Row="1" Margin="0 10 0 0">
             <ListView ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      Cursor="Hand" Name="ProjectList"
+                      Cursor="Hand" x:Name="ProjectList" 
                       ItemsSource="{Binding Projects}"
                       SelectedItem="{Binding SelectedProject, Mode=TwoWay}">
-                <!--SelectedItem="{Binding SelectedProject, Mode=TwoWay}"-->
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectProjectCommand}"

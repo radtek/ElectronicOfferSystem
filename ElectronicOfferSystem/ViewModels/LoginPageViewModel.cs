@@ -90,7 +90,7 @@ namespace ElectronicOfferSystem.ViewModels
             {
                 Report = ex.Message;
             }
-            
+
 
             // 初始窗体样式
             InitalWindowStyle();
@@ -202,6 +202,10 @@ namespace ElectronicOfferSystem.ViewModels
 
                             App.Current.Properties["User"] = user;
                             canLogin = true;
+                            App.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                Application.Current.Windows[0].Visibility = Visibility.Hidden;
+                            }));
                         }
                     });
                 task.Start();

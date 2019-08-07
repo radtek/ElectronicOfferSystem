@@ -10,6 +10,7 @@ using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using ProjectModule.Views;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace ProjectModule.ViewModels
 {
     public class ProjectPageViewModel : BindableBase
     {
+        private IRegionManager RegionManager;
+
         private Project project;
         public Project Project
         {
@@ -92,13 +95,13 @@ namespace ProjectModule.ViewModels
         public DelegateCommand SearchProjectCommand { get; set; }
         ProjectDal projectDal = new ProjectDal();
 
-        public ProjectPageViewModel()
+        public ProjectPageViewModel(IRegionManager regionManager)
         {
+            RegionManager = regionManager;
             // 初始化
             Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type)));
             ProjectType = ((int)EProjectType.Default).ToString();
             IsBtnEnabled = false;
-
             AddOrEditProjectDialog = AddOrEditProjectDialogViewModel.getInstance();
 
             // 页面导航
@@ -110,7 +113,20 @@ namespace ProjectModule.ViewModels
             {
                 ListView listView = obj as ListView;
                 Project = listView.SelectedItem as Project;
-                //if (Project == null) return;
+                //if (NavigatePath != EMainPage.RealEstatePage && NavigatePath != EMainPage.RegistrationPage)
+                //{
+                //    if (Project.Type == "1")
+                //    {
+                //        NavigatePath = EMainPage.RealEstatePage;
+                //            Navigate(EMainPage.RealEstatePage);
+                //    }
+                //    else if (Project.Type == "2")
+                //    {
+                //        NavigatePath = EMainPage.RegistrationPage;
+                //            Navigate(EMainPage.RegistrationPage);
+                //    }
+                //}
+
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
@@ -218,7 +234,9 @@ namespace ProjectModule.ViewModels
             }
 
             SelectedProject = Projects.FirstOrDefault();
-
+            //var view = new ProjectPage(RegionManager);
+            //view.ProjectList.SelectedItem = SelectedProject;
+            //SelectProjectCommand.Execute(view.ProjectList);
         }
 
         private bool AddProject()

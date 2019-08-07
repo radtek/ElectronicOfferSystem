@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using Common;
+using Common.Enums;
 using Common.Events;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
@@ -46,7 +47,7 @@ namespace RegistrationModule.ViewModels
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             AddApplicantCommand = new DelegateCommand(() => {
-                RegistrationPageViewModel.RegistrationNavCommand.Execute("TransferPage");
+                RegistrationPageViewModel.RegistrationNavCommand.Execute(ERegistrationPage.TransferPage);
             });
 
             DelApplicantCommand = new DelegateCommand(() => {

@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
+using Common.Enums;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -24,9 +25,15 @@ namespace RegistrationModule.ViewModels
             set { SetProperty(ref project, value); }
         }
 
-        public string NavigatePath { get; set; }
+        private ERegistrationPage navigatePath;
+        public ERegistrationPage NavigatePath
+        {
+            get { return navigatePath; }
+            set { SetProperty(ref navigatePath, value); }
+        }
 
-        public DelegateCommand<string> RegistrationNavCommand { get; private set; }
+
+        public DelegateCommand<ERegistrationPage?> RegistrationNavCommand { get; private set; }
         public DelegateCommand<object> SelectProjectCommand { get; set; }
 
         ProjectDal ProjectDal = new ProjectDal();
@@ -37,7 +44,7 @@ namespace RegistrationModule.ViewModels
             RegionManager = regionManager;
 
             // 导航到不同的业务数据页面
-            RegistrationNavCommand = new DelegateCommand<string>(Navigate);
+            RegistrationNavCommand = new DelegateCommand<ERegistrationPage?>(Navigate);
 
             // 在项目列表选择一个项目之后执行
             SelectProjectCommand = new DelegateCommand<object>((obj) =>
@@ -50,7 +57,7 @@ namespace RegistrationModule.ViewModels
                     // 项目信息初始化
                     //Project = ProjectDal.InitialRegistrationProject(Project);
                     // 初始进入转移信息页面
-                    RegistrationNavCommand.Execute("TransferPage");
+                    RegistrationNavCommand.Execute(ERegistrationPage.TransferPage);
 
                 }
 
@@ -59,23 +66,23 @@ namespace RegistrationModule.ViewModels
 
         }
 
-        private void Navigate(string navigatePath)
+        private void Navigate(ERegistrationPage? navigatePath)
         {
-            if (navigatePath == null) return;
             if (Project == null) return;
+            if (navigatePath == null) return;
             // 若不是登记项目，返回
             if (!"2".Equals(Project.Type)) return;
             // 加载该项目的数据
             Project = ProjectDal.InitialRegistrationProject(Project);
 
 
-            NavigatePath = navigatePath;
-            switch (navigatePath)
+            NavigatePath = (ERegistrationPage)navigatePath;
+            switch (NavigatePath)
             {
-                case "TransferPage":
+                case ERegistrationPage.TransferPage:
 
                     break;
-                case "FileManagerPage":
+                case ERegistrationPage.FileManagerPage:
 
                     break;
                 default:
@@ -85,7 +92,7 @@ namespace RegistrationModule.ViewModels
             // 页面跳转
             var parameters = new NavigationParameters();
             parameters.Add("Project", Project);
-            RegionManager.RequestNavigate("RegistrationContentRegion", navigatePath, NavigationComplete, parameters);
+            RegionManager.RequestNavigate("RegistrationContentRegion", NavigatePath.ToString(), NavigationComplete, parameters);
         }
         private void NavigationComplete(NavigationResult result)
         {

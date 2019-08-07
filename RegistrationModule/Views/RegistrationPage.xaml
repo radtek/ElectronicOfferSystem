@@ -8,6 +8,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -20,6 +22,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
+
+            <Converts:EnumToBool x:Key="EnumToBool" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -43,19 +47,29 @@
                 <StackPanel Orientation="Horizontal" Margin="2">
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding RegistrationNavCommand}"
-                                 CommandParameter="TransferPage"
                                  Margin="4"
-                                 IsChecked="True"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERegistrationPage.TransferPage}}"
                                  Cursor="Hand"
-                                 Content="转移信息" />
+                                 Content="转移信息">
+                        <RadioButton.CommandParameter>
+                            <Enums:ERegistrationPage>
+                                TransferPage
+                            </Enums:ERegistrationPage>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
                                  Command="{Binding RegistrationNavCommand}"
-                                 CommandParameter="FileManagerPage"
                                  Margin="4"
-                                 IsChecked="False"
+                                 IsChecked="{Binding Path=NavigatePath,Converter={StaticResource EnumToBool},ConverterParameter={x:Static Enums:ERegistrationPage.FileManagerPage}}"
                                  Cursor="Hand"
-                                 Content="附件管理" />
-                    
+                                 Content="附件管理">
+                        <RadioButton.CommandParameter>
+                            <Enums:ERegistrationPage>
+                                FileManagerPage
+                            </Enums:ERegistrationPage>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
+
                 </StackPanel>
             </materialDesign:ColorZone>
         </Grid>

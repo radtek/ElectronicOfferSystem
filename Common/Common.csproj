@@ -66,6 +66,7 @@
     <Compile Include="Enums\EOwnershipType.cs" />
     <Compile Include="Enums\EProjectType.cs" />
     <Compile Include="Enums\ERealEstatePage.cs" />
+    <Compile Include="Enums\ERegistrationPage.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
     <Compile Include="Events\NavBusinessEvent.cs" />
     <Compile Include="Events\NavRegistrationEvent.cs" />

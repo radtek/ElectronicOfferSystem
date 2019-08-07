@@ -32,7 +32,7 @@ namespace ElectronicOfferSystem.ViewModels
 
         public MenuBarViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
-            ProjectPageViewModel projectPageViewModel = new ProjectPageViewModel();
+            ProjectPageViewModel projectPageViewModel = new ProjectPageViewModel(regionManager);
             RealEstateToolBarViewModel realEstateToolBarViewModel = new RealEstateToolBarViewModel(regionManager, ea);
             RegistrationToolBarViewModel registrationToolBarViewModel = new RegistrationToolBarViewModel(regionManager, ea);
             IndexPageViewModel indexPageViewModel = new IndexPageViewModel();
