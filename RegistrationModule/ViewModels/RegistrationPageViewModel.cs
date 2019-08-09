@@ -3,6 +3,7 @@ using BusinessData.Dal;
 using BusinessData.Models;
 using Common;
 using Common.Enums;
+using Common.Events;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -34,7 +35,6 @@ namespace RegistrationModule.ViewModels
 
 
         public DelegateCommand<ERegistrationPage?> RegistrationNavCommand { get; private set; }
-        public DelegateCommand<object> SelectProjectCommand { get; set; }
 
         ProjectDal ProjectDal = new ProjectDal();
 
@@ -47,23 +47,21 @@ namespace RegistrationModule.ViewModels
             RegistrationNavCommand = new DelegateCommand<ERegistrationPage?>(Navigate);
 
             // 在项目列表选择一个项目之后执行
-            SelectProjectCommand = new DelegateCommand<object>((obj) =>
+            EA.GetEvent<SelectProjectEvent>().Subscribe(Initialization);
+
+        }
+
+        private void Initialization(Project project)
+        {
+            Project = project;
+            if (Project != null && "2".Equals(Project.Type))
             {
+                // 项目信息初始化
+                //Project = ProjectDal.InitialRegistrationProject(Project);
+                // 初始进入转移信息页面
+                Navigate(ERegistrationPage.TransferPage);
 
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
-                if (Project != null && "2".Equals(Project.Type))
-                {
-                    // 项目信息初始化
-                    //Project = ProjectDal.InitialRegistrationProject(Project);
-                    // 初始进入转移信息页面
-                    RegistrationNavCommand.Execute(ERegistrationPage.TransferPage);
-
-                }
-
-            });
-            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
-
+            }
         }
 
         private void Navigate(ERegistrationPage? navigatePath)

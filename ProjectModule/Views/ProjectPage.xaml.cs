@@ -1,4 +1,5 @@
-﻿using Prism.Regions;
+﻿using Prism.Events;
+using Prism.Regions;
 using ProjectModule.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,13 @@ namespace ProjectModule.Views
     /// </summary>
     public partial class ProjectPage : UserControl
     {
-        public ProjectPage(IRegionManager regionManager)
+        public ProjectPage(IRegionManager regionManager, IEventAggregator ea)
         {
             InitializeComponent();
            
             // view discovery
             regionManager.RegisterViewWithRegion("AddOrEditProjectDialogRegion", typeof(AddOrEditProjectDialog));
-            DataContext = new ProjectPageViewModel(regionManager);
+            DataContext = new ProjectPageViewModel(regionManager, ea);
 
         }
 

@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8DD6CC19-EDEC-4293-B224-E9B1D91609AE}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>ElectronicOfferSystem</RootNamespace>
     <AssemblyName>ElectronicOfferSystem</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

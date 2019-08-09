@@ -77,7 +77,6 @@ namespace RealEstateModule.ViewModels
 
         public DelegateCommand AddBusinessCommand { get; set; }
         public DelegateCommand DelBusinessCommand { get; set; }
-        public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand OpenImportRealEstateDialogCommand { get; set; }
         public DelegateCommand OpenExportRealEstateDialogCommand { get; set; }
         public DelegateCommand QualityControlCommand { get; set; }
@@ -106,14 +105,9 @@ namespace RealEstateModule.ViewModels
             OpenExportRealEstateDialogCommand = new DelegateCommand(ExecuteExportRealEstateDialog);
 
             // 在项目列表选择一个项目之后执行
-            SelectProjectCommand = new DelegateCommand<object>((obj) =>
-            {
-
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
+            EA.GetEvent<SelectProjectEvent>().Subscribe(selectProject=> {
+                Project = selectProject;
             });
-            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
-
         }
 
         private void InitialComboBoxList()

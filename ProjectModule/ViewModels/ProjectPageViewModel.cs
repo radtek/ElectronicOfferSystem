@@ -2,6 +2,7 @@
 using BusinessData.Dal;
 using Common;
 using Common.Enums;
+using Common.Events;
 using Common.Utils;
 using Common.ValidationRules;
 using Common.ViewModels;
@@ -28,7 +29,7 @@ namespace ProjectModule.ViewModels
     public class ProjectPageViewModel : BindableBase
     {
         private IRegionManager RegionManager;
-
+        IEventAggregator EA;
         private Project project;
         public Project Project
         {
@@ -64,7 +65,12 @@ namespace ProjectModule.ViewModels
         public Project SelectedProject
         {
             get { return selectedProject; }
-            set { SetProperty(ref selectedProject, value); }
+            set
+            {
+                SetProperty(ref selectedProject, value);
+                Project = selectedProject;
+                EA.GetEvent<SelectProjectEvent>().Publish(selectedProject);
+            }
         }
 
         private string searchProjectName;
@@ -95,8 +101,9 @@ namespace ProjectModule.ViewModels
         public DelegateCommand SearchProjectCommand { get; set; }
         ProjectDal projectDal = new ProjectDal();
 
-        public ProjectPageViewModel(IRegionManager regionManager)
+        public ProjectPageViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
+            EA = ea;
             RegionManager = regionManager;
             // 初始化
             Projects = new ObservableCollection<Project>(projectDal.GetListBy(p => !"-1".Equals(p.Type)));

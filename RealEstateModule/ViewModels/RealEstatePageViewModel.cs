@@ -51,7 +51,6 @@ namespace RealEstateModule.ViewModels
         private IRegionManager RegionManager;
         private IEventAggregator EA;
         public DelegateCommand<ERealEstatePage?> BusinessNavCommand { get; private set; }
-        public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand<object> SelectBusinessCommand { get; set; }
         public DelegateCommand AddBusinessCommand { get; set; }
         public DelegateCommand DelBusinessCommand { get; set; }
@@ -71,8 +70,7 @@ namespace RealEstateModule.ViewModels
             });
 
             // 在项目列表选择一个项目之后执行
-            SelectProjectCommand = new DelegateCommand<object>(Initialization);
-            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
+            EA.GetEvent<SelectProjectEvent>().Subscribe(Initialization);
 
             // 选中业务列表中的一项
             SelectBusinessCommand = new DelegateCommand<object>((obj)=> {
@@ -91,10 +89,9 @@ namespace RealEstateModule.ViewModels
 
         }
 
-        private void Initialization(object obj)
+        private void Initialization(Project project)
         {
-            ListView listView = obj as ListView;
-            Project = listView.SelectedItem as Project;
+            Project = project;
             if (Project != null && "1".Equals(Project.Type))
             {
                 OwnershipType = (EOwnershipType)int.Parse(Project.OwnershipType);

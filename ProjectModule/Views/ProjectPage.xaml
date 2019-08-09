@@ -102,10 +102,10 @@
                       ItemsSource="{Binding Projects}"
                       SelectedItem="{Binding SelectedProject, Mode=TwoWay}">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
+                    <!--<i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{x:Static common:GlobalCommands.SelectProjectCommand}"
                                                        CommandParameter="{Binding ElementName=ProjectList}" />
-                    </i:EventTrigger>
+                    </i:EventTrigger>-->
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding OpenAddOrEditProjectDialogCommand}"
                                                                        CommandParameter="编辑项目"/>

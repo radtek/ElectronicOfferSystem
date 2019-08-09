@@ -22,29 +22,26 @@ namespace RegistrationModule.ViewModels
 {
     public class RegistrationToolBarViewModel : BindableBase
     {
+        IEventAggregator EA;
         public Project Project { get; set; }
         public ExportRegistrationDialogViewModel ExportRegistrationViewModel { get; set; }
 
         public RegistrationPageViewModel RegistrationPageViewModel { get; set; }
 
-        public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand AddApplicantCommand { get; set; }
         public DelegateCommand DelApplicantCommand { get; set; }
         public DelegateCommand OpenExportRegistrationDialogCommand { get; set; }
 
         public RegistrationToolBarViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
-
+            EA = ea;
             OpenExportRegistrationDialogCommand = new DelegateCommand(ExecuteExportRegistrationDialog);
             RegistrationPageViewModel = new RegistrationPageViewModel(regionManager, ea);
 
             // 在项目列表选择一个项目之后执行
-            SelectProjectCommand = new DelegateCommand<object>((obj) =>
-            {
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
+            EA.GetEvent<SelectProjectEvent>().Subscribe(selectProject => {
+                Project = selectProject;
             });
-            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             AddApplicantCommand = new DelegateCommand(() => {
                 RegistrationPageViewModel.RegistrationNavCommand.Execute(ERegistrationPage.TransferPage);
