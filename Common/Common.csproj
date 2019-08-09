@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherCommandImplementation.cs" />
+    <Compile Include="Base\TablePage.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="Configurations\LocalConfiguration.cs" />
     <Compile Include="Converts\EnumToBool.cs" />

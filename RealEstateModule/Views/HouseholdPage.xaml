@@ -432,7 +432,7 @@
                   SelectedValuePath="Key"  DisplayMemberPath="Value" 
                   SelectedValue="{Binding Household.ZT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="18" Grid.Column="1" Margin="0 50"
-                Command="{Binding AddOrEditHouseholdCommand}" 
+                Command="{Binding AddOrEditTableCommand}" 
                 Content="{Binding ButtonContent}" />
     </Grid>
 </UserControl>

@@ -106,7 +106,7 @@
                  materialDesign:HintAssist.Hint="附记"/>
         
         <Button Grid.Row="5" Grid.Column="1" Margin="0 50"
-                Command="{Binding AddOrEditSequestrationCommand}" 
+                Command="{Binding AddOrEditTableCommand}" 
                 Content="{Binding ButtonContent}" />
     </Grid>
 </UserControl>

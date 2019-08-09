@@ -249,7 +249,7 @@
         <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding NaturalBuilding.BZ}"
                  materialDesign:HintAssist.Hint="备注"/>
         <Button Grid.Row="8" Grid.Column="1" Margin="0 50"
-                Command="{Binding AddOrEditNaturalBuildingCommand}" 
+                Command="{Binding AddOrEditTableCommand}" 
                 Content="{Binding ButtonContent}" />
     </Grid>
 </UserControl>
