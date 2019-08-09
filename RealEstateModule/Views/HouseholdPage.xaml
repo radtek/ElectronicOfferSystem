@@ -32,7 +32,13 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
-
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
             <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -78,7 +84,7 @@
         </TextBox>
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Household.YXTBS}"
                  materialDesign:HintAssist.Hint="原系统标识" />
-        <TextBox Grid.Row="0" Grid.Column="2"
+        <TextBox Grid.Row="0" Grid.Column="2" MaxLength="28"
                  materialDesign:HintAssist.Hint="不动产单元号">
             <TextBox.Text>
                 <Binding Path="Household.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
@@ -400,9 +406,7 @@
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding Household.FWLX,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <DatePicker Grid.Row="14" Grid.Column="0" SelectedDate="{Binding Household.JGSJ}"
-                    materialDesign:HintAssist.Hint="竣工时间"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="竣工时间"/>
         <ComboBox Grid.Row="14" Grid.Column="1" ItemsSource="{Binding FWCBList}" 
                   materialDesign:HintAssist.Hint="房屋产别"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"

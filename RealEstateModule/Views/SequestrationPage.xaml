@@ -31,6 +31,13 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="5" VerticalAlignment="Top">
@@ -75,17 +82,11 @@
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Sequestration.JFWH}"
                  materialDesign:HintAssist.Hint="解封文号"/>
         <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Sequestration.CFQSSJ}"
-                    materialDesign:HintAssist.Hint="查封起始时间"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="查封起始时间"/>
         <DatePicker Grid.Row="2" Grid.Column="2" SelectedDate="{Binding Sequestration.CFQJSJ}"
-                    materialDesign:HintAssist.Hint="查封结束时间"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="查封结束时间"/>
         <DatePicker Grid.Row="3" Grid.Column="0" SelectedDate="{Binding Sequestration.DJSJ}"
-                    materialDesign:HintAssist.Hint="登记时间"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="登记时间"/>
         <TextBox Grid.Row="3" Grid.Column="1" 
                  materialDesign:HintAssist.Hint="登簿人*" >
             <TextBox.Text>
@@ -100,9 +101,7 @@
         <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Sequestration.LHCX}"
                  materialDesign:HintAssist.Hint="轮候次序"/>
         <DatePicker Grid.Row="4" Grid.Column="0" SelectedDate="{Binding Sequestration.CFSJ}"
-                    materialDesign:HintAssist.Hint="查封时间*"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="查封时间*"/>
         <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Sequestration.FJ}"
                  materialDesign:HintAssist.Hint="附记"/>
         

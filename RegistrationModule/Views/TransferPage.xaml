@@ -218,8 +218,8 @@
                                     Grid.Row="0" Grid.Column="1" Margin="4">
                                 <materialDesign:PackIcon Kind="ArrowDown" />
                             </Button>
-                            <TextBox Grid.Row="1" Grid.Column="0" 
-                                     materialDesign:HintAssist.Hint="不动产单元号*" >
+                            <TextBox Grid.Row="1" Grid.Column="0" MaxLength="28"
+                                     materialDesign:HintAssist.Hint="不动产单元号" >
                                 <TextBox.Text>
                                     <Binding Path="Applicant.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
                                              NotifyOnValidationError="True">

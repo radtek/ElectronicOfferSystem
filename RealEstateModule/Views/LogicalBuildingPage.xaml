@@ -26,7 +26,13 @@
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
                 <Setter Property="FontSize" Value="12"/>
             </Style>
-
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
             <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -84,9 +90,7 @@
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding LogicalBuilding.MPH}"
                  materialDesign:HintAssist.Hint="门牌号" />
         <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding LogicalBuilding.JGRQ}"
-                    materialDesign:HintAssist.Hint="竣工日期"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                    materialDesign:HintAssist.Hint="竣工日期">
         </DatePicker>
         <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding LogicalBuilding.JZWZT}"
                  materialDesign:HintAssist.Hint="建筑物状态" />

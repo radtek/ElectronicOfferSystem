@@ -33,7 +33,13 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="IsEditable" Value="False"/>
             </Style>
-
+            <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                <Setter Property="Margin" Value="20 10" />
+                <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </Style>
             <Converts:EnumToVisibility x:Key="EnumToVisibility" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -77,7 +83,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="0" Grid.Column="2" 
+        <TextBox Grid.Row="0" Grid.Column="2" MaxLength="28"
                  materialDesign:HintAssist.Hint="不动产单元号" >
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.BDCDYH" UpdateSourceTrigger="PropertyChanged" 
@@ -88,7 +94,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox Grid.Row="1" Grid.Column="0" 
+        <TextBox Grid.Row="1" Grid.Column="0" MaxLength="19"
                  materialDesign:HintAssist.Hint="宗地代码*">
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.ZDDM" UpdateSourceTrigger="PropertyChanged" 
@@ -114,7 +120,7 @@
                  materialDesign:HintAssist.Hint="建筑物名称"/>
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding NaturalBuilding.XMMC}"
                  materialDesign:HintAssist.Hint="项目名称"/>
-        <TextBox Grid.Row="2" Grid.Column="1" 
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtName"
                  materialDesign:HintAssist.Hint="建筑物高度">
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.JZWGD" UpdateSourceTrigger="PropertyChanged" 
@@ -126,9 +132,7 @@
             </TextBox.Text>
         </TextBox>
         <DatePicker Grid.Row="2" Grid.Column="2" SelectedDate="{Binding NaturalBuilding.JGRQ}"
-                    materialDesign:HintAssist.Hint="竣工日期"
-                    Margin="20 10"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    materialDesign:HintAssist.Hint="竣工日期" />
         <TextBox Grid.Row="3" Grid.Column="0" 
                  materialDesign:HintAssist.Hint="幢用地面积*">
             <TextBox.Text>
