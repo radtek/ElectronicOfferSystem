@@ -57,7 +57,7 @@ namespace RealEstateModule.ViewModels
 
         NaturalBuildingDal NaturalBuildingDal = new NaturalBuildingDal();
         #region ctor
-        public NaturalBuildingPageViewModel(IEventAggregator ea)
+        public NaturalBuildingPageViewModel(IEventAggregator ea) : base(ea)
         {
             EA = ea;
         }

@@ -43,7 +43,7 @@ namespace RealEstateModule.ViewModels
         #endregion
 
 
-        public SequestrationPageViewModel(IEventAggregator ea)
+        public SequestrationPageViewModel(IEventAggregator ea) : base(ea)
         {
             EA = ea;
         }

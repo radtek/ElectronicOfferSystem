@@ -69,10 +69,12 @@
     <Compile Include="Enums\ERealEstatePage.cs" />
     <Compile Include="Enums\ERegistrationPage.cs" />
     <Compile Include="Events\FilePathEvent.cs" />
+    <Compile Include="Events\FontSizeEvent.cs" />
     <Compile Include="Events\NavBusinessEvent.cs" />
     <Compile Include="Events\NavRegistrationEvent.cs" />
     <Compile Include="Events\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Events\RefreshBusinessEvent.cs" />
+    <Compile Include="Events\TextAlignEvent.cs" />
     <Compile Include="GlobalCommands.cs" />
     <Compile Include="Models\ErrorMessage.cs" />
     <Compile Include="Models\RegistrationResult.cs" />

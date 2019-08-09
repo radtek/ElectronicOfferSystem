@@ -8,9 +8,19 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:views="clr-namespace:RealEstateModule.Views.Dialogs"
              xmlns:local="clr-namespace:RealEstateModule.Views"
+             xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:Enums="clr-namespace:Common.Enums;assembly=Common"
+             xmlns:Converts="clr-namespace:Common.Converts;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            
+            <Converts:EnumToBool x:Key="EnumToBool" />
+            <Converts:EnumToVisibility x:Key="EnumToVisibility" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <ToolBarTray>
             <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False">
@@ -76,26 +86,26 @@
                     <materialDesign:PackIcon  Kind="ContentPaste" />
                 </Button>
                 <Separator />
-                <ListBox SelectedIndex="0">
+                <ListBox>
                     <ListBox.ToolTip>
                         <StackPanel>
                             <TextBlock Text="文本位置" />
                         </StackPanel>
                     </ListBox.ToolTip>
-                    <ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding Path=TextAlignment,Converter={StaticResource EnumToBool},ConverterParameter={x:Static TextAlignment.Left}}">
                         <materialDesign:PackIcon Kind="FormatAlignLeft" />
                     </ListBoxItem>
-                    <ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding Path=TextAlignment,Converter={StaticResource EnumToBool},ConverterParameter={x:Static TextAlignment.Center}}">
                         <materialDesign:PackIcon  Kind="FormatAlignCenter" />
                     </ListBoxItem>
-                    <ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding Path=TextAlignment,Converter={StaticResource EnumToBool},ConverterParameter={x:Static TextAlignment.Right}}">
                         <materialDesign:PackIcon Kind="FormatAlignRight" />
                     </ListBoxItem>
-                    <ListBoxItem>
+                    <ListBoxItem IsSelected="{Binding Path=TextAlignment,Converter={StaticResource EnumToBool},ConverterParameter={x:Static TextAlignment.Justify}}">
                         <materialDesign:PackIcon   Kind="FormatAlignJustify" />
                     </ListBoxItem>
                 </ListBox>
-                <Separator />
+                <!--<Separator />
                 <ListBox SelectionMode="Extended">
                     <ListBox.ToolTip>
                         <StackPanel>
@@ -111,16 +121,12 @@
                     <ListBoxItem x:Name="UnderlineCheckbox">
                         <materialDesign:PackIcon Kind="FormatUnderline" />
                     </ListBoxItem>
-                </ListBox>
+                </ListBox>-->
                 <Separator />
                 <Label Content="字体大小:" VerticalAlignment="Center" />
-                <ComboBox>
-                    <ComboBoxItem  Content="10" />
-                    <ComboBoxItem IsSelected="True" Content="12" />
-                    <ComboBoxItem  Content="14" />
-                    <ComboBoxItem Content="16" />
-                </ComboBox>
-               
+                <ComboBox ItemsSource="{Binding FontSizeList}" 
+                  SelectedValuePath="Key"  DisplayMemberPath="Value"
+                  SelectedValue="{Binding FontSize,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 
   
                 <ToggleButton />

@@ -89,7 +89,7 @@ namespace RealEstateModule.ViewModels
         #endregion
 
         #region ctor
-        public ObligeePageViewModel(IEventAggregator ea)
+        public ObligeePageViewModel(IEventAggregator ea) : base(ea)
         {
             EA = ea;
         }

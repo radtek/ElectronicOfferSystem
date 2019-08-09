@@ -28,8 +28,47 @@ namespace RealEstateModule.ViewModels
 {
     public class RealEstateToolBarViewModel : BindableBase
     {
+        IEventAggregator EA;
         public Project Project { get; set; }
         public ERealEstatePage NavigatePath { get; set; }
+        private TextAlignment textAlignment;
+        /// <summary>
+        /// 文本对齐方式
+        /// </summary>
+        public TextAlignment TextAlignment
+        {
+            get { return textAlignment; }
+            set
+            {
+                SetProperty(ref textAlignment, value);
+                EA.GetEvent<TextAlignEvent>().Publish(textAlignment);
+            }
+        }
+        private int fontSize = 12;
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        public int FontSize
+        {
+            get { return fontSize; }
+            set
+            {
+                SetProperty(ref fontSize, value);
+                EA.GetEvent<FontSizeEvent>().Publish(fontSize);
+            }
+        }
+
+        #region 字典
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        private Dictionary<string, string> fontSizeList;
+        public Dictionary<string, string> FontSizeList
+        {
+            get { return fontSizeList; }
+            set { SetProperty(ref fontSizeList, value); }
+        }
+        #endregion
 
         public RealEstatePageViewModel RealEstatePageViewModel { get; set; }
         public ImportRealEstateDialogViewModel ImportRealEstateViewModel { get; set; }
@@ -45,8 +84,10 @@ namespace RealEstateModule.ViewModels
 
         public RealEstateToolBarViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
-
+            EA = ea;
             RealEstatePageViewModel = new RealEstatePageViewModel(regionManager, ea);
+
+            InitialComboBoxList();
 
             // 点击业务的导航页后
             ea.GetEvent<NavBusinessEvent>().Subscribe((navPage) => {
@@ -72,7 +113,18 @@ namespace RealEstateModule.ViewModels
                 Project = listView.SelectedItem as Project;
             });
             GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
+
         }
+
+        private void InitialComboBoxList()
+        {
+            FontSizeList = new Dictionary<string, string>();
+            for (int i = 10; i < 21; i++)
+            {
+                FontSizeList.Add(i.ToString(), i.ToString());
+            }
+        }
+
 
         #region 质检
         private  void QualityControl()
@@ -207,5 +259,6 @@ namespace RealEstateModule.ViewModels
             //        TaskScheduler.FromCurrentSynchronizationContext());
         }
         #endregion
+
     }
 }

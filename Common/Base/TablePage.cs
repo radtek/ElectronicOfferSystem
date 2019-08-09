@@ -1,6 +1,7 @@
 ﻿using BusinessData;
 using BusinessData.Models;
 using Common.Enums;
+using Common.Events;
 using Common.ViewModels;
 using Prism.Commands;
 using Prism.Events;
@@ -15,6 +16,7 @@ namespace Common.Base
     public abstract class TablePage : BindableBase, INavigationAware
     {
         #region Properties
+        IEventAggregator EA;
 
         /// <summary>
         /// 项目
@@ -42,6 +44,28 @@ namespace Common.Base
             set { SetProperty(ref buttonContent, value); }
         }
 
+        private TextAlignment textAlignment = TextAlignment.Left;
+        /// <summary>
+        /// 文本对齐方式
+        /// </summary>
+        public TextAlignment TextAlignment
+        {
+            get { return textAlignment; }
+            set { SetProperty(ref textAlignment, value); }
+        }
+
+        private int fontSize = 12;
+        /// <summary>
+        /// 字体大小
+        /// </summary>
+        public int FontSize
+        {
+            get { return fontSize; }
+            set { SetProperty(ref fontSize, value); }
+        }
+
+
+
         #region 命令
 
         /// <summary>
@@ -55,9 +79,9 @@ namespace Common.Base
 
         #region ctor
 
-        public TablePage()
+        public TablePage(IEventAggregator ea)
         {
-
+            EA = ea;
             // 初始化下拉框
             InitialComboBoxList();
             // 新增或修改表格信息
@@ -78,6 +102,14 @@ namespace Common.Base
             // 选中业务列表中的一项
             SelectBusinessCommand = new DelegateCommand<object>(SelectBusinessAOP);
             GlobalCommands.SelectBusinessCommand.RegisterCommand(SelectBusinessCommand);
+
+            EA.GetEvent<TextAlignEvent>().Subscribe((textAlign) => {
+                if (textAlign != null)
+                    TextAlignment = (TextAlignment)textAlign;
+            });
+            EA.GetEvent<FontSizeEvent>().Subscribe((fontSize) => {
+                FontSize = fontSize;
+            });
         }
 
         /// <summary>

@@ -77,7 +77,7 @@ namespace RealEstateModule.ViewModels
 
         #endregion
 
-        public MortgagePageViewModel(IEventAggregator ea)
+        public MortgagePageViewModel(IEventAggregator ea) : base(ea)
         {
             EA = ea;
             // 初始化下拉框

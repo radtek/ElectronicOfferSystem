@@ -22,7 +22,8 @@
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                 <Setter Property="Margin" Value="20 10" />
                 <Setter Property="materialDesign:HintAssist.FloatingScale" Value="0.9"/>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="{Binding FontSize}"/>
+                <Setter Property="TextAlignment" Value="{Binding TextAlignment}"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
