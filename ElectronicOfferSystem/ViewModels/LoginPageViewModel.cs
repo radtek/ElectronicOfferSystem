@@ -3,6 +3,7 @@ using BusinessData.Dal;
 using Common.Configurations;
 using Common.Utils;
 using ElectronicOfferSystem.Views;
+using OAUS.Core;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -71,6 +72,8 @@ namespace ElectronicOfferSystem.ViewModels
             set { SetProperty(ref password, value); IsCancel = true; }
         }
 
+        public string UpdateIP { get; set; }
+        public string UpdatePort { get; set; }
 
         #region 命令
         public DelegateCommand SignCommand { get; set; }
@@ -109,6 +112,27 @@ namespace ElectronicOfferSystem.ViewModels
             {
                 App.Current.Shutdown();
             });
+
+            Task.Factory.StartNew((_this) =>
+            {
+                try
+                {
+                    if (VersionHelper.HasNewVersion(UpdateIP, Int32.Parse(UpdatePort)))
+                    {
+                        MessageBoxResult result = MessageBox.Show("发现新版本，是否更新？", "提示信息", MessageBoxButton.OKCancel);
+                        if (result == MessageBoxResult.OK)
+                        {
+                            string updateExePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdater\\AutoUpdater.exe";
+                            System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(updateExePath);
+                        }
+                    }
+                }
+                catch
+                {
+                    //MessageBox.Show("由于网络原因无法检查版本更新");
+                }
+
+            }, this);
         }
 
         public void InitalWindowStyle()
@@ -254,6 +278,8 @@ namespace ElectronicOfferSystem.ViewModels
                 Password = CEncoder.Decode(ini.IniReadValue("Login", "Password"));
                 UserChecked = ini.IniReadValue("Login", "SaveInfo") == "Y";
                 SkinName = ini.IniReadValue("Skin", "Skin");
+                UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
+                UpdateIP = ini.IniReadValue("OAUS", "UpdatePort");
             }
         }
 

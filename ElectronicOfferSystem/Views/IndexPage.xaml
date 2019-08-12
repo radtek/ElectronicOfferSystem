@@ -38,10 +38,17 @@
 
             <StackPanel Grid.Column="1" Margin="24 0 0 0" VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" TextWrapping="Wrap">欢迎使用不动产登记电子报盘系统</TextBlock>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ImportDictionaryCommand}">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding ImportDictionaryCommand}"
+                        Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="SettingsOutline" />
                         <TextBlock Margin="8 0 0 0">导入字典</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenServerDialogCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="SettingsOutline" />
+                        <TextBlock Margin="8 0 0 0">设置服务器IP</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding OpenProjectPathDialogCommand}">

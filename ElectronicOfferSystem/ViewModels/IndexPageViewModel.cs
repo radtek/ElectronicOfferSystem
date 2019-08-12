@@ -29,8 +29,10 @@ namespace ElectronicOfferSystem.ViewModels
         public DelegateCommand<EMainPage?> NavigateCommand { get; set; }
         public DelegateCommand ImportDictionaryCommand { get; set; }
         public DelegateCommand OpenProjectPathDialogCommand { get; set; }
+        public DelegateCommand OpenServerDialogCommand { get; set; }
 
         ProjectPathDialogViewModel ProjectPathDialogViewModel;
+        ServerDialogViewModel ServerDialogViewModel;
 
         public IndexPageViewModel()
         {
@@ -39,24 +41,71 @@ namespace ElectronicOfferSystem.ViewModels
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
             OpenProjectPathDialogCommand = new DelegateCommand(ExecuteProjectPathDialog);
+            OpenServerDialogCommand = new DelegateCommand(ExecuteServerDialog);
             ImportDictionaryCommand = new DelegateCommand(ImportDictionary);
         }
 
+        
 
         private void Navigate(EMainPage? obj)
         {
         }
 
+        /// <summary>
+        /// 打开服务器IP设置框
+        /// </summary>
+        private async void ExecuteServerDialog()
+        {
+            var view = new ServerDialog();
+            ServerDialogViewModel = new ServerDialogViewModel();
+            //show the dialog
+            await DialogHost.Show(view, "RootDialog", ConfirSaveServerHandler);
+        }
 
         /// <summary>
-        /// 打开导入框
+        /// 点击按钮，确认/取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private void ConfirSaveServerHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            if ("False".Equals(eventArgs.Parameter.ToString())) return;
+            // cancel the close
+            eventArgs.Cancel();
+
+            var IPTextBox = eventArgs.Parameter as System.Windows.Controls.TextBox;
+            String UpdateIP = IPTextBox.Text;
+
+            try
+            {
+                string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
+                IniFileHelper ini = new IniFileHelper(cfgINI);
+                ini.IniWriteValue("OAUS", "UpdateIP", UpdateIP);
+                ini.IniWriteValue("OAUS", "UpdatePort", "4540");
+
+                // 显示加载1s
+                eventArgs.Session.UpdateContent(new SampleProgressDialog());
+                Task.Delay(TimeSpan.FromSeconds(0.3))
+                    .ContinueWith((t, _) => eventArgs.Session.Close(false), null,
+                        TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().updateShow(ex, eventArgs.Session);
+                return;
+            }
+
+        }
+
+        /// <summary>
+        /// 打开项目路径框
         /// </summary>
         private async void ExecuteProjectPathDialog()
         {
             var view = new ProjectPathDialog();
             ProjectPathDialogViewModel = new ProjectPathDialogViewModel();
             //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ConfirSaveProjectPathHandler);
+            await DialogHost.Show(view, "RootDialog", ConfirSaveProjectPathHandler);
 
         }
         /// <summary>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ElectronicOfferSystem.Views.Dialogs.ProjectPathDialog"
+﻿<UserControl x:Class="ElectronicOfferSystem.Views.Dialogs.ServerDialog"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,28 +14,27 @@
     <Grid Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <materialDesign:ColorZone Mode="PrimaryMid" Name="DialogTop" Grid.Row="0"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2">
             <StackPanel Margin="10 10"  Orientation="Horizontal">
-                <TextBlock Text="项目路径"/>
+                <TextBlock Text="服务器IP设置"/>
             </StackPanel>
         </materialDesign:ColorZone>
-        <TextBlock Margin="20 10 0 0"  Grid.Row="1">请选择项目保存路径</TextBlock>
-        <StackPanel Margin="20 -10 0 0" Grid.Row="2" Orientation="Horizontal">
-            <TextBox x:Name="FileTextBox" Text="{Binding FilePath}" Width="200" Margin="0 0 5 10"/>
-            <Button Content="选择"
-                    Command="{Binding ChooseFileCommand}" 
-                    Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+        <TextBlock Margin="20 0"  Grid.Row="1" TextWrapping="Wrap">  如若在线升级功能提示因为网络原因无法使用，可能是因为更新服务器IP地址变更导致，请向有关单位确认后更改服务器IP。</TextBlock>
+        <StackPanel Margin="20 0" Grid.Row="2" Orientation="Vertical">
+            <TextBox x:Name="IPTextBox" Text="{Binding UpdateIP}"
+                     materialDesign:HintAssist.Hint="IP地址" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Right" Grid.Row="3" 
                     Margin="0 10" Orientation="Horizontal">
             <Button IsDefault="True" Margin="15 0"
                     Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
-                    CommandParameter="{Binding ElementName=FileTextBox}">
+                    CommandParameter="{Binding ElementName=IPTextBox}">
                 确认
             </Button>
 

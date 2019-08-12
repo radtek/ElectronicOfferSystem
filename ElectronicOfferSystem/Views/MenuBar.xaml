@@ -66,7 +66,7 @@
                         <materialDesign:PackIcon  Kind="FolderMove" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="服务器IP设置">
+                <MenuItem Header="服务器IP" Command="{Binding SetServerIPCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="ServerNetwork" />
                     </MenuItem.Icon>
@@ -90,12 +90,12 @@
                         <materialDesign:PackIcon  Kind="Help" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="检查更新">
+                <MenuItem Header="检查更新" Command="{Binding CheckUpdateCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="Update" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="关于">
+                <MenuItem Header="关于" Command="{Binding AboutCommand}">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon  Kind="AlertBox" />
                     </MenuItem.Icon>

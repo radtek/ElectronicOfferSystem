@@ -47,12 +47,20 @@ namespace RealEstateModule.ViewModels.Dialogs
                 SaveFileDialog sfd = new SaveFileDialog();
                 //设置这个对话框的起始保存路径
                 //sfd.InitialDirectory = @"D:\";
-                // 默认文件名
-                //sfd.FileName = Project?.ProjectName;
                 //设置保存的文件的类型，注意过滤器的语法
-               //sfd.Filter = "BPF文件|*.bpf";
-               sfd.Filter = "Excel文件|*.xls";
-
+                //sfd.Filter = "BPF文件|*.bpf";
+                sfd.Filter = "Excel文件|*.xls";
+                // 默认文件名
+                try
+                {
+                    Project = Application.Current.Properties["SelectedProject"] as Project;
+                    string mappingType = Project.MappingType.Equals("1") ? "预测绘" : "实测绘";
+                    sfd.FileName = Project.ProjectName + "-" + mappingType;
+                }
+                catch (Exception)
+                {
+                }
+                
                 //调用ShowDialog()方法显示该对话框，该方法的返回值代表用户是否点击了确定按钮
                 if (sfd.ShowDialog() == true)
                 {

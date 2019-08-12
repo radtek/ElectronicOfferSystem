@@ -1,0 +1,17 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=新报盘系统帮助文档.chm
+Contents file=新报盘系统帮助文档.hhc
+Default topic=安装.html
+Display compile progress=No
+Index file=Index.hhk
+Language=0x804 中文(简体，中国)
+
+
+[FILES]
+安装.html
+登录.html
+简介.html
+
+[INFOTYPES]
+

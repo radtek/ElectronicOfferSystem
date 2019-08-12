@@ -70,6 +70,7 @@ namespace ProjectModule.ViewModels
                 SetProperty(ref selectedProject, value);
                 Project = selectedProject;
                 EA.GetEvent<SelectProjectEvent>().Publish(selectedProject);
+                Application.Current.Properties["SelectedProject"] = selectedProject;
             }
         }
 
@@ -118,26 +119,13 @@ namespace ProjectModule.ViewModels
             GlobalCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
             // 选中ListView中的一项
-            SelectProjectCommand = new DelegateCommand<object>((obj) =>
-            {
-                ListView listView = obj as ListView;
-                Project = listView.SelectedItem as Project;
-                //if (NavigatePath != EMainPage.RealEstatePage && NavigatePath != EMainPage.RegistrationPage)
-                //{
-                //    if (Project.Type == "1")
-                //    {
-                //        NavigatePath = EMainPage.RealEstatePage;
-                //            Navigate(EMainPage.RealEstatePage);
-                //    }
-                //    else if (Project.Type == "2")
-                //    {
-                //        NavigatePath = EMainPage.RegistrationPage;
-                //            Navigate(EMainPage.RegistrationPage);
-                //    }
-                //}
+            //SelectProjectCommand = new DelegateCommand<object>((obj) =>
+            //{
+            //    ListView listView = obj as ListView;
+            //    Project = listView.SelectedItem as Project;
 
-            });
-            GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
+            //});
+            //GlobalCommands.SelectProjectCommand.RegisterCommand(SelectProjectCommand);
 
             // 关闭模态框
             CancelAddOrEditProjectDialogCommand = new DelegateCommand(() =>

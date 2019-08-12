@@ -207,6 +207,8 @@ namespace RealEstateModule.ViewModels
         /// </summary>
         private async void ExecuteExportRealEstateDialog()
         {
+            Project = Application.Current.Properties["SelectedProject"] as Project;
+
             if (Project == null)
             {
                 // 请选择导出项目
