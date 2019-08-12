@@ -99,6 +99,8 @@ namespace ProjectModule.ViewModels
         public DelegateCommand<object> SelectProjectCommand { get; set; }
         public DelegateCommand DelProjectCommand { get; set; }
         public DelegateCommand SearchProjectCommand { get; set; }
+        public DelegateCommand ToggleOwnershipTypeCommand { get; set; }
+        public DelegateCommand ToggleMappingTypeCommand { get; set; }
         ProjectDal projectDal = new ProjectDal();
 
         public ProjectPageViewModel(IRegionManager regionManager, IEventAggregator ea)
@@ -215,6 +217,43 @@ namespace ProjectModule.ViewModels
                 return;
             }
 
+            ToggleOwnershipTypeCommand = new DelegateCommand(ToggleOwnershipType);
+            ToggleMappingTypeCommand = new DelegateCommand(ToggleMappingType);
+            }
+
+        private void ToggleOwnershipType()
+        {
+            switch ((EOwnershipType)(int.Parse(SelectedProject.OwnershipType)))
+            {
+                case EOwnershipType.OwnershipSurvey:
+                    SelectedProject.OwnershipType = "2";
+                    break;
+                case EOwnershipType.OwnershipMakeup:
+                    SelectedProject.OwnershipType = "1";
+                    break;
+                default:
+                    SelectedProject.OwnershipType = "1";
+                    break;
+            }
+            projectDal.Modify(SelectedProject);
+
+        }
+
+        private void ToggleMappingType()
+        {
+            switch ((EMappingType)(int.Parse(SelectedProject.MappingType)))
+            {
+                case EMappingType.PredictiveMapping:
+                    SelectedProject.MappingType = "2";
+                    break;
+                case EMappingType.SurveyingMapping:
+                    SelectedProject.MappingType = "1";
+                    break;
+                default:
+                    SelectedProject.MappingType = "1";
+                    break;
+            }
+            projectDal.Modify(SelectedProject);
         }
 
         private void Navigate(EMainPage? navigatePath)

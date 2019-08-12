@@ -26,6 +26,7 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref obligee, value); }
         }
 
+
         #region 字典
         /// <summary>
         /// 证件种类

@@ -35,10 +35,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="开发商：" HorizontalAlignment="Right" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=DeveloperName}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="备注：" HorizontalAlignment="Right" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Remark}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="名  称：" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProjectName}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="开发商：" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=DeveloperName}"/>
                     <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="更新时间：" HorizontalAlignment="Right" />
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=UpdateTime,StringFormat='{}{yyyy/MM/dd}'}"/>-->
                 </Grid>
@@ -49,6 +49,9 @@
             <Converts:StateToIcon x:Key="StateToIcon"/>
             <Converts:StateToColor x:Key="StateToColor"/>
             <Converts:StateToTip x:Key="StateToTip"/>
+            <Converts:OwnershipTypeToString x:Key="OwnershipTypeToString"/>
+            <Converts:MappingTypeToString x:Key="MappingTypeToString"/>
+            <Converts:ProjectTypeToVisibility x:Key="ProjectTypeToVisibility"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="#f5f5f5">
@@ -115,11 +118,26 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="{Binding State,Converter={StaticResource StateToIcon}}" 
-                                                         Foreground="{Binding State,Converter={StaticResource StateToColor}}"
-                                                         ToolTipService.ToolTip="{Binding State,Converter={StaticResource StateToTip}}"/>
-                            <TextBlock Text="{Binding ProjectName}" FontSize="15" Width="130"
-                                               Margin="5 0 0 0"
+                                                     Foreground="{Binding State,Converter={StaticResource StateToColor}}"
+                                                     ToolTipService.ToolTip="{Binding State,Converter={StaticResource StateToTip}}"
+                                                     Visibility="{Binding Type, Converter={StaticResource ProjectTypeToVisibility}}"/>
+                            <TextBlock Text="{Binding ProjectName}" FontSize="15" Width="118"
+                                               Margin="5 0" TextTrimming="CharacterEllipsis"
                                                ToolTipService.ToolTip="{Binding Source={StaticResource ProjectInfoTip}}" />
+                            <ToggleButton Width="16" Height="16" FontSize="12" Margin="2 0"
+                                          Style="{StaticResource MaterialDesignActionToggleButton}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                          ToolTip="调查类型"
+                                          Content="{Binding OwnershipType,Converter={StaticResource OwnershipTypeToString}}"
+                                          materialDesign:ToggleButtonAssist.OnContent="{Binding OwnershipType,Converter={StaticResource OwnershipTypeToString}}"
+                                          Visibility="{Binding Type, Converter={StaticResource ProjectTypeToVisibility}}"/>
+                            <ToggleButton Width="16" Height="16" FontSize="12" Margin="2 0"
+                                          Style="{StaticResource MaterialDesignActionLightToggleButton}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                          ToolTip="测绘类型"
+                                          Content="{Binding MappingType,Converter={StaticResource MappingTypeToString}}"
+                                          materialDesign:ToggleButtonAssist.OnContent="{Binding MappingType,Converter={StaticResource MappingTypeToString}}"
+                                          Visibility="{Binding Type, Converter={StaticResource ProjectTypeToVisibility}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

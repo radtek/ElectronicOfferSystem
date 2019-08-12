@@ -56,12 +56,16 @@
     <Compile Include="Configurations\LocalConfiguration.cs" />
     <Compile Include="Converts\EnumToBool.cs" />
     <Compile Include="Converts\EnumToVisibility.cs" />
+    <Compile Include="Converts\IdConverter.cs" />
+    <Compile Include="Converts\MappingTypeToString.cs" />
     <Compile Include="Converts\NameToVisibility.cs" />
+    <Compile Include="Converts\OwnershipTypeToString.cs" />
     <Compile Include="Converts\ProjectTypeToVisibility.cs" />
     <Compile Include="Converts\StateToColor.cs" />
     <Compile Include="Converts\StateToIcon.cs" />
     <Compile Include="Converts\StateToTip.cs" />
     <Compile Include="Converts\StringToBitmapSource.cs" />
+    <Compile Include="Enums\EIdType.cs" />
     <Compile Include="Enums\EMainPage.cs" />
     <Compile Include="Enums\EMappingType.cs" />
     <Compile Include="Enums\EOwnershipType.cs" />
@@ -110,6 +114,8 @@
     <Compile Include="Utils\ToolDate.cs" />
     <Compile Include="Utils\ZipHelper.cs" />
     <Compile Include="ValidationRules\BDCDYHValidationRule.cs" />
+    <Compile Include="ValidationRules\BindingProxy.cs" />
+    <Compile Include="ValidationRules\IdValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerAndNotEmptyValidationRule.cs" />
     <Compile Include="ValidationRules\IntegerValidationRule.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />

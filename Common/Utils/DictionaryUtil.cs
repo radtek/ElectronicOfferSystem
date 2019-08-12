@@ -65,6 +65,7 @@ namespace Common.Utils
                 return key;
             }
             return res.Append(".").Append(dic[key]).ToString();
+            //return dic[key];
         }
 
         /// <summary>

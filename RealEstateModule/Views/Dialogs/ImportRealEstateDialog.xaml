@@ -26,8 +26,9 @@
         </materialDesign:ColorZone>
         <TextBlock Margin="20 10 0 0"  Grid.Row="1">请选择导入的项目</TextBlock>
         <StackPanel Margin="20 -10 0 0" Grid.Row="2" Orientation="Horizontal">
-            <TextBox x:Name="FileTextBox" Text="{Binding FilePath}" Width="200"/>
-            <Button Command="{Binding ChooseFileCommand}">
+            <TextBox x:Name="FileTextBox" Text="{Binding FilePath}" Width="200" Margin="0 0 5 10"/>
+            <Button Command="{Binding ChooseFileCommand}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}">
                 选择
             </Button>
         </StackPanel>
@@ -35,8 +36,7 @@
                     Margin="0 10" Orientation="Horizontal">
             <Button IsDefault="True" Margin="15 0"
                     Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
-                    CommandParameter="{Binding ElementName=FileTextBox}"
-                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    CommandParameter="{Binding ElementName=FileTextBox}">
                 确认
             </Button>
 

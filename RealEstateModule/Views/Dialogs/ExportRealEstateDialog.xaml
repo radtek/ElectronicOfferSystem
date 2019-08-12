@@ -25,18 +25,23 @@
             </StackPanel>
         </materialDesign:ColorZone>
         <TextBlock Margin="20 10 0 0"  Grid.Row="1">请选择项目保存路径</TextBlock>
-        <StackPanel Margin="20 -10 0 0" Grid.Row="2" Orientation="Horizontal">
-            <TextBox x:Name="FileTextBox" Text="{Binding FilePath}" Width="200"/>
-            <Button Command="{Binding ChooseFileCommand}">
-                选择
-            </Button>
+        <!--<StackPanel Margin="20 -10 0 0" Grid.Row="2" Orientation="Horizontal" >
+            <TextBlock Margin="20 10 0 0">是否保存为BPF格式</TextBlock>
+            <ToggleButton Style="{StaticResource MaterialDesignSwitchLightToggleButton}"
+                          ToolTip="MaterialDesignSwitchLightToggleButton"
+                          IsChecked="{Binding IsBPF}" />
+        </StackPanel>-->
+        <StackPanel Margin="20 -10 0 0" Grid.Row="2" Orientation="Horizontal" >
+            <TextBox x:Name="FileTextBox" Text="{Binding FilePath}" Width="200" Margin="0 0 5 10"/>
+            <Button Content="选择"
+                    Command="{Binding ChooseFileCommand}" 
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Right" Grid.Row="3" 
                     Margin="0 10" Orientation="Horizontal">
             <Button IsDefault="True" Margin="15 0"
                     Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
-                    CommandParameter="{Binding ElementName=FileTextBox}"
-                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    CommandParameter="{Binding ElementName=FileTextBox}">
                 确认
             </Button>
 

@@ -124,7 +124,7 @@
                 </ListBox>-->
                 <Separator />
                 <Label Content="字体大小:" VerticalAlignment="Center" />
-                <ComboBox ItemsSource="{Binding FontSizeList}" 
+                <ComboBox ItemsSource="{Binding FontSizeList}"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding FontSize,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
 

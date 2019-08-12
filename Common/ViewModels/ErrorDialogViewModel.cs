@@ -1,12 +1,14 @@
 ﻿using Common.Models;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Common.ViewModels
 {
@@ -22,9 +24,14 @@ namespace Common.ViewModels
         private ErrorDialog view;
         private static ErrorDialogViewModel errorDialogViewModel = new ErrorDialogViewModel();
 
+        public DelegateCommand CopyCommand { get; set; }
+
         public ErrorDialogViewModel()
         {
             ErrorMessage = new ErrorMessage();
+            CopyCommand = new DelegateCommand(() =>{
+                Clipboard.SetText(ErrorMessage.Message + ErrorMessage.StackTrace);
+            });
         }
 
         public static ErrorDialogViewModel getInstance()

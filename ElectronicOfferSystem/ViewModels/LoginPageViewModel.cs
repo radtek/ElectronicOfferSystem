@@ -96,7 +96,7 @@ namespace ElectronicOfferSystem.ViewModels
             InitalWindowStyle();
 
             // 默认选中记住我
-            UserChecked = true;
+            //UserChecked = true;
 
             IsCancel = true;
 
@@ -184,7 +184,7 @@ namespace ElectronicOfferSystem.ViewModels
                             // 保存登录信息
                             try
                             {
-                                if (UserChecked) SaveLoginInfo();
+                                SaveLoginInfo();
                             }
                             catch (Exception ex)
                             {
@@ -265,8 +265,17 @@ namespace ElectronicOfferSystem.ViewModels
             string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
             IniFileHelper ini = new IniFileHelper(cfgINI);
             ini.IniWriteValue("Login", "Account", Account);
-            ini.IniWriteValue("Login", "Password", CEncoder.Encode(Password));
-            ini.IniWriteValue("Login", "SaveInfo", UserChecked ? "Y" : "N");
+            if (UserChecked)
+            {
+                ini.IniWriteValue("Login", "Password", CEncoder.Encode(Password));
+                ini.IniWriteValue("Login", "SaveInfo", "Y");
+            }
+            else
+            {
+                ini.IniWriteValue("Login", "Password", string.Empty);
+                ini.IniWriteValue("Login", "SaveInfo", "N");
+            }
+
         }
     }
 }

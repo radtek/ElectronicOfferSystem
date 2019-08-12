@@ -11,14 +11,14 @@ namespace Common.Enums
         /// <summary>
         /// 首页
         /// </summary>
-        IndexPage,
+        IndexPage = -1,
         /// <summary>
         /// 楼盘表页面
         /// </summary>
-        RealEstatePage,
+        RealEstatePage = 1,
         /// <summary>
         /// 登记业务页面
         /// </summary>
-        RegistrationPage
+        RegistrationPage = 2
     }
 }

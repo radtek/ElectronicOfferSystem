@@ -25,6 +25,17 @@ namespace RealEstateModule.ViewModels.Dialogs
 
         public Project Project { get; set; }
 
+        private bool isBPF = false;
+        /// <summary>
+        /// 是否保存为BPF文件
+        /// </summary>
+        public bool IsBPF
+        {
+            get { return isBPF; }
+            set { SetProperty(ref isBPF, value); }
+        }
+
+
         public DelegateCommand ChooseFileCommand { get; set; }
         public DelegateCommand ExportRealEstateCommand { get; set; }
 
@@ -37,10 +48,11 @@ namespace RealEstateModule.ViewModels.Dialogs
                 //设置这个对话框的起始保存路径
                 //sfd.InitialDirectory = @"D:\";
                 // 默认文件名
-                //sfd.FileName = Project.ProjectName;
+                //sfd.FileName = Project?.ProjectName;
                 //设置保存的文件的类型，注意过滤器的语法
-                sfd.Filter = "BPF文件|*.bpf";
-                
+               //sfd.Filter = "BPF文件|*.bpf";
+               sfd.Filter = "Excel文件|*.xls";
+
                 //调用ShowDialog()方法显示该对话框，该方法的返回值代表用户是否点击了确定按钮
                 if (sfd.ShowDialog() == true)
                 {

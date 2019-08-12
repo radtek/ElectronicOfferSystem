@@ -112,8 +112,11 @@ namespace RealEstateModule.Tasks
                                 //// 删除excel
                                 //File.Delete(SaveFileName.Replace(".bpf", ".xls"));
 
-                                File.Move(bufferPath.Replace(".bpf", ".xls"), SaveFileName.Replace(".bpf", ".xls"));
-                                
+                                if(Path.GetExtension(bufferPath) == ".xls")
+                                    File.Move(bufferPath, SaveFileName);
+                                else if(Path.GetExtension(bufferPath) == ".bpf")
+                                    File.Move(bufferPath.Replace(".xls",".bpf"), SaveFileName.Replace(".xls", ".bpf"));
+
                                 //taskMessage.Progress = 100.00;
 
 

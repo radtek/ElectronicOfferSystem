@@ -1,5 +1,6 @@
 ﻿using BusinessData;
 using BusinessData.Dal;
+using Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,29 +77,77 @@ namespace Common.Rules
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsID(object value)
+        public static bool IsID(EIdType type, object value)
         {
             if (value == null) return false;
+
             string text = value.ToString().Trim();
-            // 身份证
-            string sfz = @"^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$";
-            // 港澳通行证
-            string gatxz = @"^[a-zA-Z0-9]{6,10}$";
-            // 台胞证
-            string tbz = @"^([0-9]{8}|[0-9]{10})$";
-            // 护照
-            string hz = @"^[a-zA-Z0-9]{5,17}$";
-            // 户口簿
+            bool res = false;
+            switch (type)
+            {
+                case EIdType.SFZ:
+                    // 身份证
+                    string sfz = @"^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$";
+                    res = Regex.IsMatch(text, sfz);
+                    break;
+                case EIdType.GATSFZ:
+                    // 港澳通行证
+                    string gatxz = @"^[a-zA-Z0-9]{6,10}$";
+                    // 台胞证
+                    string tbz = @"^([0-9]{8}|[0-9]{10})$";
+                    res = Regex.IsMatch(text, gatxz) || Regex.IsMatch(text, tbz);
+                    break;
+                case EIdType.HZ:
+                    // 护照
+                    string hz = @"^[a-zA-Z0-9]{5,17}$";
+                    res = Regex.IsMatch(text, hz);
+                    break;
+                case EIdType.HKB:
 
-            // 军官证
-            string jgz = @"^[0-9]{8}$";
-            // 组织机构代码
-            string zzjgdm = @"^[a-zA-Z0-9]{10,20}$";
-            // 营业执照
-            string yyzz = @"^[a-zA-Z0-9]{10,20}$";
-            // 其他
+                    res = true;
+                    break;
+                case EIdType.JGZ:
+                    // 军官证
+                    string jgz = @"^[0-9]{8}$";
+                    res = Regex.IsMatch(text, jgz);
+                    break;
+                case EIdType.ZZJGDM:
+                    // 组织机构代码
+                    string zzjgdm = @"^[a-zA-Z0-9]{10,20}$";
+                    res = Regex.IsMatch(text, zzjgdm);
+                    break;
+                case EIdType.YYZZ:
+                    // 营业执照
+                    string yyzz = @"^[a-zA-Z0-9]{10,20}$";
+                    res = Regex.IsMatch(text, yyzz);
+                    break;
+                case EIdType.QT:
 
-            return Regex.IsMatch(text, sfz);
+                    res = true;
+                    break;
+                default:
+                    break;
+            }
+            return res;
+            
+            
+        }
+
+        /// <summary>
+        /// AB之和是否为C
+        /// </summary>
+        /// <param name="valueA"></param>
+        /// <param name="valueB"></param>
+        /// <param name="valueC"></param>
+        /// <returns></returns>
+        public static bool IsAnd(object valueA, object valueB, object valueC)
+        {
+            if (valueA == null || valueB == null || valueC == null) return false;
+            Decimal decimalA = Convert.ToDecimal(valueA);
+            Decimal decimalB = Convert.ToDecimal(valueB);
+            Decimal decimalC = Convert.ToDecimal(valueC);
+
+            return (decimalA + decimalB == decimalC);
         }
     }
 }

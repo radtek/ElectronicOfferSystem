@@ -94,6 +94,7 @@ namespace RealEstateModule.ViewModels
             });
 
             AddBusinessCommand = new DelegateCommand(() => {
+                RealEstatePageViewModel.NavigatePath = NavigatePath;
                 RealEstatePageViewModel.AddBusinessCommand.Execute();
             });
             DelBusinessCommand = new DelegateCommand(() => {
@@ -220,7 +221,7 @@ namespace RealEstateModule.ViewModels
             }
             var view = new ExportRealEstateDialog();
             ExportRealEstateViewModel = new ExportRealEstateDialogViewModel();
-            ExportRealEstateViewModel.Project = Project;
+            //ExportRealEstateViewModel.Project = Project;
             //show the dialog
             var result = await DialogHost.Show(view, "RootDialog", ConfirExportRealEstateEventHandler);
 
@@ -238,6 +239,11 @@ namespace RealEstateModule.ViewModels
 
             var FileTextBox = eventArgs.Parameter as TextBox;
             String FullPath = FileTextBox.Text;
+            if (string.IsNullOrWhiteSpace(FullPath))
+            {
+                MessageBox.Show("请选择保存路径", "提示");
+                return;
+            }
 
             // 开始导出
             ExportRealEstateViewModel.FilePath = FullPath;

@@ -27,7 +27,7 @@ namespace ElectronicOfferSystem.ViewModels
         public RealEstatePage RealEstatePage { get; set; }
         public RegistrationPage RegistrationPage { get; set; }
 
-        private EMainPage mainPage;
+        private EMainPage mainPage = EMainPage.IndexPage;
         public EMainPage MainPage
         {
             get { return mainPage; }

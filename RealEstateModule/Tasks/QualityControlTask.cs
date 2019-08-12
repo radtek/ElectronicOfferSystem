@@ -23,9 +23,12 @@ namespace RealEstateModule.Tasks
 
         public TaskInfoDialogViewModel TaskInfoDialog { get; set; }
 
+        public ProjectDal ProjectDal { get; set; }
+
         public QualityControlTask()
         {
             ErrorMsg = new List<string>();
+            ProjectDal = new ProjectDal();
         }
 
         public void Ongo()
@@ -41,8 +44,9 @@ namespace RealEstateModule.Tasks
                 Task task = new Task(() =>
                 {
                     //Thread.Sleep(2000);
+                    
                     QualityControl qualityControl = new QualityControl();
-                    qualityControl.Project = Project;
+                    qualityControl.Project = ProjectDal.InitialRealEstateProject(Project);
                     qualityControl.TaskMessage = taskMessage;
                     try
                     {
@@ -62,7 +66,6 @@ namespace RealEstateModule.Tasks
                         System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Application.Current.Dispatcher));
                         SynchronizationContext.Current.Post(pl =>
                         {
-                            ProjectDal projectDal = new ProjectDal();
                             foreach (var error in ErrorMsg)
                             {
                                 taskMessage.DetailMessages.Add(error);
@@ -72,7 +75,7 @@ namespace RealEstateModule.Tasks
                                 taskMessage.DetailMessages.Add("质检不通过");
                                 Project.State = "0";
                                 Project.UptateTime = DateTime.Now;
-                                projectDal.Modify(Project);
+                                ProjectDal.Modify(Project);
                             }
                             else
                             {
@@ -80,7 +83,7 @@ namespace RealEstateModule.Tasks
                                 taskMessage.DetailMessages.Add("质检合格");
                                 Project.State = "1";
                                 Project.UptateTime = DateTime.Now;
-                                projectDal.Modify(Project);
+                                ProjectDal.Modify(Project);
                             }
                         }, null);
                     });

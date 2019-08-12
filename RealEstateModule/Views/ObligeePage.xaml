@@ -95,8 +95,8 @@
                  materialDesign:HintAssist.Hint="不动产权证号" />
         <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ZJLXList}" 
                   materialDesign:HintAssist.Hint="证件种类*"
-                  SelectedValuePath="Key"  DisplayMemberPath="Value"
-                  SelectedValue="{Binding Obligee.ZJZL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding Obligee.ZJZL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Row="1" Grid.Column="1"
                  materialDesign:HintAssist.Hint="证件号*">
             <TextBox.Text>

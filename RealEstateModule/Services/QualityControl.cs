@@ -261,6 +261,8 @@ namespace RealEstateModule.Services
                     CheckNUllAndNumic(table, id, Household.YCQTJZMJ, "预测其它建筑面积");
                     CheckNUllAndNumic(table, id, Household.YCDXBFJZMJ, "预测地下部分建筑面积");
 
+                    CheckAnd(table, id, Household.YCTNJZMJ, "预测套内建筑面积", Household.YCFTJZMJ, "预测分摊建筑面积", Household.YCJZMJ, "预测建筑面积");
+
                     CheckNumic(table, id, Household.YCFTXS, "预测分摊系数");
                 }
                 else if (ProjectMappingType == EMappingType.SurveyingMapping) // 若是实测绘项目
@@ -271,8 +273,10 @@ namespace RealEstateModule.Services
                     CheckNUllAndNumic(table, id, Household.SCQTJZMJ, "实测其它建筑面积");
                     CheckNUllAndNumic(table, id, Household.SCDXBFJZMJ, "实测地下部分建筑面积");
 
+                    CheckAnd(table, id, Household.SCTNJZMJ, "实测套内建筑面积", Household.SCFTJZMJ, "实测分摊建筑面积", Household.SCJZMJ, "实测建筑面积");
+
                     CheckNumic(table, id, Household.SCFTXS, "实测分摊系数");
-                }
+                }  
 
                 // 表间检查
                 int count = 0;
@@ -331,15 +335,20 @@ namespace RealEstateModule.Services
 
                 CheckNumic(table, id, Obligee.QLMJ, "权利面积");
 
+                // 证件类型和证件号检查
+                CheckId(table, id, Obligee.ZJZL, Obligee.ZJH, "权利人");
+
                 if (!string.IsNullOrWhiteSpace(Obligee.FRXM)) // 若法人姓名不为空
                 {
                     CheckNull(table, id, Obligee.FRZJLX, "法人证件类型");
                     CheckNull(table, id, Obligee.FRZJH, "法人证件号");
+                    CheckId(table, id, Obligee.FRZJLX, Obligee.FRZJH, "法人");
                 }
                 if (!string.IsNullOrWhiteSpace(Obligee.DLRXM)) // 若代理人姓名不为空
                 {
                     CheckNull(table, id, Obligee.DLRZJLX, "代理人证件类型");
                     CheckNull(table, id, Obligee.DLRZJH, "代理人证件号");
+                    CheckId(table, id, Obligee.DLRZJLX, Obligee.DLRZJH, "代理人");
                 }
 
                 // 表间检查
@@ -354,6 +363,9 @@ namespace RealEstateModule.Services
                 TaskMessage.Progress = index / TotalCount * 100;
             }
         }
+
+
+
         /// <summary>
         /// 抵押信息质检
         /// </summary>
@@ -495,6 +507,25 @@ namespace RealEstateModule.Services
         }
 
         /// <summary>
+        /// 检查a+b是否为c
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="id"></param>
+        /// <param name="valueA"></param>
+        /// <param name="desA"></param>
+        /// <param name="valueB"></param>
+        /// <param name="desB"></param>
+        /// <param name="valueC"></param>
+        /// <param name="desC"></param>
+        private void CheckAnd(String table, String id, String valueA, String desA, String valueB, String desB, String valueC, String desC)
+        {
+            if (!RuleHelper.IsAnd(valueA,valueB,valueC))
+            {
+                ErrorMsg.Add(table + "表中，" + id + "的" + desA + "与" + desB + "之和不等于"+desC);
+            }
+        }
+
+        /// <summary>
         /// 检查不动产单元号
         /// </summary>
         /// <param name="table"></param>
@@ -547,6 +578,52 @@ namespace RealEstateModule.Services
                 return;
             }
 
+        }
+
+
+        private void CheckId(String table, String id, String zjlx, String zjh, String name)
+        {
+            bool IsSuccess = true;
+            switch ((EIdType)int.Parse(zjlx))
+            {
+                case EIdType.SFZ:
+                    if (!RuleHelper.IsID(EIdType.SFZ, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.GATSFZ:
+                    if (!RuleHelper.IsID(EIdType.GATSFZ, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.HZ:
+                    if (!RuleHelper.IsID(EIdType.HZ, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.HKB:
+                    if (!RuleHelper.IsID(EIdType.HKB, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.JGZ:
+                    if (!RuleHelper.IsID(EIdType.JGZ, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.ZZJGDM:
+                    if (!RuleHelper.IsID(EIdType.ZZJGDM, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.YYZZ:
+                    if (!RuleHelper.IsID(EIdType.YYZZ, zjh))
+                        IsSuccess = false;
+                    break;
+                case EIdType.QT:
+                    if (!RuleHelper.IsID(EIdType.QT, zjh))
+                        IsSuccess = false;
+                    break;
+                default:
+                    break;
+            }
+
+            if(!IsSuccess)
+                ErrorMsg.Add(table + "表中，" + id + "的" + name + "证件类型与证件号格式错误");
         }
     }
 }
