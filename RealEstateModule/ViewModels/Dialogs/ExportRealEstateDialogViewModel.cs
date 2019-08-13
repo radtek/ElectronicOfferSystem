@@ -82,8 +82,14 @@ namespace RealEstateModule.ViewModels.Dialogs
                 {
                     task.SaveFileName = FilePath;
                     task.book = new ExportRealEstateBook();
-                    task.TemplateFileName = System.AppDomain.CurrentDomain.BaseDirectory + @"Templates\补录-批量导入户数据模板.xlt";
                     task.Project = Project;
+
+                    if ("1".Equals(Project.OwnershipType))
+                        task.TemplateFileName = System.AppDomain.CurrentDomain.BaseDirectory + @"Templates\调查-批量导入户数据模板.xlt";
+                    else if ("2".Equals(Project.OwnershipType))
+                        task.TemplateFileName = System.AppDomain.CurrentDomain.BaseDirectory + @"Templates\补录-批量导入户数据模板.xlt";
+                    else
+                        throw new Exception("请检查项目的调查类型。");
                     task.Ongo();
                 }
                 catch (Exception ex)

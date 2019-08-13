@@ -12,6 +12,7 @@ namespace RealEstateModule.Services.Export
 {
     public class ExportRealEstateBook : RealEstateExcelBook
     {
+        public Project Project { get; set; }
         public List<string> ErrorMsg { get; set; }
         public List<NaturalBuilding> NaturalBuildings { get; set; }
         public List<Household> Households { get; set; }
@@ -51,10 +52,14 @@ namespace RealEstateModule.Services.Export
                 TotalCount += Households.Count;
             if (Obligees != null)
                 TotalCount += Obligees.Count;
-            if (Mortgages != null)
-                TotalCount += Mortgages.Count;
-            if (Sequestrations != null)
-                TotalCount += Sequestrations.Count;
+            if ("2".Equals(Project.OwnershipType))
+            {
+                if (Mortgages != null)
+                    TotalCount += Mortgages.Count;
+                if (Sequestrations != null)
+                    TotalCount += Sequestrations.Count;
+            }
+
 
             if (TotalCount == 0)
             {
@@ -70,8 +75,12 @@ namespace RealEstateModule.Services.Export
                 WriteFloor();
                 WriteHouse();
                 WriteObligee();
-                WriteMortgage();
-                WriteSequestration();
+                if ("2".Equals(Project.OwnershipType))
+                {
+                    WriteMortgage();
+                    WriteSequestration();
+                }
+                   
             }
             catch (Exception ex)
             {

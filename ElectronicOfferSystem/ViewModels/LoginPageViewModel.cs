@@ -122,6 +122,11 @@ namespace ElectronicOfferSystem.ViewModels
                         MessageBoxResult result = MessageBox.Show("发现新版本，是否更新？", "提示信息", MessageBoxButton.OKCancel);
                         if (result == MessageBoxResult.OK)
                         {
+                            App.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                App.Current.Shutdown();
+                            }));
+                            
                             string updateExePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdater\\AutoUpdater.exe";
                             System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(updateExePath);
                         }
@@ -279,7 +284,7 @@ namespace ElectronicOfferSystem.ViewModels
                 UserChecked = ini.IniReadValue("Login", "SaveInfo") == "Y";
                 SkinName = ini.IniReadValue("Skin", "Skin");
                 UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
-                UpdateIP = ini.IniReadValue("OAUS", "UpdatePort");
+                UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
             }
         }
 

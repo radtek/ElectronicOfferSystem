@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Common.ViewModels;
 using ElectronicOfferSystem.ViewModels;
+using Common.Utils.Office;
 
 namespace ElectronicOfferSystem
 {
@@ -53,6 +54,8 @@ namespace ElectronicOfferSystem
         /// <param name="e"></param>
         private void App_Startup(object sender, StartupEventArgs e)
         {
+            // 注册office许可证
+            ModifyInMemory.ActivateMemoryPatching();
 
             //UI线程未捕获异常处理事件
             this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);

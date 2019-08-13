@@ -67,26 +67,32 @@ namespace ElectronicOfferSystem.ViewModels
             {
                 realEstateToolBarViewModel.OpenImportRealEstateDialogCommand.Execute();
             });
-            ExportRealEstateProjectCommand = new DelegateCommand(() => {
+            ExportRealEstateProjectCommand = new DelegateCommand(() =>
+            {
                 realEstateToolBarViewModel.OpenExportRealEstateDialogCommand.Execute();
             });
-            ExportRegistrationProjectCommand = new DelegateCommand(() => {
+            ExportRegistrationProjectCommand = new DelegateCommand(() =>
+            {
                 registrationToolBarViewModel.OpenExportRegistrationDialogCommand.Execute();
             });
 
-            QualityControlCommand = new DelegateCommand(() => {
+            QualityControlCommand = new DelegateCommand(() =>
+            {
                 realEstateToolBarViewModel.QualityControlCommand.Execute();
             });
 
-            SetProjectPathCommand = new DelegateCommand(() => {
+            SetProjectPathCommand = new DelegateCommand(() =>
+            {
                 indexPageViewModel.OpenProjectPathDialogCommand.Execute();
             });
 
-            SetServerIPCommand = new DelegateCommand(() => {
+            SetServerIPCommand = new DelegateCommand(() =>
+            {
                 indexPageViewModel.OpenServerDialogCommand.Execute();
             });
 
-            ShowHelpCommand = new DelegateCommand(() => {
+            ShowHelpCommand = new DelegateCommand(() =>
+            {
                 string helpfile = AppDomain.CurrentDomain.BaseDirectory + @"Help\报盘系统帮助文档.chm";
                 Process.Start(helpfile);
             });
@@ -99,26 +105,35 @@ namespace ElectronicOfferSystem.ViewModels
 
         private void CheckUpdate()
         {
-            try
+            ReadConfigInfo();
+            Task.Factory.StartNew((_this) =>
             {
-                if (VersionHelper.HasNewVersion(UpdateIP, Int32.Parse(UpdatePort)))
+                try
                 {
-                    MessageBoxResult result = MessageBox.Show("发现新版本，是否更新？", "提示信息", MessageBoxButton.OKCancel);
-                    if (result == MessageBoxResult.OK)
+                    if (VersionHelper.HasNewVersion(UpdateIP, Int32.Parse(UpdatePort)))
                     {
-                        string updateExePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdater\\AutoUpdater.exe";
-                        System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(updateExePath);
+                        MessageBoxResult result = MessageBox.Show("发现新版本，是否更新？", "提示信息", MessageBoxButton.OKCancel);
+                        if (result == MessageBoxResult.OK)
+                        {
+                            App.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                App.Current.Shutdown();
+                            }));
+                            string updateExePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdater\\AutoUpdater.exe";
+                            System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(updateExePath);
+                           
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("无最新版本");
                     }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show("无最新版本");
+                    MessageBox.Show("由于网络原因无法检查版本更新");
                 }
-            }
-            catch
-            {
-                MessageBox.Show("由于网络原因无法检查版本更新");
-            }
+            }, this);
         }
 
         private async void About()
@@ -136,7 +151,7 @@ namespace ElectronicOfferSystem.ViewModels
             {
                 IniFileHelper ini = new IniFileHelper(cfgINI);
                 UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
-                UpdateIP = ini.IniReadValue("OAUS", "UpdatePort");
+                UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
             }
         }
     }

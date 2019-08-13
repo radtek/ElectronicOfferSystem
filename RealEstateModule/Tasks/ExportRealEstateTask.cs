@@ -60,6 +60,7 @@ namespace RealEstateModule.Tasks
                 {
                     try
                     {
+                        book.Project = Project;
                         book.TaskMessage = taskMessage;
                         book.NaturalBuildings = naturalBuildingDal.GetListBy(t => t.ProjectID == Project.ID);
                         book.LogicalBuildings = logicalBuildingDal.GetListBy(t => t.ProjectID == Project.ID);
@@ -104,23 +105,35 @@ namespace RealEstateModule.Tasks
                             else
                             {
                                 string bufferPath = System.AppDomain.CurrentDomain.BaseDirectory + @"Buffer\" + Path.GetFileName(SaveFileName);
-                                book.SaveAsExcel(bufferPath);
+                                try
+                                {
+                                    book.SaveAsExcel(bufferPath);
 
-                                //// 压缩成报盘
-                                //ZipHelper zipHelper = new ZipHelper();
-                                //zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
-                                //// 删除excel
-                                //File.Delete(SaveFileName.Replace(".bpf", ".xls"));
+                                    //// 压缩成报盘
+                                    //ZipHelper zipHelper = new ZipHelper();
+                                    //zipHelper.ZipFile(SaveFileName.Replace(".bpf", ".xls"), SaveFileName, 5, 500);
+                                    //// 删除excel
+                                    //File.Delete(SaveFileName.Replace(".bpf", ".xls"));
 
-                                if(Path.GetExtension(bufferPath) == ".xls")
-                                    File.Move(bufferPath, SaveFileName);
-                                else if(Path.GetExtension(bufferPath) == ".bpf")
-                                    File.Move(bufferPath.Replace(".xls",".bpf"), SaveFileName.Replace(".xls", ".bpf"));
+                                    if (Path.GetExtension(bufferPath) == ".xls")
+                                    {
+                                        File.Copy(bufferPath, SaveFileName, true);
+                                        File.Delete(bufferPath);
+                                    }
+                                    else if (Path.GetExtension(bufferPath) == ".bpf")
+                                    {
+                                        File.Copy(bufferPath.Replace(".xls", ".bpf"), SaveFileName.Replace(".xls", ".bpf"), true);
+                                        File.Delete(bufferPath.Replace(".xls", ".bpf"));
+                                    }
 
-                                //taskMessage.Progress = 100.00;
-
-
-                                taskMessage.DetailMessages.Add("导出成功");
+                                    taskMessage.Progress = 100.00;
+                                    taskMessage.DetailMessages.Add("导出成功");
+                                }
+                                catch (Exception ex)
+                                {
+                                    taskMessage.DetailMessages.Add(ex.Message + ex.StackTrace);
+                                }
+                                
                             }
                         }, null);
                     });
