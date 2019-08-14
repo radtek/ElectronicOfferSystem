@@ -2,6 +2,7 @@
 using Common;
 using Common.Enums;
 using Common.Events;
+using Common.Utils;
 using Common.Views;
 using MaterialDesignThemes.Wpf;
 using Prism.Commands;
@@ -56,15 +57,26 @@ namespace RegistrationModule.ViewModels
         /// </summary>
         private async void ExecuteExportRegistrationDialog()
         {
+            Project = Application.Current.Properties["SelectedProject"] as Project;
+
             if (Project == null || !"2".Equals(Project.Type))
             {
                 // 请选择导出项目
                 MessageBox.Show("请选择登记业务项目", "提示");
                 return;
             }
+
+            if (string.IsNullOrWhiteSpace(FileHelper.ReadConfigInfo()))
+            {
+                MessageBox.Show("请设置项目路径", "提示");
+                return;
+            }
+
             var view = new ExportRegistrationDialog();
-            ExportRegistrationViewModel = new ExportRegistrationDialogViewModel();
-            ExportRegistrationViewModel.Project = Project;
+            ExportRegistrationViewModel = new ExportRegistrationDialogViewModel
+            {
+                Project = Project
+            };
             //show the dialog
             var result = await DialogHost.Show(view, "RootDialog", ConfirExportRealEstateEventHandler);
         }

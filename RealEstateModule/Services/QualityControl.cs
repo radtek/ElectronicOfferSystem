@@ -285,7 +285,7 @@ namespace RealEstateModule.Services
                     count = Project.NaturalBuildings.Count(n => Household.ZRZH.Equals(n.ZRZH));
                     if (count < 1)
                     {
-                        ErrorMsg.Add("户表中，自然幢号【" + Household.ZRZH + "】没有对应的自然幢");
+                        ErrorMsg.Add("户表中，户标识码为【" + Household.HBSM + "】的自然幢号【"+ Household.ZRZH + "】没有对应的自然幢");
                     }
                 }
 

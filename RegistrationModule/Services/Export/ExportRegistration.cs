@@ -17,6 +17,8 @@ namespace RegistrationModule.Services.Export
         public string SaveFileName { get; set; }
         public List<string> ErrorMsg { get; set; }
         public Project Project { get; set; }
+        public TaskMessage TaskMessage { get; set; }
+
         public ExportRegistration()
         {
             ErrorMsg = new List<string>();
@@ -38,6 +40,8 @@ namespace RegistrationModule.Services.Export
 
                 // 导出属性信息文件 
                 RegistrationResultToFile(registrationResult);
+
+                TaskMessage.Progress = 30.00;
             }
             catch (Exception ex)
             {
@@ -48,6 +52,7 @@ namespace RegistrationModule.Services.Export
             {
                 // 导出附件
                 ExportFile();
+                TaskMessage.Progress = 60.00;
             }
             catch (Exception ex)
             {
@@ -80,7 +85,7 @@ namespace RegistrationModule.Services.Export
             String jsonString = JsonConvert.SerializeObject(registrationResult);
             // 将属性信息写入登记信息文件
             //String root = OutPath + "\\" + Xmmc;
-            SaveFileName += "\\" + Project.ProjectName;
+            //SaveFileName += "\\" + Project.ProjectName;
             if (!Directory.Exists(SaveFileName))
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(SaveFileName);
@@ -100,7 +105,7 @@ namespace RegistrationModule.Services.Export
         private void ExportFile()
         {
             // 获取附件保存位置基础路径
-            string baseAddress = @"D:\vs-workspace\Test";
+            string baseAddress = FileHelper.ReadConfigInfo();
             string srcPath = baseAddress + "\\" + Project.ID;
             string aimPath = SaveFileName;
             // 开始复制

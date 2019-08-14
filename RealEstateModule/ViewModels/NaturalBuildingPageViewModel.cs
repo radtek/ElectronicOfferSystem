@@ -42,6 +42,15 @@ namespace RealEstateModule.ViewModels
             set { SetProperty(ref fwjglList, value); }
         }
         /// <summary>
+        /// 房屋用途
+        /// </summary>
+        private Dictionary<string, string> fwytList;
+        public Dictionary<string, string> FWYTList
+        {
+            get { return fwytList; }
+            set { SetProperty(ref fwytList, value); }
+        }
+        /// <summary>
         /// 状态
         /// </summary>
         private Dictionary<string, string> ztList;
@@ -92,6 +101,9 @@ namespace RealEstateModule.ViewModels
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic = DictionaryUtil.GetDictionaryByName("房屋结构");
             FWJGList = dic;
+
+            dic = DictionaryUtil.GetDictionaryByName("房屋用途");
+            FWYTList = dic;
 
             dic = DictionaryUtil.GetDictionaryByName("不动产单元状态");
             ZTList = dic;

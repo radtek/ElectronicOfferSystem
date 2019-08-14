@@ -147,7 +147,7 @@ namespace RealEstateModule.Services.Export
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.DXSD);
             columnIndex++;
-            InitalizeRangeInformation(rowIndex, columnIndex, NaturalBuilding.GHYT);
+            InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(NaturalBuilding.GHYT, "房屋用途"));
             columnIndex++;
             InitalizeRangeInformation(rowIndex, columnIndex, DictionaryUtil.GetStringByKeyAndDic(NaturalBuilding.FWJG, "房屋结构"));
             columnIndex++;

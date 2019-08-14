@@ -127,8 +127,7 @@ namespace RegistrationModule.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             // 获取选中项目
-            Project project = navigationContext.Parameters["Project"] as Project;
-            if (project != null)
+            if (navigationContext.Parameters["Project"] is Project project)
             {
                 Project = project;
             }
@@ -138,14 +137,13 @@ namespace RegistrationModule.ViewModels
             FileInfoList = new ObservableCollection<FileInfo>(Project.FileInfos);
             for (int i = 0; i < FileInfoList.Count; i++)
             {
-                FileInfoList[i].FullPath = "D:\\vs-workspace\\Test\\" + FileInfoList[i].Path + FileInfoList[i].ID + FileInfoList[i].Extension;
+                FileInfoList[i].FullPath = FileHelper.ReadConfigInfo() + "\\" + FileInfoList[i].Path + FileInfoList[i].ID + FileInfoList[i].Extension;
             }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            Project project = navigationContext.Parameters["Project"] as Project;
-            if (project != null)
+            if (navigationContext.Parameters["Project"] is Project project)
             {
                 return project != null;
             }
@@ -172,6 +170,14 @@ namespace RegistrationModule.ViewModels
                 return;
             }
 
+            // 项目路径
+            string projectPath = FileHelper.ReadConfigInfo();
+            if (string.IsNullOrWhiteSpace(projectPath))
+            {
+                MessageBox.Show("请设置项目路径", "提示");
+                return;
+            }
+
             // 选择附件
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -187,8 +193,7 @@ namespace RegistrationModule.ViewModels
             var result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                // 项目路径
-                string projectPath = FileHelper.ReadConfigInfo();
+                
 
                 String[] SelectedFilePaths = openFileDialog.FileNames;
                 //bool isShow = false;
@@ -204,14 +209,16 @@ namespace RegistrationModule.ViewModels
                     String filename = System.IO.Path.GetFileNameWithoutExtension(baseAddress); // 文件原名称
                     String extension = System.IO.Path.GetExtension(baseAddress); // 文件扩展名
                     String path = Project.ID + "\\" + GetTreeFullPath(TreeNode); // 相对路径
-                    FileInfo uploadFile = new FileInfo();
-                    uploadFile.ID = Guid.NewGuid();
-                    uploadFile.ProjectID = Project.ID;
-                    uploadFile.Name = filename;
-                    uploadFile.Extension = extension;
-                    uploadFile.Path = path;
-                    uploadFile.Type = TreeNode.Name;
-                    uploadFile.UpdateTime = DateTime.Now;
+                    FileInfo uploadFile = new FileInfo
+                    {
+                        ID = Guid.NewGuid(),
+                        ProjectID = Project.ID,
+                        Name = filename,
+                        Extension = extension,
+                        Path = path,
+                        Type = TreeNode.Name,
+                        UpdateTime = DateTime.Now
+                    };
                     StringBuilder savePath = new StringBuilder(); // 文件保存路径
                     savePath.Append(projectPath).Append("\\").Append(path);
                     //address.Append(Project.ID).Append("\\").Append(TreeNode.Name);

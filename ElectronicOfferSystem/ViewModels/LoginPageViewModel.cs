@@ -283,9 +283,11 @@ namespace ElectronicOfferSystem.ViewModels
                 Password = CEncoder.Decode(ini.IniReadValue("Login", "Password"));
                 UserChecked = ini.IniReadValue("Login", "SaveInfo") == "Y";
                 SkinName = ini.IniReadValue("Skin", "Skin");
-                UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
-                UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
+                //UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
+                //UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
             }
+            UpdateIP = ConfigUtil.GetValue("ServerIP");
+            UpdatePort = ConfigUtil.GetValue("ServerPort");
         }
 
         /// <summary>

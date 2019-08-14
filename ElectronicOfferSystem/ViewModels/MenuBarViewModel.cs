@@ -126,12 +126,12 @@ namespace ElectronicOfferSystem.ViewModels
                     }
                     else
                     {
-                        MessageBox.Show("无最新版本");
+                        MessageBox.Show("无最新版本","提示");
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("由于网络原因无法检查版本更新");
+                    MessageBox.Show("由于网络原因无法检查版本更新", "提示");
                 }
             }, this);
         }
@@ -146,13 +146,15 @@ namespace ElectronicOfferSystem.ViewModels
         /// </summary>
         public void ReadConfigInfo()
         {
-            string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
-            if (File.Exists(cfgINI))
-            {
-                IniFileHelper ini = new IniFileHelper(cfgINI);
-                UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
-                UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
-            }
+            //string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
+            //if (File.Exists(cfgINI))
+            //{
+            //    IniFileHelper ini = new IniFileHelper(cfgINI);
+            //    UpdateIP = ini.IniReadValue("OAUS", "UpdateIP");
+            //    UpdatePort = ini.IniReadValue("OAUS", "UpdatePort");
+            //}
+            UpdateIP = ConfigUtil.GetValue("ServerIP");
+            UpdatePort = ConfigUtil.GetValue("ServerPort");
         }
     }
 }

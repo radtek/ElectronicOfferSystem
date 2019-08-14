@@ -20,7 +20,8 @@ namespace ElectronicOfferSystem.ViewModels.Dialogs
 
         public ServerDialogViewModel()
         {
-            ReadConfigInfo();
+            //ReadConfigInfo();
+            UpdateIP = ConfigUtil.GetValue("ServerIP");
         }
 
         /// <summary>

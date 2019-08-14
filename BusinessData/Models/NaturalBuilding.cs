@@ -16,8 +16,9 @@ namespace BusinessData
             this.Households = new HashSet<Household>();
 
             // 初始下拉框数据
-            this.FWJG = "1"; // 钢结构
-            this.ZT = "1";  // 有效
+            FWJG = "1"; // 钢结构
+            GHYT = "10"; // 住宅
+            ZT = "1";  // 有效
         }
 
         public virtual Project Project { get; set; }

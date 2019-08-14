@@ -34,7 +34,8 @@ namespace RegistrationModule.ViewModels.Dialogs
                 //创建一个保存文件式的对话框
                 SaveFileDialog sfd = new SaveFileDialog();
                 // 默认文件名
-                sfd.FileName = "登记项目";
+                Project = Application.Current.Properties["SelectedProject"] as Project;
+                sfd.FileName = Project.ProjectName;
                 //保存对话框是否记忆上次打开的目录 
                 sfd.RestoreDirectory = true;
                 //调用ShowDialog()方法显示该对话框，该方法的返回值代表用户是否点击了确定按钮

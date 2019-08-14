@@ -14,6 +14,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace ElectronicOfferSystem.ViewModels
             ImportDictionaryCommand = new DelegateCommand(ImportDictionary);
         }
 
-        
+
 
         private void Navigate(EMainPage? obj)
         {
@@ -56,10 +57,18 @@ namespace ElectronicOfferSystem.ViewModels
         /// </summary>
         private async void ExecuteServerDialog()
         {
-            var view = new ServerDialog();
-            ServerDialogViewModel = new ServerDialogViewModel();
-            //show the dialog
-            await DialogHost.Show(view, "RootDialog", ConfirSaveServerHandler);
+            try
+            {
+                var view = new ServerDialog();
+                ServerDialogViewModel = new ServerDialogViewModel();
+                //show the dialog
+                await DialogHost.Show(view, "RootDialog", ConfirSaveServerHandler);
+            }
+            catch (Exception ex)
+            {
+                ErrorDialogViewModel.getInstance().show(ex);
+                return;
+            }
         }
 
         /// <summary>
@@ -74,14 +83,15 @@ namespace ElectronicOfferSystem.ViewModels
             eventArgs.Cancel();
 
             var IPTextBox = eventArgs.Parameter as System.Windows.Controls.TextBox;
-            String UpdateIP = IPTextBox.Text;
+            String ServerIP = IPTextBox.Text;
 
             try
             {
-                string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
-                IniFileHelper ini = new IniFileHelper(cfgINI);
-                ini.IniWriteValue("OAUS", "UpdateIP", UpdateIP);
-                ini.IniWriteValue("OAUS", "UpdatePort", "4540");
+                //string cfgINI = AppDomain.CurrentDomain.BaseDirectory + LocalConfiguration.INI_CFG;
+                //IniFileHelper ini = new IniFileHelper(cfgINI);
+                //ini.IniWriteValue("OAUS", "UpdateIP", UpdateIP);
+                //ini.IniWriteValue("OAUS", "UpdatePort", "4540");
+                ConfigUtil.SaveConfig("ServerIP", ServerIP);
 
                 // 显示加载1s
                 eventArgs.Session.UpdateContent(new SampleProgressDialog());
@@ -164,7 +174,7 @@ namespace ElectronicOfferSystem.ViewModels
                 {
                     taskMessage.DetailMessages.Add("开始导入。。");
                 }));
-                
+
                 // 导入BDCS_CONSTCLS
                 BaseDal<CONSTCLS> baseDal = new BaseDal<CONSTCLS>();
                 StreamReader sr = new StreamReader(@"C:\Users\Administrator\Desktop\BDCS_CONSTCLS 1.txt", Encoding.Default);

@@ -218,7 +218,7 @@
                   materialDesign:HintAssist.Hint="房屋结构*"
                   SelectedValuePath="Key"  DisplayMemberPath="Value"
                   SelectedValue="{Binding NaturalBuilding.FWJG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Row="5" Grid.Column="2"
+        <!--<TextBox Grid.Row="5" Grid.Column="2"
                  materialDesign:HintAssist.Hint="规划用途*" >
             <TextBox.Text>
                 <Binding Path="NaturalBuilding.GHYT" UpdateSourceTrigger="PropertyChanged" 
@@ -228,7 +228,11 @@
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>
+        </TextBox>-->
+        <ComboBox Grid.Row="5" Grid.Column="2" ItemsSource="{Binding FWYTList}" 
+                  materialDesign:HintAssist.Hint="规划用途*"
+                  SelectedValuePath="Key"  DisplayMemberPath="Value" 
+                  SelectedValue="{Binding NaturalBuilding.GHYT,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding NaturalBuilding.JZWJBYT}"
                  materialDesign:HintAssist.Hint="建筑物基本用途"/>
         <TextBox Grid.Row="6" Grid.Column="1"

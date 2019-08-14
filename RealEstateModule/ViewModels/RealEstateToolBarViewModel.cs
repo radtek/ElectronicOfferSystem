@@ -124,6 +124,8 @@ namespace RealEstateModule.ViewModels
         #region 质检
         private  void QualityControl()
         {
+            Project = Application.Current.Properties["SelectedProject"] as Project;
+
             if (Project == null || !"1".Equals(Project.Type))
             {
                 MessageBox.Show("请选择楼盘项目", "提示");

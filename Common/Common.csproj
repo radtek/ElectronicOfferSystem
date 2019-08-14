@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Cells, Version=17.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
@@ -105,6 +106,7 @@
     </Compile>
     <Compile Include="Rules\RuleHelper.cs" />
     <Compile Include="Utils\CEncoder.cs" />
+    <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\DictionaryUtil.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\IniFileHelper.cs" />

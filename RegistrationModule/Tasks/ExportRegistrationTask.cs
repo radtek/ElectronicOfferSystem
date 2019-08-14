@@ -1,4 +1,5 @@
 ﻿using BusinessData;
+using Common.Models;
 using Common.ViewModels;
 using RegistrationModule.Services.Export;
 using System;
@@ -37,13 +38,17 @@ namespace RegistrationModule.Tasks
             try
             {
                 TaskInfoDialog = TaskInfoDialogViewModel.getInstance();
-                //TaskInfoDialog.Messages.Add("开始导出项目：" + Project.ProjectName);
+                TaskMessage taskMessage = new TaskMessage();
+                taskMessage.Title = "导出项目：" + Project.ProjectName;
+                taskMessage.Progress = 0.0;
+                TaskInfoDialog.Messages.Insert(0, taskMessage);
 
 
                 Task task = new Task(() =>
                 {
                     try
                     {
+                        exportRegistration.TaskMessage = taskMessage;
                         exportRegistration.SaveFileName = SaveFileName;
                         exportRegistration.Project = Project;
                         exportRegistration.write();
@@ -67,15 +72,16 @@ namespace RegistrationModule.Tasks
 
                             foreach (var error in ErrorMsg)
                             {
-                                //TaskInfoDialog.Messages.Add(error);
+                                taskMessage.DetailMessages.Add(error);
                             }
                             if (ErrorMsg != null && ErrorMsg.Count > 0)
                             {
-                                //TaskInfoDialog.Messages.Add("导出失败");
+                                taskMessage.DetailMessages.Add("导出失败");
                             }
                             else
                             {
-                                //TaskInfoDialog.Messages.Add("导出成功");
+                                taskMessage.Progress = 100.00;
+                                taskMessage.DetailMessages.Add("导出成功");
                             }
                         }, null);
                     });
